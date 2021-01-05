@@ -17,7 +17,7 @@ public class ArticleVenduDal {
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
     
     /* get by idUtilisateur: select all from articlesVendu where  no_utilisateur = ? */
-    /* where date_debut  */
+    /* where date_debut  */ 
     
     
     private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? WHERE Id = ?";
