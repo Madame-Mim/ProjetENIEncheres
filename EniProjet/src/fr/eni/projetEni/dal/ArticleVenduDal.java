@@ -122,7 +122,7 @@ public class ArticleVenduDal {
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
                 
-                article.setUtilisateur(rs.getInt(utilisateur.getId()));
+                article.setUtilisateur(rs.getInt(utilisateur.getPseudo());
                 
                 article.setCategorie(rs.getNString(categorie.getLibelle()));
                 
@@ -177,7 +177,7 @@ public class ArticleVenduDal {
         } 
     	catch (Exception ex ) 
     	{
-            logger.severe("Erreur dans la méthode getById(int id) " + nom + "erreur : " + ex.getMessage());
+            logger.severe("Erreur dans la méthode getById(int id) " + id + "erreur : " + ex.getMessage());
         }
         return resultat;
     } // fin get by id
@@ -214,16 +214,16 @@ public class ArticleVenduDal {
                 
                 resultat.setUtilisateur(vendeur);
                 
-                RetraitBo ret = retrait.getClass();
+                RetraitBo ret = retrait.getRetrait();
                 
-                resultat.setRetrait(retrait);
+                resultat.setRetrait(ret);
                 
             }
 
         } 
     	catch (Exception ex ) 
     	{
-            logger.severe("Erreur dans la méthode getById(int id) " + nom + "erreur : " + ex.getMessage());
+            logger.severe("Erreur dans la méthode getById(int id) " + id + "erreur : " + ex.getMessage());
         }
         return resultat;
     } // fin get by idUtilisateur
