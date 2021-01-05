@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.logging.Logger;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;
-import fr.eni.projetEni.bo.UtilisateurBO;
+import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.utils.MonLogger;
 
 public class ArticleVenduDal {
