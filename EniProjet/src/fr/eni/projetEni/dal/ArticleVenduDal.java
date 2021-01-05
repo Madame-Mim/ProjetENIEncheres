@@ -133,12 +133,7 @@ public class ArticleVenduDal {
     public static ArticleVenduBo getById(int id) {
     	
         ArticleVenduBo resultat = null;
-        
-        UtilisateurDal utilisateur = new UtilisateurDal();
-        
-        RetraitDal retrait = new RetraitDal();
-
-
+             
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
     		
     		PreparedStatement rqt = cnx.prepareStatement(GET_BY_ID);
@@ -160,8 +155,9 @@ public class ArticleVenduDal {
                 UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
                 resultat.setUtilisateur(vendeur);
                 
-                RetraitBo retrait = RetraitDal.getClass();
-                
+                RetraitBo retrait = RetraitDal.get(rs.getInt(id));
+                resultat.setRetrait(retrait);
+
             }
 
         } 
@@ -176,11 +172,6 @@ public class ArticleVenduDal {
    public static ArticleVenduBo getByIdUtilisateur(int id) {
     	
         ArticleVenduBo resultat = null;
-        
-        UtilisateurDal utilisateur = new UtilisateurDal();
-        
-        RetraitDal retrait = new RetraitDal();
-
 
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
     		
@@ -201,12 +192,10 @@ public class ArticleVenduDal {
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
                 UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
-                
                 resultat.setUtilisateur(vendeur);
                 
-                RetraitBo ret = retrait.getRetrait();
-                
-                resultat.setRetrait(ret);
+                RetraitBo retrait = RetraitDal.get(rs.getInt(id));
+                resultat.setRetrait(retrait);
                 
             }
 
