@@ -19,8 +19,8 @@ public class ArticleVenduDal {
     
     private static final String GET_BY_NOM="SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
-    private static final String GET_BY_ID="SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
-    private static final String GET_BY_ID_UTILISATEUR="SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?";
+    private static final String GET_BY_ID="SELECT * FROM ARTICLES_VENDUS WHERE no_article= ?";
+    private static final String GET_BY_ID_UTILISATEUR="SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
     
     
     /* get by idUtilisateur: select all from articlesVendu where  no_utilisateur = ? */
@@ -79,7 +79,7 @@ public class ArticleVenduDal {
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
-                UtilisateurBo vendeur = utilisateur.getPseudo("pseudo");
+                UtilisateurBo vendeur = UtilisateurDal.getPseudo(rs.getString(nom));
                 
                 resultat.setUtilisateur(vendeur);
                 
@@ -122,11 +122,11 @@ public class ArticleVenduDal {
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
                 
-                article.setUtilisateur(rs.getInt(utilisateur.getPseudo());
+                article.setUtilisateur(rs.getObject(utilisateur.getPseudo()));
                 
-                article.setCategorie(rs.getNString(categorie.getLibelle()));
+                article.setCategorie(rs.getString(categorie.getLibelle()));
                 
-                article.setRetrait(rs.getObject(retrait.getLieuRetrait());
+                article.setRetrait(rs.getObject(retrait.getLieuRetrait()));
 
                 
                 liste.add(article);
@@ -194,9 +194,9 @@ public class ArticleVenduDal {
 
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
     		
-    		PreparedStatement rqt = cnx.prepareStatement(GET_BY_ID);
+    		PreparedStatement rqt = cnx.prepareStatement(GET_BY_ID_UTILISATEUR);
 
-            rqt.setInt(1, utilisateur.get(id));
+            rqt.setObject(1, UtilisateurDal.get(id));
 
             ResultSet rs = rqt.executeQuery();
 
@@ -210,7 +210,7 @@ public class ArticleVenduDal {
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
-                UtilisateurBo vendeur = utilisateur.getPseudo("pseudo");
+                UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
                 
                 resultat.setUtilisateur(vendeur);
                 

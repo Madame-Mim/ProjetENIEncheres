@@ -17,10 +17,10 @@ public class EnchereDal {
 
 	
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
-    private static final String GET_BY_ID="SELECT * FROM Encheres WHERE Id=?";
+    private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
     private static final String GET_ALL="SELECT * FROM Encheres";
-    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? utilisateur=? article=? WHERE Id=?";
-    private static final String DELETE="DELETE Encheres WHERE Id=?";
+    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_utilisateur=? no_article=? WHERE no_enchere=?";
+    private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
     
