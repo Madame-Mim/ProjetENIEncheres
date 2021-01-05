@@ -44,7 +44,7 @@ public class UtilisateurDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode insert(Voiture voiture) avec voiture ="+ utilisateur +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode insert(UtlisateurBo utilisateur) avec utilisateur ="+ utilisateur +"- erreur : "+ex.getMessage());
         }
     }
 
@@ -196,7 +196,7 @@ public class UtilisateurDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode update(Voiture voiture) avec voiture ="+ utilisateur +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode update(UtlisateurBo utilisateur) avec utilisateur ="+ utilisateur +"- erreur : "+ex.getMessage());
         }
     }
 
