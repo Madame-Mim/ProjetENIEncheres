@@ -13,6 +13,17 @@ public class RetraitBo {
 	 * @param rue
 	 * @param codePostal
 	 * @param ville
+	 */
+	public RetraitBo(String rue, int codePostal, String ville) {
+		this.rue = rue;
+		CodePostal = codePostal;
+		this.ville = ville;
+	}
+
+	/**
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
 	 * @param lieuRetrait
 	 * @param noRetrait
 	 */

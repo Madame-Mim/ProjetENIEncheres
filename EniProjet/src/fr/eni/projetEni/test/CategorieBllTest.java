@@ -1,37 +1,41 @@
 package fr.eni.projetEni.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.List;
+
 import org.junit.Test;
 
+import fr.eni.projetEni.bll.CategorieBll;
+import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.CategorieBo;
+import fr.eni.projetEni.bo.UtilisateurBo;
+import fr.eni.projetEni.dal.CategorieDal;
 
 public class CategorieBllTest {
 
-	@Test
+	
+	 @Test
     void insert() throws Exception {
 
         //PREMIERE POSSIBILITE : comparaison de la taille
         /****************************************************/
-
-        // Taille initiale
-       int sizeBeforeInsertion = conducteurDAO.selectAll().size();
+		
+		// Taille initiale
+	       int sizeBeforeInsertion = CategorieBll.get().size();
 
         //Ajout d'un conducteur et récupération de son id
-       CategorieBo libelle = new CategorieBo(noCategorie, libelle, categorieArticle)
-        Conducteur conducteur = new Conducteur("GOYER", "Germain");
-        Conducteur recuperationInsertion = conducteurDAO.insert(conducteur);
-
+        CategorieBo libelle = new CategorieBo("Bureau");
+        CategorieBll.insert(libelle);
+        
+	
         //La taille doit avoir été augmentée de 1 après l'insertion
-        int sizeAfterInsertion = conducteurDAO.selectAll().size();
+        int sizeAfterInsertion = CategorieBll.get().size();
 
         assertEquals(sizeAfterInsertion, sizeBeforeInsertion + 1);
-
-       //DEUXIEME POSSIBILITE: Comparaison du conducteur insérer et celui récupéré (on voit si on a bien les même données
-        /****************************************************/
-
-        Conducteur conducteurAttendu = new Conducteur("GOYER", "Germain");
-        Conducteur recuperationConducteur = conducteurDAO.insert(conducteurAttendu);
-        Conducteur conducteurRecupere = conducteurDAO.selectById(recuperationConducteur.getId());
-
-        assertEquals(conducteurAttendu, conducteurRecupere);
     }
+	
+	
+	
 }

@@ -17,7 +17,7 @@ public class CategorieDal {
     //doute sur la ligne update. pas d'id donc pas de where nécessaire.
     private static final String UPDATE = "UPDATE CATEGORIES SET no_categorie = ?, no_categorie = ?";
     private static final String DELETE = "DELETE CATEGORIES WHERE no_categorie = ?";
-    
+     
     
     public static void insert(CategorieBo libelle)
     {

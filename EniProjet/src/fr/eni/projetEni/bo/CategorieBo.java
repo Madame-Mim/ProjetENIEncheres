@@ -7,6 +7,15 @@ public class CategorieBo {
 	
 	public CategorieBo() {}
 	
+	
+	/**
+	 * @param libelle
+	 */
+	public CategorieBo(String libelle) {
+		this.libelle = libelle;
+	}
+
+
 	/**
 	 * @param noCategorie
 	 * @param libelle
