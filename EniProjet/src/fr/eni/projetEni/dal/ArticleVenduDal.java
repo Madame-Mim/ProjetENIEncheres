@@ -14,15 +14,16 @@ public class ArticleVenduDal {
     private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?)";
     
     private static final String GET_BY_NOM="SELECT * FROM ARTICLES_VENDUS WHERE nom_article = ?";
-    private static final String GET_BY_CATEGORIE="SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
-    private static final String GET_BY_ETAT_ENCHERE="SELECT * FROM ARTICLES_VENDUS WHERE                   = ?";
-    private static final String GET_BY_ETAT_VENTE="SELECT * FROM ARTICLES_VENDUS WHERE                     = ?";
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
+    
+    /* get by idUtilisateur: select all from articlesVendu where  no_utilisateur = ? */
+    /* where date_debut  */
+    
     
     private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? WHERE Id = ?";
     private static final String DELETE="DELETE ARTICLES_VENDUS WHERE nom_article = ?";
 	
-    private static Logger logger = MonLogger.getLogger("UtilisateurDAL");
+    private static Logger logger = MonLogger.getLogger("ArticleVenduDal");
 
     
     public static void insertArticle(ArticleVenduBo articleVendu) {
