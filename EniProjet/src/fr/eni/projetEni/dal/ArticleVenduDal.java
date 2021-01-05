@@ -49,7 +49,7 @@ public class ArticleVenduDal {
     	
         ArticleVenduBo resultat = null;
         
-        UtilisateurDAL utilisateur = new UtilisateurDAL();
+        UtilisateurDal utilisateur = new UtilisateurDal();
 
 
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
@@ -70,7 +70,7 @@ public class ArticleVenduDal {
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
-                UtilisateurBO vendeur = utilisateur.getPseudo("pseudo");
+                UtilisateurBo vendeur = utilisateur.getPseudo("pseudo");
                 
                 resultat.setUtilisateur(vendeur);
                 

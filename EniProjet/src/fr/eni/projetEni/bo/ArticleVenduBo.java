@@ -12,7 +12,7 @@ import java.time.LocalDate;
 		private int miseAPrix;
 		private int prixVente;
 		private String etatVente;
-		private UtilisateurBO utilisateur;
+		private UtilisateurBo utilisateur;
 		private CategorieBo categorie;
 		private RetraitBo retrait;
 		
@@ -73,10 +73,10 @@ import java.time.LocalDate;
 		public void setEtatVente(String etatVente) {
 			this.etatVente = etatVente;
 		}
-		public UtilisateurBO getUtilisateur() {
+		public UtilisateurBo getUtilisateur() {
 			return utilisateur;
 		}
-		public void setUtilisateur(UtilisateurBO utilisateur) {
+		public void setUtilisateur(UtilisateurBo utilisateur) {
 			this.utilisateur = utilisateur;
 		}
 		public CategorieBo getCategorie() {
