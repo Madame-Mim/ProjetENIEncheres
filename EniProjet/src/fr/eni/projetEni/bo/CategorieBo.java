@@ -4,7 +4,7 @@ public class CategorieBo {
 
 	private int noCategorie;
 	private String libelle;
-	private CategorieBo categorieArticle;
+	private ArticleVenduBo categorieArticle;
 	
 	public CategorieBo() {}
 	
@@ -13,7 +13,7 @@ public class CategorieBo {
 	 * @param libelle
 	 * @param categorieArticle
 	 */
-	public CategorieBo(int noCategorie, String libelle, CategorieBo categorieArticle) {
+	public CategorieBo(int noCategorie, String libelle, ArticleVenduBo categorieArticle) {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.categorieArticle = categorieArticle;
@@ -45,13 +45,13 @@ public class CategorieBo {
 	/**
 	 * @return the categorieArticle
 	 */
-	public CategorieBo getCategorieArticle() {
+	public ArticleVenduBo getCategorieArticle() {
 		return categorieArticle;
 	}
 	/**
 	 * @param categorieArticle the categorieArticle to set
 	 */
-	public void setCategorieArticle(CategorieBo categorieArticle) {
+	public void setCategorieArticle(ArticleVenduBo categorieArticle) {
 		this.categorieArticle = categorieArticle;
 	}
 	@Override
