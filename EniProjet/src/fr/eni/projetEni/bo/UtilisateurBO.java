@@ -1,6 +1,6 @@
 package fr.eni.projetEni.bo;
 
-public class UtilisateursBO {
+public class UtilisateurBO {
 private int id;
 private String pseudo;
 private String nom;
@@ -17,14 +17,14 @@ private boolean administrateur;
 /**
  * constructeur vide
 */
-public UtilisateursBO() {
+public UtilisateurBO() {
 	super();
 }
 
 /**
 * copntructeur complet
  */
-public UtilisateursBO(int id, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+public UtilisateurBO(int id, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 		String codePostal, String ville, String password, int credit, boolean administrateur) {
 	super();
 	this.id = id;
@@ -44,7 +44,7 @@ public UtilisateursBO(int id, String pseudo, String nom, String prenom, String e
 /**
  constructeur sans id
  */
-public UtilisateursBO(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+public UtilisateurBO(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 		String codePostal, String ville, String password, int credit, boolean administrateur) {
 	super();
 	this.pseudo = pseudo;

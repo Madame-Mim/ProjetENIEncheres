@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.logging.Logger;
 
-import fr.eni.projetEni.bo.UtilisateursBO;
+import fr.eni.projetEni.bo.UtilisateurBO;
 import fr.eni.projetEni.utils.MonLogger;
 
-public class UtilisateursDAL {
+public class UtilisateurDAL {
 
     private static final String INSERT = "INSERT INTO utilisateurs VALUES(?,?,?)";
     private static final String GET_ALL = "SELECT * FROM utilisateurs";
@@ -19,7 +19,7 @@ public class UtilisateursDAL {
 
     private static Logger logger = MonLogger.getLogger("UtilisateursDAL");
 
-    public static void insert(UtilisateursBO utilisateur )
+    public static void insert(UtilisateurBO utilisateur )
     {
         try(Connection cnx = Utils.getConnection())
         {
