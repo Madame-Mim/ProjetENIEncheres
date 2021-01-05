@@ -11,7 +11,7 @@ import fr.eni.projetEni.bo.CategorieBo;
 
 public class CategorieDal {
 
-	private static final String INSERT = "INSERT INTO CATEGORIES VALUES (?,?)";
+	private static final String INSERT = "INSERT INTO CATEGORIES VALUES (?)";
     private static final String GET_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = ?";
     private static final String GET_ALL = "SELECT * FROM CATEGORIES";
     //doute sur la ligne update. pas d'id donc pas de where nécessaire.
@@ -25,8 +25,7 @@ public class CategorieDal {
 			Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement requete = cnx.prepareStatement(INSERT);
 			
-			requete.setInt(1, libelle.getNoCategorie());
-			requete.setString(2, libelle.getLibelle());
+			requete.setString(1, libelle.getLibelle());
 			requete.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
