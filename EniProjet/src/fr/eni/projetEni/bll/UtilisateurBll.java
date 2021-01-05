@@ -2,12 +2,12 @@ package fr.eni.projetEni.bll;
 
 import java.util.List;
 
-import fr.eni.projetEni.bo.UtilisateurBO;
-import fr.eni.projetEni.dal.UtilisateurDAL;
+import fr.eni.projetEni.bo.UtilisateurBo;
+import fr.eni.projetEni.dal.UtilisateurDal;
 
-public class UtilisateurBLL {
+public class UtilisateurBll {
 
-    public static void insert(UtilisateurBO utilisateur )throws Exception {
+    public static void insert(UtilisateurBo utilisateur )throws Exception {
     {
     	if(utilisateur.getPseudo().trim().equals("")||utilisateur.getNom().trim().equals("")||utilisateur.getPrenom().trim().equals("")||
     			utilisateur.getEmail().trim().equals("")||utilisateur.getTelephone().trim().equals("")||utilisateur.getRue().trim().equals("")|| 
@@ -21,33 +21,33 @@ public class UtilisateurBLL {
             throw new Exception("Le pseudo ne peut contenir que des lettres et des chiffres");
         }
     	
-    	UtilisateurDAL.insert(utilisateur);
+    	UtilisateurDal.insert(utilisateur);
     }
   }
 
-    public static List<UtilisateurBO> get()throws Exception {
+    public static List<UtilisateurBo> get()throws Exception {
     {
-    	return UtilisateurDAL.get();
+    	return UtilisateurDal.get();
     }
    }
 
-    public static UtilisateurBO get(int id)throws Exception {
+    public static UtilisateurBo get(int id)throws Exception {
     {
-    	return UtilisateurDAL.get(id);
+    	return UtilisateurDal.get(id);
     }
    }
     
-    public static UtilisateurBO getPseudo(String pseudo) throws Exception {
+    public static UtilisateurBo getPseudo(String pseudo) throws Exception {
     {
-    	return UtilisateurDAL.getPseudo(pseudo);
+    	return UtilisateurDal.getPseudo(pseudo);
     }
    }
-    public static UtilisateurBO getCourriel(String email)throws Exception {
+    public static UtilisateurBo getCourriel(String email)throws Exception {
     {
-    	return UtilisateurDAL.getCourriel(email);
+    	return UtilisateurDal.getCourriel(email);
     }
    }
-    public static void update(UtilisateurBO utilisateur) throws Exception{
+    public static void update(UtilisateurBo utilisateur) throws Exception{
     {
     	if(utilisateur.getPseudo().trim().equals("")||utilisateur.getNom().trim().equals("")||utilisateur.getPrenom().trim().equals("")||
     			utilisateur.getEmail().trim().equals("")||utilisateur.getTelephone().trim().equals("")||utilisateur.getRue().trim().equals("")|| 
@@ -61,14 +61,14 @@ public class UtilisateurBLL {
             throw new Exception("Le pseudo ne peut contenir que des lettres et des chiffres");
         }
     	
-    	UtilisateurDAL.update(utilisateur);
+    	UtilisateurDal.update(utilisateur);
     }
     }
     public static void delete(int id)throws Exception {
-        if(UtilisateurDAL.get(id) ==null)
+        if(UtilisateurDal.get(id) ==null)
         {
             throw new Exception("Il semblerait que cet utilisateur n'existe pas ou ait déjà été supprimé de la base de données.");
         }
-        UtilisateurDAL.delete(id);
+        UtilisateurDal.delete(id);
     }
 }

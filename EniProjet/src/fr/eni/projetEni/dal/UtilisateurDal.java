@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import fr.eni.projetEni.bo.UtilisateurBO;
+import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.utils.MonLogger;
 
-public class UtilisateurDAL {
+public class UtilisateurDal {
 
     private static final String INSERT = "INSERT INTO utilisateurs VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String GET_ALL = "SELECT * FROM utilisateurs";
@@ -20,9 +20,9 @@ public class UtilisateurDAL {
     private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, codePostal=?, ville=?, password=?, credit=?, administrateur=? WHERE no_utilisateur=?";
     private static final String DELETE = "DELETE utilisateurs WHERE no_utilisateur=?";
 
-    private static Logger logger = MonLogger.getLogger("UtilisateurDAL");
+    private static Logger logger = MonLogger.getLogger("UtilisateurDal");
 
-    public static void insert(UtilisateurBO utilisateur )
+    public static void insert(UtilisateurBo utilisateur )
     {
         try(Connection cnx = ConnectionProvider.getConnection())
         {
@@ -48,9 +48,9 @@ public class UtilisateurDAL {
         }
     }
 
-    public static List<UtilisateurBO>  get()
+    public static List<UtilisateurBo>  get()
     {
-        List<UtilisateurBO> listes = new ArrayList<>();
+        List<UtilisateurBo> listes = new ArrayList<>();
    try(Connection cnx = ConnectionProvider.getConnection())
     {
         PreparedStatement requete = cnx.prepareStatement(GET_ALL);
@@ -58,7 +58,7 @@ public class UtilisateurDAL {
 
         while(rs.next())
         {
-            UtilisateurBO utilisateur = new UtilisateurBO();
+            UtilisateurBo utilisateur = new UtilisateurBo();
             utilisateur.setId(rs.getInt("id"));
             utilisateur.setPseudo(rs.getString("pseudo"));
             utilisateur.setNom(rs.getString("nom"));
@@ -81,9 +81,9 @@ public class UtilisateurDAL {
         return listes;
 }
 
-    public static UtilisateurBO get(int id)
+    public static UtilisateurBo get(int id)
     {
-    	UtilisateurBO resultat=null;
+    	UtilisateurBo resultat=null;
         try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
@@ -91,7 +91,7 @@ public class UtilisateurDAL {
             ResultSet rs =  requete.executeQuery();
 
             if(rs.next()) {
-                resultat = new UtilisateurBO();
+                resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
                 resultat.setNom(rs.getString("nom"));
@@ -112,9 +112,9 @@ public class UtilisateurDAL {
         }
         return resultat;
     }
-    public static UtilisateurBO getPseudo(String pseudo)
+    public static UtilisateurBo getPseudo(String pseudo)
     {
-    	UtilisateurBO resultat=null;
+    	UtilisateurBo resultat=null;
         try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_PSEUDO);
@@ -122,7 +122,7 @@ public class UtilisateurDAL {
             ResultSet rs =  requete.executeQuery();
 
             if(rs.next()) {
-                resultat = new UtilisateurBO();
+                resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
                 resultat.setNom(rs.getString("nom"));
@@ -143,9 +143,9 @@ public class UtilisateurDAL {
         }
         return resultat;
     }
-    public static UtilisateurBO getCourriel(String email)
+    public static UtilisateurBo getCourriel(String email)
     {
-    	UtilisateurBO resultat=null;
+    	UtilisateurBo resultat=null;
         try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_COURRIEL);
@@ -153,7 +153,7 @@ public class UtilisateurDAL {
             ResultSet rs =  requete.executeQuery();
 
             if(rs.next()) {
-                resultat = new UtilisateurBO();
+                resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
                 resultat.setNom(rs.getString("nom"));
@@ -174,7 +174,7 @@ public class UtilisateurDAL {
         }
         return resultat;
     }
-    public static void update(UtilisateurBO utilisateur)
+    public static void update(UtilisateurBo utilisateur)
     {
         try(Connection cnx = ConnectionProvider.getConnection())
         {

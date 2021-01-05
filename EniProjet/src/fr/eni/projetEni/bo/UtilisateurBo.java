@@ -1,6 +1,6 @@
 package fr.eni.projetEni.bo;
 
-public class UtilisateurBO {
+public class UtilisateurBo {
 private int id;
 private String pseudo;
 private String nom;
@@ -17,14 +17,14 @@ private boolean administrateur;
 /**
  * constructeur vide
 */
-public UtilisateurBO() {
+public UtilisateurBo() {
 	super();
 }
 
 /**
 * copntructeur complet
  */
-public UtilisateurBO(int id, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+public UtilisateurBo(int id, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 		String codePostal, String ville, String password, int credit, boolean administrateur) {
 	super();
 	this.id = id;
@@ -44,7 +44,7 @@ public UtilisateurBO(int id, String pseudo, String nom, String prenom, String em
 /**
  constructeur sans id
  */
-public UtilisateurBO(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+public UtilisateurBo(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 		String codePostal, String ville, String password, int credit, boolean administrateur) {
 	super();
 	this.pseudo = pseudo;
@@ -210,7 +210,7 @@ public void setAdministrateur(boolean administrateur) {
  */
 @Override
 public String toString() {
-	return "UtilisateursBO [id=" + id + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom=" + prenom + ", email="
+	return "UtilisateursBo [id=" + id + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom=" + prenom + ", email="
 			+ email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville
 			+ ", password=" + password + ", credit=" + credit + ", administrateur=" + administrateur + "]";
 }
