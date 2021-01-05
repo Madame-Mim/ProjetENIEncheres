@@ -20,7 +20,7 @@ public class UtilisateurDAL {
     private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, codePostal=?, ville=?, password=?, credit=?, administrateur=? WHERE no_utilisateur=?";
     private static final String DELETE = "DELETE utilisateurs WHERE no_utilisateur=?";
 
-    private static Logger logger = MonLogger.getLogger("UtilisateursDAL");
+    private static Logger logger = MonLogger.getLogger("UtilisateurDAL");
 
     public static void insert(UtilisateurBO utilisateur )
     {
