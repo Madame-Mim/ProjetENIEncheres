@@ -1,20 +1,20 @@
 package fr.eni.projetEni.bo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 	public class ArticleVenduBo {
 
 		private int noArticle;
 		private String nomArticle;
 		private String description;
-		private Date dateDebutEncheres;
-		private Date dateFinEncheres;
+		private LocalDate dateDebutEncheres;
+		private LocalDate dateFinEncheres;
 		private int miseAPrix;
 		private int prixVente;
 		private String etatVente;
-		private Utilisateur utilisateur;
-		private Categorie categorie;
-		private Retrait retrait;
+		private UtilisateurBO utilisateur;
+		private CategorieBo categorie;
+		private RetraitBo retrait;
 		
 		
 		/* constructeur */
@@ -43,16 +43,16 @@ import java.util.Date;
 		public void setDescription(String description) {
 			this.description = description;
 		}
-		public Date getDateDebutEncheres() {
+		public LocalDate getDateDebutEncheres() {
 			return dateDebutEncheres;
 		}
-		public void setDateDebutEncheres(Date dateDebutEncheres) {
+		public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 			this.dateDebutEncheres = dateDebutEncheres;
 		}
-		public Date getDateFinEncheres() {
+		public LocalDate getDateFinEncheres() {
 			return dateFinEncheres;
 		}
-		public void setDateFinEncheres(Date dateFinEncheres) {
+		public void setDateFinEncheres(LocalDate dateFinEncheres) {
 			this.dateFinEncheres = dateFinEncheres;
 		}
 		public int getMiseAPrix() {
@@ -73,22 +73,22 @@ import java.util.Date;
 		public void setEtatVente(String etatVente) {
 			this.etatVente = etatVente;
 		}
-		public Utilisateur getUtilisateur() {
+		public UtilisateurBO getUtilisateur() {
 			return utilisateur;
 		}
-		public void setUtilisateur(Utilisateur utilisateur) {
+		public void setUtilisateur(UtilisateurBO utilisateur) {
 			this.utilisateur = utilisateur;
 		}
-		public Categorie getCategorie() {
+		public CategorieBo getCategorie() {
 			return categorie;
 		}
-		public void setCategorie(Categorie categorie) {
+		public void setCategorie(CategorieBo categorie) {
 			this.categorie = categorie;
 		}
-		public Retrait getRetrait() {
+		public RetraitBo getRetrait() {
 			return retrait;
 		}
-		public void setRetrait(Retrait retrait) {
+		public void setRetrait(RetraitBo retrait) {
 			this.retrait = retrait;
 		}
 		/* fin getters setters */
