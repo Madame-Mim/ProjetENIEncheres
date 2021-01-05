@@ -5,7 +5,7 @@ public class RetraitBo {
 	private String rue;
 	private int CodePostal;
 	private String ville;
-	private RetraitBo lieuRetrait;
+	private ArticleVenduBo lieuRetrait;
 	
 	public RetraitBo() {}
 	/**
@@ -14,7 +14,7 @@ public class RetraitBo {
 	 * @param ville
 	 * @param lieuRetrait
 	 */
-	public RetraitBo(String rue, int codePostal, String ville, RetraitBo lieuRetrait) {
+	public RetraitBo(String rue, int codePostal, String ville, ArticleVenduBo lieuRetrait) {
 		this.rue = rue;
 		CodePostal = codePostal;
 		this.ville = ville;
@@ -59,13 +59,13 @@ public class RetraitBo {
 	/**
 	 * @return the lieuRetrait
 	 */
-	public RetraitBo getLieuRetrait() {
+	public ArticleVenduBo getLieuRetrait() {
 		return lieuRetrait;
 	}
 	/**
 	 * @param lieuRetrait the lieuRetrait to set
 	 */
-	public void setLieuRetrait(RetraitBo lieuRetrait) {
+	public void setLieuRetrait(ArticleVenduBo lieuRetrait) {
 		this.lieuRetrait = lieuRetrait;
 	}
 	@Override
