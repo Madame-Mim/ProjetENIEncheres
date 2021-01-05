@@ -76,7 +76,7 @@ public class ArticleVenduDal {
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
-                UtilisateurBo vendeur = UtilisateurDal.getPseudo(rs.getString(nom));
+                UtilisateurBo vendeur = UtilisateurDal.getPseudo(rs.getString("Pseudo"));
                 
                 resultat.setUtilisateur(vendeur);
                 
