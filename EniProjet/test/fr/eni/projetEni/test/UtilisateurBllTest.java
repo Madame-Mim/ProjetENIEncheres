@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import java.util.logging.Logger;
+import fr.eni.projetEni.utils.MonLogger;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.eni.projetEni.bo.UtilisateurBo;
-import fr.eni.projetEni.utils.MonLogger;
 import fr.eni.projetEni.bll.UtilisateurBll;
 
 class UtilisateurBllTest {
@@ -38,8 +38,17 @@ class UtilisateurBllTest {
     @Test
     void insert() throws Exception {
     	UtilisateurBo utilisateur = new UtilisateurBo();
-    	utilisateur.setNom("Picasso");
-    	utilisateur.setPrenom("Pablo");
+    	utilisateur.setPseudo("hippieMan");
+    	utilisateur.setNom("Pablo");
+    	utilisateur.setPrenom("Picasso");
+    	utilisateur.setEmail("Pablo.Picassiette@gmal.com");
+    	utilisateur.setTelephone("0102030405");
+    	utilisateur.setRue("18 rue Megalo");
+    	utilisateur.setCodePostal("75002");
+    	utilisateur.setVille("Paris");
+    	utilisateur.setPassword("peintreDeOuf");
+    	utilisateur.setCredit(120);
+    	utilisateur.setAdministrateur(true);
         try {
         	UtilisateurBll.insert(utilisateur);
         } catch (Exception e) {
@@ -97,8 +106,17 @@ class UtilisateurBllTest {
     void update() throws Exception {
 
     	UtilisateurBo utilisateur = new UtilisateurBo();
-        utilisateur.setNom("Picasso");
-        utilisateur.setPrenom("Pablo");
+    	utilisateur.setPseudo("hippieMan");
+    	utilisateur.setNom("Pablo");
+    	utilisateur.setPrenom("Picasso");
+    	utilisateur.setEmail("Pablo.Picassiette@gmal.com");
+    	utilisateur.setTelephone("0102030405");
+    	utilisateur.setRue("18 rue Megalo");
+    	utilisateur.setCodePostal("75002");
+    	utilisateur.setVille("Paris");
+    	utilisateur.setPassword("peintreDeOuf");
+    	utilisateur.setCredit(120);
+    	utilisateur.setAdministrateur(true);
 
         UtilisateurBll.insert(utilisateur);
         List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
