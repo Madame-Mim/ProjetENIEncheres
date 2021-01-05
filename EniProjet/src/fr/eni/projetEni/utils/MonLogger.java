@@ -1,4 +1,4 @@
-package fr.eni.utils;
+package fr.eni.projetEni.utils;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;

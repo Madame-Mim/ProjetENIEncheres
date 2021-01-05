@@ -4,11 +4,11 @@ import java.util.logging.Logger;
 
 public class utilisateursDAL {
 
-    private static final String INSERT = "INSERT INTO Voitures VALUES(?,?,?)";
-    private static final String GET_ALL = "SELECT * FROM Voitures";
-    private static final String GET_BY_ID = "SELECT * FROM Voitures WHERE IdVoiture=?";
-    private static final String UPDATE = "UPDATE Voitures SET Nom=?, PI=?, FkPersonne=? WHERE IdVoiture=?";
-    private static final String DELETE = "DELETE Voitures WHERE IdVoiture=?";
+    private static final String INSERT = "INSERT INTO utilisateurs VALUES(?,?,?)";
+    private static final String GET_ALL = "SELECT * FROM utilisateurs";
+    private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE Id=?";
+    private static final String UPDATE = "UPDATE utilisateurs SET Nom=?, PI=?, FkPersonne=? WHERE =?";
+    private static final String DELETE = "DELETE utilisateurs WHERE IdVoiture=?";
 
     private static Logger logger = MonLogger.getLogger("VoitureDAL");
 
