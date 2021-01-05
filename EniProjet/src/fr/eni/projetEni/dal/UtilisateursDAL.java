@@ -1,25 +1,32 @@
 package fr.eni.projetEni.dal;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.logging.Logger;
 
-public class utilisateursDAL {
+import fr.eni.projetEni.bo.UtilisateursBO;
+import fr.eni.projetEni.utils.MonLogger;
+
+public class UtilisateursDAL {
 
     private static final String INSERT = "INSERT INTO utilisateurs VALUES(?,?,?)";
     private static final String GET_ALL = "SELECT * FROM utilisateurs";
-    private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE Id=?";
-    private static final String UPDATE = "UPDATE utilisateurs SET Nom=?, PI=?, FkPersonne=? WHERE =?";
-    private static final String DELETE = "DELETE utilisateurs WHERE IdVoiture=?";
+    private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
+    private static final String GET_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
+    private static final String GET_BY_COURRIEL = "SELECT * FROM utilisateurs WHERE courriel=?";
+    private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, codePostal=?, ville=?, password=?, credit=?, administrateur=? WHERE no_utilisateur=?";
+    private static final String DELETE = "DELETE utilisateurs WHERE no_utilisateur=?";
 
-    private static Logger logger = MonLogger.getLogger("VoitureDAL");
+    private static Logger logger = MonLogger.getLogger("UtilisateursDAL");
 
-    public static void insert(Voiture voiture)
+    public static void insert(UtilisateursBO utilisateur )
     {
         try(Connection cnx = Utils.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(INSERT);
-            requete.setString(1, voiture.getNom());
-            requete.setString(2, voiture.getPi());
-            requete.setObject(3, voiture.getPersonne());
+            requete.setString(1, utilisateur.getPseudo());
+            requete.setString(2, utilisateur.getNom());
+            requete.setObject(3, utilisateur.getPrenom());
 
             requete.executeUpdate();
 
