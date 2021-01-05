@@ -32,7 +32,8 @@ public class EnchereDal {
             requete.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
             requete.setInt(2, enchere.getMontantEnchere());
             requete.setInt(3, enchere.getNoUtilisateur().getId());
-            requete.setInt(4, enchere.getNoArticle().getId());       
+            requete.setInt(4, enchere.getNoArticle().getNoArticle());
+            		     
                
             
 
@@ -60,7 +61,7 @@ public class EnchereDal {
                resultat.setMontantEnchere(rs.getInt("montant_enchere"));
                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
                resultat.setNoUtilisateur(utilisateur);
-               ArticleVenduBo article = ArticleVenduDal.get(rs.getInt("id"));
+               ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
                resultat.setNoArticle(article);             
                                          		
                            }
@@ -91,7 +92,7 @@ public class EnchereDal {
             	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
             	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
                 enchere.setNoUtilisateur(utilisateur);
-                ArticleVenduBo article = ArticleVenduDal.get(rs.getInt("id"));
+                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
                 enchere.setNoArticle(article);  
             	listes.add(enchere);
             	
@@ -113,7 +114,7 @@ public class EnchereDal {
             requete.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
             requete.setInt(2,enchere.getMontantEnchere());
             requete.setInt(3,enchere.getNoUtilisateur().getId());
-           requete.setInt(4,enchere.getNoArticle().getId());
+           requete.setInt(4,enchere.getNoArticle().getNoArticle());
             requete.executeUpdate();
         }
         catch(Exception ex)
@@ -141,5 +142,5 @@ public class EnchereDal {
         }
     
     
-
+    }
 }
