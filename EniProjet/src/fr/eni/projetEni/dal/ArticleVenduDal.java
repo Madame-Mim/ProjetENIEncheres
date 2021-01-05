@@ -91,7 +91,7 @@ public class ArticleVenduDal {
             logger.severe("Erreur dans la méthode getByNom " + nom + "erreur : " + ex.getMessage());
         }
         return resultat;
-    } // fin get by id
+    } // fin get by nom
     
     
     public static List<ArticleVenduBo> getAll() {
@@ -245,7 +245,7 @@ public class ArticleVenduDal {
         } catch (Exception ex ) {
             logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
         }
-    }
+    }/* fin update */
 
 
     public static void deleteArticle(int id) {
@@ -258,7 +258,7 @@ public class ArticleVenduDal {
         } catch (Exception ex ) {
             logger.severe("erreur dans la méthode  deleteArticle(int id) " + id + "erreur : " + ex.getMessage());
         }
-    }
+    }/* fin delete */
     
     
     
