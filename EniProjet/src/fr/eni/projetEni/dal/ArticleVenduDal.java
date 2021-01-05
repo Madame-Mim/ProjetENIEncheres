@@ -94,14 +94,8 @@ public class ArticleVenduDal {
     public static List<ArticleVenduBo> getAll() {
 
         List<ArticleVenduBo> liste = new ArrayList<>();
-        
-        
-        UtilisateurBo utilisateur = new UtilisateurBo();
-        
-        CategorieBo categorie = new CategorieBo();
-        
-        RetraitBo retrait = new RetraitBo();
-
+              
+       
         try ( Connection cnx = ConnectionProvider.getConnection() ) 
         {
             PreparedStatement rqt = cnx.prepareStatement(GET_ALL);
@@ -118,12 +112,12 @@ public class ArticleVenduDal {
                 article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
-                
-                article.setUtilisateur(rs.getObject(utilisateur.getPseudo()));
-                
-                article.setCategorie(rs.getString(categorie.getLibelle()));
-                
-                article.setRetrait(rs.getObject(retrait.getLieuRetrait()));
+                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
+                article.setUtilisateur(utilisateur);
+                CategorieBo categorie = CategorieDal.get(rs.getString(categorie.getLibelle()));
+                article.setCategorie(categorie);
+                RetraitBo retrait = RetraitDal.get(rs.getString(retrait.getLieuRetrait()));
+                article.setRetrait(retrait);
 
                 
                 liste.add(article);
@@ -164,10 +158,9 @@ public class ArticleVenduDal {
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
                 UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
-                
                 resultat.setUtilisateur(vendeur);
                 
-                RetraitBo ret = retrait.getClass();
+                RetraitBo retrait = RetraitDal.getClass();
                 
             }
 
