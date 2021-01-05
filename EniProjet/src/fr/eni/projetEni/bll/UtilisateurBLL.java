@@ -1,5 +1,5 @@
 package fr.eni.projetEni.bll;
 
-public class UtilisateursBLL {
+public class UtilisateurBLL {
 
 }
