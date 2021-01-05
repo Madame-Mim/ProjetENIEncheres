@@ -58,9 +58,6 @@ public class ArticleVenduDal {
     	
         ArticleVenduBo resultat = null;
         
-        UtilisateurDal utilisateur = new UtilisateurDal();
-
-
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
     		
     		PreparedStatement rqt = cnx.prepareStatement(GET_BY_NOM);
@@ -166,7 +163,7 @@ public class ArticleVenduDal {
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
 
-                UtilisateurBo vendeur = utilisateur.getPseudo("pseudo");
+                UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
                 
                 resultat.setUtilisateur(vendeur);
                 
