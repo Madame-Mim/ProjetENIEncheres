@@ -2,6 +2,8 @@ package fr.eni.projetEni.test;
 
 import org.junit.Test;
 
+import fr.eni.projetEni.bo.CategorieBo;
+
 public class CategorieBllTest {
 
 	@Test
@@ -14,6 +16,7 @@ public class CategorieBllTest {
        int sizeBeforeInsertion = conducteurDAO.selectAll().size();
 
         //Ajout d'un conducteur et récupération de son id
+       CategorieBo libelle = new CategorieBo(noCategorie, libelle, categorieArticle)
         Conducteur conducteur = new Conducteur("GOYER", "Germain");
         Conducteur recuperationInsertion = conducteurDAO.insert(conducteur);
 

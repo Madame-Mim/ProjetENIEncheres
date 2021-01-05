@@ -4,7 +4,6 @@ public class CategorieBo {
 
 	private int noCategorie;
 	private String libelle;
-	private ArticleVenduBo categorieArticle;
 	
 	public CategorieBo() {}
 	
@@ -13,10 +12,9 @@ public class CategorieBo {
 	 * @param libelle
 	 * @param categorieArticle
 	 */
-	public CategorieBo(int noCategorie, String libelle, ArticleVenduBo categorieArticle) {
+	public CategorieBo(int noCategorie, String libelle) {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
-		this.categorieArticle = categorieArticle;
 	}
 	/**
 	 * @return the noCategorie
@@ -42,23 +40,12 @@ public class CategorieBo {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	/**
-	 * @return the categorieArticle
-	 */
-	public ArticleVenduBo getCategorieArticle() {
-		return categorieArticle;
-	}
-	/**
-	 * @param categorieArticle the categorieArticle to set
-	 */
-	public void setCategorieArticle(ArticleVenduBo categorieArticle) {
-		this.categorieArticle = categorieArticle;
-	}
+
 	@Override
 	public String toString() {
-		return "CategorieBo [noCategorie=" + noCategorie + ", libelle=" + libelle + ", categorieArticle="
-				+ categorieArticle + "]";
+		return "CategorieBo [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
 	}
+	
 	
 	
 }

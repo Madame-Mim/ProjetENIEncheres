@@ -5,7 +5,6 @@ public class RetraitBo {
 	private String rue;
 	private int CodePostal;
 	private String ville;
-	private ArticleVenduBo lieuRetrait;
 	private int NoRetrait;
 	
 	public RetraitBo() {}
@@ -17,11 +16,10 @@ public class RetraitBo {
 	 * @param lieuRetrait
 	 * @param noRetrait
 	 */
-	public RetraitBo(String rue, int codePostal, String ville, ArticleVenduBo lieuRetrait, int noRetrait) {
+	public RetraitBo(String rue, int codePostal, String ville, int noRetrait) {
 		this.rue = rue;
 		CodePostal = codePostal;
 		this.ville = ville;
-		this.lieuRetrait = lieuRetrait;
 		NoRetrait = noRetrait;
 	}
 
@@ -67,19 +65,6 @@ public class RetraitBo {
 		this.ville = ville;
 	}
 
-	/**
-	 * @return the lieuRetrait
-	 */
-	public ArticleVenduBo getLieuRetrait() {
-		return lieuRetrait;
-	}
-
-	/**
-	 * @param lieuRetrait the lieuRetrait to set
-	 */
-	public void setLieuRetrait(ArticleVenduBo lieuRetrait) {
-		this.lieuRetrait = lieuRetrait;
-	}
 
 	/**
 	 * @return the noRetrait
@@ -97,7 +82,6 @@ public class RetraitBo {
 
 	@Override
 	public String toString() {
-		return "RetraitBo [rue=" + rue + ", CodePostal=" + CodePostal + ", ville=" + ville + ", lieuRetrait="
-				+ lieuRetrait + ", NoRetrait=" + NoRetrait + "]";
+		return "RetraitBo [rue=" + rue + ", CodePostal=" + CodePostal + ", ville=" + ville + ", NoRetrait=" + NoRetrait + "]";
 	}
 }
