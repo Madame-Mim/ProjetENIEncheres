@@ -38,8 +38,17 @@ class UtilisateurBllTest {
     @Test
     void insert() throws Exception {
     	UtilisateurBo utilisateur = new UtilisateurBo();
-    	utilisateur.setNom("Picasso");
-    	utilisateur.setPrenom("Pablo");
+    	utilisateur.setPseudo("hippieMan");
+    	utilisateur.setNom("Pablo");
+    	utilisateur.setPrenom("Picasso");
+    	utilisateur.setEmail("Pablo.Picassiette@gmal.com");
+    	utilisateur.setTelephone("0102030405");
+    	utilisateur.setRue("18 rue Megalo");
+    	utilisateur.setCodePostal("75002");
+    	utilisateur.setVille("Paris");
+    	utilisateur.setPassword("peintreDeOuf");
+    	utilisateur.setCredit(120);
+    	utilisateur.setAdministrateur(true);
         try {
         	UtilisateurBll.insert(utilisateur);
         } catch (Exception e) {
@@ -97,8 +106,17 @@ class UtilisateurBllTest {
     void update() throws Exception {
 
     	UtilisateurBo utilisateur = new UtilisateurBo();
-        utilisateur.setNom("Picasso");
-        utilisateur.setPrenom("Pablo");
+    	utilisateur.setPseudo("hippieMan");
+    	utilisateur.setNom("Pablo");
+    	utilisateur.setPrenom("Picasso");
+    	utilisateur.setEmail("Pablo.Picassiette@gmal.com");
+    	utilisateur.setTelephone("0102030405");
+    	utilisateur.setRue("18 rue Megalo");
+    	utilisateur.setCodePostal("75002");
+    	utilisateur.setVille("Paris");
+    	utilisateur.setPassword("peintreDeOuf");
+    	utilisateur.setCredit(120);
+    	utilisateur.setAdministrateur(true);
 
         UtilisateurBll.insert(utilisateur);
         List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
