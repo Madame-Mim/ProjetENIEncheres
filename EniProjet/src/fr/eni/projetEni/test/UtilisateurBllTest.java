@@ -2,6 +2,7 @@ package fr.eni.projetEni.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.AfterEach;
@@ -22,9 +23,9 @@ class UtilisateurBllTest {
     }
 
     @AfterEach
-    void tearDown() {
-        List<UtilisateurBo> utilisateur = UtilisateurBll.get();
-        for (utilisateur item : utilisateurs) {
+    void tearDown() throws Exception {
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
+        for (UtilisateurBo item : utilisateurs) {
             try {
 
             	UtilisateurBll.delete(item.getId());
@@ -35,7 +36,7 @@ class UtilisateurBllTest {
     }
 
     @Test
-    void insert() {
+    void insert() throws Exception {
     	UtilisateurBo utilisateur = new UtilisateurBo();
     	utilisateur.setNom("Picasso");
     	utilisateur.setPrenom("Pablo");
@@ -45,8 +46,8 @@ class UtilisateurBllTest {
             fail("erreur : " + e.getMessage());
         }
 
-        List<UtilisateurBo> utilisateur = UtilisateurBll.get();
-        utilisateur dernierePersonne = utilisateurs.get(utilisateurs.size() - 1);
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
+        UtilisateurBo dernierePersonne = utilisateurs.get(utilisateurs.size() - 1);
 
         assertEquals(dernierePersonne.getNom(), utilisateur.getNom());
         assertEquals(dernierePersonne.getPrenom(), utilisateur.getPrenom());
@@ -54,10 +55,10 @@ class UtilisateurBllTest {
     }
 
     @Test
-    void get() {
-    	utilisateur p1 = new Utilisateur("Picassa", "Paola");
-    	utilisateur p2 = new Utilisateur("Picassi", "Paoli");
-    	utilisateur p3 = new Utilisateur("Picasse", "Paule");
+    void get() throws Exception {
+    	UtilisateurBo p1 = new UtilisateurBo("monpseudo", "monnom", "monprenom", "monemail", "montelephone", "marue", "moncodepostal", "maville", "monpassword", 0, true);
+    	UtilisateurBo p2 = new UtilisateurBo("tonpseudo", "tonnom", "tonprenom", "tonemail", "tontelephone", "tarue", "toncodepostal", "taville", "tonpassword", 0, false);
+    	UtilisateurBo p3 = new UtilisateurBo("sonpseudo", "sonnom", "sonprenom", "sonemail", "sontelephone", "sarue", "soncodepostal", "saville", "sonpassword", 200, false);
         try {
         	UtilisateurBll.insert(p1);
         	UtilisateurBll.insert(p2);
@@ -67,7 +68,7 @@ class UtilisateurBllTest {
         }
 
 
-        List<Utilisateur> utilisateurs = UtilisateurBll.get();
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
         assertEquals(3, utilisateurs.size());
 
 
@@ -75,18 +76,18 @@ class UtilisateurBllTest {
 
     @Test
     void testGet() throws Exception {
-        Personne p1 = new Personne("Picassa", "Paola");
-        Personne p2 = new Personne("Picassi", "Paoli");
-        Personne p3 = new Personne("Picasse", "Paule");
+    	UtilisateurBo p1 = new UtilisateurBo("monpseudo", "monnom", "monprenom", "monemail", "montelephone", "marue", "moncodepostal", "maville", "monpassword", 0, true);
+    	UtilisateurBo p2 = new UtilisateurBo("tonpseudo", "tonnom", "tonprenom", "tonemail", "tontelephone", "tarue", "toncodepostal", "taville", "tonpassword", 0, false);
+    	UtilisateurBo p3 = new UtilisateurBo("sonpseudo", "sonnom", "sonprenom", "sonemail", "sontelephone", "sarue", "soncodepostal", "saville", "sonpassword", 200, false);
 
             UtilisateurBll.insert(p1);
             UtilisateurBll.insert(p2);
             UtilisateurBll.insert(p3);
 
-        List<Personne> utilisateurs = UtilisateurBll.get();
-        Personne personnearecup =utilisateurs.get(2);
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
+        UtilisateurBo personnearecup =utilisateurs.get(2);
 
-        Personne personnerecuperee = UtilisateurBll.get(personnearecup.getId());
+        UtilisateurBo personnerecuperee = UtilisateurBll.get(personnearecup.getId());
         assertEquals(personnearecup.getNom(), personnerecuperee.getNom());
         assertEquals(personnearecup.getPrenom(), personnerecuperee.getPrenom());
         assertEquals(personnearecup.getId(), personnerecuperee.getId());
@@ -95,19 +96,19 @@ class UtilisateurBllTest {
     @Test
     void update() throws Exception {
 
-        Personne utilisateur = new Personne();
+    	UtilisateurBo utilisateur = new UtilisateurBo();
         utilisateur.setNom("Picasso");
         utilisateur.setPrenom("Pablo");
 
         UtilisateurBll.insert(utilisateur);
-        List<Personne> utilisateurs = UtilisateurBll.get();
-        Personne personneamodifier = utilisateurs.get(0);
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
+        UtilisateurBo personneamodifier = utilisateurs.get(0);
 
         personneamodifier.setNom("Picassa");
         personneamodifier.setPrenom("Paola");
 
         UtilisateurBll.update(personneamodifier);
-        Personne personnemodifiee = UtilisateurBll.get(personneamodifier.getId());
+        UtilisateurBo personnemodifiee = UtilisateurBll.get(personneamodifier.getId());
 
         assertEquals(personnemodifiee.getNom(), "Picassa");
         assertEquals(personnemodifiee.getPrenom(), "Paola");
@@ -116,14 +117,14 @@ class UtilisateurBllTest {
 
     @Test
     void delete() throws Exception {
-        Personne utilisateur = new Personne();
+    	UtilisateurBo utilisateur = new UtilisateurBo();
         utilisateur.setNom("Picasso");
         utilisateur.setPrenom("Pablo");
 
         UtilisateurBll.insert(utilisateur);
-        List<Personne> utilisateurs = UtilisateurBll.get();
+        List<UtilisateurBo> utilisateurs = UtilisateurBll.get();
 
-        for (Personne item : utilisateurs) {
+        for (UtilisateurBo item : utilisateurs) {
             UtilisateurBll.delete(item.getId());
         }
         utilisateurs = UtilisateurBll.get();
