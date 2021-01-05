@@ -14,7 +14,8 @@ public class CategorieDal {
 	private static final String INSERT = "INSERT INTO CATEGORIES VALUES (?,?)";
     private static final String GET_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = ?";
     private static final String GET_ALL = "SELECT * FROM CATEGORIES";
-    private static final String UPDATE = "UPDATE CATEGORIES SET nom = ?, vitesseMax = ? WHERE no_categorie = ?";
+    //doute sur la ligne update. pas d'id donc pas de where nécessaire.
+    private static final String UPDATE = "UPDATE CATEGORIES SET no_categorie = ?, no_categorie = ?";
     private static final String DELETE = "DELETE CATEGORIES WHERE no_categorie = ?";
     
     
