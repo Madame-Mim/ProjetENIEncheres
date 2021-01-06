@@ -21,8 +21,8 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletNouvelleVente - doGet");
-		RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-encheres/nouvelleVente.jsp");
-		rs.forward(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -30,6 +30,10 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletNouvelleVente - doPost");
+		
+		String nomArticle = request.getParameter("nomArticle");
+		String descritpionArticle
+		
 	}
 
 }
