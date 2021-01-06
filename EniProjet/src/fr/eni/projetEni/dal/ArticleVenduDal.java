@@ -66,7 +66,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+           while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));
@@ -116,7 +116,7 @@ public class ArticleVenduDal {
                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
                 article.setUtilisateur(utilisateur);
                 
-                CategorieBo categorie = CategorieDal.get(rs.getInt("libelle"));
+                CategorieBo categorie = CategorieDal.get(rs.getInt("noCategorie"));
                 article.setCategorie(categorie);
                 
                 RetraitBo retrait = RetraitDal.get(rs.getInt("noRetrait"));
@@ -145,7 +145,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+            while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));
@@ -184,7 +184,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+            while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));

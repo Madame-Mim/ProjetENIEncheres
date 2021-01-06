@@ -2,7 +2,6 @@ package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +27,7 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
 	rd.forward(request, response);
 	}
 
@@ -40,13 +39,21 @@ public class ServletConnexion extends HttpServlet {
 		
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
-		boolean typeLogin = Pattern.matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b", pseudo) ;
-
-		if(typeLogin==true)
+		boolean checkSiEmail = Pattern.matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b", pseudo) ;
+		
+		out.println("pseudo : "+pseudo);
+		out.println("password : " +password);
+		out.println("email : "+checkSiEmail);
+		out.close();
+		
+		if(checkSiEmail==true)
 		{
 			try 
 			{
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getCourriel(pseudo);
+				
+				out.println("password en bdd : "+ utilisateurRecupere.getPassword());
+				out.close();
 				String pwdBdd= utilisateurRecupere.getPassword();
 				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
 				
@@ -74,6 +81,8 @@ public class ServletConnexion extends HttpServlet {
 			try 
 			{
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
+				out.println("password en bdd"+utilisateurRecupere.getPassword());
+				out.close();
 				String pwdBdd = utilisateurRecupere.getPassword();
 				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
 				
