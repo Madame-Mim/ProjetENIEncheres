@@ -35,5 +35,5 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
         this.getServletContext().getRequestDispatcher(  URL liste des encheres ).forward( request, response );
 
 		
-	}
+	} 
 }
