@@ -11,10 +11,7 @@
 <title>Se connecter</title>
 </head>
 <body class="container-fluid col-xs-12">
-	<header class="row col-xs-12">
-		<%@ include file="../../Include/header.html" %>	
-	</header>
-	
+
 	<div class="clearfix"></div>
 <br><br>
 
