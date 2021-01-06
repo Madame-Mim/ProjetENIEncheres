@@ -90,7 +90,7 @@ public class UtilisateurDal {
             requete.setInt(1,id);
             ResultSet rs =  requete.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
                 resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
@@ -121,7 +121,7 @@ public class UtilisateurDal {
             requete.setString(1,pseudo);
             ResultSet rs =  requete.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
                 resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
@@ -152,7 +152,7 @@ public class UtilisateurDal {
             requete.setString(1,email);
             ResultSet rs =  requete.executeQuery();
 
-            if(rs.next()) {
+            while(rs.next()) {
                 resultat = new UtilisateurBo();
                 resultat.setId(rs.getInt("id"));
                 resultat.setPseudo(rs.getString("pseudo"));
