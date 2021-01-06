@@ -21,7 +21,7 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletNouvelleVente - doGet");
-		RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/nouvelleVente.jsp");
+		RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-encheres/nouvelleVente.jsp");
 		rs.forward(request, response);
 	}
 
