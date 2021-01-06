@@ -42,39 +42,39 @@
                     <br />
                     
                     <label for="telephone">Numéro de téléphone :<span class="requis"></span></label>
-                    <input type="text" id="telephone" name="telephone" value="" size="20" maxlength="20" />
+                    <input type="text" id="telephone" name="telephone" value="${utilisateur.telephone}" size="20" maxlength="20" />
                     <span class="erreur">${form.erreurs['telephone']}</span>
                     <br />
                     
                     <label for="rue">Rue :<span class="requis"></span></label>
-                    <input type="text" id="rue" name="rue" value="" size="20" maxlength="120" />
+                    <input type="text" id="rue" name="rue" value="${utilisateur.rue}" size="20" maxlength="120" />
                     <span class="erreur">${form.erreurs['rue']}</span>
                     <br />
                     
                     <label for="codePostal">Code postale :<span class="requis"></span></label>
-                    <input type="text" id="codePostal" name="codePostal" value="" size="20" maxlength="20" />
+                    <input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}" size="20" maxlength="20" />
                     <span class="erreur">${form.erreurs['codePostal']}</span>
                     <br />
                     
                                         
                     <label for="ville">Ville :<span class="requis"></span></label>
-                    <input type="text" id="ville" name="ville" value="" size="20" maxlength="20" />
+                    <input type="text" id="ville" name="ville" value="${utilisateur.ville}" size="20" maxlength="20" />
                     <span class="erreur">${form.erreurs['ville']}</span>
                     <br />
                     
                                         
                     <label for="motdepasseactuel">Mot de passe actuel :<span class="requis"></span></label>
-                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="" size="20" maxlength="20" />
+                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.motdepasseactuel}" size="20" maxlength="20" />
                 	<span class="erreur">${form.erreurs['motdepasseactuel']}</span>
                 	<br />
                     
                     <label for="motdepasse">Mot de passe :<span class="requis"></span></label>
-                	<input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />
+                	<input type="password" id="motdepasse" name="motdepasse" value="${utilisateur.motdepasse}" size="20" maxlength="20" />
                 	<span class="erreur">${form.erreurs['motdepasse']}</span>
                 	<br />
 
                 	<label for="confirmation">Confirmation du mot de passe <span class="requis"></span></label>
-                	<input type="password" id="confirmation" name="confirmation" value="" size="20" maxlength="20" />
+                	<input type="password" id="confirmation" name="confirmation" value="${utilisateur.confirmation}" size="20" maxlength="20" />
                 	<span class="erreur">${form.erreurs['confirmation']}</span>
                 	<br />
                 	
