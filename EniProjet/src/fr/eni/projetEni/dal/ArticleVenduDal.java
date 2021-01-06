@@ -116,7 +116,7 @@ public class ArticleVenduDal {
                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
                 article.setUtilisateur(utilisateur);
                 
-                CategorieBo categorie = CategorieDal.get(rs.getInt("libelle"));
+                CategorieBo categorie = CategorieDal.get(rs.getInt("noCategorie"));
                 article.setCategorie(categorie);
                 
                 RetraitBo retrait = RetraitDal.get(rs.getInt("noRetrait"));
