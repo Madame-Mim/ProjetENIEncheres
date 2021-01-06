@@ -1,6 +1,10 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.projetEni.bo.ArticleVenduBo;
 
 /**
  * Servlet implementation class ServletNouvelleVente
@@ -32,7 +38,34 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("ServletNouvelleVente - doPost");
 		
 		String nomArticle = request.getParameter("nomArticle");
-		String descritpionArticle
+		System.out.println("nomArticle" + nomArticle);
+		String descritpionArticle = request.getParameter("descritpionArticle");
+		System.out.println("descritpionArticle" + descritpionArticle);
+		String CatégorieArticle = request.getParameter("CatégorieArticle");
+		System.out.println("CatégorieArticle" + CatégorieArticle);
+		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
+		System.out.println("miseAPrixArticle" + miseAPrixArticle);
+		
+		Date debutEnchere;
+		try {
+			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
+			System.out.println("debutEnchere" + debutEnchere);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		Date finEnchere;
+		try {
+			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
+			System.out.println("finEnchere" + finEnchere);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente, utilisateur, categorie, retrait)
+		
 		
 	}
 

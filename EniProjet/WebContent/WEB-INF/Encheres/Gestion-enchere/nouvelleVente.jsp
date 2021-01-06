@@ -44,11 +44,11 @@
 	<div>
 		<label>Retrait</label>
 		<div>
-		<label>Rue : </label><input type="text" name="rueRetrait" required>
+		<label>Rue : </label><input type="text" name="rueRetrait">
 		<br>
-		<label>Code postal : </label><input type="text" name="codePostalRetrait" required>
+		<label>Code postal : </label><input type="text" name="codePostalRetrait">
 		<br>
-		<label>Ville: </label><input type="text" name="villeRetrait" required>
+		<label>Ville: </label><input type="text" name="villeRetrait">
 		</div>
 	
 	</div>
