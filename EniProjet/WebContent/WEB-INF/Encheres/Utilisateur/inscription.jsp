@@ -11,7 +11,7 @@
 <body>
 
 	<header>
-		<%@ include file="header.html" %>	
+		<%@ include file="/WEB-INF/Include/header.html" %>	
 	</header>
         
     <h1>Mon profil</h1>
@@ -75,7 +75,7 @@
                 </fieldset>
                 <p class="info">${ form.resultat }</p>
                 <input type="submit" value="Valider"  />
-                <input type="reset" value="Remettre à zéro" />
+                <a href="   URL liste des encheres   " class="button">Annuler</a>
                 <br /> 
             </form>
         </div>
