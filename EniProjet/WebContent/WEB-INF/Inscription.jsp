@@ -76,7 +76,7 @@
                 <p class="info">${ form.resultat }</p>
                 <input type="submit" value="Valider"  />
                 <input type="reset" value="Remettre à zéro" />
-                <br />
+                <br /> 
             </form>
         </div>
 
