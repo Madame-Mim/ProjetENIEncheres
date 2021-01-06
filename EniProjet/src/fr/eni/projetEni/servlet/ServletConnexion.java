@@ -2,7 +2,6 @@ package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +27,7 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/Encheres/utilisateur/connexion.jsp");
 	rd.forward(request, response);
 	}
 
@@ -41,7 +40,8 @@ public class ServletConnexion extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		boolean typeLogin = Pattern.matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b", pseudo) ;
-
+		out.println("pseudo : "+pseudo+" password : "+password+" typelogin : "+typeLogin);
+		out.close();
 		if(typeLogin==true)
 		{
 			try 
@@ -49,7 +49,8 @@ public class ServletConnexion extends HttpServlet {
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getCourriel(pseudo);
 				String pwdBdd= utilisateurRecupere.getPassword();
 				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
-				
+				out.println("password en bdd"+pwdBdd);
+				out.close();
 				if(VerifPassword==false) 
 				{
 					out.println("Le login et le mot de passe ne correspondent pas");
