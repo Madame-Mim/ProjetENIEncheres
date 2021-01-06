@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.bll.UtilisateurBll;
 
-class UtilisateurBllTest {
-//pour renvoi
+class UtilisateurBllTest2 {
+
 	private static Logger logger = MonLogger.getLogger("PersonneBllTest");
 
     @BeforeEach
