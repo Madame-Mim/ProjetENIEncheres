@@ -5,9 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+       <!--    <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />     url ?????? -->
 <title>ENI-Enchères</title>
 </head>
 <body>
+
+	<header>
+		<%@ include file="header.html" %>	
+	</header>
 
 	<h1>Mon profil</h1>
 	
@@ -57,10 +62,6 @@
                     <span class="erreur">${form.erreurs['ville']}</span>
                     <br />
                     
-                    <label for="ville">Ville :<span class="requis"></span></label>
-                    <input type="text" id="ville" name="ville" value="" size="20" maxlength="20" />
-                    <span class="erreur">${form.erreurs['ville']}</span>
-                    <br />
                                         
                     <label for="motdepasseactuel">Mot de passe actuel :<span class="requis"></span></label>
                 	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="" size="20" maxlength="20" />
@@ -77,8 +78,6 @@
                 	<span class="erreur">${form.erreurs['confirmation']}</span>
                 	<br />
                 	
-                	<label for="ville">Ville :<span class="requis"></span></label>
-                    <input type="text" id="ville" name="ville" value="" size="20" maxlength="20" />
                     
                 </fieldset>
                 <p class="info">${ form.resultat }</p>

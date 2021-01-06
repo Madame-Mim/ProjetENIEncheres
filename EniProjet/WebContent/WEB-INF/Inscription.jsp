@@ -9,6 +9,10 @@
 <title>ENI-Enchères</title>
 </head>
 <body>
+
+	<header>
+		<%@ include file="header.html" %>	
+	</header>
         
     <h1>Mon profil</h1>
         
@@ -53,11 +57,6 @@
                     <br />
                     
                                         
-                    <label for="ville">Ville :<span class="requis"></span></label>
-                    <input type="text" id="ville" name="ville" value="" size="20" maxlength="20" />
-                    <span class="erreur">${form.erreurs['ville']}</span>
-                    <br />
-                    
                     <label for="ville">Ville :<span class="requis"></span></label>
                     <input type="text" id="ville" name="ville" value="" size="20" maxlength="20" />
                     <span class="erreur">${form.erreurs['ville']}</span>
