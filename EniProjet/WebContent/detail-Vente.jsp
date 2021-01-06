@@ -23,6 +23,8 @@
 		<br>
 		Meilleur offre ${article.offre} points par ${article.utilisateur}
 		<br>
+		Mise à prix : ${article.prixDepart}
+		<br>
 		Fin de l'enchère : ${article.finEnchere}
 		<br>
 		Retrait : ${article.adresseRetrait}

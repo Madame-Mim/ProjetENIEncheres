@@ -11,7 +11,7 @@ import java.time.LocalDate;
 		private LocalDate dateFinEncheres;
 		private int miseAPrix;
 		private int prixVente;
-		private String etatVente;
+		//private String etatVente;
 		private UtilisateurBo utilisateur;
 		private CategorieBo categorie;
 		private RetraitBo retrait;
@@ -23,11 +23,6 @@ import java.time.LocalDate;
 		}
 		/* fin constructeur */
 		
-		
-		/* getters setters */
-		public int getNoArticle() {
-			return noArticle;
-		}
 		/**
 		 * @param noArticle
 		 * @param nomArticle
@@ -52,7 +47,7 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.etatVente = etatVente;
+			//this.etatVente = etatVente;
 			this.utilisateur = utilisateur;
 			this.categorie = categorie;
 			this.retrait = retrait;
@@ -81,10 +76,39 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.etatVente = etatVente;
+			//this.etatVente = etatVente;
 			this.utilisateur = utilisateur;
 			this.categorie = categorie;
 			this.retrait = retrait;
+		}
+		
+		
+		
+		/**
+		 * @param nomArticle
+		 * @param description
+		 * @param dateFinEncheres
+		 * @param miseAPrix
+		 * @param prixVente
+		 * @param utilisateur
+		 * @param categorie
+		 * @param retrait
+		 */
+		public ArticleVenduBo(String nomArticle, String description, LocalDate dateFinEncheres, int miseAPrix,
+				int prixVente, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo retrait) {
+			super();
+			this.nomArticle = nomArticle;
+			this.description = description;
+			this.dateFinEncheres = dateFinEncheres;
+			this.miseAPrix = miseAPrix;
+			this.prixVente = prixVente;
+			this.utilisateur = utilisateur;
+			this.categorie = categorie;
+			this.retrait = retrait;
+		}
+		/* getters setters */
+		public int getNoArticle() {
+			return noArticle;
 		}
 		public void setNoArticle(int noArticle) {
 			this.noArticle = noArticle;
@@ -125,12 +149,12 @@ import java.time.LocalDate;
 		public void setPrixVente(int prixVente) {
 			this.prixVente = prixVente;
 		}
-		public String getEtatVente() {
-			return etatVente;
-		}
-		public void setEtatVente(String etatVente) {
-			this.etatVente = etatVente;
-		}
+	//	public String getEtatVente() {
+	//		return etatVente;
+	//	}
+	//	public void setEtatVente(String etatVente) {
+	//		this.etatVente = etatVente;
+	//	}
 		public UtilisateurBo getUtilisateur() {
 			return utilisateur;
 		}
@@ -157,7 +181,7 @@ import java.time.LocalDate;
 		public String toString() {
 			return "ArticleVenduBo [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description="
 					+ description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres
-					+ ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + "]";
+					+ ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente /*+ ", etatVente=" + etatVente + "]"*/;
 		}
 		/* toString */
 		
