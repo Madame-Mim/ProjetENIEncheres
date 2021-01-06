@@ -22,22 +22,22 @@
                     <legend>Mon profil</legend>
                     
                     <label for="pseudo">Pseudo : <span class="requis"></span></label>
-                    <input type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" size="30" maxlength="30"  />
+                    <input type="text" id="pseudo" name="pseudo" value="<c:out value=""/>" size="30" maxlength="30"  />
                     <span class="erreur">${form.erreurs['pseudo']}</span>
                     <br />
                     
                     <label for="nom">Nom : <span class="requis"></span></label>
-                    <input type="text" id="nom" name="nom" value="<c:out value="${utilisateur.nom}"/>" size="30" maxlength="30" />
+                    <input type="text" id="nom" name="nom" value="<c:out value=""/>" size="30" maxlength="30" />
                     <span class="erreur">${form.erreurs['nom']}</span>
                     <br />
                     
                     <label for="prenom">Prénom : <span class="requis"></span></label>
-                    <input type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.prenom}"/>" size="30" maxlength="30" />
+                    <input type="text" id="prenom" name="prenom" value="<c:out value=""/>" size="30" maxlength="30" />
                     <span class="erreur">${form.erreurs['prenom']}</span>
                     <br />
                     
                     <label for="email">Email :</label>
-                    <input type="text" id="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
+                    <input type="text" id="email" name="email" value="<c:out value=""/>" size="20" maxlength="60" />
                     <span class="erreur">${form.erreurs['email']}</span>
                     <br />
                     
@@ -75,7 +75,8 @@
                 </fieldset>
                 <p class="info">${ form.resultat }</p>
                 <input type="submit" value="Valider"  />
-                <input type="reset" value="Remettre à zéro" /> <br />
+                <input type="reset" value="Remettre à zéro" />
+                <br />
             </form>
         </div>
 
