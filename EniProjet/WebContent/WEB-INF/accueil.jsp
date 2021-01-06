@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ENI-Encheres</title>
-<a href="#">S'inscrire-Se connecter</a>
+<a href="#">S'inscrire - Se connecter</a>
 </head>
 <body>
 <h1> Liste des enchères</h1>
@@ -23,6 +23,8 @@ placeholder="le nom de l'article contient" size= "40"/>
 <option value="SportLoisirs">Sport&Loisirs</option>
 </select>
 </p>
+
+
 
 
 </body>
