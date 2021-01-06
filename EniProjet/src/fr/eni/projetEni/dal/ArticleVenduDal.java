@@ -66,7 +66,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+           while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));
@@ -145,7 +145,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+            while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));
@@ -184,7 +184,7 @@ public class ArticleVenduDal {
 
             ResultSet rs = rqt.executeQuery();
 
-            if (rs.next())
+            while(rs.next())
             {
                 resultat = new ArticleVenduBo();
                 resultat.setNomArticle(rs.getNString("nom_article"));
