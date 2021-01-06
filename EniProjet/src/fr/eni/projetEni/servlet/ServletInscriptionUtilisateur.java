@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.beans.Commande;
-import fr.eni.forms.CreationCommandeForm;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.UtilisateurDal;
 
