@@ -15,7 +15,7 @@ import fr.eni.projetEni.bll.UtilisateurBll;
 
 class UtilisateurBllTest2 {
 
-	private static Logger logger = MonLogger.getLogger("PersonneBllTest");
+	private static Logger logger = MonLogger.getLogger("PersonneBllTest2");
 
     @BeforeEach
     void setUp() {
