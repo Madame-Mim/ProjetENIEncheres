@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,16 +26,23 @@ public class ServletEncherir extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		 try {
-			ArticleVenduBo articlevendu = ArticleVenduBll.getById(7);
-		out.println(request.getParameter(articlevendu.getNomArticle()));
-			
-		ArticleVenduBo article = null;
-		article = new ArticleVenduBo(articlevendu.getNomArticle(),article.getDescription(),article.getDateFinEncheres(), article.getPrixVente(), article.getMiseAPrix(),article.getUtilisateur(),article.getCategorie(),article.getRetrait());
-		request.setAttribute("article", article);
-		 } catch (Exception e) {
-				e.printStackTrace();
-			}
+		List<ArticleVenduBo> listeArticles;
+		try {
+			listeArticles = ArticleVenduBll.getAll();
+			for(ArticleVenduBo article : listeArticles)
+	        {
+	            //"affichageListeArticle" doit apparaître dans la jsp pour afficher la liste comme ceci
+	            //<p><%=request.getAttribute("affichageListeArticle") %> </p>
+	            request.setAttribute("affichagelisteArticle", listeArticles);
+	            System.out.println(article);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        //le forward envoi l'affichage à la jsp
+        RequestDispatcher rd = request.getRequestDispatcher("detail-Vente.jsp");
+        rd.forward(request, response);
 	}
 
 	/**
