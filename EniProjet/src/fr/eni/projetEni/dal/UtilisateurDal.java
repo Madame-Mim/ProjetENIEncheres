@@ -139,7 +139,7 @@ public class UtilisateurDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode get(String pseudo) avec pseudo ="+ pseudo +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode getPseudo(String pseudo) avec pseudo ="+ pseudo +"- erreur : "+ex.getMessage());
         }
         return resultat;
     }
@@ -170,7 +170,7 @@ public class UtilisateurDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode get(String courriel) avec courriel ="+ email +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode getCourriel(String courriel) avec courriel ="+ email +"- erreur : "+ex.getMessage());
         }
         return resultat;
     }

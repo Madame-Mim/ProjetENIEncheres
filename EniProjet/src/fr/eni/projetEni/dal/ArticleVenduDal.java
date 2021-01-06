@@ -112,11 +112,14 @@ public class ArticleVenduDal {
                 article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
+                
                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
                 article.setUtilisateur(utilisateur);
-                CategorieBo categorie = CategorieDal.get(rs.getString(categorie.getLibelle()));
+                
+                CategorieBo categorie = CategorieDal.get(rs.getInt("libelle"));
                 article.setCategorie(categorie);
-                RetraitBo retrait = RetraitDal.get(rs.getString(retrait.getLieuRetrait()));
+                
+                RetraitBo retrait = RetraitDal.get(rs.getInt("noRetrait"));
                 article.setRetrait(retrait);
 
                 
