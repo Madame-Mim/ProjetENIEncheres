@@ -11,7 +11,6 @@
 <body>
 
 	<header>
-		<%@ include file="/WEB-INF/Include/header.html" %>	
 	</header>
         
     <h1>Mon profil</h1>
