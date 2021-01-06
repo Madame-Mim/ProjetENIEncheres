@@ -75,7 +75,7 @@
                 </fieldset>
                 <p class="info">${ form.resultat }</p>
                 <input type="submit" value="Valider"  />
-                <a href="   URL liste des encheres   " class="button">Annuler</a>
+                <a href="/WEB-INF/accueil.jsp" class="button">Annuler</a>
                 <br /> 
             </form>
         </div>

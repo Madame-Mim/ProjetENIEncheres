@@ -33,7 +33,7 @@
 		
 	<div class="clearfix"></div>
 <br><br>
-			<a href="#">Créer un compte</a>
+			<a href="<%=request.getContextPath()%>/ServletInscriptionUtilisateur">Créer un compte</a>
 			
 	</section>
 </body>
