@@ -1,16 +1,18 @@
-package EniProjet.src.fr.eni.projetEni.bll;
+package fr.eni.projetEni.bll;
 
 import java.util.List;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;
+import fr.eni.projetEni.dal.ArticleVenduDal;
+import fr.eni.projetEni.dal.UtilisateurDal;
 
 
 public class ArticleVenduBll {
 
 	public static void insertArticle(ArticleVenduBo article )throws Exception {
 	    {
-	    	if(article.getNomArticle().trim().equals("")||article.getDescription().trim().equals("")||article.getDateDebutEncheres().trim().equals("")||
-	    			article.getDateFinEncheres().trim().equals("")||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur().equals("")||article.getCategorie().equals("")||article.getRetrait().equals("") )
+	    	if(article.getNomArticle().trim().equals("")||article.getDescription().trim().equals("")||article.getDateDebutEncheres()==null||
+	    			article.getDateFinEncheres()==null||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur()==null||article.getCategorie()==null||article.getRetrait()==null )
 	    	{
 	    		throw new Exception("L'ensemble des informations doit être renseigné.");
 	    	}
@@ -43,8 +45,8 @@ public class ArticleVenduBll {
 	   }
 	    public static void updateArticle(ArticleVenduBo article) throws Exception{
 	    {
-	    	if(article.getNomArticle().trim().equals("")||article.getDescription().trim().equals("")||article.getDateDebutEncheres().trim().equals("")||
-	    			article.getDateFinEncheres().trim().equals("")||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur().equals("")||article.getCategorie().equals("")||article.getRetrait().equals("") )
+	    	if(article.getNomArticle().trim().equals("")||article.getDescription().trim().equals("")||article.getDateDebutEncheres()==null||
+	    			article.getDateFinEncheres()==null||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur()==null||article.getCategorie()==null||article.getRetrait()==null)
 	    	{
 	    		throw new Exception("L'ensemble des informations doit être renseigné.");
 	    	}
