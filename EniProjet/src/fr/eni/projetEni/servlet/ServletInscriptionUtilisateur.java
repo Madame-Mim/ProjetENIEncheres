@@ -32,7 +32,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		
 		request.setAttribute("utilisateur", utilisateur);
 		
-        this.getServletContext().getRequestDispatcher(  URL liste des encheres ).forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward( request, response );
 
 		
 	} 

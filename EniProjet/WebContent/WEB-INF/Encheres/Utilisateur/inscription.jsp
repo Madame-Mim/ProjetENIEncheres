@@ -17,7 +17,7 @@
     <h1>Mon profil</h1>
         
         <div>
-            <form method="post" action="<c:url value="/Inscription"/>">
+            <form method="post" action="<c:url value="ServletInscriptionUtilisateur"/>">
                 <fieldset>
                     <legend>Mon profil</legend>
                     
