@@ -148,8 +148,8 @@ public class ArticleVenduDal {
             while(rs.next())
             {
                 resultat = new ArticleVenduBo();
-                resultat.setNomArticle(rs.getNString("nom_article"));
-                resultat.setDescription(rs.getNString("description"));
+                resultat.setNomArticle(rs.getString("nom_article"));
+                resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
@@ -187,8 +187,8 @@ public class ArticleVenduDal {
             while(rs.next())
             {
                 resultat = new ArticleVenduBo();
-                resultat.setNomArticle(rs.getNString("nom_article"));
-                resultat.setDescription(rs.getNString("description"));
+                resultat.setNomArticle(rs.getString("nom_article"));
+                resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
