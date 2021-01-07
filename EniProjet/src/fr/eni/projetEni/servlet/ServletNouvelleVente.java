@@ -47,8 +47,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		String nomArticle = request.getParameter("nomArticle");
 		System.out.println("nomArticle :" + nomArticle);
 		
-		String descritpionArticle = request.getParameter("descritpionArticle");
-		System.out.println("descritpionArticle :" + descritpionArticle);
+		String descriptionArticle = request.getParameter("descriptionArticle");
+		System.out.println("descriptionArticle :" + descriptionArticle);
 		
 		//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
 		String debutEnchere = request.getParameter("debutEnchere");
@@ -90,9 +90,11 @@ public class ServletNouvelleVente extends HttpServlet {
 		int noRetrait = adresseRetrait.getNoRetrait();
 		System.out.println("affiche le numéro de retrait " + noRetrait);
 		
-		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelleVente = ArticleVenduBll.ajouter(nomArticle, descritpionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
-		
+		ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+		ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+		ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+				
+		ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
 	}
 
 }

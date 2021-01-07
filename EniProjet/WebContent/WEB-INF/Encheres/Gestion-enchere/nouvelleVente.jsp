@@ -17,7 +17,7 @@
 	</div>
 	<br>
 	<div>
-		<label>Decsription : </label><input type="text" name="descritpionArticle" required>
+		<label>Decsription : </label><input type="text" name="descriptionArticle" required>
 	</div>
 	<br>
 	<div>
