@@ -36,7 +36,7 @@
 			<input type="number" min=${article.Prix}+1 size=10>
 			<input type="submit" value="Enchérir">
 		</form>
-		
+		<p><%=request.getAttribute("affichageListeArticle") %></p>
 		
 	</section>
 	
