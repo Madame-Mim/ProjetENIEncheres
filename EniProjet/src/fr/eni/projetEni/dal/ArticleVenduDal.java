@@ -14,7 +14,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.utils.MonLogger;
 
 public class ArticleVenduDal {
-
+ 
     private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?)";
     
     private static final String GET_BY_NOM="SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
