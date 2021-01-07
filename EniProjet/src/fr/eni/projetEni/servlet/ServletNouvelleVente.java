@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -46,27 +47,25 @@ public class ServletNouvelleVente extends HttpServlet {
 		String nomArticle = request.getParameter("nomArticle");
 		System.out.println("nomArticle :" + nomArticle);
 		
-		String descritpionArticle = request.getParameter("descritpionArticle");
-		System.out.println("descritpionArticle :" + descritpionArticle);
+		String descriptionArticle = request.getParameter("descriptionArticle");
+		System.out.println("descriptionArticle :" + descriptionArticle);
+		
+		//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
+		String debutEnchere = request.getParameter("debutEnchere");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		LocalDate debutEncherelocalDate = LocalDate.parse(debutEnchere,formatter);
+		System.out.println("Début enchère : " + debutEncherelocalDate);
 		
 		
-		LocalDate debutEnchere;
-		try {
-			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
-			System.out.println("debutEnchere :" + debutEnchere);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
+		String finEnchere = request.getParameter("finEnchere");
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
+		LocalDate finEncherelocalDate = LocalDate.parse(finEnchere,formatter);
+		System.out.println("fin enchère : " + finEncherelocalDate);
 		
-		LocalDate finEnchere;
-		try {
-			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
-			System.out.println("finEnchere :" + finEnchere);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
+				
 		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
 		System.out.println("miseAPrixArticle :" + miseAPrixArticle);
 		
@@ -88,14 +87,14 @@ public class ServletNouvelleVente extends HttpServlet {
 		int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
 		String villeRetrait = request.getParameter("villeRetrait");
 		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
-		System.out.println(adresseRetrait);
 		int noRetrait = adresseRetrait.getNoRetrait();
+		System.out.println("affiche le numéro de retrait " + noRetrait);
 		
-		
-		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelleVente = ArticleVenduBll.ajouter(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
-		
-		
+		ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+		ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+		ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+				
+		ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
 	}
 
 }
