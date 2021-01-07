@@ -13,9 +13,9 @@ import fr.eni.projetEni.dal.UtilisateurDal;
 
 public class ArticleVenduBll {
 	
-	public static ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo noUtilisateur, CategorieBo noCategorie, RetraitBo noRetrait)
+	public static ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo adresseRetrait)
 	{
-		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, noUtilisateur, noCategorie , noRetrait);
+		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, utilisateur, categorie , adresseRetrait);
 		ArticleVenduDal.insertArticle(nouvelleVente);
 		return nouvelleVente;
 	}

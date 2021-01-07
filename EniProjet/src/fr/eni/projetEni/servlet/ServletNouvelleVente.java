@@ -74,6 +74,8 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 		//UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", 0102030405, "18 rue Emile Zola", 44000, "Nantes", "lemeilleur", 0, false);
 		UtilisateurBo utilisateur = new UtilisateurBo();
+		int noUtilisateur = utilisateur.getId();
+		System.out.println("noUtilisateur : " + noUtilisateur);
 		
 	//créer catégorieBo
 		String categorieArticle = request.getParameter("categorieArticle");
@@ -94,7 +96,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
 		ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
 				
-		ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
+		//ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
 	}
 
 }
