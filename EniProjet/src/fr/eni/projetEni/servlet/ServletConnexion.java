@@ -52,8 +52,6 @@ public class ServletConnexion extends HttpServlet {
 			{
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getCourriel(pseudo);
 				
-				out.println("password en bdd : "+ utilisateurRecupere.getPassword());
-				out.close();
 				String pwdBdd= utilisateurRecupere.getPassword();
 				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
 				

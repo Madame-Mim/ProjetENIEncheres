@@ -27,11 +27,19 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd=null;
-		rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
-		rd.forward(request, response);
-	
-	
+		List<ArticleVenduBo> listeArticles = new ArrayList<>();
+		try {
+			listeArticles= ArticleVenduBll.getAll();
+			 for(ArticleVenduBo article : listeArticles)
+	            {request.setAttribute("affichagelisteArticle", listeArticles);
+                System.out.println(article);
+            }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
+	        rd.forward(request, response);
 		
 	
 	}
