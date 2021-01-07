@@ -1,13 +1,25 @@
 package fr.eni.projetEni.bll;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;
+import fr.eni.projetEni.bo.CategorieBo;
+import fr.eni.projetEni.bo.RetraitBo;
+import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
 import fr.eni.projetEni.dal.UtilisateurDal;
 
 
 public class ArticleVenduBll {
+	
+	public ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo noUtilisateur, CategorieBo noCategorie, RetraitBo noRetrait)
+	{
+		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, noUtilisateur, noCategorie , noRetrait);
+		ArticleVenduDal.insertArticle(nouvelleVente);
+		return nouvelleVente;
+	}
 
 	public static void insertArticle(ArticleVenduBo article )throws Exception {
 	    {

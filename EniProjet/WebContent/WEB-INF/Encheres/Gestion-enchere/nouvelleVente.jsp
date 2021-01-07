@@ -21,7 +21,7 @@
 	</div>
 	<br>
 	<div>
-		<label>Catégorie </label><input type="select" name="CatégorieArticle" required>
+		<label>Catégorie </label><input type="select" name="categorieArticle" required>
 	</div>
 	<br>
 	<div>

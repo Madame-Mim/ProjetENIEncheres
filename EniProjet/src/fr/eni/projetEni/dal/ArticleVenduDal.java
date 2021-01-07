@@ -106,14 +106,14 @@ public class ArticleVenduDal {
             {
                 ArticleVenduBo article = new ArticleVenduBo();
                 article.setNoArticle(rs.getInt("no_article"));
-                article.setNomArticle(rs.getNString("nom_article"));
-                article.setDescription(rs.getNString("description"));
+                article.setNomArticle(rs.getString("nom_article"));
+                article.setDescription(rs.getString("description"));
                 article.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
                 
-                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
+                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("noUtilisateur"));
                 article.setUtilisateur(utilisateur);
                 
                 CategorieBo categorie = CategorieDal.get(rs.getInt("noCategorie"));
@@ -127,7 +127,7 @@ public class ArticleVenduDal {
             }
 
         } catch (Exception ex ) {
-            logger.severe("erreur dans la méthode getAll " + "erreur : " + ex.getMessage());
+           ex.printStackTrace();
         }
         return liste;
     }/* fin get all */
@@ -148,8 +148,8 @@ public class ArticleVenduDal {
             while(rs.next())
             {
                 resultat = new ArticleVenduBo();
-                resultat.setNomArticle(rs.getNString("nom_article"));
-                resultat.setDescription(rs.getNString("description"));
+                resultat.setNomArticle(rs.getString("nom_article"));
+                resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
@@ -187,8 +187,8 @@ public class ArticleVenduDal {
             while(rs.next())
             {
                 resultat = new ArticleVenduBo();
-                resultat.setNomArticle(rs.getNString("nom_article"));
-                resultat.setDescription(rs.getNString("description"));
+                resultat.setNomArticle(rs.getString("nom_article"));
+                resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));

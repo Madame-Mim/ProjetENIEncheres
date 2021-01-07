@@ -11,7 +11,6 @@ import java.time.LocalDate;
 		private LocalDate dateFinEncheres;
 		private int miseAPrix;
 		private int prixVente;
-		//private String etatVente;
 		private UtilisateurBo utilisateur;
 		private CategorieBo categorie;
 		private RetraitBo retrait;
@@ -37,7 +36,7 @@ import java.time.LocalDate;
 		 * @param retrait
 		 */
 		public ArticleVenduBo(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-				LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, UtilisateurBo utilisateur,
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur,
 				CategorieBo categorie, RetraitBo retrait) {
 			super();
 			this.noArticle = noArticle;
@@ -47,7 +46,6 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			//this.etatVente = etatVente;
 			this.utilisateur = utilisateur;
 			this.categorie = categorie;
 			this.retrait = retrait;
@@ -67,7 +65,7 @@ import java.time.LocalDate;
 		 * @param retrait
 		 */
 		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
-				LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, UtilisateurBo utilisateur,
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur,
 				CategorieBo categorie, RetraitBo retrait) {
 			super();
 			this.nomArticle = nomArticle;
@@ -76,7 +74,6 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			//this.etatVente = etatVente;
 			this.utilisateur = utilisateur;
 			this.categorie = categorie;
 			this.retrait = retrait;
@@ -106,6 +103,52 @@ import java.time.LocalDate;
 			this.categorie = categorie;
 			this.retrait = retrait;
 		}
+		
+		
+		/**
+		 * @param nomArticle
+		 * @param description
+		 * @param dateDebutEncheres
+		 * @param dateFinEncheres
+		 * @param miseAPrix
+		 * @param prixVente
+		 * @param categorie
+		 * @param retrait
+		 */
+		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, CategorieBo categorie, RetraitBo retrait) {
+			this.nomArticle = nomArticle;
+			this.description = description;
+			this.dateDebutEncheres = dateDebutEncheres;
+			this.dateFinEncheres = dateFinEncheres;
+			this.miseAPrix = miseAPrix;
+			this.prixVente = prixVente;
+			this.categorie = categorie;
+			this.retrait = retrait;
+		}
+		
+		
+
+		/**
+		 * @param nomArticle
+		 * @param description
+		 * @param dateDebutEncheres
+		 * @param dateFinEncheres
+		 * @param miseAPrix
+		 * @param prixVente
+		 * @param retrait
+		 */
+		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, RetraitBo retrait) {
+			this.nomArticle = nomArticle;
+			this.description = description;
+			this.dateDebutEncheres = dateDebutEncheres;
+			this.dateFinEncheres = dateFinEncheres;
+			this.miseAPrix = miseAPrix;
+			this.prixVente = prixVente;
+			this.retrait = retrait;
+		}
+
 		/* getters setters */
 		public int getNoArticle() {
 			return noArticle;
