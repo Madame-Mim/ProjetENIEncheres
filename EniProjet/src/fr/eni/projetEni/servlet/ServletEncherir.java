@@ -1,7 +1,6 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +24,7 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+
 		List<ArticleVenduBo> listeArticles;
 		try {
 			listeArticles = ArticleVenduBll.getAll();
@@ -48,7 +47,6 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		List<ArticleVenduBo> listeArticles;
 		try {
 			listeArticles = ArticleVenduBll.getAll();
