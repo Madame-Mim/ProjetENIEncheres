@@ -36,72 +36,75 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		
+		String jspCible =null;
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		boolean checkSiEmail = Pattern.matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b", pseudo) ;
-		
-		out.println("pseudo : "+pseudo);
-		out.println("password : " +password);
-		out.println("email : "+checkSiEmail);
-		out.close();
-		
+			
 		if(checkSiEmail==true)
 		{
 			try 
 			{
+				
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getCourriel(pseudo);
-				
-				String pwdBdd= utilisateurRecupere.getPassword();
-				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
-				
-				if(VerifPassword==false) 
+
+				if(utilisateurRecupere==null)
 				{
-					out.println("Le login et le mot de passe ne correspondent pas");
-					out.close();
+					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 				}
 				else
 				{
-					HttpSession session = request.getSession();
-
-					RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/accueil.jsp");
-					rd.forward(request, response);
+					String pwdBdd= utilisateurRecupere.getPassword();
+					boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
+	
+					if(VerifPassword==false) 
+					{
+						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
+					}
+					else
+					{
+						HttpSession session = request.getSession();
+						jspCible="/WEB-INF/Encheres/accueil.jsp";
+					}
 				}
-			} 
-			catch (Exception e) 
-			{
-				e.printStackTrace();
 			}
-			
-		}
+				catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+			}
+		
 		else 
 		{
 			try 
 			{
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
-				out.println("password en bdd"+utilisateurRecupere.getPassword());
-				out.close();
-				String pwdBdd = utilisateurRecupere.getPassword();
-				boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
-				
-				if(VerifPassword==false) 
+				if(utilisateurRecupere==null)
 				{
-					out.println("Le login et le mot de passe ne correspondent pas");
-					out.close();
+					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 				}
 				else
 				{
-					HttpSession session = request.getSession();
-
-					RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/accueil.jsp");
-					rd.forward(request, response);
+					String pwdBdd = utilisateurRecupere.getPassword();
+					boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
+					
+					if(VerifPassword==false||pseudo==null)
+					{
+						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
+					}
+					else
+					{
+						HttpSession session = request.getSession();
+						jspCible="/WEB-INF/Encheres/accueil.jsp";					
+					}
 				}
-
 			} 
 			catch (Exception e) 
 			{
 				e.printStackTrace();
 			}
 		}
+		RequestDispatcher rd= request.getRequestDispatcher(jspCible);
+		rd.forward(request, response);
 	}
 }

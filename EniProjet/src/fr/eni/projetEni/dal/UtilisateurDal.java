@@ -122,17 +122,17 @@ public class UtilisateurDal {
             ResultSet rs =  requete.executeQuery();
 
             while(rs.next()) {
-                resultat = new UtilisateurBo();
-                resultat.setId(rs.getInt("id"));
+            	resultat = new UtilisateurBo();
+                resultat.setId(rs.getInt("no_utilisateur"));
                 resultat.setPseudo(rs.getString("pseudo"));
                 resultat.setNom(rs.getString("nom"));
                 resultat.setPrenom(rs.getString("prenom"));
                 resultat.setEmail(rs.getString("email"));
                 resultat.setTelephone(rs.getString("telephone"));
                 resultat.setRue(rs.getString("rue"));
-                resultat.setCodePostal(rs.getString("codePostal"));
+                resultat.setCodePostal(rs.getString("code_Postal"));
                 resultat.setVille(rs.getString("ville"));
-                resultat.setPassword(rs.getString("password"));
+                resultat.setPassword(rs.getString("mot_de_passe"));
                 resultat.setCredit(rs.getInt("credit"));
                 resultat.setAdministrateur(rs.getBoolean("administrateur"));
             }
