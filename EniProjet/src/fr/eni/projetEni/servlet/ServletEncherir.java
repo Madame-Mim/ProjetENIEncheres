@@ -39,8 +39,9 @@ public class ServletEncherir extends HttpServlet {
 		}
         
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
+        
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class ServletEncherir extends HttpServlet {
 		}
         
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
 		}
 
