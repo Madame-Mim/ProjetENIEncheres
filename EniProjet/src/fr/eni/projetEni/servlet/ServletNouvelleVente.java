@@ -50,7 +50,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("descritpionArticle :" + descritpionArticle);
 		
 		
-		Date debutEnchere;
+		LocalDate debutEnchere;
 		try {
 			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
 			System.out.println("debutEnchere :" + debutEnchere);
@@ -59,7 +59,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 		
-		Date finEnchere;
+		LocalDate finEnchere;
 		try {
 			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
 			System.out.println("finEnchere :" + finEnchere);
@@ -74,7 +74,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("prixVente :" + miseAPrixArticle);
 	
 		//UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", 0102030405, "18 rue Emile Zola", 44000, "Nantes", "lemeilleur", 0, false);
-		
+		UtilisateurBo utilisateur = new UtilisateurBo();
 		
 	//créer catégorieBo
 		String categorieArticle = request.getParameter("categorieArticle");
@@ -89,11 +89,11 @@ public class ServletNouvelleVente extends HttpServlet {
 		String villeRetrait = request.getParameter("villeRetrait");
 		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
 		System.out.println(adresseRetrait);
+		int noRetrait = adresseRetrait.getNoRetrait();
 		
-		ArticleVenduBo essai = new ArticleVenduBo(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, adresseRetrait)
-		System.out.println();		
+		
 		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelleVente = ArticleVenduBll.insertArticle(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, adresseRetrait);
+		ArticleVenduBo nouvelleVente = ArticleVenduBll.ajouter(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
 		
 		
 	}
