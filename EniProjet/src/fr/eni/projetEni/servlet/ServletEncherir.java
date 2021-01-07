@@ -24,7 +24,16 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    /*    HttpSession session = request.getSession();
+        
+        if (session.getAttribute("session") == null )
+        {
+           
+            response.sendRedirect(request.getContextPath()+"/ServletAccueil");
+        }
+        else
+        {
+        	*/
 		List<ArticleVenduBo> listeArticles;
 		try {
 			listeArticles = ArticleVenduBll.getAll();
@@ -40,8 +49,8 @@ public class ServletEncherir extends HttpServlet {
         //le forward envoi l'affichage à la jsp
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
-        
-	}
+        }
+	//}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
