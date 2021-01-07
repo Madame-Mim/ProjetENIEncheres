@@ -93,8 +93,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("affiche le numéro de retrait " + noRetrait);
 		
 		ArticleVenduBll articleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
-		ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+		//ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+		//ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
 				
 		//ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
 	}
