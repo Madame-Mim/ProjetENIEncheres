@@ -113,7 +113,7 @@ public class ArticleVenduDal {
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
                 
-                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
+                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("noUtilisateur"));
                 article.setUtilisateur(utilisateur);
                 
                 CategorieBo categorie = CategorieDal.get(rs.getInt("noCategorie"));
