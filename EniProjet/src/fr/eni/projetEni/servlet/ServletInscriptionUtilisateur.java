@@ -28,7 +28,10 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		UtilisateurDal utilisateur = new UtilisateurDal();
+		UtilisateurBo utilisateur = null;
+		
+		utilisateur = new UtilisateurBo(utilisateur.getPseudo(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getTelephone(), utilisateur.getRue(),utilisateur.getVille(), utilisateur.getCodePostal(), utilisateur.getPassword(), 0, false);
+		
 		
 		request.setAttribute("utilisateur", utilisateur);
 		
