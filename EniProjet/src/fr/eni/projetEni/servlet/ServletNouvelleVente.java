@@ -71,18 +71,16 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		int prixVente = miseAPrixArticle;
 		System.out.println("prixVente :" + miseAPrixArticle);
+	
+		//UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", 0102030405, "18 rue Emile Zola", 44000, "Nantes", "lemeilleur", 0, false);
 		
-		String etatVente;
-		
-	//Récupérer l'utilisateur
-		UtilisateurBo utilisateur = new UtilisateurBo(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, password, credit, administrateur);
-		UtilisateurBll.get(utilisateur.getId());
 		
 	//créer catégorieBo
 		String categorieArticle = request.getParameter("categorieArticle");
 		System.out.println("CatégorieArticle :" + categorieArticle);
 		CategorieBo categorie = new CategorieBo(categorieArticle);
-		System.out.println(categorie);
+		int noCategorie = categorie.getNoCategorie();
+		System.out.println("noCategorie : " + noCategorie);
 		
 	//créer l'adresse de retrait
 		String rueRetrait = request.getParameter("rueRetrait");
@@ -93,7 +91,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		
 		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
-		//ArticleVenduBo nouvelleVente = ArticleVenduBll.insertArticle(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, etatVente, utilisateur, categorie, adresseRetrait);
+		ArticleVenduBo nouvelleVente = ArticleVenduBll.insertArticle(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, adresseRetrait);
 		//je dois bien récupérer l'ensemble des paramètre sauf les trois derniers c'est les id
 		
 		
