@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.UtilisateurBo;
-import fr.eni.projetEni.dal.UtilisateurDal;
 
 /**
  * Servlet implementation class ServletInscriptionUtilisateur
@@ -32,6 +32,9 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		
 		utilisateur = new UtilisateurBo(utilisateur.getPseudo(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getTelephone(), utilisateur.getRue(),utilisateur.getVille(), utilisateur.getCodePostal(), utilisateur.getPassword(), 0, false);
 		
+		UtilisateurBll util = new UtilisateurBll();
+		
+		utilisateur = util.insert(utilisateur);
 		
 		request.setAttribute("utilisateur", utilisateur);
 		
