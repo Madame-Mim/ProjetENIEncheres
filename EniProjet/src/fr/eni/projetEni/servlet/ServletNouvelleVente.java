@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -49,24 +50,22 @@ public class ServletNouvelleVente extends HttpServlet {
 		String descritpionArticle = request.getParameter("descritpionArticle");
 		System.out.println("descritpionArticle :" + descritpionArticle);
 		
+		//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
+		String debutEnchere = request.getParameter("debutEnchere");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
-		Date debutEnchere = null;
-		try {
-			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
-			System.out.println("debutEnchere :" + debutEnchere);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		LocalDate debutEncherelocalDate = LocalDate.parse(debutEnchere,formatter);
+		System.out.println("Début enchère : " + debutEncherelocalDate);
 		
 		
-		Date finEnchere = null;
-		try {
-			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
-			System.out.println("finEnchere :" + finEnchere);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
+		String finEnchere = request.getParameter("finEnchere");
+		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
+		LocalDate finEncherelocalDate = LocalDate.parse(finEnchere,formatter);
+		System.out.println("fin enchère : " + finEncherelocalDate);
+		
+				
 		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
 		System.out.println("miseAPrixArticle :" + miseAPrixArticle);
 		
@@ -88,13 +87,11 @@ public class ServletNouvelleVente extends HttpServlet {
 		int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
 		String villeRetrait = request.getParameter("villeRetrait");
 		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
-		System.out.println(adresseRetrait);
 		int noRetrait = adresseRetrait.getNoRetrait();
-		
+		System.out.println("affiche le numéro de retrait " + noRetrait);
 		
 		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelleVente = ArticleVenduBll.ajouter(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
-		
+		ArticleVenduBo nouvelleVente = ArticleVenduBll.ajouter(nomArticle, descritpionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
 		
 	}
 

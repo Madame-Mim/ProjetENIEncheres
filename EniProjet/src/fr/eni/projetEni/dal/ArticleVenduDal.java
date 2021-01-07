@@ -49,7 +49,8 @@ public class ArticleVenduDal {
             rqt.executeUpdate();
             
 		} catch (Exception ex) {
-            logger.severe("Erreur dans la méthode insertArticle(ArticleVenduBo articleVendu) avec article ="+ articleVendu +"- erreur : "+ex.getMessage());
+			ex.printStackTrace();
+            //logger.severe("Erreur dans la méthode insertArticle(ArticleVenduBo articleVendu) avec article ="+ articleVendu +"- erreur : "+ex.getMessage());
 		}
     } /* fin insert */
     
