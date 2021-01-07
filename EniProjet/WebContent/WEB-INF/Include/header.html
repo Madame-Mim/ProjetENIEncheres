@@ -1,13 +1,15 @@
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	
 	<nav>
 		<ul>
 		<c:if test="${empty session}">
 			<li><a href="<%=request.getContextPath()%>/connexion">S'inscrire - Se connecter</a></li>
 		</c:if>
-		<c:if test="${!empty session}">
-			<li><a href="<%=request.getContextPath()%>/accueil">Enchères</a></li>
-			<li><a href="<%=request.getContextPath()%>/NouvelleVente">Vendre un article</a></li>
-			<li><a href="<%=request.getContextPath()%>/Profil">Mon profil</a></li>
-			<li><a href="<%=request.getContextPath()%>/Déconnexion">Déconnexion</a></li>
+		<c:if test="${not empty session}">
+			<li><a href="<%=request.getContextPath()%>/Encheres/accueil">Enchères</a></li>
+			<li><a href="<%=request.getContextPath()%>/Encheres/Gestion-enchereNouvelleVente">Vendre un article</a></li>
+			<li><a href="<%=request.getContextPath()%>/Encheres/Utilisateur/Profil">Mon profil</a></li>
+			<li><a href="<%=request.getContextPath()%>/ServletDeconnexion">Déconnexion</a></li>
 		</c:if>
 		</ul>
 	</nav>
