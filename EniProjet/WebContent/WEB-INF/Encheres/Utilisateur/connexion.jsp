@@ -7,9 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../CSS/connexion.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/connexion.css">
 <title>Se connecter</title>
 </head>
+<%@include file="/WEB-INF/Include/Logo.html" %>
 <body class="container-fluid col-xs-12">
 
 	<div class="clearfix"></div>
@@ -19,21 +20,26 @@
 	
 		<form action="<%=request.getContextPath()%>/connexion" method="post">
 			<label for="identifiant">Identifiant : </label>
-			<input type="text" name="pseudo" id="identifiant"/>
-			<br>
+			<input class="texte" type="text" name="pseudo" id="identifiant" size=30/>
+			<br><br>
 			<label for="password">Mot de passe : </label>
-			<input type="password" name="password" id="password">
-			<br>
-			<input type="submit" value="Connexion">
-			<input type="checkbox" name="souvenir" id=souvenir> 
-			<label for="souvenir">Se souvenir de moi</label>
-			<br>
-			<a href="#">Mot de passe oublié</a>
+			<input class="texte" type="password" name="password" id="password"  size=30>
+			<br><br>
+			<input class="submit" type="submit" value="Connexion">
+			 
+			 <div id="iteration2">
+			 <input type="checkbox" name="souvenir" id=souvenir>
+				 Se souvenir de moi
+				<br>
+				<a href="#">Mot de passe oublié</a>
+			</div>
 		</form>
 		
 	<div class="clearfix"></div>
 <br><br>
-			<a href="<%=request.getContextPath()%>/ServletInscriptionUtilisateur">Créer un compte</a>
+			<form action="<%=request.getContextPath()%>/ServletInscriptionUtilisateur">
+				<input class="submit" type="submit" value="Créer un compte">
+			</form>
 			
 	</section>
 </body>

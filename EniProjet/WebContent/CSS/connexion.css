@@ -1,1 +1,30 @@
 @charset "UTF-8";
+
+.texte
+{
+	margin-right : 45%;
+	float :right;
+}
+
+label
+{
+	display:block;
+	vertical-align: middle;
+	float : left;
+}
+
+.submit, a[class=submit]:hover
+{
+	height: 50px;
+	width:130px;
+	box-shadow: 5px 5px black;
+	float:left;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+}
+
+#iteration2
+{
+	margin-left: 150px;
+}
