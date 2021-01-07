@@ -106,8 +106,8 @@ public class ArticleVenduDal {
             {
                 ArticleVenduBo article = new ArticleVenduBo();
                 article.setNoArticle(rs.getInt("no_article"));
-                article.setNomArticle(rs.getNString("nom_article"));
-                article.setDescription(rs.getNString("description"));
+                article.setNomArticle(rs.getString("nom_article"));
+                article.setDescription(rs.getString("description"));
                 article.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
                 article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 article.setMiseAPrix(rs.getInt("prix_initial"));
@@ -127,7 +127,7 @@ public class ArticleVenduDal {
             }
 
         } catch (Exception ex ) {
-            logger.severe("erreur dans la méthode getAll " + "erreur : " + ex.getMessage());
+           ex.printStackTrace();
         }
         return liste;
     }/* fin get all */

@@ -19,6 +19,7 @@ import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
+import fr.eni.projetEni.dal.ArticleVenduDal;
 
 /**
  * Servlet implementation class ServletNouvelleVente
@@ -89,10 +90,10 @@ public class ServletNouvelleVente extends HttpServlet {
 		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
 		System.out.println(adresseRetrait);
 		
-		
+		ArticleVenduBo essai = new ArticleVenduBo(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, adresseRetrait)
+		System.out.println();		
 		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
 		ArticleVenduBo nouvelleVente = ArticleVenduBll.insertArticle(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, adresseRetrait);
-		//je dois bien récupérer l'ensemble des paramètre sauf les trois derniers c'est les id
 		
 		
 	}

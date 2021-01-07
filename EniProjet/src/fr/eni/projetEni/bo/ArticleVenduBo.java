@@ -126,6 +126,28 @@ import java.time.LocalDate;
 			this.categorie = categorie;
 			this.retrait = retrait;
 		}
+		
+		
+
+		/**
+		 * @param nomArticle
+		 * @param description
+		 * @param dateDebutEncheres
+		 * @param dateFinEncheres
+		 * @param miseAPrix
+		 * @param prixVente
+		 * @param retrait
+		 */
+		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, RetraitBo retrait) {
+			this.nomArticle = nomArticle;
+			this.description = description;
+			this.dateDebutEncheres = dateDebutEncheres;
+			this.dateFinEncheres = dateFinEncheres;
+			this.miseAPrix = miseAPrix;
+			this.prixVente = prixVente;
+			this.retrait = retrait;
+		}
 
 		/* getters setters */
 		public int getNoArticle() {
