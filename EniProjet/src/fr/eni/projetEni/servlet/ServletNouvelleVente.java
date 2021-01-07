@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetEni.bll.ArticleVenduBll;
+import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
+import fr.eni.projetEni.bo.CategorieBo;
+import fr.eni.projetEni.bo.RetraitBo;
+import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
  * Servlet implementation class ServletNouvelleVente
@@ -38,18 +43,16 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("ServletNouvelleVente - doPost");
 		
 		String nomArticle = request.getParameter("nomArticle");
-		System.out.println("nomArticle" + nomArticle);
+		System.out.println("nomArticle :" + nomArticle);
+		
 		String descritpionArticle = request.getParameter("descritpionArticle");
-		System.out.println("descritpionArticle" + descritpionArticle);
-		String CatégorieArticle = request.getParameter("CatégorieArticle");
-		System.out.println("CatégorieArticle" + CatégorieArticle);
-		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
-		System.out.println("miseAPrixArticle" + miseAPrixArticle);
+		System.out.println("descritpionArticle :" + descritpionArticle);
+		
 		
 		Date debutEnchere;
 		try {
 			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
-			System.out.println("debutEnchere" + debutEnchere);
+			System.out.println("debutEnchere :" + debutEnchere);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -58,13 +61,40 @@ public class ServletNouvelleVente extends HttpServlet {
 		Date finEnchere;
 		try {
 			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
-			System.out.println("finEnchere" + finEnchere);
+			System.out.println("finEnchere :" + finEnchere);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
+		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
+		System.out.println("miseAPrixArticle :" + miseAPrixArticle);
 		
-		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente, utilisateur, categorie, retrait)
+		int prixVente = miseAPrixArticle;
+		System.out.println("prixVente :" + miseAPrixArticle);
+		
+		String etatVente;
+		
+	//Récupérer l'utilisateur
+		UtilisateurBo utilisateur = new UtilisateurBo(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, password, credit, administrateur);
+		UtilisateurBll.get(utilisateur.getId());
+		
+	//créer catégorieBo
+		String categorieArticle = request.getParameter("categorieArticle");
+		System.out.println("CatégorieArticle :" + categorieArticle);
+		CategorieBo categorie = new CategorieBo(categorieArticle);
+		System.out.println(categorie);
+		
+	//créer l'adresse de retrait
+		String rueRetrait = request.getParameter("rueRetrait");
+		int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
+		String villeRetrait = request.getParameter("villeRetrait");
+		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
+		System.out.println(adresseRetrait);
+		
+		
+		ArticleVenduBll ArticleVenduBll = new ArticleVenduBll();
+		//ArticleVenduBo nouvelleVente = ArticleVenduBll.insertArticle(nomArticle, descritpionArticle, debutEnchere, finEnchere, miseAPrixArticle, prixVente, etatVente, utilisateur, categorie, adresseRetrait);
+		//je dois bien récupérer l'ensemble des paramètre sauf les trois derniers c'est les id
 		
 		
 	}
