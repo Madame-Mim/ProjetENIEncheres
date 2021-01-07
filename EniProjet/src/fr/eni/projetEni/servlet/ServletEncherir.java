@@ -31,9 +31,7 @@ public class ServletEncherir extends HttpServlet {
 			listeArticles = ArticleVenduBll.getAll();
 			for(ArticleVenduBo article : listeArticles)
 	        {
-	            //"affichageListeArticle" doit apparaître dans la jsp pour afficher la liste comme ceci
-	            //<p><%=request.getAttribute("affichageListeArticle") %> </p>
-	            request.setAttribute("affichagelisteArticle", listeArticles);
+	            request.setAttribute("affichageListeArticle", listeArticles);
 	            System.out.println(article);
 	        }
 		} catch (Exception e) {
@@ -50,16 +48,23 @@ public class ServletEncherir extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		 try {
-			ArticleVenduBo articlevendu = ArticleVenduBll.getById(7);
-		out.println(articlevendu.getNomArticle());
-			
-		ArticleVenduBo article = null;
-		article = new ArticleVenduBo(articlevendu.getNomArticle(),article.getDescription(),article.getDateFinEncheres(), article.getPrixVente(), article.getMiseAPrix(),article.getUtilisateur(),article.getCategorie(),article.getRetrait());
-		request.setAttribute("article", article);
-		 } catch (Exception e) {
-				e.printStackTrace();
-			}
+		List<ArticleVenduBo> listeArticles;
+		try {
+			listeArticles = ArticleVenduBll.getAll();
+			for(ArticleVenduBo article : listeArticles)
+	        {
+	            //"affichageListeArticle" doit apparaître dans la jsp pour afficher la liste comme ceci
+	            //<p><%=request.getAttribute("affichageListeArticle") %> </p>
+	            request.setAttribute("affichageListeArticle", listeArticles);
+	            System.out.println(article);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        //le forward envoi l'affichage à la jsp
+        RequestDispatcher rd = request.getRequestDispatcher("detail-Vente.jsp");
+        rd.forward(request, response);
 		}
 
 }
