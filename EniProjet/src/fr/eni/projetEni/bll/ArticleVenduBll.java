@@ -1,7 +1,6 @@
 package fr.eni.projetEni.bll;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;

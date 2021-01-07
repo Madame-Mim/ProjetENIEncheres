@@ -50,7 +50,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("descritpionArticle :" + descritpionArticle);
 		
 		
-		LocalDate debutEnchere;
+		Date debutEnchere = null;
 		try {
 			debutEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("debutEnchere"));
 			System.out.println("debutEnchere :" + debutEnchere);
@@ -59,7 +59,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 		
-		LocalDate finEnchere;
+		Date finEnchere = null;
 		try {
 			finEnchere = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("finEnchere"));
 			System.out.println("finEnchere :" + finEnchere);
