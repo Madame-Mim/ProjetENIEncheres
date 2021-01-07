@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Detail vente</title>
+<title>Enchère terminée</title>
 </head>
 <body>
 	<header>
@@ -13,7 +13,7 @@
 	</header>
 	
 	<section>
-		<h1>Détail vente</h1>
+		<h1>${article.utilisateur} a remporté l'enchère</h1>
 		
 		${article.nom}
 		<br>
@@ -31,9 +31,10 @@
 		<br>
 		 
 		<form action="<%=request.getContextPath()%>/confirmationRetrait" method="post">
-			
+			<input type="hidden" name="credit" value="${article.offre}">
 			<input type="submit" value="retrait effectué">
 		</form>
+		<p><%=request.getAttribute("affichageListeArticle") %></p>
 		
 	</section>
 	
