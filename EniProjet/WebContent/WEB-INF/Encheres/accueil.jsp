@@ -33,7 +33,14 @@ placeholder="le nom de l'article contient" size= "40"/>
 <option value="SportLoisirs">Sport&Loisirs</option>
 </select>
 </p>
+<br/>
+<br/>
+<input type="submit" value="RECHERCHER">
+<br/>
+<br/>
 
+<p><%=request.getAttribute("affichageListeArticle") %> </p>
+               
 <ol>
 		<c:forEach var="v" items="${ArticleVenduBo}">
 <li>
