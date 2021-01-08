@@ -59,7 +59,7 @@
                     
                                         
                     <label for="motdepasseactuel">Mot de passe actuel :<span class="requis"></span></label>
-                	<input type="text" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.password}" size="20" maxlength="20" />
+                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.password}" size="20" maxlength="20" />
                 	<br />
                     
                     <label for="motdepasse">Mot de passe :<span class="requis"></span></label>
