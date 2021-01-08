@@ -35,13 +35,13 @@ public class CategorieDal {
     public static CategorieBo get(int no_categorie)
     {
     	CategorieBo resultat = null;
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+    	
+		try(Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
+			requete.setInt(1, no_categorie);
 	    	ResultSet rs = requete.executeQuery();
 	    	
-	    	if(rs.next())
+	    	if(rs.next()) 
 	    	{
 	    		resultat = new CategorieBo();
 	    		resultat.setNoCategorie(rs.getInt("no_categorie"));
