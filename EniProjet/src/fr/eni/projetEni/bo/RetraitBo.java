@@ -3,7 +3,7 @@ package fr.eni.projetEni.bo;
 public class RetraitBo {
 
 	private String rue;
-	private int CodePostal;
+	private String CodePostal;
 	private String ville;
 	private int NoRetrait;
 	
@@ -14,7 +14,7 @@ public class RetraitBo {
 	 * @param codePostal
 	 * @param ville
 	 */
-	public RetraitBo(String rue, int codePostal, String ville) {
+	public RetraitBo(String rue, String codePostal, String ville) {
 		this.rue = rue;
 		CodePostal = codePostal;
 		this.ville = ville;
@@ -27,7 +27,7 @@ public class RetraitBo {
 	 * @param lieuRetrait
 	 * @param noRetrait
 	 */
-	public RetraitBo(String rue, int codePostal, String ville, int noRetrait) {
+	public RetraitBo(String rue, String codePostal, String ville, int noRetrait) {
 		this.rue = rue;
 		CodePostal = codePostal;
 		this.ville = ville;
@@ -51,14 +51,14 @@ public class RetraitBo {
 	/**
 	 * @return the codePostal
 	 */
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return CodePostal;
 	}
 
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		CodePostal = codePostal;
 	}
 
