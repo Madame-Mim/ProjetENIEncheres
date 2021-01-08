@@ -31,8 +31,8 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			listeArticles= ArticleVenduBll.getAll();
 			 for(ArticleVenduBo article : listeArticles)
-	            {request.setAttribute("affichagelisteArticle", listeArticles);
-                System.out.println(article);
+	            {request.setAttribute("listeArticles", listeArticles);
+                /**System.out.println(article)**/;
             }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -54,13 +54,15 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			listeArticles= ArticleVenduBll.getAll();
 			 for(ArticleVenduBo article : listeArticles)
-	            {request.setAttribute("affichagelisteArticle", listeArticles);
-                System.out.println(article);
+	            {request.setAttribute("listeArticles", listeArticles);
+               /** System.out.println(article);**/
             }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
 	        rd.forward(request, response);
 	}

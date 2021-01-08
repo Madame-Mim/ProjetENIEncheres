@@ -39,28 +39,21 @@ placeholder="le nom de l'article contient" size= "40"/>
 <br/>
 <br/>
 
-<p><%=request.getAttribute("affichageListeArticle") %> </p>
-               
-<ol>
-		<c:forEach var="v" items="${ArticleVenduBo}">
-<li>
-<ul>
+<p><%=request.getAttribute("listeArticles") %></p>
+
+
+	
+
+
+	<ol>
+		<c:forEach var="v" items="${listeArticles}">
 			<li>
-				${ArticleVenduBo.nomArticle}
+				${v.toString()}
 			</li>
-			<li>
-				${ArticleVenduBo.prixVente}
-			</li>
-			<li>
-				${ArticleVenduBo.dateFinEncheres}
-			</li>
-			<li>
-				${ArticleVenduBo.utilisateur}
-			</li>
-		</ul>
-</li>
 		</c:forEach>
 	</ol>
+	
+
 
 </body>
 </html>
