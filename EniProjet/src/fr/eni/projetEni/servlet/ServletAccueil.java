@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
@@ -37,8 +38,19 @@ public class ServletAccueil extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
-	        rd.forward(request, response);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("session")==null){
+			
+		
+		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueilvisiteur.jsp");
+	        rd.forward(request, response);}
+		else
+		{
+			
+			
+			  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
+		        rd.forward(request, response);}
 		
 	}
 
