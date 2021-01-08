@@ -22,7 +22,6 @@ public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -41,7 +40,6 @@ public class ServletAccueil extends HttpServlet {
 		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
 	        rd.forward(request, response);
 		
-	
 	}
 
 	/**

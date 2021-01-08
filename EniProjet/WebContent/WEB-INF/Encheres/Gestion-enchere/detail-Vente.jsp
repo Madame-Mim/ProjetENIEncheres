@@ -45,8 +45,8 @@
 		 <c:if test="${article.miseAPrix<=article.prixVente}" >
 		 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
 		 </c:if>
-		<form action="<%=request.getContextPath()%>/encherir" method="post">
-			<input type="number" c:out min="${proposition}" c:out value="${proposition}" size=10>
+		<form action="<%=request.getContextPath()%>/encherir?id=${article.getNoArticle()}" method="post">
+			<input name="enchere" type="number" c:out min="${proposition}" c:out value="${proposition}" size=10>
 			<input type="submit" value="Enchérir">
 		</form>
 		

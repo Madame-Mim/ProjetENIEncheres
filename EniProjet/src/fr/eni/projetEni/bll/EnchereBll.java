@@ -50,12 +50,21 @@ public class EnchereBll
         {
             throw new Exception("données incorrectes");
         }
-        
-
+    	
         EnchereDal.update(enchere);
-
-
     }
+    
+    public static void updateEnchere(EnchereBo enchere) throws Exception
+    {
+    	if(enchere.getDateEnchere()==null||enchere.getMontantEnchere()==0)
+        {
+            throw new Exception("données incorrectes");
+        }
+    	
+        EnchereDal.updateEnchere(enchere);
+    }
+    
+    
     public static void delete(int id) throws Exception
     {
         if(id<=0)
