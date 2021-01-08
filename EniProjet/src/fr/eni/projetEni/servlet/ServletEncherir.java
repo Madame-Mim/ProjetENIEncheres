@@ -15,10 +15,12 @@ import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
 import fr.eni.projetEni.bll.EnchereBll;
 import fr.eni.projetEni.bll.RetraitBll;
+import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.EnchereBo;
 import fr.eni.projetEni.bo.RetraitBo;
+import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
  * Servlet implementation class ServletEncherir
@@ -51,7 +53,6 @@ public class ServletEncherir extends HttpServlet {
 				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
 
-				System.out.println(enchere);
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -68,7 +69,21 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		        
+		int montant= Integer.parseInt(request.getParameter("enchere"));//récupération de la valeur envoyée par le formulaire (fonctionne)
+		ArticleVenduBo article;
+		try {
+			int no_article=Integer.parseInt(request.getParameter("id"));
+			
+			EnchereBo enchere = EnchereBll.getByIdArticle(no_article);
+			enchere.setMontantEnchere(montant);
+
+			EnchereBll.updateEnchere(enchere);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
         //le forward envoi l'affichage à la jsp
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
