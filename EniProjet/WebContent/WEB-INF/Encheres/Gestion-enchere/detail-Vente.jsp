@@ -25,10 +25,10 @@
 		Personne n'a encore enchéri sur votre produit.
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
-		Meilleur offre ${article.prixVente} points par ${enchere.utilisateur.getPseudo()}
+		Meilleur offre ${article.prixVente} points par ${enchere.noUtilisateur.getPseudo()}
 		</c:if>
 		<br>
-		Mise à prix : ${article.miseAPrix}
+		Mise à prix : ${article.miseAPrix} points
 		<br>
 		Fin de l'enchère : ${article.dateFinEncheres}
 		<br>
@@ -46,7 +46,7 @@
 		 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
 		 </c:if>
 		<form action="<%=request.getContextPath()%>/encherir" method="post">
-			<input type="number" c:out min="${proposition}" size=10>
+			<input type="number" c:out min="${proposition}" c:out value="${proposition}" size=10>
 			<input type="submit" value="Enchérir">
 		</form>
 		

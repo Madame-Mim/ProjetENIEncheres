@@ -18,6 +18,7 @@ public class EnchereDal {
 	
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
+    private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
     private static final String GET_ALL="SELECT * FROM Encheres";
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_utilisateur=? no_article=? WHERE no_enchere=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
@@ -46,17 +47,17 @@ public class EnchereDal {
         }
     }
     
-    public static EnchereBo get(int id) {
+    public static EnchereBo get(int noEnchere) {
     	EnchereBo resultat=null;
 
         try (Connection cnx = ConnectionProvider.getConnection()) {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-            requete.setInt(1,id);
+            requete.setInt(1,noEnchere);
             ResultSet rs = requete.executeQuery();
 
             if(rs.next()) {
                resultat = new EnchereBo();
-               resultat.setNoEnchere(rs.getInt("id"));
+               resultat.setNoEnchere(rs.getInt("no_enchere"));
                resultat.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
                resultat.setMontantEnchere(rs.getInt("montant_enchere"));
                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
@@ -68,12 +69,36 @@ public class EnchereDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode get(int id) avec id ="+ id +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode get(int id) avec id ="+ noEnchere +"- erreur : "+ex.getMessage());
         }
         return resultat;
-          
+	}
+    
+    public static EnchereBo getByIdArticle(int noArticle)
+    {
+    	EnchereBo resultat=null;
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(GET_BY_IDARTICLE);
+            requete.setInt(1,noArticle);
+            ResultSet rs =  requete.executeQuery();
 
-
+            while(rs.next()) {
+                resultat = new EnchereBo();
+            	 resultat.setNoEnchere(rs.getInt("no_enchere"));
+                 resultat.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+                 resultat.setMontantEnchere(rs.getInt("montant_enchere"));
+                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
+                 resultat.setNoUtilisateur(utilisateur);
+                 ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
+                 resultat.setNoArticle(article);             
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.severe("Erreur dans la méthode getByIdArticle(int noArticle) avec noArticle ="+ noArticle +"- erreur : "+ex.getMessage());
+        }
+        return resultat;
 	}
     
     public static List<EnchereBo> get()
