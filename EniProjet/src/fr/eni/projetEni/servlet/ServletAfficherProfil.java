@@ -33,17 +33,31 @@ public class ServletAfficherProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		session.getAttribute("session");
-		int id= Integer.parseInt(session.getAttribute("session").toString());
-	
+		
+	if(request.getParameter("pseudo2").trim().equals(""))
+		{HttpSession session = request.getSession();
+		session.getAttribute("session");		
+		int id1= Integer.parseInt(session.getAttribute("session").toString());
 		try {
-			UtilisateurBo utilisateur = UtilisateurBll.get(id);
+			UtilisateurBo utilisateur = UtilisateurBll.get(id1);
 			request.setAttribute("utilisateur", utilisateur);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		}
+	else
+
+	{
+		try {
+			UtilisateurBo utilisateur = UtilisateurBll.get(UtilisateurBll.getPseudo(request.getParameter("pseudo2")).getId());
+			request.setAttribute("utilisateur", utilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}}
 		RequestDispatcher rd = request.getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/afficherProfil.jsp");
         rd.forward(request, response);
 		
@@ -59,8 +73,14 @@ public class ServletAfficherProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+
+		
 		HttpSession session = request.getSession();
 		session.getAttribute("session");
+		
+		
 		int id= Integer.parseInt(session.getAttribute("session").toString());
 	
 		try {

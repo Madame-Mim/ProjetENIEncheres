@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jstl/xml" prefix="x" %>
 
 
 <!DOCTYPE html>
@@ -47,12 +48,25 @@ placeholder="le nom de l'article contient" size= "40"/>
 
 	<ol>
 		<c:forEach var="v" items="${listeArticles}">
+			
+			<li>${v.toString()}</li>
+				</c:forEach>
+				
+					</ol>	
+	<ul>
+		<c:forEach var="v" items="${listeArticles}">
+			<p>
+			<li>${v.nomArticle}</li>
+			<li>${v.prixVente}</li>
+			<li>${v.dateFinEncheres}</li>
 			<li>
-				${v.toString()}
+			
+			<a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></li>
 			</li>
-		</c:forEach>
-	</ol>
-	
+			</p> 
+				</c:forEach>
+				
+					</ul>	
 
 
 </body>
