@@ -44,7 +44,7 @@ public class ServletVenteEmportee extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Vente-emportee.jsp");
         rd.forward(request, response);
 		}
-
+//
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
