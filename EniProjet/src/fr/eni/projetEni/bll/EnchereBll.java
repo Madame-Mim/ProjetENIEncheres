@@ -29,6 +29,16 @@ public class EnchereBll
         return EnchereDal.get(id);
 
     }
+    
+    public static EnchereBo getByIdArticle(int noArticle) throws Exception
+    {
+        if(noArticle<=0)
+        {
+            throw new Exception("Id incorrect");
+        }
+        return EnchereDal.getByIdArticle(noArticle);
+
+    }
     public static List<EnchereBo> get()
     {
         return EnchereDal.get();
@@ -40,12 +50,21 @@ public class EnchereBll
         {
             throw new Exception("données incorrectes");
         }
-        
-
+    	
         EnchereDal.update(enchere);
-
-
     }
+    
+    public static void updateEnchere(EnchereBo enchere) throws Exception
+    {
+    	if(enchere.getDateEnchere()==null||enchere.getMontantEnchere()==0)
+        {
+            throw new Exception("données incorrectes");
+        }
+    	
+        EnchereDal.updateEnchere(enchere);
+    }
+    
+    
     public static void delete(int id) throws Exception
     {
         if(id<=0)

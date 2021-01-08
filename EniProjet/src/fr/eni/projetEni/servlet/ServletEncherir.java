@@ -15,10 +15,12 @@ import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
 import fr.eni.projetEni.bll.EnchereBll;
 import fr.eni.projetEni.bll.RetraitBll;
+import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.EnchereBo;
 import fr.eni.projetEni.bo.RetraitBo;
+import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
  * Servlet implementation class ServletEncherir
@@ -48,13 +50,10 @@ public class ServletEncherir extends HttpServlet {
 				request.setAttribute("article", article);
 				
 				
-				EnchereBo enchere = EnchereBll.get(article.getNoArticle());
+				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
 
-				System.out.println(article.getNoArticle());
-				System.out.println(article.getRetrait());
-				System.out.println(article.getUtilisateur());
-				System.out.println(article.getCategorie());
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,23 +69,24 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ArticleVenduBo> listeArticles;
+		int montant= Integer.parseInt(request.getParameter("enchere"));//récupération de la valeur envoyée par le formulaire (fonctionne)
+		ArticleVenduBo article;
 		try {
-			listeArticles = ArticleVenduBll.getAll();
-			for(ArticleVenduBo article : listeArticles)
-	        {
-	            //"affichageListeArticle" doit apparaître dans la jsp pour afficher la liste comme ceci
-	            //<p><%=request.getAttribute("affichageListeArticle") %> </p>
-	            request.setAttribute("affichageListeArticle", listeArticles);
-	            System.out.println(article);
-	        }
+			int no_article=Integer.parseInt(request.getParameter("id"));
+			
+			EnchereBo enchere = EnchereBll.getByIdArticle(no_article);
+			enchere.setMontantEnchere(montant);
+
+			EnchereBll.updateEnchere(enchere);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
+		
+	
         //le forward envoi l'affichage à la jsp
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
-		}
-
+		
+}
 }

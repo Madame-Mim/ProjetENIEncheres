@@ -18,8 +18,10 @@ public class EnchereDal {
 	
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
+    private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
     private static final String GET_ALL="SELECT * FROM Encheres";
-    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_utilisateur=? no_article=? WHERE no_enchere=?";
+    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_article=? no_utilisateur=? WHERE no_enchere=?";
+    private static final String UPDATE_ENCHERE="UPDATE Encheres SET montant_enchere=? WHERE no_enchere=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
@@ -46,17 +48,17 @@ public class EnchereDal {
         }
     }
     
-    public static EnchereBo get(int id) {
+    public static EnchereBo get(int noEnchere) {
     	EnchereBo resultat=null;
 
         try (Connection cnx = ConnectionProvider.getConnection()) {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-            requete.setInt(1,id);
+            requete.setInt(1,noEnchere);
             ResultSet rs = requete.executeQuery();
 
             if(rs.next()) {
                resultat = new EnchereBo();
-               resultat.setNoEnchere(rs.getInt("id"));
+               resultat.setNoEnchere(rs.getInt("no_enchere"));
                resultat.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
                resultat.setMontantEnchere(rs.getInt("montant_enchere"));
                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
@@ -68,12 +70,37 @@ public class EnchereDal {
         }
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la méthode get(int id) avec id ="+ id +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode get(int id) avec id ="+ noEnchere +"- erreur : "+ex.getMessage());
         }
         return resultat;
-          
+	}
+    
+    public static EnchereBo getByIdArticle(int noArticle)
+    {
+    	EnchereBo resultat=null;
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(GET_BY_IDARTICLE);
+            requete.setInt(1,noArticle);
+            ResultSet rs =  requete.executeQuery();
 
-
+            while(rs.next()) {
+                resultat = new EnchereBo();
+            	 resultat.setNoEnchere(rs.getInt("no_enchere"));
+                 resultat.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+                 resultat.setMontantEnchere(rs.getInt("montant_enchere"));
+                 
+                 ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
+                 resultat.setNoArticle(article);      
+                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
+                 resultat.setNoUtilisateur(utilisateur);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.severe("Erreur dans la méthode getByIdArticle(int noArticle) avec noArticle ="+ noArticle +"- erreur : "+ex.getMessage());
+        }
+        return resultat;
 	}
     
     public static List<EnchereBo> get()
@@ -113,17 +140,31 @@ public class EnchereDal {
             PreparedStatement requete = cnx.prepareStatement(UPDATE);
             requete.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
             requete.setInt(2,enchere.getMontantEnchere());
-            requete.setInt(3,enchere.getNoUtilisateur().getId());
-           requete.setInt(4,enchere.getNoArticle().getNoArticle());
+            requete.setInt(3,enchere.getNoArticle().getNoArticle());
+            requete.setInt(4,enchere.getNoUtilisateur().getId());
+
             requete.executeUpdate();
         }
         catch(Exception ex)
         {
             logger.severe("Erreur dans la methode update(EnchereBo enchere) avec enchere =" + enchere + " erreur :" + ex.getMessage());
-
-
         }
     }
+    
+    public static void updateEnchere(EnchereBo enchere)
+    {
+    	 try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(UPDATE_ENCHERE);
+            requete.setInt(1,enchere.getMontantEnchere());
+            requete.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            logger.severe("Erreur dans la methode updateEnchere(EnchereBo enchere) avec enchere =" + enchere + " erreur :" + ex.getMessage());
+        }
+    }
+    
     public static void delete(int id)
     {
     	try(Connection cnx = ConnectionProvider.getConnection())

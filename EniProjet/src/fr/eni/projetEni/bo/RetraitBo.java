@@ -3,9 +3,9 @@ package fr.eni.projetEni.bo;
 public class RetraitBo {
 
 	private String rue;
-	private int CodePostal;
+	private String codePostal;
 	private String ville;
-	private int NoRetrait;
+	private int noRetrait;
 	
 	public RetraitBo() {}
 
@@ -14,9 +14,9 @@ public class RetraitBo {
 	 * @param codePostal
 	 * @param ville
 	 */
-	public RetraitBo(String rue, int codePostal, String ville) {
+	public RetraitBo(String rue, String codePostal, String ville) {
 		this.rue = rue;
-		CodePostal = codePostal;
+		codePostal = codePostal;
 		this.ville = ville;
 	}
 
@@ -27,11 +27,11 @@ public class RetraitBo {
 	 * @param lieuRetrait
 	 * @param noRetrait
 	 */
-	public RetraitBo(String rue, int codePostal, String ville, int noRetrait) {
+	public RetraitBo(String rue, String codePostal, String ville, int noRetrait) {
 		this.rue = rue;
-		CodePostal = codePostal;
+		codePostal = codePostal;
 		this.ville = ville;
-		NoRetrait = noRetrait;
+		noRetrait = noRetrait;
 	}
 
 	/**
@@ -51,15 +51,15 @@ public class RetraitBo {
 	/**
 	 * @return the codePostal
 	 */
-	public int getCodePostal() {
-		return CodePostal;
+	public String getCodePostal() {
+		return codePostal;
 	}
 
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(int codePostal) {
-		CodePostal = codePostal;
+	public void setCodePostal(String codePostal) {
+		codePostal = codePostal;
 	}
 
 	/**
@@ -81,18 +81,18 @@ public class RetraitBo {
 	 * @return the noRetrait
 	 */
 	public int getNoRetrait() {
-		return NoRetrait;
+		return noRetrait;
 	}
 
 	/**
 	 * @param noRetrait the noRetrait to set
 	 */
 	public void setNoRetrait(int noRetrait) {
-		NoRetrait = noRetrait;
+		noRetrait = noRetrait;
 	}
 
 	@Override
 	public String toString() {
-		return "RetraitBo [rue=" + rue + ", CodePostal=" + CodePostal + ", ville=" + ville + ", NoRetrait=" + NoRetrait + "]";
+		return "RetraitBo [rue=" + rue + ", CodePostal=" + codePostal + ", ville=" + ville + ", NoRetrait=" + noRetrait + "]";
 	}
 }

@@ -26,7 +26,7 @@ public class RetraitDal {
 			PreparedStatement requete = cnx.prepareStatement(INSERT);
 			
 			requete.setString(1, AdresseRetrait.getRue());
-			requete.setInt(2, AdresseRetrait.getCodePostal());
+			requete.setString(2, AdresseRetrait.getCodePostal());
 			requete.setString(3, AdresseRetrait.getVille());
 			requete.executeUpdate();
 		} catch (SQLException e) {
@@ -35,14 +35,14 @@ public class RetraitDal {
     	
     }
     
-    public static RetraitBo get(int no_retrait)
+    public static RetraitBo get(int noRetrait)
     {
     	RetraitBo resultat = null;
     	Connection cnx;
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-			requete.setInt(1,no_retrait);
+			requete.setInt(1,noRetrait);
 	    	ResultSet rs = requete.executeQuery();
 	    	
 	    	if(rs.next())
@@ -50,7 +50,7 @@ public class RetraitDal {
 	    		resultat = new RetraitBo();
 	    		resultat.setNoRetrait(rs.getInt("no_retrait"));
 	    		resultat.setRue(rs.getString("rue"));
-	    		resultat.setCodePostal(rs.getInt("code_postal"));
+	    		resultat.setCodePostal(rs.getString("code_postal"));
 	    		resultat.setVille(rs.getString("ville"));
 	    	}
 		} catch (SQLException e) {
@@ -75,7 +75,7 @@ public class RetraitDal {
 				RetraitBo AdresseRetrait = new RetraitBo();
 				AdresseRetrait.setNoRetrait(rs.getInt("no_retrait"));
 				AdresseRetrait.setRue(rs.getString("rue"));
-				AdresseRetrait.setCodePostal(rs.getInt("code_postal"));
+				AdresseRetrait.setCodePostal(rs.getString("code_postal"));
 				AdresseRetrait.setVille(rs.getString("ville"));
 				listeRetraits.add(AdresseRetrait);
 			}
@@ -96,7 +96,7 @@ public class RetraitDal {
             PreparedStatement requete = cnx.prepareStatement(UPDATE);
             requete.setInt(1, AdresseRetrait.getNoRetrait());
             requete.setString(2,AdresseRetrait.getRue());
-            requete.setInt(3, AdresseRetrait.getCodePostal());
+            requete.setString(3, AdresseRetrait.getCodePostal());
             requete.setString(4, AdresseRetrait.getVille());
             requete.executeUpdate();
         }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Enchère terminée</title>
+<title>Detail vente</title>
 </head>
 <body>
 	<header>
@@ -13,29 +13,39 @@
 	</header>
 	
 	<section>
-		<h1>${article.utilisateur} a remporté l'enchère</h1>
-		
-		${article.nom}
+		<h1>Vente </h1>
+		<c:if test="${article.prixVente ==0}" >
+		Cette vente s'est achevée sans enchère.
+		</c:if>
+		<c:if test="${article.prixVente !=0}">
+		 ${enchere.noUtilisateur.getPseudo()} a remporté l'enchère !
+		 </c:if>
+		 <br>
+		${article.nomArticle}
 		<br>
 		Description : ${article.description}
 		<br>
-		Meilleur offre ${article.offre} points par ${article.utilisateur}
+		<c:if test="${article.prixVente ==0}" >
+		Personne n'a enchéri sur ce produit.
+		</c:if>
+		<c:if test="${article.prixVente !=0}">
+		Meilleur offre ${article.prixVente} points par ${enchere.noUtilisateur.getPseudo()}
+		</c:if>
 		<br>
-		Mise à prix : ${article.prixDepart}
+		Mise à prix : ${article.miseAPrix} points
 		<br>
-		Fin de l'enchère : ${article.finEnchere}
+		Fin de l'enchère : ${article.dateFinEncheres}
 		<br>
-		Retrait : ${article.adresseRetrait}
+		Retrait : ${article.retrait.getRue()}
 		<br>
-		Vendeur : ${article.nomVendeur}		
+		${article.retrait.getCodePostal()}	${article.retrait.getVille()}
 		<br>
-		 
-		<form action="<%=request.getContextPath()%>/confirmationRetrait" method="post">
-			<input type="hidden" name="credit" value="${article.offre}">
-			<input type="submit" value="retrait effectué">
+		Vendeur :	${article.utilisateur.getPseudo()}
+		<br>
+			
+		<form action="<%=request.getContextPath()%>/VenteTerminee" method="post">
+			<input type="submit" value="Retrait effectué">
 		</form>
-		<p><%=request.getAttribute("affichageListeArticle") %></p>
-		
 	</section>
 	
 </body>
