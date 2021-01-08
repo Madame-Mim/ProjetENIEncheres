@@ -48,13 +48,11 @@ public class ServletEncherir extends HttpServlet {
 				request.setAttribute("article", article);
 				
 				
-				EnchereBo enchere = EnchereBll.get(article.getNoArticle());
+				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
 
-				System.out.println(article.getNoArticle());
-				System.out.println(article.getRetrait());
-				System.out.println(article.getUtilisateur());
-				System.out.println(article.getCategorie());
+				System.out.println(enchere);
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

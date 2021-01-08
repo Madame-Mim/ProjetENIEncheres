@@ -29,6 +29,16 @@ public class EnchereBll
         return EnchereDal.get(id);
 
     }
+    
+    public static EnchereBo getByIdArticle(int noArticle) throws Exception
+    {
+        if(noArticle<=0)
+        {
+            throw new Exception("Id incorrect");
+        }
+        return EnchereDal.getByIdArticle(noArticle);
+
+    }
     public static List<EnchereBo> get()
     {
         return EnchereDal.get();

@@ -25,7 +25,7 @@
 		Personne n'a encore enchéri sur votre produit.
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
-		Meilleur offre ${article.prixVente} points par ${enchere.utilisateur.getPseudo()}
+		Meilleur offre ${article.prixVente} points par ${enchere.noUtilisateur.getPseudo()}
 		</c:if>
 		<br>
 		Mise à prix : ${article.miseAPrix}

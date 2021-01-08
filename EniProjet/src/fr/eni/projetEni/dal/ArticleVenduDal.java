@@ -149,6 +149,7 @@ public class ArticleVenduDal {
             while(rs.next())
             {
                 resultat = new ArticleVenduBo();
+                resultat.setNoArticle(rs.getInt("no_article"));
                 resultat.setNomArticle(rs.getString("nom_article"));
                 resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
