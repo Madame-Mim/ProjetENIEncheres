@@ -42,7 +42,7 @@ public class RetraitDal {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-			requete.setInt(1,noRetrait);
+			requete.setInt(1, noRetrait);
 	    	ResultSet rs = requete.executeQuery();
 	    	
 	    	if(rs.next())

@@ -41,7 +41,6 @@ public class ServletNouvelleVente extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
 		rd.forward(request, response);
 		
-		
 	}	
 	
 
@@ -89,9 +88,9 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 	//Permet de récupérer le noCategorie	
 		int noCategorie2 = Integer.parseInt(request.getParameter("categorieArticle"));
-		System.out.println("nocategorie liste deroulante :" + noCategorie2);
+		//System.out.println("nocategorie liste deroulante :" + noCategorie2);
 		CategorieBo noCat = CategorieBll.get(noCategorie2);
-		System.out.println("noCat : " + noCat);
+		//System.out.println("noCat : " + noCat);
 		
 	//Permet de récupérer l'idRetrait
 			/*List<RetraitBo> listeRetraits = RetraitBll.get();
@@ -111,41 +110,36 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 		
 		//Récupérer et le noRetrait et le noCategorie et l'insérer dans la method insert
-		String rueRetrait2 = request.getParameter("rueRetrait");
-		String codePostalRetrait2 = request.getParameter("codePostalRetrait");
-		String villeRetrait2 = request.getParameter("villeRetrait");
-		RetraitBo retraitMarche = new RetraitBo(rueRetrait2, codePostalRetrait2, villeRetrait2);
-		int duretraitcherche = retraitMarche.getNoRetrait();
-		RetraitBo fppfff = RetraitBll.get(duretraitcherche);
-		System.out.println("enfin trouvé :" + fppfff);
-		
 		
 		
 		List<RetraitBo> listeRetraits = RetraitBll.get();
 		String rueRetrait = request.getParameter("rueRetrait");
+		System.out.println(rueRetrait);
 		String codePostalRetrait = request.getParameter("codePostalRetrait");
 		String villeRetrait = request.getParameter("villeRetrait");
 		
-			for(RetraitBo retrait : listeRetraits)
+		for(RetraitBo retrait : listeRetraits)
+		{
+			
+			if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait))
 			{
-				if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait))
-				{
-					int noRetrait = retrait.getNoRetrait();
-					System.out.println("Retrait numéro " + noRetrait);
-					RetraitBo retraitAttendu = new RetraitBo("1 rue du retrait","93000","Bobigny");
-					 //retraitAttendu = RetraitBll.get(retraitAttendu.getNoRetrait());
-					 System.out.println("retraitAttendu :" + retraitAttendu);
-					
-					ArticleVenduBll articleVenduBll = new ArticleVenduBll();
-					ArticleVenduBo nouvelleVenteReussie = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
-					System.out.println("samere :" + nouvelleVenteReussie);
-					
-				//Sert si je passe par le method insert de Emilie
-					//ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
-					//ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);;
-				}
+				int noRetrait = retrait.getNoRetrait();
+				System.out.println("Retrait numéro " + noRetrait);
+				RetraitBo jeCherche = RetraitBll.get(noRetrait);
+				System.out.println("jeCherche " + jeCherche);
 				
+				
+				ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+				//ArticleVenduBo nouvelleVenteReussie = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, jeCherche);
+				
+			//Sert si je passe par le method insert de Emilie
+				ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, jeCherche);
+				ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);
+			}else {
+				System.out.println("je prend pas d'infos");
 			}
+			
+		}
 		
 	
 	//insérer un article	

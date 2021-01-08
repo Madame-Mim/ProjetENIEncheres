@@ -9,6 +9,7 @@ public class RetraitBo {
 	
 	public RetraitBo() {}
 
+	
 	/**
 	 * @param rue
 	 * @param codePostal
@@ -16,23 +17,26 @@ public class RetraitBo {
 	 */
 	public RetraitBo(String rue, String codePostal, String ville) {
 		this.rue = rue;
-		codePostal = codePostal;
+		this.codePostal = codePostal;
 		this.ville = ville;
 	}
+
+
+	
 
 	/**
 	 * @param rue
 	 * @param codePostal
 	 * @param ville
-	 * @param lieuRetrait
 	 * @param noRetrait
 	 */
 	public RetraitBo(String rue, String codePostal, String ville, int noRetrait) {
 		this.rue = rue;
-		codePostal = codePostal;
+		this.codePostal = codePostal;
 		this.ville = ville;
-		noRetrait = noRetrait;
+		this.noRetrait = noRetrait;
 	}
+
 
 	/**
 	 * @return the rue
@@ -55,12 +59,15 @@ public class RetraitBo {
 		return codePostal;
 	}
 
+	
+
 	/**
 	 * @param codePostal the codePostal to set
 	 */
 	public void setCodePostal(String codePostal) {
-		codePostal = codePostal;
+		this.codePostal = codePostal;
 	}
+
 
 	/**
 	 * @return the ville
@@ -88,7 +95,7 @@ public class RetraitBo {
 	 * @param noRetrait the noRetrait to set
 	 */
 	public void setNoRetrait(int noRetrait) {
-		noRetrait = noRetrait;
+		this.noRetrait = noRetrait;
 	}
 
 	@Override
