@@ -16,6 +16,8 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 @WebServlet("/ServletInscriptionUtilisateur")
 public class ServletInscriptionUtilisateur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private UtilisateurBll utilisateurCree = new UtilisateurBll();
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,17 +30,38 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		UtilisateurBo utilisateur = null;
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
+		String motdepasse = request.getParameter("motdepasse");
 		
-		utilisateur = new UtilisateurBo(utilisateur.getPseudo(), utilisateur.getNom(), utilisateur.getPrenom(), utilisateur.getEmail(), utilisateur.getTelephone(), utilisateur.getRue(),utilisateur.getVille(), utilisateur.getCodePostal(), utilisateur.getPassword(), 0, false);
+		UtilisateurBo utilisateur = new UtilisateurBo();
 		
-		UtilisateurBll util = new UtilisateurBll();
+		utilisateur.setPseudo(pseudo);
+		utilisateur.setNom(nom);
+		utilisateur.setPrenom(prenom);
+		utilisateur.setEmail(email);
+		utilisateur.setTelephone(telephone);
+		utilisateur.setRue(rue);
+		utilisateur.setCodePostal(codePostal);
+		utilisateur.setVille(ville);
+		utilisateur.setPassword(motdepasse);
 		
-		utilisateur = util.insert(utilisateur);
+		try {
+			utilisateurCree.insert(utilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
-		request.setAttribute("utilisateur", utilisateur);
 		
-        this.getServletContext().getRequestDispatcher("/WEB-INF/accueil.jsp").forward( request, response );
+        //this.getServletContext().getRequestDispatcher("URL servlet page d'accueil").forward( request, response );
 
 		
 	} 
