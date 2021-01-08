@@ -41,7 +41,6 @@ public class ServletAccueil extends HttpServlet {
 		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
 	        rd.forward(request, response);
 		
-	
 	}
 
 	/**
