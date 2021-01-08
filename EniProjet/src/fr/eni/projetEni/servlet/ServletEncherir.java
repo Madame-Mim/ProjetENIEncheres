@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
+import fr.eni.projetEni.bll.EnchereBll;
 import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
+import fr.eni.projetEni.bo.EnchereBo;
 import fr.eni.projetEni.bo.RetraitBo;
 
 /**
@@ -44,7 +46,12 @@ public class ServletEncherir extends HttpServlet {
 			try {
 				ArticleVenduBo article = ArticleVenduBll.getById(7);
 				request.setAttribute("article", article);
-				System.out.println(article);
+				
+				
+				EnchereBo enchere = EnchereBll.get(article.getNoArticle());
+				request.setAttribute("enchere", enchere);
+
+				System.out.println(article.getNoArticle());
 				System.out.println(article.getRetrait());
 				System.out.println(article.getUtilisateur());
 				System.out.println(article.getCategorie());
