@@ -18,10 +18,10 @@
         <div>
             <form method="post" action="<c:url value="ServletInscriptionUtilisateur"/>">
                 <fieldset>
-                    <legend>Mon profil</legend>
+                    <legend>Créer mon profil</legend>
                     
                     <label for="pseudo">Pseudo : <span class="requis"></span></label>
-                    <input type="text" id="pseudo" name="pseudo" value="<c:out value=""/>" size="30" maxlength="30"  />
+                    <input type="text" id="pseudo" name="pseudo" required="required" value="<c:out value=""/>" size="30" maxlength="30"  />
                     <br />
                     
                     <label for="nom">Nom : <span class="requis"></span></label>

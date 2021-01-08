@@ -1,11 +1,15 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.UtilisateurBo;
@@ -60,12 +64,36 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				//}
+				
+				
+				/*
+				   //avec un cookie :
+				
+				
+				Cookie cookieConnecte = new Cookie( "connecté(e)","statut");  
+				
+				response.addCookie(cookieConnecte);}
+				
+				//avec le contexte :
+				
+				ServletContext application = this.getServletContext();
+				application.setAttribute("connecté(e)", "statut");
+				
+				//avec une session :  */
+				
+				HttpSession session = request.getSession();
+				
+				String statut = "connecté(e)";
+				
+				request.getSession().setAttribute(statut, statut);
 
 		}
-		
-        //this.getServletContext().getRequestDispatcher("URL servlet page d'accueil").forward( request, response );
+		}
+	
+        this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/modifierMonProfil.jsp" ).forward( request, response );
 
 		
-	} 
+	
+	}
 }

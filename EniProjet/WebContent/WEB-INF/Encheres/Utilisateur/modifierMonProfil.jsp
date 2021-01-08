@@ -8,81 +8,72 @@
        <!--    <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />     url ?????? -->
 <title>ENI-Enchères</title>
 </head>
+<%@include file="/WEB-INF/Include/Logo.html" %>
+
 <body>
 
 	<header>
 		<%@ include file="/WEB-INF/Include/header.html" %>	
 	</header>
+	
 
 	<h1>Mon profil</h1>
 	
         <div>
-            <form method="post" action="<c:url value="/Inscription"/>">
+            <form method="post" action="<c:url value="/ServletModifierMonProfil"/>">
                 <fieldset>
-                    <legend>Mon profil</legend>
+                    <legend>Modifier mon profil</legend>
                     
                     <label for="pseudo">Pseudo : <span class="requis"></span></label>
                     <input type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" size="30" maxlength="30"  />
-                    <span class="erreur">${form.erreurs['pseudo']}</span>
                     <br />
                     
                     <label for="nom">Nom : <span class="requis"></span></label>
                     <input type="text" id="nom" name="nom" value="<c:out value="${utilisateur.nom}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.erreurs['nom']}</span>
                     <br />
                     
                     <label for="prenom">Prénom : <span class="requis"></span></label>
                     <input type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.prenom}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.erreurs['prenom']}</span>
                     <br />
                     
                     <label for="email">Email :</label>
                     <input type="text" id="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
-                    <span class="erreur">${form.erreurs['email']}</span>
                     <br />
                     
                     <label for="telephone">Numéro de téléphone :<span class="requis"></span></label>
                     <input type="text" id="telephone" name="telephone" value="${utilisateur.telephone}" size="20" maxlength="20" />
-                    <span class="erreur">${form.erreurs['telephone']}</span>
                     <br />
                     
                     <label for="rue">Rue :<span class="requis"></span></label>
                     <input type="text" id="rue" name="rue" value="${utilisateur.rue}" size="20" maxlength="120" />
-                    <span class="erreur">${form.erreurs['rue']}</span>
                     <br />
                     
-                    <label for="codePostal">Code postale :<span class="requis"></span></label>
+                    <label for="codePostal">Code postal :<span class="requis"></span></label>
                     <input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}" size="20" maxlength="20" />
-                    <span class="erreur">${form.erreurs['codePostal']}</span>
                     <br />
                     
                                         
                     <label for="ville">Ville :<span class="requis"></span></label>
                     <input type="text" id="ville" name="ville" value="${utilisateur.ville}" size="20" maxlength="20" />
-                    <span class="erreur">${form.erreurs['ville']}</span>
                     <br />
                     
                                         
                     <label for="motdepasseactuel">Mot de passe actuel :<span class="requis"></span></label>
-                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.motdepasseactuel}" size="20" maxlength="20" />
-                	<span class="erreur">${form.erreurs['motdepasseactuel']}</span>
+                	<input type="text" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.password}" size="20" maxlength="20" />
                 	<br />
                     
                     <label for="motdepasse">Mot de passe :<span class="requis"></span></label>
-                	<input type="password" id="motdepasse" name="motdepasse" value="${utilisateur.motdepasse}" size="20" maxlength="20" />
-                	<span class="erreur">${form.erreurs['motdepasse']}</span>
+                	<input type="password" id="motdepasse" name="motdepasse" value="${utilisateur.password}" size="20" maxlength="20" />
                 	<br />
 
                 	<label for="confirmation">Confirmation du mot de passe <span class="requis"></span></label>
-                	<input type="password" id="confirmation" name="confirmation" value="${utilisateur.confirmation}" size="20" maxlength="20" />
-                	<span class="erreur">${form.erreurs['confirmation']}</span>
+                	<input type="password" id="confirmation" name="confirmation" value="${utilisateur.password}" size="20" maxlength="20" />
                 	<br />
                 	
                     
-                </fieldset>
-                <p class="info">${ form.resultat }</p>
+                </fieldset> 
                 <input type="submit" value="Valider"  />
-                <input type="reset" value="Remettre à zéro" /> <br />
+                <a href="ServletSupprimerMonProfil" class="button">Supprimer mon profil</a>
             </form>
         </div>
 
