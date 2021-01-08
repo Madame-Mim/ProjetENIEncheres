@@ -15,7 +15,7 @@ import fr.eni.projetEni.utils.MonLogger;
 
 public class ArticleVenduDal {
  
-    private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,?)";
     
     private static final String GET_BY_NOM="SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
@@ -44,6 +44,9 @@ public class ArticleVenduDal {
             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
             rqt.setInt(5, articleVendu.getMiseAPrix());
             rqt.setInt(6, articleVendu.getPrixVente());
+            rqt.setInt(7, articleVendu.getUtilisateur().getId());
+            rqt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+            rqt.setInt(9, articleVendu.getRetrait().getNoRetrait());
             
 
             rqt.executeUpdate();
