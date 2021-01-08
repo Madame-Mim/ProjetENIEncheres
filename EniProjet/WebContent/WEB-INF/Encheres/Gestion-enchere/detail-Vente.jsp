@@ -15,28 +15,38 @@
 	<section>
 		<h1>Détail vente</h1>
 		
-		${article.nom}
+		${article.nomArticle}
 		<br>
 		Description : ${article.description}
 		<br>
-		Catégorie ${article.categorie}
+		Catégorie 
 		<br>
-		Meilleur offre ${article.offre} points par ${article.utilisateur}
+		<c:if test="${article.prixVente ==0}" >
+		Personne n'a encore enchéri sur votre produit.
+		</c:if>
+		<c:if test="${article.prixVente !=0}">
+		Meilleur offre ${article.prixVente} points par ${article.utilisateur.getNom()}
+		</c:if>
 		<br>
-		Mise à prix : ${article.prixDepart}
+		Mise à prix : ${article.miseAPrix}
 		<br>
-		Fin de l'enchère : ${article.finEnchere}
+		Fin de l'enchère : ${article.dateFinEncheres}
 		<br>
-		Retrait : ${article.adresseRetrait}
+		Retrait : ${article.retrait}
 		<br>
-		Vendeur : ${article.nomVendeur}		
+		Vendeur :	${article.utilisateur}
 		<br>
 		Ma proposition 
+		 <c:if test="${article.miseAPrix>article.prixVente}" >
+		 <c:set var="proposition" value="${article.miseAPrix}" scope="page" />
+		 </c:if>
+		 <c:if test="${article.miseAPrix<=article.prixVente}" >
+		 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
+		 </c:if>
 		<form action="<%=request.getContextPath()%>/encherir" method="post">
-			<input type="number" min=${article.Prix}+1 size=10>
+			<input type="number" c:out min="${proposition}" size=10>
 			<input type="submit" value="Enchérir">
 		</form>
-		<p><%=request.getAttribute("affichageListeArticle") %></p>
 		
 	</section>
 	
