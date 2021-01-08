@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
@@ -40,49 +41,6 @@ public class ServletNouvelleVente extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
 		rd.forward(request, response);
 		
-//Permet de récupérer le noCategorie
-		
-		
-		
-		List<CategorieBo> listes = CategorieBll.get();
-		String libelleNommé = "Informatique";
-		
-		for(CategorieBo libelle : listes)
-		{
-			if(libelle.getLibelle().equals("a garder"))
-			{
-				System.out.println(libelle.getNoCategorie());
-			}
-		}
-		
-		
-//Permet de récupérer l'idRetrait
-		List<RetraitBo> listeRetraits = RetraitBll.get();
-		String rue = "1 rue du retrait";
-		int code = 93000;
-		String ville = "Bobigny";
-		
-		for(RetraitBo retrait : listeRetraits)
-		{
-			if(retrait.getRue().equals(rue) & retrait.getCodePostal()==code & retrait.getVille().equals(ville))
-			{
-				System.out.println(retrait.getNoRetrait());
-			}
-		}
-		
-	//Permet de récupérer l'Utilisateur
-			/*List<UtilisateurBo> listeUtilisateurs = UtilisateurBll.get();
-			
-			
-			for(UtilisateurBo utilisateur : listeUtilisateurs)
-			{
-				if(utilisateur.getPseudo().equals(pseudo) & utilisateur.getCodePostal()==code & utilisateur.getVille().equals(ville))
-				{
-					System.out.println(utilisateur.getId());
-				}
-			}	*/
-		
-		
 		
 	}	
 	
@@ -99,7 +57,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String descriptionArticle = request.getParameter("descriptionArticle");
 		System.out.println("descriptionArticle :" + descriptionArticle);
 		
-		//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
+	//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
 		String debutEnchere = request.getParameter("debutEnchere");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
@@ -107,7 +65,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("Début enchère : " + debutEncherelocalDate);
 		
 		
-		//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
+	//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
 		String finEnchere = request.getParameter("finEnchere");
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
@@ -121,52 +79,73 @@ public class ServletNouvelleVente extends HttpServlet {
 		int prixVente = miseAPrixArticle;
 		System.out.println("prixVente :" + miseAPrixArticle);
 	
-		//UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", 0102030405, "18 rue Emile Zola", 44000, "Nantes", "lemeilleur", 0, false);
-		UtilisateurBo utilisateur = new UtilisateurBo();
-		int noUtilisateur = utilisateur.getId();
-		System.out.println("noUtilisateur : " + noUtilisateur);
+	UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", "0102030405", "18 rue Emile Zola", "44000", "Nantes", "lemeilleur", 0, false);
+	//Permet de récupérer l'id de l'utilisateur
+		/*HttpSession session = request.getSession();
+		session.setAttribute("session", 1);//a retirer juste là pour les test
+		session.getAttribute("session");
+		System.out.println(session.getAttribute("session"));
+		int utilisateurAttendu = session.getAttribute("session");*/
 		
-
+	//Permet de récupérer le noCategorie	
+		int noCategorie2 = Integer.parseInt(request.getParameter("categorieArticle"));
+		System.out.println("nocategorie liste deroulante :" + noCategorie2);
+		CategorieBo noCat = CategorieBll.get(noCategorie2);
+		System.out.println("a voir : " + noCat);
 		
-		
-	//créer catégorieBo
-		/*
-		System.out.println("CatégorieArticle :" + categorieArticle);
-		CategorieBo categorie = new CategorieBo(categorieArticle);
-		int noCategorie = categorie.getNoCategorie();
-		System.out.println("noCategorie : " + noCategorie);*/
-		
-		List<CategorieBo> listeLibelles = CategorieBll.get();
-		String categorieArticle = request.getParameter("categorieArticle");
-		System.out.println("Affixhage categorieArticle " + categorieArticle);
-		
-		
-		for(CategorieBo libelle : listeLibelles)
-		{
-			if(libelle.getLibelle().equals(categorieArticle))
+	//Permet de récupérer l'idRetrait
+			/*List<RetraitBo> listeRetraits = RetraitBll.get();
+			String rueRetrait = request.getParameter("rueRetrait");
+			int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
+			String villeRetrait = request.getParameter("villeRetrait");
+			
+			for(RetraitBo retrait : listeRetraits)
 			{
-				System.out.println("j'ai réussi :" + libelle.getNoCategorie());
-			}
-		}
+				if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal()==codePostalRetrait & retrait.getVille().equals(villeRetrait))
+				{
+					int noRetrait = retrait.getNoRetrait();
+					System.out.println("Retrait numéro " + noRetrait);
+				}
+			}*/
+		
+	
+		
+		//Récupérer et le noRetrait et le noCategorie et l'insérer dans la method insert
 		
 		
-		
-		
-		
-		
-	//créer l'adresse de retrait
+		List<RetraitBo> listeRetraits = RetraitBll.get();
 		String rueRetrait = request.getParameter("rueRetrait");
-		int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
+		String codePostalRetrait = request.getParameter("codePostalRetrait");
 		String villeRetrait = request.getParameter("villeRetrait");
-		RetraitBo adresseRetrait = new RetraitBo(rueRetrait, codePostalRetrait, villeRetrait);
-		int noRetrait = adresseRetrait.getNoRetrait();
-		System.out.println("affiche le numéro de retrait " + noRetrait);
 		
-		ArticleVenduBll articleVenduBll = new ArticleVenduBll();
-		//ArticleVenduBo nouvelleVente = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
-		//ArticleVenduBo article = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, categorie,adresseRetrait);
+			for(RetraitBo retrait : listeRetraits)
+			{
+				if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait))
+				{
+					int noRetrait = retrait.getNoRetrait();
+					System.out.println("Retrait numéro " + noRetrait);
+					RetraitBo retraitAttendu = new RetraitBo();
+					 retraitAttendu = RetraitBll.get(retraitAttendu.getNoRetrait());
+					
+					ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+					ArticleVenduBo nouvelleVenteReussie = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
+					
+					
+				//Sert si je passe par le method insert de Emilie
+					//ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
+					//ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);;
+				}
 				
-		//ArticleVenduBo ddd = ArticleVenduBll.insertArticle(article);
-	}
+			}
+		
+	
+	//insérer un article	
+		/*ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+		ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, session.getAttribute("session"), noCategorie2, noRetrait);
+		ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);*/
+	
+				
 
+	
 }
+}//ne pas toucher
