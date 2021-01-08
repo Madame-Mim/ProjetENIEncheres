@@ -59,12 +59,12 @@ public class ServletAfficherProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/**HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
+		session.getAttribute("session");
+		int id= Integer.parseInt(session.getAttribute("session").toString());
 	
-		String pseudo1 =(String)session.getAttribute("pseudo");**/
-		String pseudo1="ADVIL";
 		try {
-			UtilisateurBo utilisateur = UtilisateurBll.getCourriel(pseudo1);
+			UtilisateurBo utilisateur = UtilisateurBll.get(id);
 			request.setAttribute("utilisateur", utilisateur);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
