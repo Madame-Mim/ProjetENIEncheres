@@ -24,7 +24,7 @@ public class ArticleVenduBll {
 	public static void insertArticle(ArticleVenduBo article )throws Exception {
 	    {
 	    	if(article.getNomArticle().trim().equals("")||article.getDescription().trim().equals("")||article.getDateDebutEncheres()==null||
-	    			article.getDateFinEncheres()==null||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur()==null||article.getCategorie()==null||article.getRetrait()==null )
+	    			article.getDateFinEncheres()==null||article.getMiseAPrix()<=0||article.getPrixVente()<=0||article.getUtilisateur().getId()==0||article.getCategorie().getNoCategorie()==0||article.getRetrait().getNoRetrait()==0 )
 	    	{
 	    		throw new Exception("L'ensemble des informations doit être renseigné.");
 	    	}
