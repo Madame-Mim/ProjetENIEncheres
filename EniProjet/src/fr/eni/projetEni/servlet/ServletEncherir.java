@@ -68,23 +68,10 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<ArticleVenduBo> listeArticles;
-		try {
-			listeArticles = ArticleVenduBll.getAll();
-			for(ArticleVenduBo article : listeArticles)
-	        {
-	            //"affichageListeArticle" doit apparaître dans la jsp pour afficher la liste comme ceci
-	            //<p><%=request.getAttribute("affichageListeArticle") %> </p>
-	            request.setAttribute("affichageListeArticle", listeArticles);
-	            System.out.println(article);
-	        }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        
+		        
         //le forward envoi l'affichage à la jsp
         RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
         rd.forward(request, response);
-		}
-
+		
+}
 }
