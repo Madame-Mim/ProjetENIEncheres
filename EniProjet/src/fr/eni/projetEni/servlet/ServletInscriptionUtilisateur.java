@@ -81,12 +81,27 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				application.setAttribute("connecté(e)", "statut");
 				
 				//avec une session :  */ 
+					
+					//recupere l'ID
 				
-				HttpSession session = request.getSession();
+				UtilisateurBo utilisateurRecupere;
+				try {
+					utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
+					HttpSession session = request.getSession();
+					int id =utilisateurRecupere.getId();
+
+					session.setAttribute("session", id);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				
-				String statut = "connecté(e)";
+				//HttpSession session = request.getSession();
 				
-				request.getSession().setAttribute(statut, statut);
+				//String statut = "connecté(e)";
+				
+				//request.getSession().setAttribute("statut", statut);
 
 		}
 		}
