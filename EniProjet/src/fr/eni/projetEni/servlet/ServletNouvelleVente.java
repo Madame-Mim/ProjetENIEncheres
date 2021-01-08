@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
+import fr.eni.projetEni.bll.CategorieBll;
+import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
@@ -22,7 +25,7 @@ import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
 
-/**
+/** 
  * Servlet implementation class ServletNouvelleVente
  */
 @WebServlet("/ServletNouvelleVente")
@@ -36,7 +39,53 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("ServletNouvelleVente - doGet");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
 		rd.forward(request, response);
-	}
+		
+//Permet de récupérer le noCategorie
+		
+		
+		
+		List<CategorieBo> listes = CategorieBll.get();
+		String libelleNommé = "Informatique";
+		
+		for(CategorieBo libelle : listes)
+		{
+			if(libelle.getLibelle().equals("a garder"))
+			{
+				System.out.println(libelle.getNoCategorie());
+			}
+		}
+		
+		
+//Permet de récupérer l'idRetrait
+		List<RetraitBo> listeRetraits = RetraitBll.get();
+		String rue = "1 rue du retrait";
+		int code = 93000;
+		String ville = "Bobigny";
+		
+		for(RetraitBo retrait : listeRetraits)
+		{
+			if(retrait.getRue().equals(rue) & retrait.getCodePostal()==code & retrait.getVille().equals(ville))
+			{
+				System.out.println(retrait.getNoRetrait());
+			}
+		}
+		
+	//Permet de récupérer l'Utilisateur
+			/*List<UtilisateurBo> listeUtilisateurs = UtilisateurBll.get();
+			
+			
+			for(UtilisateurBo utilisateur : listeUtilisateurs)
+			{
+				if(utilisateur.getPseudo().equals(pseudo) & utilisateur.getCodePostal()==code & utilisateur.getVille().equals(ville))
+				{
+					System.out.println(utilisateur.getId());
+				}
+			}	*/
+		
+		
+		
+	}	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -77,12 +126,33 @@ public class ServletNouvelleVente extends HttpServlet {
 		int noUtilisateur = utilisateur.getId();
 		System.out.println("noUtilisateur : " + noUtilisateur);
 		
+
+		
+		
 	//créer catégorieBo
-		String categorieArticle = request.getParameter("categorieArticle");
+		/*
 		System.out.println("CatégorieArticle :" + categorieArticle);
 		CategorieBo categorie = new CategorieBo(categorieArticle);
 		int noCategorie = categorie.getNoCategorie();
-		System.out.println("noCategorie : " + noCategorie);
+		System.out.println("noCategorie : " + noCategorie);*/
+		
+		List<CategorieBo> listeLibelles = CategorieBll.get();
+		String categorieArticle = request.getParameter("categorieArticle");
+		System.out.println("Affixhage categorieArticle " + categorieArticle);
+		
+		
+		for(CategorieBo libelle : listeLibelles)
+		{
+			if(libelle.getLibelle().equals(categorieArticle))
+			{
+				System.out.println("j'ai réussi :" + libelle.getNoCategorie());
+			}
+		}
+		
+		
+		
+		
+		
 		
 	//créer l'adresse de retrait
 		String rueRetrait = request.getParameter("rueRetrait");
