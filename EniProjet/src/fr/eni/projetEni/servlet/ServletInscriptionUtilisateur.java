@@ -39,6 +39,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String motdepasse = request.getParameter("motdepasse");
+		String confirmation = request.getParameter("confirmation");
 		
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		
@@ -51,15 +52,17 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		utilisateur.setCodePostal(codePostal);
 		utilisateur.setVille(ville);
 		utilisateur.setPassword(motdepasse);
-		
-		try {
-			utilisateurCree.insert(utilisateur);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		
+		if (motdepasse.equals(confirmation)) {
+				try {
+					utilisateurCree.insert(utilisateur);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+		}
 		
         //this.getServletContext().getRequestDispatcher("URL servlet page d'accueil").forward( request, response );
 
