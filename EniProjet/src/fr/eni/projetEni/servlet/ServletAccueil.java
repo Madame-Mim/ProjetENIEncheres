@@ -30,10 +30,10 @@ public class ServletAccueil extends HttpServlet {
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
-			 for(ArticleVenduBo article : listeArticles)
-	            {request.setAttribute("listeArticles", listeArticles);
+		
+	        request.setAttribute("listeArticles", listeArticles);
                 /**System.out.println(article)**/;
-            }
+            
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,10 +53,10 @@ public class ServletAccueil extends HttpServlet {
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
-			 for(ArticleVenduBo article : listeArticles)
-	            {request.setAttribute("listeArticles", listeArticles);
+			
+	           request.setAttribute("listeArticles", listeArticles);
                /** System.out.println(article);**/
-            }
+           
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
