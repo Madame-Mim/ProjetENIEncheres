@@ -80,7 +80,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				ServletContext application = this.getServletContext();
 				application.setAttribute("connecté(e)", "statut");
 				
-				//avec une session :  */
+				//avec une session :  */ 
 				
 				HttpSession session = request.getSession();
 				
