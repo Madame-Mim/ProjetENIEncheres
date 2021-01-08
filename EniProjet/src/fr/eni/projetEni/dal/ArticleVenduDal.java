@@ -114,13 +114,13 @@ public class ArticleVenduDal {
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
                 
-                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_Utilisateur"));
+                UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 article.setUtilisateur(utilisateur);
                 
-                CategorieBo categorie = CategorieDal.get(rs.getInt("no_Categorie"));
+                CategorieBo categorie = CategorieDal.get(rs.getInt("no_categorie"));
                 article.setCategorie(categorie);
                 
-                RetraitBo retrait = RetraitDal.get(rs.getInt("no_Retrait"));
+                RetraitBo retrait = RetraitDal.get(rs.getInt("no_retrait"));
                 article.setRetrait(retrait);
 
                 
@@ -160,7 +160,7 @@ public class ArticleVenduDal {
                 resultat.setUtilisateur(vendeur);
                 
                 CategorieBo categorie = CategorieDal.get(rs.getInt("no_categorie"));
-                resultat.setUtilisateur(vendeur);
+                resultat.setCategorie(categorie);
                 
                 RetraitBo retrait = RetraitDal.get(rs.getInt("no_retrait"));
                 resultat.setRetrait(retrait);

@@ -19,22 +19,24 @@
 		<br>
 		Description : ${article.description}
 		<br>
-		Catégorie 
+		Catégorie ${article.categorie.getLibelle()}
 		<br>
 		<c:if test="${article.prixVente ==0}" >
 		Personne n'a encore enchéri sur votre produit.
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
-		Meilleur offre ${article.prixVente} points par ${article.utilisateur.getNom()}
+		Meilleur offre ${article.prixVente} points par ${article.utilisateur.getPseudo()}
 		</c:if>
 		<br>
 		Mise à prix : ${article.miseAPrix}
 		<br>
 		Fin de l'enchère : ${article.dateFinEncheres}
 		<br>
-		Retrait : ${article.retrait}
+		Retrait : ${article.retrait.getRue()}
 		<br>
-		Vendeur :	${article.utilisateur}
+		${article.retrait.getCodePostal()}	${article.retrait.getVille()}
+		<br>
+		Vendeur :	${article.utilisateur.getPseudo()}
 		<br>
 		Ma proposition 
 		 <c:if test="${article.miseAPrix>article.prixVente}" >
