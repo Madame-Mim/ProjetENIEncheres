@@ -55,7 +55,8 @@ public class ServletConnexion extends HttpServlet {
 				{
 					String pwdBdd= utilisateurRecupere.getPassword();
 					boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
-	
+					int id =utilisateurRecupere.getId();
+
 					if(VerifPassword==false) 
 					{
 						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
@@ -63,7 +64,7 @@ public class ServletConnexion extends HttpServlet {
 					else
 					{
 						HttpSession session = request.getSession();
-						request.setAttribute("session", session);
+						session.setAttribute("session", id);
 						jspCible="/WEB-INF/Encheres/accueil.jsp";
 					}
 				}
@@ -87,7 +88,7 @@ public class ServletConnexion extends HttpServlet {
 				{
 					String pwdBdd = utilisateurRecupere.getPassword();
 					boolean VerifPassword = Pattern.matches(password, pwdBdd) ;
-					
+					int id =utilisateurRecupere.getId();
 					if(VerifPassword==false||pseudo==null)
 					{
 						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
@@ -95,7 +96,7 @@ public class ServletConnexion extends HttpServlet {
 					else
 					{
 						HttpSession session = request.getSession();
-						request.setAttribute("session", session);
+						session.setAttribute("session", id);
 						jspCible="/WEB-INF/Encheres/accueil.jsp";					
 					}
 				}
