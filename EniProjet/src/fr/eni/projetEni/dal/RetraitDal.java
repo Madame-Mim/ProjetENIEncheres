@@ -35,14 +35,14 @@ public class RetraitDal {
     	
     }
     
-    public static RetraitBo get(int no_retrait)
+    public static RetraitBo get(int noRetrait)
     {
     	RetraitBo resultat = null;
     	Connection cnx;
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-			requete.setInt(1,no_retrait);
+			requete.setInt(1,noRetrait);
 	    	ResultSet rs = requete.executeQuery();
 	    	
 	    	if(rs.next())

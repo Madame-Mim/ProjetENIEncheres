@@ -52,17 +52,17 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("ServletNouvelleVente - doPost");
 		
 		String nomArticle = request.getParameter("nomArticle");
-		System.out.println("nomArticle :" + nomArticle);
+		//System.out.println("nomArticle :" + nomArticle);
 		
 		String descriptionArticle = request.getParameter("descriptionArticle");
-		System.out.println("descriptionArticle :" + descriptionArticle);
+		//System.out.println("descriptionArticle :" + descriptionArticle);
 		
 	//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
 		String debutEnchere = request.getParameter("debutEnchere");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		LocalDate debutEncherelocalDate = LocalDate.parse(debutEnchere,formatter);
-		System.out.println("Début enchère : " + debutEncherelocalDate);
+		//System.out.println("Début enchère : " + debutEncherelocalDate);
 		
 		
 	//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
@@ -70,14 +70,14 @@ public class ServletNouvelleVente extends HttpServlet {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		LocalDate finEncherelocalDate = LocalDate.parse(finEnchere,formatter);
-		System.out.println("fin enchère : " + finEncherelocalDate);
+		//System.out.println("fin enchère : " + finEncherelocalDate);
 		
 				
 		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
-		System.out.println("miseAPrixArticle :" + miseAPrixArticle);
+		//System.out.println("miseAPrixArticle :" + miseAPrixArticle);
 		
 		int prixVente = miseAPrixArticle;
-		System.out.println("prixVente :" + miseAPrixArticle);
+		//System.out.println("prixVente :" + miseAPrixArticle);
 	
 	UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", "0102030405", "18 rue Emile Zola", "44000", "Nantes", "lemeilleur", 0, false);
 	//Permet de récupérer l'id de l'utilisateur
@@ -91,7 +91,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		int noCategorie2 = Integer.parseInt(request.getParameter("categorieArticle"));
 		System.out.println("nocategorie liste deroulante :" + noCategorie2);
 		CategorieBo noCat = CategorieBll.get(noCategorie2);
-		System.out.println("a voir : " + noCat);
+		System.out.println("noCat : " + noCat);
 		
 	//Permet de récupérer l'idRetrait
 			/*List<RetraitBo> listeRetraits = RetraitBll.get();
@@ -111,6 +111,14 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 		
 		//Récupérer et le noRetrait et le noCategorie et l'insérer dans la method insert
+		String rueRetrait2 = request.getParameter("rueRetrait");
+		String codePostalRetrait2 = request.getParameter("codePostalRetrait");
+		String villeRetrait2 = request.getParameter("villeRetrait");
+		RetraitBo retraitMarche = new RetraitBo(rueRetrait2, codePostalRetrait2, villeRetrait2);
+		int duretraitcherche = retraitMarche.getNoRetrait();
+		RetraitBo fppfff = RetraitBll.get(duretraitcherche);
+		System.out.println("enfin trouvé :" + fppfff);
+		
 		
 		
 		List<RetraitBo> listeRetraits = RetraitBll.get();
@@ -124,12 +132,13 @@ public class ServletNouvelleVente extends HttpServlet {
 				{
 					int noRetrait = retrait.getNoRetrait();
 					System.out.println("Retrait numéro " + noRetrait);
-					RetraitBo retraitAttendu = new RetraitBo();
-					 retraitAttendu = RetraitBll.get(retraitAttendu.getNoRetrait());
+					RetraitBo retraitAttendu = new RetraitBo("1 rue du retrait","93000","Bobigny");
+					 //retraitAttendu = RetraitBll.get(retraitAttendu.getNoRetrait());
+					 System.out.println("retraitAttendu :" + retraitAttendu);
 					
 					ArticleVenduBll articleVenduBll = new ArticleVenduBll();
 					ArticleVenduBo nouvelleVenteReussie = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
-					
+					System.out.println("samere :" + nouvelleVenteReussie);
 					
 				//Sert si je passe par le method insert de Emilie
 					//ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, retraitAttendu);
