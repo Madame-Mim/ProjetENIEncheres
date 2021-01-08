@@ -39,7 +39,6 @@ public class ServletVenteEmportee extends HttpServlet {
 			System.out.println(enchere);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         
@@ -52,11 +51,14 @@ public class ServletVenteEmportee extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UtilisateurBo utilisateurACrediter;
-		utilisateurACrediter = new UtilisateurBo();
-		//utilisateurACrediter.setCredit(request.getParameter("credit"));
-		
-		request.setAttribute("utilisateur", utilisateurACrediter);
+		UtilisateurBo utilisateurACrediter = new UtilisateurBo();
+		int montant = Integer.parseInt(request.getParameter("credit"));
+		utilisateurACrediter.setCredit(montant);
+		try {
+			UtilisateurBll.update(utilisateurACrediter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	//	UtilisateurBll.update(utilisateurACrediter);
 	}
 

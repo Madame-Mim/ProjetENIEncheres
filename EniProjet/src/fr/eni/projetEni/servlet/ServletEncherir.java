@@ -1,6 +1,8 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -43,7 +45,7 @@ public class ServletEncherir extends HttpServlet {
         else
         {
         	*/
-		//int id = Integer.parseInt(request.getParameter("id"));
+	//	int id = Integer.parseInt(request.getParameter("idarticle"));
 
 			try {
 				ArticleVenduBo article = ArticleVenduBll.getById(7);
@@ -69,16 +71,30 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int montant= Integer.parseInt(request.getParameter("enchere"));//récupération de la valeur envoyée par le formulaire (fonctionne)
-		ArticleVenduBo article;
-		try {
-			int no_article=Integer.parseInt(request.getParameter("id"));
+		try 
+		{
+			HttpSession session = request.getSession();
+			int montant= Integer.parseInt(request.getParameter("enchere"));
+			UtilisateurBo utilisateur  = new UtilisateurBo();
+			//int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+			utilisateur.setId(4);
 			
-			EnchereBo enchere = EnchereBll.getByIdArticle(no_article);
+			ArticleVenduBo article = new ArticleVenduBo();
+			int no_article=Integer.parseInt(request.getParameter("id"));
+			article.setNoArticle(no_article);
+			LocalDate date = LocalDate.now();	
+			
+			EnchereBo enchere = new EnchereBo();
+			enchere.setDateEnchere(date);
 			enchere.setMontantEnchere(montant);
-
-			EnchereBll.updateEnchere(enchere);
-		} catch (Exception e) {
+			enchere.setNoArticle(article);
+			enchere.setNoUtilisateur(utilisateur);
+			
+			System.out.println(enchere);
+			EnchereBll.insert(enchere);
+		} 
+		catch (Exception e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

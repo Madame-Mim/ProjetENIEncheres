@@ -45,6 +45,7 @@
 			
 		<form action="<%=request.getContextPath()%>/VenteTerminee" method="post">
 			<input type="submit" value="Retrait effectué">
+			<input name="credit" type="hidden" value="${article.prixVente}">
 		</form>
 	</section>
 	

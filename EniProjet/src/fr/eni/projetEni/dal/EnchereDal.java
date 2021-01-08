@@ -21,7 +21,6 @@ public class EnchereDal {
     private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
     private static final String GET_ALL="SELECT * FROM Encheres";
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_article=? no_utilisateur=? WHERE no_enchere=?";
-    private static final String UPDATE_ENCHERE="UPDATE Encheres SET montant_enchere=? WHERE no_enchere=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
@@ -33,11 +32,8 @@ public class EnchereDal {
             PreparedStatement requete = cnx.prepareStatement(INSERT);
             requete.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
             requete.setInt(2, enchere.getMontantEnchere());
-            requete.setInt(3, enchere.getNoUtilisateur().getId());
-            requete.setInt(4, enchere.getNoArticle().getNoArticle());
-            		     
-               
-            
+            requete.setObject(3, enchere.getNoUtilisateur().getId());
+            requete.setObject(4, enchere.getNoArticle().getNoArticle());
 
             requete.executeUpdate();
 
@@ -150,21 +146,7 @@ public class EnchereDal {
             logger.severe("Erreur dans la methode update(EnchereBo enchere) avec enchere =" + enchere + " erreur :" + ex.getMessage());
         }
     }
-    
-    public static void updateEnchere(EnchereBo enchere)
-    {
-    	 try(Connection cnx = ConnectionProvider.getConnection())
-        {
-            PreparedStatement requete = cnx.prepareStatement(UPDATE_ENCHERE);
-            requete.setInt(1,enchere.getMontantEnchere());
-            requete.executeUpdate();
-        }
-        catch(Exception ex)
-        {
-            logger.severe("Erreur dans la methode updateEnchere(EnchereBo enchere) avec enchere =" + enchere + " erreur :" + ex.getMessage());
-        }
-    }
-    
+       
     public static void delete(int id)
     {
     	try(Connection cnx = ConnectionProvider.getConnection())

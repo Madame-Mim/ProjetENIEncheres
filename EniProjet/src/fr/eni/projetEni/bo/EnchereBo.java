@@ -7,8 +7,8 @@ public class EnchereBo {
 	private int noEnchere;
 	private LocalDate dateEnchere;
 	private int montantEnchere;
-	private ArticleVenduBo noArticle;
-	private UtilisateurBo noUtilisateur;
+	private static ArticleVenduBo noArticle;
+	private static UtilisateurBo noUtilisateur;
 	/**
 	 * @param noEnchere
 	 * @param dateEnchere
@@ -85,7 +85,7 @@ public class EnchereBo {
 	 * @param noArticle the noArticle to set
 	 */
 	public void setNoArticle(ArticleVenduBo noArticle) {
-		this.noArticle = noArticle;
+		EnchereBo.noArticle = noArticle;
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class EnchereBo {
 	 * @param noUtilisateur the noUtilisateur to set
 	 */
 	public void setNoUtilisateur(UtilisateurBo noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+		EnchereBo.noUtilisateur = noUtilisateur;
 	}
 
 	/* (non-Javadoc)
