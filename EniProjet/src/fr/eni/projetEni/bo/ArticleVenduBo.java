@@ -14,13 +14,14 @@ import java.time.LocalDate;
 		private static UtilisateurBo utilisateur;
 		private static CategorieBo categorie;
 		private static RetraitBo retrait;
-		
+		private boolean retraitEffectue;
 		
 		/* constructeur */
 		public ArticleVenduBo() {
 			super();
 		}
 		/* fin constructeur */
+		
 		
 		/**
 		 * @param noArticle
@@ -30,14 +31,11 @@ import java.time.LocalDate;
 		 * @param dateFinEncheres
 		 * @param miseAPrix
 		 * @param prixVente
-		 * @param etatVente
-		 * @param utilisateur
-		 * @param categorie
-		 * @param retrait
+		 * @param retraitEffectue
 		 */
 		public ArticleVenduBo(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-				LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur,
-				CategorieBo categorie, RetraitBo retrait) {
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente,  UtilisateurBo utilisateur,
+				CategorieBo categorie, RetraitBo retrait, boolean retraitEffectue) {
 			super();
 			this.noArticle = noArticle;
 			this.nomArticle = nomArticle;
@@ -46,11 +44,11 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.utilisateur = utilisateur;
-			this.categorie = categorie;
-			this.retrait = retrait;
+			ArticleVenduBo.utilisateur = utilisateur;
+			ArticleVenduBo.categorie = categorie;
+			ArticleVenduBo.retrait = retrait;
+			this.retraitEffectue = retraitEffectue;		
 		}
-
 
 		/**
 		 * @param nomArticle
@@ -66,7 +64,7 @@ import java.time.LocalDate;
 		 */
 		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
 				LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur,
-				CategorieBo categorie, RetraitBo retrait) {
+				CategorieBo categorie, RetraitBo retrait, boolean retraitEffectue) {
 			super();
 			this.nomArticle = nomArticle;
 			this.description = description;
@@ -77,6 +75,7 @@ import java.time.LocalDate;
 			ArticleVenduBo.utilisateur = utilisateur;
 			ArticleVenduBo.categorie = categorie;
 			ArticleVenduBo.retrait = retrait;
+			this.retraitEffectue = retraitEffectue;
 		}
 		
 		
@@ -92,7 +91,7 @@ import java.time.LocalDate;
 		 * @param retrait
 		 */
 		public ArticleVenduBo(String nomArticle, String description, LocalDate dateFinEncheres, int miseAPrix,
-				int prixVente, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo retrait) {
+				int prixVente, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo retrait, boolean retraitEffectue) {
 			super();
 			this.nomArticle = nomArticle;
 			this.description = description;
@@ -102,6 +101,7 @@ import java.time.LocalDate;
 			ArticleVenduBo.utilisateur = utilisateur;
 			ArticleVenduBo.categorie = categorie;
 			ArticleVenduBo.retrait = retrait;
+			this.retraitEffectue = retraitEffectue;
 		}
 		
 		
@@ -116,7 +116,7 @@ import java.time.LocalDate;
 		 * @param retrait
 		 */
 		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
-				LocalDate dateFinEncheres, int miseAPrix, int prixVente, CategorieBo categorie, RetraitBo retrait) {
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, CategorieBo categorie, RetraitBo retrait, boolean retraitEffectue) {
 			this.nomArticle = nomArticle;
 			this.description = description;
 			this.dateDebutEncheres = dateDebutEncheres;
@@ -125,6 +125,7 @@ import java.time.LocalDate;
 			this.prixVente = prixVente;
 			ArticleVenduBo.categorie = categorie;
 			ArticleVenduBo.retrait = retrait;
+			this.retraitEffectue = retraitEffectue;
 		}
 		
 		
@@ -139,7 +140,7 @@ import java.time.LocalDate;
 		 * @param retrait
 		 */
 		public ArticleVenduBo(String nomArticle, String description, LocalDate dateDebutEncheres,
-				LocalDate dateFinEncheres, int miseAPrix, int prixVente, RetraitBo retrait) {
+				LocalDate dateFinEncheres, int miseAPrix, int prixVente, RetraitBo retrait,  boolean retraitEffectue) {
 			this.nomArticle = nomArticle;
 			this.description = description;
 			this.dateDebutEncheres = dateDebutEncheres;
@@ -147,6 +148,7 @@ import java.time.LocalDate;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
 			ArticleVenduBo.retrait = retrait;
+			this.retraitEffectue = retraitEffectue;
 		}
 
 		/* getters setters */
@@ -218,6 +220,20 @@ import java.time.LocalDate;
 		}
 		/* fin getters setters */
 
+
+		/**
+		 * @return the retraitEffectue
+		 */
+		public boolean isRetraitEffectue() {
+			return retraitEffectue;
+		}
+
+		/**
+		 * @param retraitEffectue the retraitEffectue to set
+		 */
+		public void setRetraitEffectue(boolean retraitEffectue) {
+			this.retraitEffectue = retraitEffectue;
+		}
 
 		/* toString */
 		@Override
