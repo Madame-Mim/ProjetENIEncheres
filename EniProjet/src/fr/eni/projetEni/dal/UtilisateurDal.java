@@ -179,18 +179,18 @@ public class UtilisateurDal {
         try(Connection cnx = ConnectionProvider.getConnection())
         {
         	PreparedStatement requete = cnx.prepareStatement(UPDATE);
-            requete.setInt(1, utilisateur.getId());
-            requete.setString(2, utilisateur.getPseudo());
-            requete.setString(3, utilisateur.getNom());
-            requete.setString(4, utilisateur.getPrenom());
-            requete.setString(5, utilisateur.getEmail());
-            requete.setString(6, utilisateur.getTelephone());
-            requete.setString(7, utilisateur.getRue());
-            requete.setString(8, utilisateur.getCodePostal());
-            requete.setString(9, utilisateur.getVille());
-            requete.setString(10, utilisateur.getPassword());
-            requete.setInt(11, utilisateur.getCredit());
-            requete.setBoolean(12, utilisateur.isAdministrateur());
+        	 requete.setString(1, utilisateur.getPseudo());
+             requete.setString(2, utilisateur.getNom());
+             requete.setString(3, utilisateur.getPrenom());
+             requete.setString(4, utilisateur.getEmail());
+             requete.setString(5, utilisateur.getTelephone());
+             requete.setString(6, utilisateur.getRue());
+             requete.setString(7, utilisateur.getCodePostal());
+             requete.setString(8, utilisateur.getVille());
+             requete.setString(9, utilisateur.getPassword());
+             requete.setInt(10, utilisateur.getCredit());
+             requete.setBoolean(11, utilisateur.isAdministrateur());
+             requete.setInt(12, utilisateur.getId());
 
             requete.executeUpdate();
 
