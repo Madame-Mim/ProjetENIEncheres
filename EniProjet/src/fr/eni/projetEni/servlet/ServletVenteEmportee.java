@@ -23,7 +23,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 @WebServlet("/VenteTerminee")
 public class ServletVenteEmportee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       //
+     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

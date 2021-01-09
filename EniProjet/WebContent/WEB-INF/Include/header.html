@@ -1,4 +1,5 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/header.css">
 	
 	<nav>
 		<ul>
@@ -6,10 +7,10 @@
 			<li><a href="<%=request.getContextPath()%>/connexion">S'inscrire - Se connecter</a></li>
 		</c:if>
 		<c:if test="${not empty session}">
-			<li><a href="<%=request.getContextPath()%>/ServletAccueil">Enchères</a></li>
-			<li><a href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre un article</a></li>
-			<li><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">Mon profil</a></li>
 			<li><a href="<%=request.getContextPath()%>/ServletDeconnexion">Déconnexion</a></li>
+			<li><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">Mon profil</a></li>
+			<li><a href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre un article</a></li>
+			<li><a href="<%=request.getContextPath()%>/ServletAccueil">Enchères</a></li>
 		</c:if>
 		</ul>
 	</nav>

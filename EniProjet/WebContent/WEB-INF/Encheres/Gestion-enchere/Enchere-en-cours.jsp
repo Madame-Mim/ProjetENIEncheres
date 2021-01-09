@@ -25,7 +25,9 @@
 		<div class="col-xs-offset-2 col-xs-4"> Catégorie</div><div class=" col-xs-6"> ${article.categorie.getLibelle()}</div>
 		<br>
 		<c:if test="${article.prixVente ==0}" >
-		Personne n'a encore enchéri sur votre produit.
+		<br><br>
+		<div class="col-xs-offset-2 col-xs-10"><strong>Personne n'a encore enchéri sur ce produit.</strong></div>
+		<br>
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
 		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${article.prixVente} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>
@@ -50,7 +52,7 @@
 		 <c:if test="${article.miseAPrix<=article.prixVente}" >
 		 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
 		 </c:if>
-		 <c:if test="${article.utilisateur.getCredit()<article.prixVente}" >
+		 <c:if test="${utilisateur.getCredit()<article.prixVente || article.utilisateur.getId()==sessionScope.session || enchere.noUtilisateur.getId()==sessionScope.session}" >
 		 <c:set var="enabled" value="disabled" scope="page" />
 		 </c:if>
 		<div class="col-xs-6">

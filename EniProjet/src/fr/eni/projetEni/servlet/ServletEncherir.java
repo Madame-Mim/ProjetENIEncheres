@@ -29,7 +29,6 @@ public class ServletEncherir extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // HttpSession session = request.getSession();
 		/*  
         if (session.getAttribute("session") == null )
         {
@@ -39,12 +38,16 @@ public class ServletEncherir extends HttpServlet {
         else
         {
         	*/
-		int id = Integer.parseInt(request.getParameter("idarticle"));
+		int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
 			try {
-				ArticleVenduBo article = ArticleVenduBll.getById(id);
+			    HttpSession session = request.getSession();
+				int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+
+				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
-				
+				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+
 				
 				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
@@ -56,7 +59,7 @@ public class ServletEncherir extends HttpServlet {
 			}
 	        
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Enchere-en-cours.jsp");
         rd.forward(request, response);
         }
 	//}
@@ -99,7 +102,7 @@ public class ServletEncherir extends HttpServlet {
 		
 	
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Enchere-en-cours.jsp");
         rd.forward(request, response);
 		
 }
