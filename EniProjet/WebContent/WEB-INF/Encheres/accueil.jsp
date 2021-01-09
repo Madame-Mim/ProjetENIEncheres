@@ -65,6 +65,7 @@ placeholder="le nom de l'article contient" size= "40"/>
 <br/>
 <input type="submit" value="RECHERCHER">
 <br/>
+<p><%=request.getAttribute("affichageListeEnchere") %> </p>
 <br/>
 <p>
 	<ul>
@@ -78,19 +79,19 @@ placeholder="le nom de l'article contient" size= "40"/>
 		
 		
 			<p>
-			<li><a href="<%=request.getContextPath()%>/ServletEncherir?idarticle=${v.noArticle}">${v.nomArticle}</a></li></li>
+			<li><a href="<%=request.getContextPath()%>/ServletEncherir?idarticle=${v.noArticle}">${v.nomArticle}</a></li>
 			<li>${v.prixVente}</li>
 			<li>${v.dateFinEncheres}</li>
 			<li>
 			
-			<a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></li>
+			<a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a>
 			</li>
 			</p> 
 			</c:if>
 				</c:forEach>
 				
 					</ul>	
-</p>
+
 
 </body>
 </html>
