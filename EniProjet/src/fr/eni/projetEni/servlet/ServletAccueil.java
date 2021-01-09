@@ -40,9 +40,9 @@ public class ServletAccueil extends HttpServlet {
 		}
 		
 		HttpSession session = request.getSession();
+
 		if(session.getAttribute("session")==null){
 			
-		
 		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueilvisiteur.jsp");
 	        rd.forward(request, response);}
 		else
