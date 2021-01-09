@@ -84,7 +84,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 					
 					//recupere l'ID
 				
-				UtilisateurBo utilisateurRecupere;
+				/*UtilisateurBo utilisateurRecupere;
 				try {
 					utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
 					HttpSession session = request.getSession();
@@ -94,19 +94,19 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}
+				}*/
 
 				
-				//HttpSession session = request.getSession();
+			HttpSession session = request.getSession();
 				
-				//String statut = "connecté(e)";
+				String statut = "connecté(e)";
 				
-				//request.getSession().setAttribute("statut", statut);
+				request.getSession().setAttribute("statut", statut);
 
 		}
+		
 		}
-	
-        this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/modifierMonProfil.jsp" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( "/ServletAccueil" ).forward( request, response );
 
 		
 	
