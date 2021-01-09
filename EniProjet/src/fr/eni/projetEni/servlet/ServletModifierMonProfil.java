@@ -46,6 +46,10 @@ public class ServletModifierMonProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		session.getAttribute("session");
+		int id= Integer.parseInt(session.getAttribute("session").toString());
+		
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -57,7 +61,10 @@ public class ServletModifierMonProfil extends HttpServlet {
 		String motdepasse = request.getParameter("motdepasse");
 		String confirmation = request.getParameter("confirmation");
 		
+		boolean admin = false;
+		
 		UtilisateurBo utilisateur = new UtilisateurBo();
+		
 		
 		utilisateur.setPseudo(pseudo);
 		utilisateur.setNom(nom);
@@ -68,6 +75,10 @@ public class ServletModifierMonProfil extends HttpServlet {
 		utilisateur.setCodePostal(codePostal);
 		utilisateur.setVille(ville);
 		utilisateur.setPassword(motdepasse);
+		utilisateur.setCredit(0);
+		utilisateur.setAdministrateur(admin);
+		utilisateur.setId(id);
+
 
 		
 		if (motdepasse.equals(confirmation)) {
@@ -85,4 +96,3 @@ public class ServletModifierMonProfil extends HttpServlet {
 }
 
 /* A faire : servlet supprimer mon compte */
-
