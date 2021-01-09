@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.EnchereBll;
@@ -32,11 +33,8 @@ public class ServletVenteEmportee extends HttpServlet {
 			ArticleVenduBo article = ArticleVenduBll.getById(7);
 			request.setAttribute("article", article);
 			
-			
 			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 			request.setAttribute("enchere", enchere);
-
-			System.out.println(enchere);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,14 +49,30 @@ public class ServletVenteEmportee extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UtilisateurBo utilisateurACrediter = new UtilisateurBo();
-		int montant = Integer.parseInt(request.getParameter("credit"));
-		utilisateurACrediter.setCredit(montant);
+		HttpSession session = request.getSession();
+	//	int id = Integer.parseInt(session.getAttribute("session").toString());
 		try {
+			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(4);
+			System.out.println(utilisateurACrediter);
+
+			int montant = Integer.parseInt(request.getParameter("credit"));
+			System.out.println("montant : "+montant);
+
+			int creditActuel = utilisateurACrediter.getCredit();
+			System.out.println("credit actuel : "+creditActuel);
+
+			int nouveauCredit = creditActuel+montant;
+			System.out.println("nouveau credit : "+nouveauCredit);
+
+			utilisateurACrediter.setCredit(montant);
+			System.out.println(utilisateurACrediter);
+			
 			UtilisateurBll.update(utilisateurACrediter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		
 	//	UtilisateurBll.update(utilisateurACrediter);
 	}
 

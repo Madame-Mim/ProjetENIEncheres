@@ -17,7 +17,7 @@ public class UtilisateurDal {
     private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
     private static final String GET_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
     private static final String GET_BY_COURRIEL = "SELECT * FROM utilisateurs WHERE email=?";
-    private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, codePostal=?, ville=?, password=?, credit=?, administrateur=? WHERE no_utilisateur=?";
+    private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_Postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
     private static final String DELETE = "DELETE utilisateurs WHERE no_utilisateur=?";
 
     private static Logger logger = MonLogger.getLogger("UtilisateurDal");
@@ -66,9 +66,9 @@ public class UtilisateurDal {
             utilisateur.setEmail(rs.getString("email"));
             utilisateur.setTelephone(rs.getString("telephone"));
             utilisateur.setRue(rs.getString("rue"));
-            utilisateur.setCodePostal(rs.getString("codePostal"));
+            utilisateur.setCodePostal(rs.getString("code_postal"));
             utilisateur.setVille(rs.getString("ville"));
-            utilisateur.setPassword(rs.getString("password"));
+            utilisateur.setPassword(rs.getString("moy_de_passe"));
             utilisateur.setCredit(rs.getInt("credit"));
             utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
             listes.add(utilisateur);
@@ -99,7 +99,7 @@ public class UtilisateurDal {
                 resultat.setEmail(rs.getString("email"));
                 resultat.setTelephone(rs.getString("telephone"));
                 resultat.setRue(rs.getString("rue"));
-                resultat.setCodePostal(rs.getString("code_Postal"));
+                resultat.setCodePostal(rs.getString("code_postal"));
                 resultat.setVille(rs.getString("ville"));
                 resultat.setPassword(rs.getString("mot_de_passe"));
                 resultat.setCredit(rs.getInt("credit"));
@@ -130,7 +130,7 @@ public class UtilisateurDal {
                 resultat.setEmail(rs.getString("email"));
                 resultat.setTelephone(rs.getString("telephone"));
                 resultat.setRue(rs.getString("rue"));
-                resultat.setCodePostal(rs.getString("code_Postal"));
+                resultat.setCodePostal(rs.getString("code_postal"));
                 resultat.setVille(rs.getString("ville"));
                 resultat.setPassword(rs.getString("mot_de_passe"));
                 resultat.setCredit(rs.getInt("credit"));
@@ -161,7 +161,7 @@ public class UtilisateurDal {
                 resultat.setEmail(rs.getString("email"));
                 resultat.setTelephone(rs.getString("telephone"));
                 resultat.setRue(rs.getString("rue"));
-                resultat.setCodePostal(rs.getString("code_Postal"));
+                resultat.setCodePostal(rs.getString("code_postal"));
                 resultat.setVille(rs.getString("ville"));
                 resultat.setPassword(rs.getString("mot_de_passe"));
                 resultat.setCredit(rs.getInt("credit"));
@@ -179,17 +179,18 @@ public class UtilisateurDal {
         try(Connection cnx = ConnectionProvider.getConnection())
         {
         	PreparedStatement requete = cnx.prepareStatement(UPDATE);
-            requete.setString(1, utilisateur.getPseudo());
-            requete.setString(2, utilisateur.getNom());
-            requete.setString(3, utilisateur.getPrenom());
-            requete.setString(4, utilisateur.getEmail());
-            requete.setString(5, utilisateur.getTelephone());
-            requete.setString(6, utilisateur.getRue());
-            requete.setString(7, utilisateur.getCodePostal());
-            requete.setString(8, utilisateur.getVille());
-            requete.setString(9, utilisateur.getPassword());
-            requete.setInt(10, utilisateur.getCredit());
-            requete.setBoolean(11, utilisateur.isAdministrateur());
+            requete.setInt(1, utilisateur.getId());
+            requete.setString(2, utilisateur.getPseudo());
+            requete.setString(3, utilisateur.getNom());
+            requete.setString(4, utilisateur.getPrenom());
+            requete.setString(5, utilisateur.getEmail());
+            requete.setString(6, utilisateur.getTelephone());
+            requete.setString(7, utilisateur.getRue());
+            requete.setString(8, utilisateur.getCodePostal());
+            requete.setString(9, utilisateur.getVille());
+            requete.setString(10, utilisateur.getPassword());
+            requete.setInt(11, utilisateur.getCredit());
+            requete.setBoolean(12, utilisateur.isAdministrateur());
 
             requete.executeUpdate();
 
@@ -199,7 +200,7 @@ public class UtilisateurDal {
             logger.severe("Erreur dans la méthode update(UtlisateurBo utilisateur) avec utilisateur ="+ utilisateur +"- erreur : "+ex.getMessage());
         }
     }
-
+    
     public static void delete(int id)
     {
         try(Connection cnx = ConnectionProvider.getConnection())

@@ -75,13 +75,12 @@ public class ServletEncherir extends HttpServlet {
 		{
 			HttpSession session = request.getSession();
 			int montant= Integer.parseInt(request.getParameter("enchere"));
-			UtilisateurBo utilisateur  = new UtilisateurBo();
+			UtilisateurBo utilisateur = UtilisateurBll.get(5);
 			//int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
-			utilisateur.setId(4);
 			
-			ArticleVenduBo article = new ArticleVenduBo();
 			int no_article=Integer.parseInt(request.getParameter("id"));
-			article.setNoArticle(no_article);
+			ArticleVenduBo article = ArticleVenduBll.getById(no_article);
+			
 			LocalDate date = LocalDate.now();	
 			
 			EnchereBo enchere = new EnchereBo();
@@ -89,13 +88,13 @@ public class ServletEncherir extends HttpServlet {
 			enchere.setMontantEnchere(montant);
 			enchere.setNoArticle(article);
 			enchere.setNoUtilisateur(utilisateur);
-			
-			System.out.println(enchere);
+			enchere.setNoEnchere(3);
+
 			EnchereBll.insert(enchere);
+			ArticleVenduBll.updateArticle(article);
 		} 
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

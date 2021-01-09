@@ -2,6 +2,7 @@ package fr.eni.projetEni.bll;
 
 import java.util.List;
 
+import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.UtilisateurDal;
 
@@ -47,7 +48,7 @@ public class UtilisateurBll {
     	return UtilisateurDal.getCourriel(email);
     }
    }
-    public static void update(UtilisateurBo utilisateur) throws Exception{
+    public static void update(UtilisateurBo utilisateur) throws Exception
     {
     	if(utilisateur.getPseudo().trim().equals("")||utilisateur.getNom().trim().equals("")||utilisateur.getPrenom().trim().equals("")||
     			utilisateur.getEmail().trim().equals("")||utilisateur.getTelephone().trim().equals("")||utilisateur.getRue().trim().equals("")|| 
@@ -63,7 +64,7 @@ public class UtilisateurBll {
     	
     	UtilisateurDal.update(utilisateur);
     }
-    }
+       
     public static void delete(int id)throws Exception {
         if(UtilisateurDal.get(id) ==null)
         {

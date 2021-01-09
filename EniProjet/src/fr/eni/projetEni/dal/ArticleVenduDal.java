@@ -223,14 +223,15 @@ public class ArticleVenduDal {
         try ( Connection cnx = ConnectionProvider.getConnection() ) 
         {
         	PreparedStatement rqt = cnx.prepareStatement(UPDATE);
-
-        	 rqt.setString(1, articleVendu.getNomArticle());
-             rqt.setString(2, articleVendu.getDescription());
-             rqt.setDate(3, java.sql.Date.valueOf(articleVendu.getDateDebutEncheres()));
-             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
-             rqt.setInt(5, articleVendu.getMiseAPrix());
-             rqt.setInt(6, articleVendu.getPrixVente());
-            rqt.executeUpdate();
+       	 	 rqt.setInt(1, articleVendu.getNoArticle());
+        	 rqt.setString(2, articleVendu.getNomArticle());
+             rqt.setString(3, articleVendu.getDescription());
+             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateDebutEncheres()));
+             rqt.setDate(5, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
+             rqt.setInt(6, articleVendu.getMiseAPrix());
+             rqt.setInt(7, articleVendu.getPrixVente());
+           
+             rqt.executeUpdate();
 
         } catch (Exception ex ) {
             logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());

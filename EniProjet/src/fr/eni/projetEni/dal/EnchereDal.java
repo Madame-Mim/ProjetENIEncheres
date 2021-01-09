@@ -20,7 +20,7 @@ public class EnchereDal {
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
     private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
     private static final String GET_ALL="SELECT * FROM Encheres";
-    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=? no_article=? no_utilisateur=? WHERE no_enchere=?";
+    private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? WHERE no_enchere=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
@@ -32,8 +32,8 @@ public class EnchereDal {
             PreparedStatement requete = cnx.prepareStatement(INSERT);
             requete.setDate(1, java.sql.Date.valueOf(enchere.getDateEnchere()));
             requete.setInt(2, enchere.getMontantEnchere());
-            requete.setObject(3, enchere.getNoUtilisateur().getId());
-            requete.setObject(4, enchere.getNoArticle().getNoArticle());
+            requete.setObject(3, enchere.getNoArticle().getNoArticle());
+            requete.setObject(4, enchere.getNoUtilisateur().getId());
 
             requete.executeUpdate();
 

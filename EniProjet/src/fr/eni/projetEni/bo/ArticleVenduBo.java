@@ -11,9 +11,9 @@ import java.time.LocalDate;
 		private LocalDate dateFinEncheres;
 		private int miseAPrix;
 		private int prixVente;
-		private UtilisateurBo utilisateur;
-		private CategorieBo categorie;
-		private RetraitBo retrait;
+		private static UtilisateurBo utilisateur;
+		private static CategorieBo categorie;
+		private static RetraitBo retrait;
 		
 		
 		/* constructeur */
@@ -74,9 +74,9 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.utilisateur = utilisateur;
-			this.categorie = categorie;
-			this.retrait = retrait;
+			ArticleVenduBo.utilisateur = utilisateur;
+			ArticleVenduBo.categorie = categorie;
+			ArticleVenduBo.retrait = retrait;
 		}
 		
 		
@@ -99,9 +99,9 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.utilisateur = utilisateur;
-			this.categorie = categorie;
-			this.retrait = retrait;
+			ArticleVenduBo.utilisateur = utilisateur;
+			ArticleVenduBo.categorie = categorie;
+			ArticleVenduBo.retrait = retrait;
 		}
 		
 		
@@ -123,8 +123,8 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.categorie = categorie;
-			this.retrait = retrait;
+			ArticleVenduBo.categorie = categorie;
+			ArticleVenduBo.retrait = retrait;
 		}
 		
 		
@@ -146,7 +146,7 @@ import java.time.LocalDate;
 			this.dateFinEncheres = dateFinEncheres;
 			this.miseAPrix = miseAPrix;
 			this.prixVente = prixVente;
-			this.retrait = retrait;
+			ArticleVenduBo.retrait = retrait;
 		}
 
 		/* getters setters */
@@ -202,19 +202,19 @@ import java.time.LocalDate;
 			return utilisateur;
 		}
 		public void setUtilisateur(UtilisateurBo utilisateur) {
-			this.utilisateur = utilisateur;
+			ArticleVenduBo.utilisateur = utilisateur;
 		}
 		public CategorieBo getCategorie() {
 			return categorie;
 		}
 		public void setCategorie(CategorieBo categorie) {
-			this.categorie = categorie;
+			ArticleVenduBo.categorie = categorie;
 		}
 		public RetraitBo getRetrait() {
 			return retrait;
 		}
 		public void setRetrait(RetraitBo retrait) {
-			this.retrait = retrait;
+			ArticleVenduBo.retrait = retrait;
 		}
 		/* fin getters setters */
 
