@@ -17,7 +17,7 @@ public class UtilisateurDal {
     private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
     private static final String GET_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
     private static final String GET_BY_COURRIEL = "SELECT * FROM utilisateurs WHERE email=?";
-    private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_Postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
+    private static final String UPDATE = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? WHERE no_utilisateur=?";
     private static final String DELETE = "DELETE utilisateurs WHERE no_utilisateur=?";
 
     private static Logger logger = MonLogger.getLogger("UtilisateurDal");

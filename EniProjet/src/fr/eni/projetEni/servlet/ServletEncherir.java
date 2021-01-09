@@ -88,10 +88,14 @@ public class ServletEncherir extends HttpServlet {
 			enchere.setMontantEnchere(montant);
 			enchere.setNoArticle(article);
 			enchere.setNoUtilisateur(utilisateur);
-			enchere.setNoEnchere(3);
 
 			EnchereBll.insert(enchere);
+			System.out.println(article);
+			article.setPrixVente(montant);
+			System.out.println(article.getDateDebutEncheres());
 			ArticleVenduBll.updateArticle(article);
+			System.out.println(article);
+
 		} 
 		catch (Exception e) 
 		{
