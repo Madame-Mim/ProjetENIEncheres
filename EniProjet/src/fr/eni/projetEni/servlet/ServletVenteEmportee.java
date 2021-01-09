@@ -1,7 +1,6 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +29,9 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ArticleVenduBo article = ArticleVenduBll.getById(7);
+			int id = Integer.parseInt(request.getParameter("idarticle"));
+
+			ArticleVenduBo article = ArticleVenduBll.getById(id);
 			request.setAttribute("article", article);
 			
 			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
@@ -50,10 +51,10 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	//	int id = Integer.parseInt(session.getAttribute("session").toString());
+		int id = Integer.parseInt(session.getAttribute("session").toString());
 		try {
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
-			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(4);
+			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id);
 			int montant = Integer.parseInt(request.getParameter("credit"));
 			int creditActuel = utilisateurACrediter.getCredit();
 			int nouveauCredit = creditActuel+montant;
@@ -61,8 +62,10 @@ public class ServletVenteEmportee extends HttpServlet {
 			
 			utilisateurAmodifie.update(utilisateurACrediter);
 			
+			int idArticle = Integer.parseInt(request.getParameter("idarticle"));
+
 			ArticleVenduBll articleAModifie = new ArticleVenduBll();
-			ArticleVenduBo articleRetire = ArticleVenduBll.getById(7);
+			ArticleVenduBo articleRetire = ArticleVenduBll.getById(idArticle);
 			articleRetire.setRetraitEffectue(true);
 			System.out.println(articleRetire);
 			articleAModifie.updateArticle(articleRetire);

@@ -2,8 +2,6 @@ package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,14 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
-import fr.eni.projetEni.bll.CategorieBll;
 import fr.eni.projetEni.bll.EnchereBll;
-import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
-import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.EnchereBo;
-import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
@@ -45,10 +39,10 @@ public class ServletEncherir extends HttpServlet {
         else
         {
         	*/
-	//	int id = Integer.parseInt(request.getParameter("idarticle"));
+		int id = Integer.parseInt(request.getParameter("idarticle"));
 
 			try {
-				ArticleVenduBo article = ArticleVenduBll.getById(7);
+				ArticleVenduBo article = ArticleVenduBll.getById(id);
 				request.setAttribute("article", article);
 				
 				
@@ -74,15 +68,16 @@ public class ServletEncherir extends HttpServlet {
 		try 
 		{
 			HttpSession session = request.getSession();
-			int montant= Integer.parseInt(request.getParameter("enchere"));
-			UtilisateurBo utilisateur = UtilisateurBll.get(5);
-			//int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+
+			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
 			
 			int no_article=Integer.parseInt(request.getParameter("id"));
 			ArticleVenduBo article = ArticleVenduBll.getById(no_article);
 			
 			LocalDate date = LocalDate.now();	
-			
+			int montant= Integer.parseInt(request.getParameter("enchere"));
+
 			EnchereBo enchere = new EnchereBo();
 			enchere.setDateEnchere(date);
 			enchere.setMontantEnchere(montant);

@@ -18,6 +18,13 @@ div
 	float:left;
 	background-color: white;
 	color: black;
-	text-decoration: none;
 }
 
+.submitEncherir
+{
+	height: 50px;
+	width:130px;
+	box-shadow: 5px 5px black;
+	background-color: white;
+	color: black;
+}]
