@@ -52,25 +52,24 @@ public class ServletVenteEmportee extends HttpServlet {
 		HttpSession session = request.getSession();
 	//	int id = Integer.parseInt(session.getAttribute("session").toString());
 		try {
+			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
 			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(4);
-			System.out.println(utilisateurACrediter);
-
 			int montant = Integer.parseInt(request.getParameter("credit"));
-			System.out.println("montant : "+montant);
-
 			int creditActuel = utilisateurACrediter.getCredit();
-			System.out.println("credit actuel : "+creditActuel);
-
 			int nouveauCredit = creditActuel+montant;
-			System.out.println("nouveau credit : "+nouveauCredit);
-
-			utilisateurACrediter.setCredit(montant);
-			System.out.println(utilisateurACrediter);
+			utilisateurACrediter.setCredit(nouveauCredit);
 			
-			UtilisateurBll.update(utilisateurACrediter);
+			utilisateurAmodifie.update(utilisateurACrediter);
+			
+			ArticleVenduBll articleAModifie = new ArticleVenduBll();
+			ArticleVenduBo articleRetire = ArticleVenduBll.getById(7);
+			articleRetire.setRetraitEffectue(true);
+			System.out.println(articleRetire);
+			articleAModifie.updateArticle(articleRetire);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		
 		
 		
 	//	UtilisateurBll.update(utilisateurACrediter);
