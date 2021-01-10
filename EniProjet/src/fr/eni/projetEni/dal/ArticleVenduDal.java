@@ -28,7 +28,7 @@ public class ArticleVenduDal {
       /* %request.getparameter("recherche")% */ 
     
     
-    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, retrait_effectue= ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? WHERE no_article = ?";
+    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, retrait_effectue=? WHERE no_article = ?";
     private static final String DELETE="DELETE ARTICLES_VENDUS WHERE no_article = ?";
 	
     private static Logger logger = MonLogger.getLogger("ArticleVenduDal");

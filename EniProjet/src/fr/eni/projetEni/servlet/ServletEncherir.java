@@ -21,7 +21,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 /**
  * Servlet implementation class ServletEncherir
  */
-@WebServlet("/encherir")
+@WebServlet("/VenteEnCours")
 public class ServletEncherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,6 +47,7 @@ public class ServletEncherir extends HttpServlet {
 				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
 				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+				request.setAttribute("utilisateur", utilisateur);
 
 				
 				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
@@ -107,20 +108,20 @@ public class ServletEncherir extends HttpServlet {
 			int nouveauCredit = creditActuel-montant;
 			utilisateur.setCredit(nouveauCredit);
 			utilisateurAmodifie.update(utilisateur);
-
+/*
 			//insertion de la nouvelle enchère
 			enchere.setDateEnchere(date);
 			enchere.setMontantEnchere(montant);
 			enchere.setNoArticle(article);
 			enchere.setNoUtilisateur(utilisateur);
 			EnchereBll.insert(enchere);
-			
+*/
 			//Modification du prix de vente dans la table article
-
+			
 			article.setPrixVente(montant);
-			System.out.println(montant);
+
 			articleAModifie.updateArticle(article);
-			System.out.println(article);
+
 		} 
 		catch (Exception e) 
 		{

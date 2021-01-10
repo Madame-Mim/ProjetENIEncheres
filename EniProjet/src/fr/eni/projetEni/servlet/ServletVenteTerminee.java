@@ -21,7 +21,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
  * Servlet implementation class ServletVenteEmportee
  */
 @WebServlet("/VenteTerminee")
-public class ServletVenteEmportee extends HttpServlet {
+public class ServletVenteTerminee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
 	/**
@@ -29,9 +29,9 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//int id = Integer.parseInt(request.getParameter("idarticle"));
+			int id = Integer.parseInt(request.getParameter("idarticle"));
 
-			ArticleVenduBo article = ArticleVenduBll.getById(12);
+			ArticleVenduBo article = ArticleVenduBll.getById(id);
 			request.setAttribute("article", article);
 			
 			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
@@ -51,6 +51,8 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+	     session.setAttribute("session", 5);
+
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 		try {
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
@@ -72,6 +74,24 @@ public class ServletVenteEmportee extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		
+		try {
+			int id2 = Integer.parseInt(request.getParameter("idarticle"));
+			ArticleVenduBo article;
 
+			article = ArticleVenduBll.getById(id2);
+			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
+			request.setAttribute("enchere", enchere);
+			request.setAttribute("article", article);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		 //le forward envoi l'affichage à la jsp
+	    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
+	    rd.forward(request, response);
+		}
 }
