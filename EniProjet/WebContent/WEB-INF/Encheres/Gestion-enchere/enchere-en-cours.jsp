@@ -30,7 +30,7 @@
 		<br>
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
-		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${enchere.montant_enchere} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>
+		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${artcile.prixVente} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>
 		</c:if>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6">${article.miseAPrix} points</div>
