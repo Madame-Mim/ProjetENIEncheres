@@ -19,6 +19,7 @@ public class EnchereDal {
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
     private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
+    private static final String GET_MAX_BY_IDARTICLE="SELECT * FROM Encheres WHERE montant_enchere =(SELECT MAX(montant_enchere) FROM Encheres WHERE no_article=?)";
     private static final String GET_ALL="SELECT * FROM Encheres";
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? WHERE no_enchere=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
@@ -95,6 +96,34 @@ public class EnchereDal {
         catch (Exception ex)
         {
             logger.severe("Erreur dans la méthode getByIdArticle(int noArticle) avec noArticle ="+ noArticle +"- erreur : "+ex.getMessage());
+        }
+        return resultat;
+	}
+    
+    public static EnchereBo getMaxByIdArticle(int noArticle)
+    {
+    	EnchereBo resultat=null;
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(GET_MAX_BY_IDARTICLE);
+            requete.setInt(1,noArticle);
+            ResultSet rs =  requete.executeQuery();
+
+            while(rs.next()) {
+                 resultat = new EnchereBo();
+            	 resultat.setNoEnchere(rs.getInt("no_enchere"));
+                 resultat.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+                 resultat.setMontantEnchere(rs.getInt("montant_enchere"));
+                 
+                 ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
+                 resultat.setNoArticle(article);      
+                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
+                 resultat.setNoUtilisateur(utilisateur);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.severe("Erreur dans la méthode getMaxByIdArticle(int noArticle) avec noArticle ="+ noArticle +"- erreur : "+ex.getMessage());
         }
         return resultat;
 	}

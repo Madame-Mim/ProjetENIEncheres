@@ -42,8 +42,8 @@ public class ServletEncherir extends HttpServlet {
 
 			try {
 			    HttpSession session = request.getSession();
-				int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
-
+			     session.setAttribute("session", 5);
+			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
 				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
@@ -59,7 +59,7 @@ public class ServletEncherir extends HttpServlet {
 			}
 	        
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Enchere-en-cours.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
         rd.forward(request, response);
         }
 	//}
@@ -71,10 +71,11 @@ public class ServletEncherir extends HttpServlet {
 		try 
 		{
 			HttpSession session = request.getSession();
+		     session.setAttribute("session", 5);
+
 			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
-			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
 			
 			int no_article=Integer.parseInt(request.getParameter("id"));
 			
@@ -85,24 +86,41 @@ public class ServletEncherir extends HttpServlet {
 			int montant= Integer.parseInt(request.getParameter("enchere"));
 
 			EnchereBo enchere = new EnchereBo();
-			enchere.setDateEnchere(date);
-			enchere.setMontantEnchere(montant);
-			enchere.setNoArticle(article);
-			enchere.setNoUtilisateur(utilisateur);
-
-			EnchereBll.insert(enchere);
-			System.out.println(article);
-			article.setPrixVente(montant);
-			System.out.println(article.getDateDebutEncheres());
-			articleAModifie.updateArticle(article);
-			System.out.println(article);
 			
+			//Remboursement points de la meilleur enchere actuelle
+			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article);
+	
+			UtilisateurBo utilisateurARembourse = enchere.getNoUtilisateur();
+			if(utilisateurARembourse != null)
+			{
+			int creditActuell = utilisateurARembourse.getCredit();
+			int nouveauCreditt = creditActuell+meilleurEnchere.getMontantEnchere();
+			utilisateurARembourse.setCredit(nouveauCreditt);
+			
+			utilisateurAmodifie.update(utilisateurARembourse);
+			}
+			
+			//Retrait des points du nouvel enchérisseur
+			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+
 			int creditActuel = utilisateur.getCredit();
 			int nouveauCredit = creditActuel-montant;
 			utilisateur.setCredit(nouveauCredit);
 			utilisateurAmodifie.update(utilisateur);
 
+			//insertion de la nouvelle enchère
+			enchere.setDateEnchere(date);
+			enchere.setMontantEnchere(montant);
+			enchere.setNoArticle(article);
+			enchere.setNoUtilisateur(utilisateur);
+			EnchereBll.insert(enchere);
+			
+			//Modification du prix de vente dans la table article
 
+			article.setPrixVente(montant);
+			System.out.println(montant);
+			articleAModifie.updateArticle(article);
+			System.out.println(article);
 		} 
 		catch (Exception e) 
 		{
@@ -111,7 +129,7 @@ public class ServletEncherir extends HttpServlet {
 		
 	
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Enchere-en-cours.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
         rd.forward(request, response);
 		
 }

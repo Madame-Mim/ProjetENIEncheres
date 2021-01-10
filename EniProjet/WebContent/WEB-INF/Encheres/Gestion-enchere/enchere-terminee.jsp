@@ -30,7 +30,9 @@
 		<div class="col-xs-offset-2 col-xs-4">Description : </div><div class=" col-xs-6">${article.description}</div>
 		<br>
 		<c:if test="${article.prixVente ==0}" >
-		Personne n'a enchéri sur ce produit.
+		<br>
+		<div class="col-xs-offset-2 col-xs-10"><strong>Personne n'a enchéri sur ce produit.</strong></div>
+		<br>
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
 		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${article.prixVente} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>

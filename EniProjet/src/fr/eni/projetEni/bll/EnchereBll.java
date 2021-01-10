@@ -39,6 +39,17 @@ public class EnchereBll
         return EnchereDal.getByIdArticle(noArticle);
 
     }
+    
+    public static EnchereBo getMaxByIdArticle(int noArticle) throws Exception
+    {
+        if(noArticle<=0)
+        {
+            throw new Exception("Id incorrect");
+        }
+        return EnchereDal.getMaxByIdArticle(noArticle);
+
+    }
+    
     public static List<EnchereBo> get()
     {
         return EnchereDal.get();

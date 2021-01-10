@@ -29,9 +29,9 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int id = Integer.parseInt(request.getParameter("idarticle"));
+			//int id = Integer.parseInt(request.getParameter("idarticle"));
 
-			ArticleVenduBo article = ArticleVenduBll.getById(id);
+			ArticleVenduBo article = ArticleVenduBll.getById(12);
 			request.setAttribute("article", article);
 			
 			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
@@ -42,7 +42,7 @@ public class ServletVenteEmportee extends HttpServlet {
 		}
         
     //le forward envoi l'affichage à la jsp
-    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Vente-emportee.jsp");
+    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
     rd.forward(request, response);
     }
 //
@@ -72,10 +72,6 @@ public class ServletVenteEmportee extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
-		
-		
-	//	UtilisateurBll.update(utilisateurACrediter);
-	}
+		}
 
 }
