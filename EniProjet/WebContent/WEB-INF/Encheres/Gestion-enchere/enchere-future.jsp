@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="/WEB-INF/Include/header.html" %>	
+		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
 	
 	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">
@@ -24,10 +24,10 @@
 		<div class="col-xs-offset-2 col-xs-4"> Description : </div><div class="col-xs-6"> <textarea >${article.description}</textarea> </div>
 		<br>
 		
-		<% request.getAttribute("categorieListe"); %>
 		<div class="col-xs-offset-2 col-xs-4"> Catégorie :</div><div class="col-xs-6">	
-			<select name="categorie">		
-				<c:forEach var="v" items="${listeCategorie}">
+			<select name="categorie">	
+				<% request.getAttribute("categorieListe"); %>
+				<c:forEach var="v" items="${categorieListe}">
 	   				<option value="${v.libelle}">${v.libelle}</option>
 				</c:forEach>
 			</select>
