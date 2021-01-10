@@ -27,6 +27,8 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("do get");
+
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
@@ -59,7 +61,7 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		
+		System.out.println("do post");
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
@@ -73,8 +75,8 @@ public class ServletAccueil extends HttpServlet {
 		}
 		
 		
-		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
-	        rd.forward(request, response);
+		 // RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
+	       // rd.forward(request, response);
 	}
 
 }
