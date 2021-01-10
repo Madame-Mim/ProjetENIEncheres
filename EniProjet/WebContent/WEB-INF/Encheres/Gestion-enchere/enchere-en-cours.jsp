@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="/WEB-INF/Include/header.html" %>	
+		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
 	
 	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">

@@ -8,7 +8,7 @@
        <!--    <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />     url ?????? -->
 <title>ENI-Enchères</title>
 </head>
-<%@include file="/WEB-INF/Include/Logo.html" %>
+<%@include file="/WEB-INF/Include/logo.html" %>
 
 <body>
 
