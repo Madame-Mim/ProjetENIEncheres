@@ -59,8 +59,9 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		int id = Integer.parseInt(session.getAttribute("session").toString());
+		session.setAttribute("session", 5);
 
+		int id = Integer.parseInt(session.getAttribute("session").toString());
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
 
 		
@@ -78,15 +79,32 @@ public class ServletVenteFuture extends HttpServlet {
 
 			int prixBase = Integer.parseInt(request.getParameter("prix"));
 			int categorie =Integer.parseInt(request.getParameter("categorie"));
+			String rue = request.getParameter("rue");
+			String codePostal = request.getParameter("codepostal");
+			String ville = request.getParameter("ville");
 			
 			CategorieBo categorieVente = CategorieBll.get(categorie);
-//retrait à mettre en oeuvre RetraitBo retrait = RetraitBll.get(no_retrait)
-			UtilisateurBo utilisateur;
-			try {
-				utilisateur = UtilisateurBll.get(id);
-				ArticleVenduBo article = new ArticleVenduBo();
-				//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
-
+			RetraitBo retrait = RetraitBll.getRetrait(rue, codePostal, ville); //recuperation de l'adresse de retrait en bdd
+			
+			if(retrait == null) //si cette adresse n'existe pas alors :
+			{
+				try {
+					RetraitBll nouvelleadresse = new RetraitBll();
+					
+					RetraitBo newPlace = new RetraitBo();
+					
+					newPlace.setRue(rue);
+					newPlace.setCodePostal(codePostal);
+					newPlace.setVille(ville);
+					
+					nouvelleadresse.insert(newPlace); //enregistrement de la nouvelle adresse
+					
+				
+					UtilisateurBo utilisateur;
+			
+					utilisateur = UtilisateurBll.get(id);
+					ArticleVenduBo article = new ArticleVenduBo();
+				
 					article.setNoArticle(idArticle);
 					article.setNomArticle(nom);
 					article.setDescription(description);
@@ -96,9 +114,9 @@ public class ServletVenteFuture extends HttpServlet {
 					article.setPrixVente(0);
 					article.setCategorie(categorieVente);
 					article.setUtilisateur(utilisateur);
-//					article.setRetrait(retrait);
+					article.setRetrait(newPlace); //on set la nouvelle adresse enregistrée
 					try {
-						articleAModifie.updateArticle(article);
+						articleAModifie.updateArticle(article); //enregistrement de l'article
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -108,11 +126,42 @@ public class ServletVenteFuture extends HttpServlet {
 				e1.printStackTrace();
 			}
 
-			
+		} 
+			else
+			{
+				UtilisateurBo utilisateur;
+				
+				try {
+					utilisateur = UtilisateurBll.get(id);
+					ArticleVenduBo article = new ArticleVenduBo();
+					//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
+
+						article.setNoArticle(idArticle);
+						article.setNomArticle(nom);
+						article.setDescription(description);
+						article.setDateDebutEncheres(debutEnchere);
+						article.setDateFinEncheres(finEnchere);
+						article.setMiseAPrix(prixBase);
+						article.setPrixVente(0);
+						article.setCategorie(categorieVente);
+						article.setUtilisateur(utilisateur);
+						article.setRetrait(retrait);
+						try {
+							articleAModifie.updateArticle(article);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+				}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+		}
 		}
 		else if(request.getParameter("annulerModif")!=null)
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("/VenteEnCours");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 			rd.forward(request, response);
 		}
 		else if(request.getParameter("annulerVente")!=null)

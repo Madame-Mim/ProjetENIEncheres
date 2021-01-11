@@ -9,7 +9,7 @@ public class RetraitBll {
 	
 		 public static void insert(RetraitBo AdresseRetrait) throws Exception
 	 {
-		 if(AdresseRetrait.getRue().trim().equals("") & AdresseRetrait.getCodePostal().trim().equals("") & AdresseRetrait.getVille().trim().equals(""))
+		 if(AdresseRetrait.getRue().trim().equals("") || AdresseRetrait.getCodePostal().trim().equals("") || AdresseRetrait.getVille().trim().equals(""))
          {
 			 throw new Exception("Addresse non conforme");
          }

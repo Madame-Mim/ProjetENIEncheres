@@ -35,7 +35,7 @@
 		</div>
 		<div class="col-xs-offset-2 col-xs-4"> photo de l'article : </div><div class="col-xs-6"> <input type="file"> </div>
 		
-		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6"><input name="prix" type="number" value="${article.miseAPrix}" size=3></div>
+		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6"><input name="prix" type="number" value="${article.miseAPrix}" min=1 size=3></div>
 		<br>
 		<fmt:parseDate  value="${article.dateDebutEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
 		<fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd" var="debutDateEnchere" />
@@ -49,9 +49,9 @@
 		<div class="col-xs-offset-2 col-xs-10">
 		<fieldset>
 	      	<legend>Retrait</legend>
-			<span class="col-xs-6">Rue : </span><span class="col-xs-6"><input type="text" value="${article.retrait.getRue()}"></span>
-			<span class="col-xs-6">Code postal : </span> <span class="col-xs-6"> <input type="text" value="${article.retrait.getCodePostal()}" > </span>
-			<span class="col-xs-6">Ville : </span><span class="col-xs-6"> <input type="text" value="${article.retrait.getVille()}" ></span>
+			<span class="col-xs-6">Rue : </span><span class="col-xs-6"><input name="rue" type="text" value="${article.retrait.getRue()}"></span>
+			<span class="col-xs-6">Code postal : </span> <span class="col-xs-6"> <input name="codepostal" type="text" value="${article.retrait.getCodePostal()}" > </span>
+			<span class="col-xs-6">Ville : </span><span class="col-xs-6"> <input name="ville" type="text" value="${article.retrait.getVille()}" ></span>
 		</fieldset>
 		</div>
 		<br>
