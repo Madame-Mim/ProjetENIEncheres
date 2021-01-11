@@ -30,7 +30,7 @@
 		<br>
 		</c:if>
 		<c:if test="${article.prixVente !=0}">
-		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${artcile.prixVente} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>
+		<div class="col-xs-offset-2 col-xs-4">Meilleur offre : </div><div class="col-xs-6">${article.prixVente} points par <a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">${enchere.noUtilisateur.getPseudo()}</a></div>
 		</c:if>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6">${article.miseAPrix} points</div>
@@ -56,7 +56,7 @@
 		 <c:set var="enabled" value="disabled" scope="page" />
 		 </c:if>
 		<div class="col-xs-6">
-		<form action="<%=request.getContextPath()%>/encherir?id=${article.getNoArticle()}" method="post">
+		<form action="<%=request.getContextPath()%>/VenteEnCours?id=${article.getNoArticle()}" method="post">
 			<input  name="enchere" type="number" max="${article.utilisateur.getCredit()}" min="${proposition}" value="${proposition}" size=5 ${enabled}>
 			<input  class="submitEncherir" type="submit" value="Enchérir" ${enabled}>
 		</form>

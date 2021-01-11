@@ -108,15 +108,15 @@ public class ServletVenteEnCours extends HttpServlet {
 			int nouveauCredit = creditActuel-montant;
 			utilisateur.setCredit(nouveauCredit);
 			utilisateurAmodifie.update(utilisateur);
-/*
-			//insertion de la nouvelle enchère
+
+		//	insertion de la nouvelle enchère
 			enchere.setDateEnchere(date);
 			enchere.setMontantEnchere(montant);
 			enchere.setNoArticle(article);
 			enchere.setNoUtilisateur(utilisateur);
 			EnchereBll.insert(enchere);
-*/
-			//Modification du prix de vente dans la table article
+
+			// Modification du prix de vente dans la table article
 			
 			article.setPrixVente(montant);
 
