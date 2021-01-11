@@ -50,6 +50,8 @@ public class ServletModifierMonProfil extends HttpServlet {
 		session.getAttribute("session");
 		int id= Integer.parseInt(session.getAttribute("session").toString());
 		
+		//int credit = Integer.parseInt(session.getAttribute("credit").toString());
+		
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -75,7 +77,7 @@ public class ServletModifierMonProfil extends HttpServlet {
 		utilisateur.setCodePostal(codePostal);
 		utilisateur.setVille(ville);
 		utilisateur.setPassword(motdepasse);
-		utilisateur.setCredit(0);
+		//utilisateur.setCredit(credit);
 		utilisateur.setAdministrateur(admin);
 		utilisateur.setId(id);
 
@@ -95,4 +97,3 @@ public class ServletModifierMonProfil extends HttpServlet {
 	}
 }
 
-/* A faire : servlet supprimer mon compte */
