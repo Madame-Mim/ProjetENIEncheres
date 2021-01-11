@@ -3,12 +3,6 @@
   <display-name>ENI-ENCHERE</display-name>
   <welcome-file-list>
     <welcome-file>ServletAccueil</welcome-file>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <resource-ref>
     <description>ServerSQL Datasource</description>
