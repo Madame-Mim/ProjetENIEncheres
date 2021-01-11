@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="<c:url value="/CSS/inscription.css"/>" />
 <title>ENI-Enchères</title>
 </head>
-<%@include file="/WEB-INF/Include/Logo.html" %>
+<%@include file="/WEB-INF/Include/logo.html" %>
 <body>
 
 	<header>

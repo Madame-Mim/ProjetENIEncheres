@@ -15,7 +15,7 @@ import fr.eni.projetEni.utils.MonLogger;
 
 public class ArticleVenduDal {
  
-	private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?,?,?)";
     
     private static final String GET_BY_NOM="SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
@@ -28,7 +28,7 @@ public class ArticleVenduDal {
       /* %request.getparameter("recherche")% */ 
     
     
-    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ? WHERE no_article = ?";
+    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, retrait_effectue=? WHERE no_article = ?";
     private static final String DELETE="DELETE ARTICLES_VENDUS WHERE no_article = ?";
 	
     private static Logger logger = MonLogger.getLogger("ArticleVenduDal");
@@ -44,10 +44,11 @@ public class ArticleVenduDal {
             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
             rqt.setInt(5, articleVendu.getMiseAPrix());
             rqt.setInt(6, articleVendu.getPrixVente());
-            rqt.setInt(7, articleVendu.getUtilisateur().getId());
-            rqt.setInt(8, articleVendu.getCategorie().getNoCategorie());
-            rqt.setInt(9, articleVendu.getRetrait().getNoRetrait());
-            
+            rqt.setBoolean(7, articleVendu.isRetraitEffectue());
+            rqt.setInt(8, articleVendu.getUtilisateur().getId());
+            rqt.setInt(9, articleVendu.getCategorie().getNoCategorie());
+            rqt.setInt(10, articleVendu.getRetrait().getNoRetrait());
+
 
             rqt.executeUpdate();
             
@@ -79,6 +80,7 @@ public class ArticleVenduDal {
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
+                resultat.setRetraitEffectue(rs.getBoolean("retrait_effectue"));
 
                 UtilisateurBo vendeur = UtilisateurDal.getPseudo(rs.getString("Pseudo"));
                 
@@ -116,7 +118,8 @@ public class ArticleVenduDal {
                 article.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 article.setMiseAPrix(rs.getInt("prix_initial"));
                 article.setPrixVente(rs.getInt("prix_vente"));
-                
+                article.setRetraitEffectue(rs.getBoolean("retrait_effectue"));
+
                 UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 article.setUtilisateur(utilisateur);
                 
@@ -125,8 +128,7 @@ public class ArticleVenduDal {
                 
                 RetraitBo retrait = RetraitDal.get(rs.getInt("no_retrait"));
                 article.setRetrait(retrait);
-
-                
+  
                 liste.add(article);
             }
 
@@ -159,6 +161,7 @@ public class ArticleVenduDal {
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
+                resultat.setRetraitEffectue(rs.getBoolean("retrait_effectue"));
 
                 UtilisateurBo vendeur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 resultat.setUtilisateur(vendeur);
@@ -168,6 +171,7 @@ public class ArticleVenduDal {
                 
                 RetraitBo retrait = RetraitDal.get(rs.getInt("no_retrait"));
                 resultat.setRetrait(retrait);
+
 
             }
 
@@ -201,6 +205,7 @@ public class ArticleVenduDal {
                 resultat.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
                 resultat.setMiseAPrix(rs.getInt("prix_initial"));
                 resultat.setPrixVente(rs.getInt("prix_vente"));
+                resultat.setRetraitEffectue(rs.getBoolean("retrait_effectue"));
 
                 UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
                 resultat.setUtilisateur(vendeur);
@@ -223,18 +228,19 @@ public class ArticleVenduDal {
         try ( Connection cnx = ConnectionProvider.getConnection() ) 
         {
         	PreparedStatement rqt = cnx.prepareStatement(UPDATE);
-       	 	 rqt.setInt(1, articleVendu.getNoArticle());
-        	 rqt.setString(2, articleVendu.getNomArticle());
-             rqt.setString(3, articleVendu.getDescription());
-             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateDebutEncheres()));
-             rqt.setDate(5, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
-             rqt.setInt(6, articleVendu.getMiseAPrix());
-             rqt.setInt(7, articleVendu.getPrixVente());
-           
+        	 rqt.setString(1, articleVendu.getNomArticle());
+             rqt.setString(2, articleVendu.getDescription());
+             rqt.setDate(3, java.sql.Date.valueOf(articleVendu.getDateDebutEncheres()));
+             rqt.setDate(4, java.sql.Date.valueOf(articleVendu.getDateFinEncheres()));
+             rqt.setInt(5, articleVendu.getMiseAPrix());
+             rqt.setInt(6, articleVendu.getPrixVente());
+             rqt.setBoolean(7, articleVendu.isRetraitEffectue());
+       	 	 rqt.setInt(8, articleVendu.getNoArticle());
+
              rqt.executeUpdate();
 
         } catch (Exception ex ) {
-            logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
+           logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
         }
     }/* fin update */
 

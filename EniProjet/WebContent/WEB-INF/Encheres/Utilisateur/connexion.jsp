@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/connexion.css">
 <title>Se connecter</title>
 </head>
-<%@include file="/WEB-INF/Include/Logo.html" %>
+<%@include file="/WEB-INF/Include/logo.html" %>
 <body class="container-fluid col-xs-12">
 
 	<div class="clearfix"></div>

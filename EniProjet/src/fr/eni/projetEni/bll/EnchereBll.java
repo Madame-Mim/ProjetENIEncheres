@@ -39,9 +39,30 @@ public class EnchereBll
         return EnchereDal.getByIdArticle(noArticle);
 
     }
+    
+    public static EnchereBo getMaxByIdArticle(int noArticle) throws Exception
+    {
+        if(noArticle<=0)
+        {
+            throw new Exception("Id incorrect");
+        }
+        return EnchereDal.getMaxByIdArticle(noArticle);
+
+    }
+    
     public static List<EnchereBo> get()
     {
         return EnchereDal.get();
+
+    }
+    
+    public static List<EnchereBo> getbyutilisateur(int no_Utilisateur) throws Exception
+    {
+    	if(no_Utilisateur<=0)
+        {
+            throw new Exception("Vendeur incorrect");
+        }
+        return EnchereDal.getbyutilisateur(no_Utilisateur);
 
     }
     public static void update(EnchereBo enchere) throws Exception

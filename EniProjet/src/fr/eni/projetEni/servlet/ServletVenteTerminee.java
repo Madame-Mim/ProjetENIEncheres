@@ -1,7 +1,6 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,15 +21,17 @@ import fr.eni.projetEni.bo.UtilisateurBo;
  * Servlet implementation class ServletVenteEmportee
  */
 @WebServlet("/VenteTerminee")
-public class ServletVenteEmportee extends HttpServlet {
+public class ServletVenteTerminee extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			ArticleVenduBo article = ArticleVenduBll.getById(7);
+			int id = Integer.parseInt(request.getParameter("idarticle"));
+
+			ArticleVenduBo article = ArticleVenduBll.getById(id);
 			request.setAttribute("article", article);
 			
 			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
@@ -41,7 +42,7 @@ public class ServletVenteEmportee extends HttpServlet {
 		}
         
     //le forward envoi l'affichage à la jsp
-    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/Vente-emportee.jsp");
+    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
     rd.forward(request, response);
     }
 //
@@ -50,30 +51,47 @@ public class ServletVenteEmportee extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	//	int id = Integer.parseInt(session.getAttribute("session").toString());
+	     session.setAttribute("session", 5);
+
+		int id = Integer.parseInt(session.getAttribute("session").toString());
 		try {
-			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(4);
-			System.out.println(utilisateurACrediter);
-
+			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
+			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id);
 			int montant = Integer.parseInt(request.getParameter("credit"));
-			System.out.println("montant : "+montant);
-
 			int creditActuel = utilisateurACrediter.getCredit();
-			System.out.println("credit actuel : "+creditActuel);
-
 			int nouveauCredit = creditActuel+montant;
-			System.out.println("nouveau credit : "+nouveauCredit);
-
-			utilisateurACrediter.setCredit(montant);
-			System.out.println(utilisateurACrediter);
+			utilisateurACrediter.setCredit(nouveauCredit);
 			
-			UtilisateurBll.update(utilisateurACrediter);
+			utilisateurAmodifie.update(utilisateurACrediter);
+			
+			int idArticle = Integer.parseInt(request.getParameter("idarticle"));
+
+			ArticleVenduBll articleAModifie = new ArticleVenduBll();
+			ArticleVenduBo articleRetire = ArticleVenduBll.getById(idArticle);
+			articleRetire.setRetraitEffectue(true);
+			System.out.println(articleRetire);
+			articleAModifie.updateArticle(articleRetire);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		
-		
-	//	UtilisateurBll.update(utilisateurACrediter);
-	}
+		try {
+			int id2 = Integer.parseInt(request.getParameter("idarticle"));
+			ArticleVenduBo article;
 
+			article = ArticleVenduBll.getById(id2);
+			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
+			request.setAttribute("enchere", enchere);
+			request.setAttribute("article", article);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		 //le forward envoi l'affichage à la jsp
+	    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
+	    rd.forward(request, response);
+		}
 }

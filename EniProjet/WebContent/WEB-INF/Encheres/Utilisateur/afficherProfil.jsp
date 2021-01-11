@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/connexion.css">
 <title>Afficher profil</title>
 </head>
-<%@include file="/WEB-INF/Include/Logo.html" %>
+<%@include file="/WEB-INF/Include/logo.html" %>
 <body>
 
 

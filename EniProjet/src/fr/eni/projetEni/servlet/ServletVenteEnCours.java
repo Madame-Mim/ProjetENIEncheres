@@ -2,8 +2,6 @@ package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,28 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
-import fr.eni.projetEni.bll.CategorieBll;
 import fr.eni.projetEni.bll.EnchereBll;
-import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
-import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.EnchereBo;
-import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
  * Servlet implementation class ServletEncherir
  */
-@WebServlet("/encherir")
-public class ServletEncherir extends HttpServlet {
+@WebServlet("/VenteEnCours")
+public class ServletVenteEnCours extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // HttpSession session = request.getSession();
 		/*  
         if (session.getAttribute("session") == null )
         {
@@ -45,12 +38,17 @@ public class ServletEncherir extends HttpServlet {
         else
         {
         	*/
-	//	int id = Integer.parseInt(request.getParameter("idarticle"));
+		int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
 			try {
-				ArticleVenduBo article = ArticleVenduBll.getById(7);
+			    HttpSession session = request.getSession();
+			     session.setAttribute("session", 5);
+			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
-				
+				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+				request.setAttribute("utilisateur", utilisateur);
+
 				
 				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
@@ -62,7 +60,7 @@ public class ServletEncherir extends HttpServlet {
 			}
 	        
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
         rd.forward(request, response);
         }
 	//}
@@ -74,27 +72,55 @@ public class ServletEncherir extends HttpServlet {
 		try 
 		{
 			HttpSession session = request.getSession();
-			int montant= Integer.parseInt(request.getParameter("enchere"));
-			UtilisateurBo utilisateur = UtilisateurBll.get(5);
-			//int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+		     session.setAttribute("session", 5);
+
+			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+
+			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
 			
 			int no_article=Integer.parseInt(request.getParameter("id"));
+			
+			ArticleVenduBll articleAModifie = new ArticleVenduBll();
 			ArticleVenduBo article = ArticleVenduBll.getById(no_article);
 			
 			LocalDate date = LocalDate.now();	
-			
+			int montant= Integer.parseInt(request.getParameter("enchere"));
+
 			EnchereBo enchere = new EnchereBo();
+			
+			//Remboursement points de la meilleur enchere actuelle
+			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article);
+	
+			UtilisateurBo utilisateurARembourse = enchere.getNoUtilisateur();
+			if(utilisateurARembourse != null)
+			{
+			int creditActuell = utilisateurARembourse.getCredit();
+			int nouveauCreditt = creditActuell+meilleurEnchere.getMontantEnchere();
+			utilisateurARembourse.setCredit(nouveauCreditt);
+			
+			utilisateurAmodifie.update(utilisateurARembourse);
+			}
+			
+			//Retrait des points du nouvel enchérisseur
+			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+
+			int creditActuel = utilisateur.getCredit();
+			int nouveauCredit = creditActuel-montant;
+			utilisateur.setCredit(nouveauCredit);
+			utilisateurAmodifie.update(utilisateur);
+
+		//	insertion de la nouvelle enchère
 			enchere.setDateEnchere(date);
 			enchere.setMontantEnchere(montant);
 			enchere.setNoArticle(article);
 			enchere.setNoUtilisateur(utilisateur);
-
 			EnchereBll.insert(enchere);
-			System.out.println(article);
+
+			// Modification du prix de vente dans la table article
+			
 			article.setPrixVente(montant);
-			System.out.println(article.getDateDebutEncheres());
-			ArticleVenduBll.updateArticle(article);
-			System.out.println(article);
+
+			articleAModifie.updateArticle(article);
 
 		} 
 		catch (Exception e) 
@@ -104,7 +130,7 @@ public class ServletEncherir extends HttpServlet {
 		
 	
         //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/detail-Vente.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
         rd.forward(request, response);
 		
 }

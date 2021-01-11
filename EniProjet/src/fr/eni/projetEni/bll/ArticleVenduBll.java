@@ -1,5 +1,5 @@
 package fr.eni.projetEni.bll;
-
+//
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,9 +13,9 @@ import fr.eni.projetEni.dal.UtilisateurDal;
 
 public class ArticleVenduBll {
 	
-	public static ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo adresseRetrait)
+	public static ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente,  boolean retraitEffectue, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo adresseRetrait)
 	{
-		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, utilisateur, categorie , adresseRetrait);
+		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, retraitEffectue, utilisateur, categorie , adresseRetrait);
 		ArticleVenduDal.insertArticle(nouvelleVente);
 		return nouvelleVente;
 	}
