@@ -18,6 +18,7 @@ public class EnchereDal {
 	
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
+    private static final String GET_BY_UTILISATEUR="SELECT * FROM Encheres WHERE no_utilisateur=?";
     private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
     private static final String GET_MAX_BY_IDARTICLE="SELECT * FROM Encheres WHERE montant_enchere =(SELECT MAX(montant_enchere) FROM Encheres WHERE no_article=?)";
     private static final String GET_ALL="SELECT * FROM Encheres";
@@ -127,6 +128,37 @@ public class EnchereDal {
         }
         return resultat;
 	}
+    
+    public static List<EnchereBo> getbyutilisateur(int no_Utilisateur)
+    {
+        List<EnchereBo> listes = new ArrayList<>();
+        try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(GET_BY_UTILISATEUR);
+            requete.setInt(1,no_Utilisateur);
+            ResultSet rs = requete.executeQuery();
+
+            while(rs.next())
+            {
+            	EnchereBo enchere= new EnchereBo();
+            	enchere.setNoEnchere(rs.getInt("id"));
+            	enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+            	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+            	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
+                enchere.setNoUtilisateur(utilisateur);
+                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
+                enchere.setNoArticle(article);  
+            	listes.add(enchere);
+            	
+            }
+        }
+
+        catch (Exception ex)
+        {
+            logger.severe("Erreur dans la methode get() - erreur :" + ex.getMessage());
+        }
+        return listes;
+    }
     
     public static List<EnchereBo> get()
     {
