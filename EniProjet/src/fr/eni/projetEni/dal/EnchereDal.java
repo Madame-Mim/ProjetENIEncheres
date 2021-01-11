@@ -129,13 +129,14 @@ public class EnchereDal {
         return resultat;
 	}
     
-    public static List<EnchereBo> getbyutilisateur(int no_Utilisateur)
+    public static List<EnchereBo> getbyutilisateur(int vendeur)
     {
         List<EnchereBo> listes = new ArrayList<>();
+       
         try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(GET_BY_UTILISATEUR);
-            requete.setInt(1,no_Utilisateur);
+            requete.setInt(1,vendeur);
             ResultSet rs = requete.executeQuery();
 
             while(rs.next())
@@ -147,15 +148,17 @@ public class EnchereDal {
             	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 enchere.setNoUtilisateur(utilisateur);
                 ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
-                enchere.setNoArticle(article);  
-            	listes.add(enchere);
+                enchere.setNoArticle(article);
+                int utilisateurid=utilisateur.getId();
+                if(utilisateurid==vendeur) {
+            	listes.add(enchere);}
             	
             }
         }
 
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la methode get() - erreur :" + ex.getMessage());
+            logger.severe("Erreur dans la methode getbyutilisateur - erreur :" + ex.getMessage());
         }
         return listes;
     }
