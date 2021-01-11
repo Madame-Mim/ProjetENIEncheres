@@ -87,6 +87,7 @@ public class RetraitDal {
     	return listeRetraits;
     }
     
+    
     public static void update(RetraitBo AdresseRetrait)
     {
     	Connection cnx;
