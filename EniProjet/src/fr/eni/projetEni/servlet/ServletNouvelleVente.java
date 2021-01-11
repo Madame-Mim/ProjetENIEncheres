@@ -25,7 +25,8 @@ import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
-
+import fr.eni.projetEni.dal.RetraitDal;
+ 
 /** 
  * Servlet implementation class ServletNouvelleVente
  */
@@ -78,13 +79,17 @@ public class ServletNouvelleVente extends HttpServlet {
 		int prixVente = miseAPrixArticle;
 		//System.out.println("prixVente :" + miseAPrixArticle);
 	
-	UtilisateurBo utilisateur = new UtilisateurBo("BigBoss", "Durand", "Jean", "Jean.Durand@gmail.com", "0102030405", "18 rue Emile Zola", "44000", "Nantes", "lemeilleur", 0, false);
 	//Permet de récupérer l'id de l'utilisateur
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		session.setAttribute("session", 1);//a retirer juste là pour les test
-		session.getAttribute("session");
-		System.out.println(session.getAttribute("session"));
-		int utilisateurAttendu = session.getAttribute("session");*/
+		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
+		//System.out.println("id utilisateur : " + session.getAttribute("session"));
+		UtilisateurBo utilisateur = new UtilisateurBo();
+		try {
+			utilisateur = UtilisateurBll.get(idUtilisateur);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	//Permet de récupérer le noCategorie	
 		int noCategorie2 = Integer.parseInt(request.getParameter("categorieArticle"));
@@ -92,20 +97,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		CategorieBo noCat = CategorieBll.get(noCategorie2);
 		//System.out.println("noCat : " + noCat);
 		
-	//Permet de récupérer l'idRetrait
-			/*List<RetraitBo> listeRetraits = RetraitBll.get();
-			String rueRetrait = request.getParameter("rueRetrait");
-			int codePostalRetrait = Integer.parseInt(request.getParameter("codePostalRetrait"));
-			String villeRetrait = request.getParameter("villeRetrait");
-			
-			for(RetraitBo retrait : listeRetraits)
-			{
-				if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal()==codePostalRetrait & retrait.getVille().equals(villeRetrait))
-				{
-					int noRetrait = retrait.getNoRetrait();
-					System.out.println("Retrait numéro " + noRetrait);
-				}
-			}*/
+		
+		boolean retraitEffectue = false;
 		
 	
 		
@@ -114,41 +107,97 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		List<RetraitBo> listeRetraits = RetraitBll.get();
 		String rueRetrait = request.getParameter("rueRetrait");
-		System.out.println(rueRetrait);
 		String codePostalRetrait = request.getParameter("codePostalRetrait");
 		String villeRetrait = request.getParameter("villeRetrait");
 		
-		for(RetraitBo retrait : listeRetraits)
+		
+		/*for(RetraitBo retrait : listeRetraits)
 		{
 			
-			if(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait))
+			if((retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
 			{
 				int noRetrait = retrait.getNoRetrait();
 				System.out.println("Retrait numéro " + noRetrait);
-				RetraitBo jeCherche = RetraitBll.get(noRetrait);
-				System.out.println("jeCherche " + jeCherche);
+				RetraitBo RetraitParDefaut = RetraitBll.get(noRetrait);
+				System.out.println("RetraitParDefaut " + RetraitParDefaut);
 				
-				
+				//permet d'insérer une nouvelle vente
 				ArticleVenduBll articleVenduBll = new ArticleVenduBll();
-				//ArticleVenduBo nouvelleVenteReussie = articleVenduBll.ajouter(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, jeCherche);
+				ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo();
+				nouvelArticleVendu.setNomArticle(nomArticle);
+				nouvelArticleVendu.setDescription(descriptionArticle);
+				nouvelArticleVendu.setDateDebutEncheres(debutEncherelocalDate);
+				nouvelArticleVendu.setDateFinEncheres(debutEncherelocalDate);
+				nouvelArticleVendu.setMiseAPrix(miseAPrixArticle);
+				nouvelArticleVendu.setPrixVente(prixVente);
+				nouvelArticleVendu.setRetraitEffectue(retraitEffectue);
+				nouvelArticleVendu.setUtilisateur(utilisateur);
+				nouvelArticleVendu.setCategorie(noCat);
+				nouvelArticleVendu.setRetrait(RetraitParDefaut);
+				System.out.println(nouvelArticleVendu);
+
+				try {
+					articleVenduBll.insertArticle(nouvelArticleVendu);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+					
 				
-			//Sert si je passe par le method insert de Emilie
-				ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, utilisateur, noCat, jeCherche);
-				ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);
 			}else {
-				System.out.println("je prend pas d'infos");
+				System.out.println("pas bon");
 			}
 			
-		}
 		
 	
-	//insérer un article	
-		/*ArticleVenduBll articleVenduBll = new ArticleVenduBll();
-		ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo(nomArticle, descriptionArticle, debutEncherelocalDate, finEncherelocalDate, miseAPrixArticle, prixVente, session.getAttribute("session"), noCategorie2, noRetrait);
-		ArticleVenduBo nouvelleVente = articleVenduBll.insertArticle(nouvelArticleVendu);*/
+			
+		
+		if(!(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
+		{
+		//crée un nouveau retrait
+				RetraitBo nouvelleAdresseRetrait = new RetraitBo();
+				nouvelleAdresseRetrait.setRue(rueRetrait);
+				nouvelleAdresseRetrait.setCodePostal(codePostalRetrait);
+				nouvelleAdresseRetrait.setVille(villeRetrait);
+				System.out.println("nouvelleAdresseRetrait : " + nouvelleAdresseRetrait);
+				try {
+					RetraitBll.insert(nouvelleAdresseRetrait);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+			
+				
+		}  
+			*/
+		
+		
+		RetraitBo retraitEssai1000= new RetraitBo();
+		retraitEssai1000.setRue(rueRetrait);
+		retraitEssai1000.setCodePostal(codePostalRetrait);
+		retraitEssai1000.setVille(villeRetrait);
+		try {
+			RetraitBll.getRetrait(retraitEssai1000);
+			System.out.println();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+			
+			
+				
+				
+			
+		
+			
+			
+			
+			
+		
+		
+	
 	
 				
 
 	
-}
+	}
 }//ne pas toucher

@@ -6,6 +6,14 @@ import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.dal.RetraitDal;
 
 public class RetraitBll {
+	
+	public static RetraitBo getRetrait(RetraitBo retrait) throws Exception {
+	    {
+	    	return RetraitDal.getRetrait(retrait);
+	    }
+	   }
+	
+	
 
 	 public static void insert(RetraitBo AdresseRetrait) throws Exception
 	 {

@@ -13,12 +13,6 @@ import fr.eni.projetEni.dal.UtilisateurDal;
 
 public class ArticleVenduBll {
 	
-	public static ArticleVenduBo ajouter(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix, int prixVente,  boolean retraitEffectue, UtilisateurBo utilisateur, CategorieBo categorie, RetraitBo adresseRetrait)
-	{
-		ArticleVenduBo nouvelleVente = new ArticleVenduBo(nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, retraitEffectue, utilisateur, categorie , adresseRetrait);
-		ArticleVenduDal.insertArticle(nouvelleVente);
-		return nouvelleVente;
-	}
 
 	
 	public static void insertArticle(ArticleVenduBo article )throws Exception {

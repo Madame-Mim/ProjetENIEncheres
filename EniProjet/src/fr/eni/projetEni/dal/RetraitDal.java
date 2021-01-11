@@ -14,6 +14,7 @@ public class RetraitDal {
 
 	private static final String INSERT = "INSERT INTO RETRAITS VALUES (?,?,?)";
     private static final String GET_BY_ID = "SELECT * FROM RETRAITS WHERE no_retrait = ?";
+    private static final String GET_RETRAIT = "SELECT * FROM RETRAITS WHERE rue = ? AND code_postal = ? AND ville = ?";
     private static final String GET_ALL = "SELECT * FROM RETRAITS";
     private static final String UPDATE = "UPDATE RETRAITS SET rue = ?, code_postal = ? , ville = ? WHERE no_retrait = ?";
     private static final String DELETE = "DELETE RETRAITS WHERE no_retrait = ?";
@@ -60,6 +61,35 @@ public class RetraitDal {
     	return resultat;
     }
     
+    public static RetraitBo  getRetrait(RetraitBo retrait)
+    {
+    	RetraitBo resultat = null;
+    	Connection cnx;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
+			//requete.setString(1, rue);
+			//requete.setString(2, codePostal);
+			//requete.setString(3, ville);
+	    	ResultSet rs = requete.executeQuery();
+	    	
+	    	if(rs.next())
+	    	{
+	    		resultat = new RetraitBo();
+	    		resultat.setNoRetrait(rs.getInt("no_retrait"));
+	    		resultat.setRue(rs.getString("rue"));
+	    		resultat.setCodePostal(rs.getString("code_postal"));
+	    		resultat.setVille(rs.getString("ville"));
+	    	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    	return resultat;
+    }
+    	
+    	
+    
     
     public static List<RetraitBo>  get()
     {
@@ -86,6 +116,7 @@ public class RetraitDal {
     	
     	return listeRetraits;
     }
+    
     
     public static void update(RetraitBo AdresseRetrait)
     {

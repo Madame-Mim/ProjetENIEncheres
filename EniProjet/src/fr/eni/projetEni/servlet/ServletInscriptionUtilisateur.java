@@ -84,11 +84,10 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 					
 					//recupere l'ID
 				
-				UtilisateurBo utilisateurRecupere;
 				try {
-					utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
+					utilisateur = UtilisateurBll.getPseudo(pseudo);
 					HttpSession session = request.getSession();
-					int id =utilisateurRecupere.getId();
+					int id = utilisateur.getId();
 
 					session.setAttribute("session", id);
 				} catch (Exception e1) {
