@@ -68,7 +68,7 @@ public class ServletAccueil extends HttpServlet {
 		
 		
 		String filtreNom = request.getParameter("recherche");
-		String categorieselection = request.getParameter("categorieselection");
+		String categorieselection = request.getParameter("categorie");
 		
 		
 		

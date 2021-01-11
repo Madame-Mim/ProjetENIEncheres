@@ -71,7 +71,7 @@ placeholder="${recherchearticle}" size= "10"/>
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
 <c:set var = "recherchearticle" value ="${filtreNom}" />
-${test2}
+
 
     <c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
     
