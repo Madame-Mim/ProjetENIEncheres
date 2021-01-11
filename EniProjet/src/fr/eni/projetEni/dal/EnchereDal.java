@@ -147,7 +147,7 @@ public class EnchereDal {
             	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
             	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 enchere.setNoUtilisateur(utilisateur);
-                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
+                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
                 enchere.setNoArticle(article);
                 listes.add(enchere);
             	
@@ -175,9 +175,9 @@ public class EnchereDal {
             	enchere.setNoEnchere(rs.getInt("no_enchere"));
             	enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
             	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
-            	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
+            	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 enchere.setNoUtilisateur(utilisateur);
-                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
+                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
                 enchere.setNoArticle(article);  
             	listes.add(enchere);
             	
