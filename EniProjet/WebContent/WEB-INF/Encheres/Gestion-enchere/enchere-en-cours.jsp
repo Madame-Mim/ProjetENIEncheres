@@ -15,7 +15,7 @@
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
 	
-	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">
+	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
 		<h2>Détail vente</h2>
 		
 		<h3>${article.nomArticle}</h3>

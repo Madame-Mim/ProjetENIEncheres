@@ -43,7 +43,7 @@ public class ServletVenteFuture extends HttpServlet {
 			ArticleVenduBo article = ArticleVenduBll.getById(id);
 			request.setAttribute("article", article);
 
-			List<CategorieBo> listeCategorie = CategorieBll.get();
+			List<CategorieBo> listeCategorie = CategorieBll.getallM1();
 			request.setAttribute("categorieListe", listeCategorie);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,7 +59,6 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("session", 5);
 
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));

@@ -15,7 +15,7 @@
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
 	
-	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">
+	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
 		
 		<c:if test="${article.prixVente ==0}" >
 		<h2> Cette vente s'est achevée sans enchère.</h2>
@@ -53,8 +53,8 @@
 		
 		<br><br><br>
 		<c:if test="${article.retraitEffectue== false }">
-		<form class="col-xs-offset-1 col-xs-5" action="<%=request.getContextPath()%>/VenteTerminee?idarticle=${article.noArticle}" method="post">
-			<input class="submit" type="submit" value="Retrait effectué">
+		<form class="col-xs-offset-2 col-xs-4" action="<%=request.getContextPath()%>/VenteTerminee?idarticle=${article.noArticle}" method="post">
+			<input class="submitCourt" type="submit" value="Retrait effectué">
 			<input name="credit" type="hidden" value="${article.prixVente}">
 		</form>
 		</c:if>
