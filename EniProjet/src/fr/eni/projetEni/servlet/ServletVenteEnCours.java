@@ -78,7 +78,7 @@ public class ServletVenteEnCours extends HttpServlet {
 
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
 			
-			int no_article=Integer.parseInt(request.getParameter("id"));
+			int no_article=Integer.parseInt(request.getParameter("idarticle"));
 			
 			ArticleVenduBll articleAModifie = new ArticleVenduBll();
 			ArticleVenduBo article = ArticleVenduBll.getById(no_article);
