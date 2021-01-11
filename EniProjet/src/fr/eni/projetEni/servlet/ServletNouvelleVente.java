@@ -25,7 +25,7 @@ import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
-
+ 
 /** 
  * Servlet implementation class ServletNouvelleVente
  */
