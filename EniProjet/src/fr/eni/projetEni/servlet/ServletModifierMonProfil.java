@@ -46,11 +46,26 @@ public class ServletModifierMonProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//HttpSession session = request.getSession();
+		//session.getAttribute("session");
+		//int id= Integer.parseInt(session.getAttribute("session").toString());
+		
+		//int credit = Integer.parseInt(session.getAttribute("credit").toString());
+		
 		HttpSession session = request.getSession();
 		session.getAttribute("session");
 		int id= Integer.parseInt(session.getAttribute("session").toString());
+	
+		try {
+			UtilisateurBo utilisateur = UtilisateurBll.get(id);
+			request.setAttribute("utilisateur", utilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//int credit = Integer.parseInt(session.getAttribute("credit").toString());
+		
+		
 		
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
@@ -90,6 +105,8 @@ public class ServletModifierMonProfil extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				
 		
         this.getServletContext().getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/afficherProfil.jsp").forward( request, response );
 	
