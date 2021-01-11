@@ -109,6 +109,14 @@ public class ServletAccueil extends HttpServlet {
 		else 
 		{
 			int vendeur= Integer.parseInt(session.getAttribute("session").toString());	
+		
+			String choixAV = request.getParameter("choixAV");
+			String choixA1 = request.getParameter("choixA1");
+			String choixA2 = request.getParameter("choixA2");
+			String choixA3 = request.getParameter("choixA3");
+			String choixV1 = request.getParameter("choixV1");
+			String choixV2 = request.getParameter("choixV2");
+			String choixV3 = request.getParameter("choixV3");
 			
 		List<EnchereBo> malisteEncheres = new ArrayList<>();
 		
@@ -121,6 +129,7 @@ public class ServletAccueil extends HttpServlet {
 	        request.setAttribute("filtreNom", filtreNom);  
 	        request.setAttribute("categorieselection", categorieselection);
 	        request.setAttribute("vendeur", vendeur);
+	        request.setAttribute("choixAV", choixAV);
             
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
