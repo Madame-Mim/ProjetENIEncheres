@@ -40,9 +40,9 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6">${article.miseAPrix} points</div>
 		<br>
-		<c:set var="finDateEnchere" value="<%=new java.util.Date()%>" />
-		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><fmt:formatDate pattern="dd/MM/yyyy" value="${finDateEnchere}"/></div>
-		<br>
+		<fmt:parseDate  value="${article.dateFinEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+		<fmt:formatDate value="${parsedDate}" type="date" pattern="dd/MM/yyyy" var="finDateEnchere" />	
+		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6">${finDateEnchere}</div>
 		<div class="col-xs-offset-2 col-xs-4">Retrait : </div><div class="col-xs-6">${article.retrait.getRue()}</div>
 		<br>
 		<div class="col-xs-offset-6 col-xs-6">${article.retrait.getCodePostal()}	${article.retrait.getVille()}</div>

@@ -59,9 +59,10 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	     session.setAttribute("session", 5);
-
 		int id = Integer.parseInt(session.getAttribute("session").toString());
+
+		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
+
 		
 		if(request.getParameter("enregistrer")!=null)
 		{
@@ -79,38 +80,61 @@ public class ServletVenteFuture extends HttpServlet {
 			int categorie =Integer.parseInt(request.getParameter("categorie"));
 			
 			CategorieBo categorieVente = CategorieBll.get(categorie);
-		//pourquoi try catch ?	UtilisateurBo utilisateur = UtilisateurBll.get(id);
-			ArticleVenduBo article = new ArticleVenduBo();
-		//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
-
-			article.setNoArticle(idArticle);
-			article.setNomArticle(nom);
-			article.setDescription(description);
-			article.setDateDebutEncheres(debutEnchere);
-			article.setDateFinEncheres(finEnchere);
-			article.setMiseAPrix(prixBase);
-			article.setCategorie(categorieVente);
-		//	article.setUtilisateur(utilisateur);
+//retrait à mettre en oeuvre RetraitBo retrait = RetraitBll.get(no_retrait)
+			UtilisateurBo utilisateur;
 			try {
-				articleAModifie.updateArticle(article);
-			} catch (Exception e) {
+				utilisateur = UtilisateurBll.get(id);
+				ArticleVenduBo article = new ArticleVenduBo();
+				//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
+
+					article.setNoArticle(idArticle);
+					article.setNomArticle(nom);
+					article.setDescription(description);
+					article.setDateDebutEncheres(debutEnchere);
+					article.setDateFinEncheres(finEnchere);
+					article.setMiseAPrix(prixBase);
+					article.setPrixVente(0);
+					article.setCategorie(categorieVente);
+					article.setUtilisateur(utilisateur);
+//					article.setRetrait(retrait);
+					try {
+						articleAModifie.updateArticle(article);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
+
 			
 		}
 		else if(request.getParameter("annulerModif")!=null)
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp?idarticle=id");
+			RequestDispatcher rd = request.getRequestDispatcher("/VenteEnCours");
 			rd.forward(request, response);
 		}
 		else if(request.getParameter("annulerVente")!=null)
 		{
-			System.out.println("delete les données");
+				ArticleVenduBll articleBll = new ArticleVenduBll();
+				ArticleVenduBo articleADelete;
+				try {
+					System.out.println(idarticle);
+					articleADelete = ArticleVenduBll.getById(idarticle);
+					System.out.println(articleADelete);
+					articleBll.deleteArticle(idarticle);
+					
+					   RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					   rd.forward(request, response);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 		}
 		
 		 //le forward envoi l'affichage à la jsp
-	   // RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future?idarticle=id.jsp");
-	  //  rd.forward(request, response);
+
 		}
 }

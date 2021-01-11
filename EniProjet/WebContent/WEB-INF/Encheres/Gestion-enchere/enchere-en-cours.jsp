@@ -14,7 +14,7 @@
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	//
+	
 	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">
 		<h2>Détail vente</h2>
 		
@@ -35,8 +35,9 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6">${article.miseAPrix} points</div>
 		<br>
-		<c:set var="finDateEnchere"  value="${article.dateFinEncheres}" />
-		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><fmt:parseDate pattern="dd/MM/yyyy" value="${finDateEnchere}"/></div>
+		<fmt:parseDate  value="${article.dateFinEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+		<fmt:formatDate value="${parsedDate}" type="date" pattern="dd/MM/yyyy" var="finDateEnchere" />	
+		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6">${finDateEnchere}</div>
 		<br>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Retrait : </div><div class="col-xs-6">${article.retrait.getRue()}</div>

@@ -67,7 +67,7 @@ public class ArticleVenduBll {
 	    }
 	    }
 	    public static void deleteArticle(int id)throws Exception {
-	        if(UtilisateurDal.get(id)==null)
+	        if(ArticleVenduDal.getById(id)==null)
 	        {
 	            throw new Exception("Cet article n'existe pas ou a déjà été supprimé de la base de données.");
 	        }

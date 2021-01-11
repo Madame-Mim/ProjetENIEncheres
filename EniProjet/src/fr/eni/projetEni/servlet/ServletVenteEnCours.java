@@ -42,7 +42,6 @@ public class ServletVenteEnCours extends HttpServlet {
 
 			try {
 			    HttpSession session = request.getSession();
-			     session.setAttribute("session", 5);
 			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
@@ -72,7 +71,6 @@ public class ServletVenteEnCours extends HttpServlet {
 		try 
 		{
 			HttpSession session = request.getSession();
-		     session.setAttribute("session", 5);
 
 			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 

@@ -37,10 +37,12 @@
 		
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6"><input name="prix" type="number" value="${article.miseAPrix}" size=3></div>
 		<br>
-		<c:set var="debutDateEnchere" value="<%=new java.util.Date()%>" />
+		<fmt:parseDate  value="${article.dateDebutEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+		<fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd" var="debutDateEnchere" />
 		<div class="col-xs-offset-2 col-xs-4">Début de l'enchère : </div><div class="col-xs-6"><input name="dateDebut" type="date" value="${debutDateEnchere}"/></div>
 		<br>
-		<c:set var="finDateEnchere" value="<%=new java.util.Date()%>" />
+		<fmt:parseDate  value="${article.dateFinEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
+		<fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd" var="finDateEnchere" />	
 		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><input name="dateFin" type="date" value="${finDateEnchere}"/></div>
 		<br><br><br>
 		

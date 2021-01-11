@@ -51,9 +51,9 @@ public class ServletVenteTerminee extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	     session.setAttribute("session", 5);
 
 		int id = Integer.parseInt(session.getAttribute("session").toString());
+
 		try {
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
 			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id);
