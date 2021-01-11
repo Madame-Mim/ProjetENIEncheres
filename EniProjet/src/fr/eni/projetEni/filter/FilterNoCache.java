@@ -1,4 +1,4 @@
-package fr.eni.projetEni.servlet;
+package fr.eni.projetEni.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;

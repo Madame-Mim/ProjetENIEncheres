@@ -19,7 +19,7 @@
   
   <filter>
        <filter-name>NoCacheFilter</filter-name>
-       <filter-class>fr.eni.projetEni.servlet.FilterNoCache</filter-class>
+       <filter-class>fr.eni.projetEni.filter.FilterNoCache</filter-class>
     </filter>
    
     <!-- déclaration des URL interceptées par ce filtre -->

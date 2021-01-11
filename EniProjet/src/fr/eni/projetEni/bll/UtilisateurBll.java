@@ -21,6 +21,18 @@ public class UtilisateurBll {
         {
             throw new Exception("Le pseudo ne peut contenir que des lettres et des chiffres");
         }
+    	if(!utilisateur.getEmail().matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b"))
+        {
+            throw new Exception("L'adresse courriel n'est pas dans un format valide");
+        }
+    	if(UtilisateurBll.getCourriel(utilisateur.getEmail().trim().toLowerCase())!=null)
+        {
+            throw new Exception("L'adresse courriel existe déjà");
+        }
+    	if(UtilisateurBll.getPseudo(utilisateur.getPseudo().trim().toLowerCase())!=null)
+        {
+            throw new Exception("Le pseudo existe déjà");
+        }
     	
     	UtilisateurDal.insert(utilisateur);
     }
