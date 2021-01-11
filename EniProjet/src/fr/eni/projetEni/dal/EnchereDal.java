@@ -142,16 +142,14 @@ public class EnchereDal {
             while(rs.next())
             {
             	EnchereBo enchere= new EnchereBo();
-            	enchere.setNoEnchere(rs.getInt("id"));
+            	enchere.setNoEnchere(rs.getInt("no_enchere"));
             	enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
             	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
             	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 enchere.setNoUtilisateur(utilisateur);
                 ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("id"));
                 enchere.setNoArticle(article);
-                int utilisateurid=utilisateur.getId();
-                if(utilisateurid==vendeur) {
-            	listes.add(enchere);}
+                listes.add(enchere);
             	
             }
         }
@@ -174,7 +172,7 @@ public class EnchereDal {
             while(rs.next())
             {
             	EnchereBo enchere= new EnchereBo();
-            	enchere.setNoEnchere(rs.getInt("id"));
+            	enchere.setNoEnchere(rs.getInt("no_enchere"));
             	enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
             	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
             	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("id"));
