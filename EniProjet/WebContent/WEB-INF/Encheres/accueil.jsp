@@ -65,7 +65,12 @@ placeholder="le nom de l'article contient" size= "40"/>
 <br/>
 <input type="submit" value="RECHERCHER">
 <br/>
-<p><%=request.getAttribute("affichageListeEnchere") %> </p>
+liste enchere
+<p><%=request.getAttribute("listeArticles") %> </p>
+vendeur
+<p>${vendeur}</p>
+ma liste enchere
+<p><%=request.getAttribute("malisteEncheres") %> </p>
 <br/>
 <p>
 	<ul>
