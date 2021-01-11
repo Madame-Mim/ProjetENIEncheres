@@ -25,6 +25,7 @@ import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
+import fr.eni.projetEni.dal.RetraitDal;
  
 /** 
  * Servlet implementation class ServletNouvelleVente
@@ -109,7 +110,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		String codePostalRetrait = request.getParameter("codePostalRetrait");
 		String villeRetrait = request.getParameter("villeRetrait");
 		
-		for(RetraitBo retrait : listeRetraits)
+		
+		/*for(RetraitBo retrait : listeRetraits)
 		{
 			
 			if((retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
@@ -141,13 +143,18 @@ public class ServletNouvelleVente extends HttpServlet {
 				}
 					
 				
-			}else
+			}else {
 				System.out.println("pas bon");
 			}
+			
 		
 	
-				//crée un nouveau retrait
-				/*RetraitBo nouvelleAdresseRetrait = new RetraitBo();
+			
+		
+		if(!(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
+		{
+		//crée un nouveau retrait
+				RetraitBo nouvelleAdresseRetrait = new RetraitBo();
 				nouvelleAdresseRetrait.setRue(rueRetrait);
 				nouvelleAdresseRetrait.setCodePostal(codePostalRetrait);
 				nouvelleAdresseRetrait.setVille(villeRetrait);
@@ -156,11 +163,24 @@ public class ServletNouvelleVente extends HttpServlet {
 					RetraitBll.insert(nouvelleAdresseRetrait);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}*/
+				}
+		}
 			
 				
-				  
-				
+		}  
+			*/
+		
+		
+		RetraitBo retraitEssai1000= new RetraitBo();
+		retraitEssai1000.setRue(rueRetrait);
+		retraitEssai1000.setCodePostal(codePostalRetrait);
+		retraitEssai1000.setVille(villeRetrait);
+		try {
+			RetraitBll.getRetrait(retraitEssai1000);
+			System.out.println();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 				
 			
 			
