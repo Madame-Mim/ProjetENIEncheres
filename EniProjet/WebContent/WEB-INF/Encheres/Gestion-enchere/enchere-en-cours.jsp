@@ -35,8 +35,8 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Mise à prix : </div> <div class="col-xs-6">${article.miseAPrix} points</div>
 		<br>
-		<c:set var="finDateEnchere" value="<%=new java.util.Date()%>" />
-		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><fmt:formatDate pattern="dd/MM/yyyy" value="${finDateEnchere}"/></div>
+		<c:set var="finDateEnchere"  value="${article.dateFinEncheres}" />
+		<div class="col-xs-offset-2 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><fmt:parseDate pattern="dd/MM/yyyy" value="${finDateEnchere}"/></div>
 		<br>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Retrait : </div><div class="col-xs-6">${article.retrait.getRue()}</div>
@@ -56,7 +56,7 @@
 		 <c:set var="enabled" value="disabled" scope="page" />
 		 </c:if>
 		<div class="col-xs-6">
-		<form action="<%=request.getContextPath()%>/VenteEnCours?id=${article.getNoArticle()}" method="post">
+		<form action="<%=request.getContextPath()%>/VenteEnCours?idarticle=${article.getNoArticle()}" method="post">
 			<input  name="enchere" type="number" max="${article.utilisateur.getCredit()}" min="${proposition}" value="${proposition}" size=5 ${enabled}>
 			<input  class="submitEncherir" type="submit" value="Enchérir" ${enabled}>
 		</form>
