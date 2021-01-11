@@ -29,12 +29,14 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("do get");
 
+				
+				
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
-		
+			
 	        request.setAttribute("listeArticles", listeArticles);
-                /**System.out.println(article)**/;
+	       
             
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -60,23 +62,47 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+
 		System.out.println("do post");
+			
+		
+		
+		String filtreNom = request.getParameter("recherche");
+		String categorieselection = request.getParameter("categorieselection");
+		
+		
+		
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		try {
 			listeArticles= ArticleVenduBll.getAll();
-			
-	           request.setAttribute("listeArticles", listeArticles);
-               /** System.out.println(article);**/
-           
+		
+	        request.setAttribute("listeArticles", listeArticles);
+	        request.setAttribute("filtreNom", filtreNom);  
+	        request.setAttribute("categorieselection", categorieselection);
+	        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		HttpSession session = request.getSession();
+
+		if(session.getAttribute("session")==null){
+			
+		  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueilvisiteur.jsp");
+	        rd.forward(request, response);}
+		else
+		{
+			
+			
+			  RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
+		        rd.forward(request, response);}
+		
+	}
+
 		
 		 // RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueil.jsp");
 	       // rd.forward(request, response);
-	}
+	
 
 }
