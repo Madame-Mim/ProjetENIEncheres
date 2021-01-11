@@ -14,7 +14,7 @@
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	
+	//
 	<section class="row col-xs-offset-4 col-xs-5 col-xs-offset-4">
 		<h2>Détail vente</h2>
 		
