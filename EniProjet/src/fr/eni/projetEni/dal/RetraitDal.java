@@ -60,17 +60,16 @@ public class RetraitDal {
     	
     	return resultat;
     }
-    
-    public static RetraitBo  getRetrait(RetraitBo retrait)
+    public static RetraitBo getRetrait(String rue, String codePostal, String ville)
     {
     	RetraitBo resultat = null;
     	Connection cnx;
 		try {
 			cnx = ConnectionProvider.getConnection();
-			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
-			//requete.setString(1, rue);
-			//requete.setString(2, codePostal);
-			//requete.setString(3, ville);
+			PreparedStatement requete = cnx.prepareStatement(GET_RETRAIT);
+			requete.setString(1, rue);
+			requete.setString(2, codePostal);
+			requete.setString(3, ville);
 	    	ResultSet rs = requete.executeQuery();
 	    	
 	    	if(rs.next())
@@ -87,9 +86,6 @@ public class RetraitDal {
     	
     	return resultat;
     }
-    	
-    	
-    
     
     public static List<RetraitBo>  get()
     {

@@ -7,15 +7,7 @@ import fr.eni.projetEni.dal.RetraitDal;
 
 public class RetraitBll {
 	
-	public static RetraitBo getRetrait(RetraitBo retrait) throws Exception {
-	    {
-	    	return RetraitDal.getRetrait(retrait);
-	    }
-	   }
-	
-	
-
-	 public static void insert(RetraitBo AdresseRetrait) throws Exception
+		 public static void insert(RetraitBo AdresseRetrait) throws Exception
 	 {
 		 if(AdresseRetrait.getRue().trim().equals("") & AdresseRetrait.getCodePostal().trim().equals("") & AdresseRetrait.getVille().trim().equals(""))
          {
@@ -27,6 +19,11 @@ public class RetraitBll {
 	 public static RetraitBo get(int no_retrait)
 	 {
 		 return RetraitDal.get(no_retrait);
+	 }
+	 
+	 public static RetraitBo getRetrait(String rue, String codePostal, String ville)
+	 {
+		 return RetraitDal.getRetrait(rue, codePostal, ville);
 	 }
 	 
 	public static List<RetraitBo>  get()
