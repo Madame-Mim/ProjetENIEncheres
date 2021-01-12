@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/venteterminee.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/venteRemportee.css">
 <title>Vente Remportée</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	
 	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
 		
-		 <h3>Vous avez remporté la vente</h3>
+		 <div class="title"><h3>Vous avez remporté la vente</h3></div>
 		 <br>
 
 		<h3>${article.nomArticle}</h3>
@@ -40,7 +40,7 @@
 			<div class="clearfix"></div>
 		
 		<br><br><br>
-		<a href="/EniProjet/ServletAccueil">Retour Accueil</a> 
+		<div class="back"><a href="/EniProjet/ServletAccueil">Retour Accueil</a> </div>
 	</section>
 	
 </body>
