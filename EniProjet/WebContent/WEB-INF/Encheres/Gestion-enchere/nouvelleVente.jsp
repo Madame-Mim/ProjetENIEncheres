@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/nouvelleVente.css">
 <title>Nouvelle vente</title>
 </head>
 <body>
@@ -21,7 +22,7 @@
 			</div>
 			<br>
 			<div>
-				<label>Decsription : </label><input type="text" name="descriptionArticle" required>
+				<label>Decsription : </label><input type="textarea" name="descriptionArticle" required>
 			</div>
 			<br>
 			<div>
@@ -50,21 +51,22 @@
 			</div>
 			<br>
 				
-			<div>
+			<div class="retrait">
 				<label>Retrait</label>
-				<div>
+			
+				<div class="detailRetrait">
 				<label>Rue : </label><input type="text" name="rueRetrait">
 				<br>
 				<label>Code postal : </label><input type="text" name="codePostalRetrait">
 				<br>
 				<label>Ville: </label><input type="text" name="villeRetrait">
 				</div>
-			
 			</div>
+			
 			<br>
 			<div>
 				<input type="submit" value="Enregister">
-				<input type="submit" value="Annuler">
+				<a href="/EniProjet/ServletAccueil">Annuler</a>
 			</div>
 		</form>
 	</section>	

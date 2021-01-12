@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+
+div
+{
+	font-size: 1.5em;
+}
+
+.back 
+{
+	height: 90px;
+	width:130px;
+	box-shadow:  5px 5px black;
+	background-color: white;
+	color: black;
+	border: 1px solid black;	
+}
+
+*
+{
+	text-align: center;
+}
+
+header
+{
+	text-align: left;
+}
+
+.retrait
+{
+	border: solid 1px black;
+	padding: 5px;
+}
+
+.detailRetrait
+{
+	font-size: 1em;
+}
+
+input, textarea, select, button {
+  width : 150px;
+  margin: 0;
+  box-sizing: border-box;
+}
