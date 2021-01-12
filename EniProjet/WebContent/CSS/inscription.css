@@ -1,0 +1,34 @@
+@charset "UTF-8";
+/* Général ------------------------------------------------------------------------------------- */
+
+body, p, legend, label, input {
+    font: normal 8pt verdana, helvetica, sans-serif;
+}
+
+fieldset {
+    padding: 10px;
+    border: 1px #008000 solid;
+}
+
+legend {
+    font-weight: bold;
+    color: #008000;
+}
+
+/* Forms --------------------------------------------------------------------------------------- */
+
+form label {
+    float: left;
+    width: 200px;
+    margin: 3px 0px 0px 0px;
+}
+
+
+.container {
+	display: inline-block;
+}
+
+
+
+
+
