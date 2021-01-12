@@ -8,10 +8,10 @@
 </head>
 <body>
 	<header>
-		<%@ include file="/WEB-INF/Include/header.html" %>	
+		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
 	<section>
-		<h1>Nouvelle vente</h1>
+		<div class=title><h1>Nouvelle vente</h1></div>
 	
 		<form method="post" action="/EniProjet/ServletNouvelleVente">
 			

@@ -23,4 +23,16 @@
        <filter-name>NoCacheFilter</filter-name>
        <url-pattern>/Gestion-enchere/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+       <filter-name>NoCacheFilter</filter-name>
+       <url-pattern>/Utilisateur/afficherProfil.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+       <filter-name>NoCacheFilter</filter-name>
+       <url-pattern>/Utilisateur/modifierMonProfil.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+       <filter-name>NoCacheFilter</filter-name>
+       <url-pattern>/accueil.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

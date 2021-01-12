@@ -12,14 +12,20 @@
 <title>ENI-Encheres</title>
 
 </head>
-<h1> Liste des enchères</h1>
+
+<body>
+
+<header>
+		<%@ include file="/WEB-INF/Include/header.html" %>
+</header>
+<h1> Liste des enchères</h1>	
 
 
-<c:set var = "recherchearticle" value ="le nom de l'article contient" />
+<c:set var = "recherchearticle" value ="${namerecherche}" />
 <form method="post" action="<%=request.getContextPath()%>/ServletAccueil">
 <label for="recherchearticle">Filtres</label>
 <input type="text" name="recherche" 
-placeholder="${recherchearticle}" size= "10"/>
+placeholder="${recherchearticle}" size= "40"/>
 <br/>
 
 
@@ -38,58 +44,58 @@ placeholder="${recherchearticle}" size= "10"/>
 <br/>
 
 
-<fieldset>
+
 
 <div class="choixAV">
 <input checked type="radio" id="achat" name="choixAV" value="achat">
 <label for="achat">Achats</label><br>
-<fieldset>
+
 <input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
 <label for="achat">enchères ouverte</label><br>
 <input type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
 <label for="achat">mes enchères en cours</label><br>
 <input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
 <label for="achat">mes enchères remportés</label><br>
-	</fieldset>
+
 <input type="radio" id="vente" name="choixAV" value="vente">
 <label for="vente">Mes ventes</label><br>
-	<fieldset>
+
 <input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
 <label for="achat">mes ventes en cours</label><br>
 <input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute">
 <label for="achat">ventes non debutées</label><br>
 <input type="checkbox" id="choixV3" name="choixV3" value="ventetermine">
 <label for="achat">ventes terminées</label><br>
-	</fieldset>
+
 </div>
-</fieldset>
+
 
 
 <input type="submit" value="RECHERCHER">
 </form>
 
 <br/>
-liste enchere
+<!--
 <p><%=request.getAttribute("listeArticles") %> </p>
 vendeur
 <p>${vendeur}</p>
 ma liste enchere
 <p><%=request.getAttribute("malisteEncheres") %> </p>
-<br/>
+<br/>-->
 <p>
 	<ul>
-<c:set	var ="choixA1" value ="default" />	
+
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
 <c:set var = "recherchearticle" value ="${filtreNom}" />
 <c:set var ="vendeur" value ="${vendeur}" />
-<c:set var ="choixAV" value ="${choixAV}" />${choixAV}
-<c:set	var ="choixA1" value ="${choixA1}" />${choixA1}
-<c:set	var ="choixA2" value ="${choixA2}" />${choixA2}
-<c:set	var ="choixA3" value ="${choixA3}" />${choixA3}
-<c:set	var ="choixV1" value ="${choixV1}" />${choixV1}
-<c:set	var ="choixV2" value ="${choixV2}" />${choixV2}
-<c:set	var ="choixV3" value ="${choixV3}" />${choixV3}
+<c:set var ="choixAV" value ="${choixAV}" />
+<c:set	var ="choixA1" value ="${choixA1}" />
+<c:set	var ="choixA2" value ="${choixA2}" />
+<c:set	var ="choixA3" value ="${choixA3}" />
+<c:set	var ="choixV1" value ="${choixV1}" />
+<c:set	var ="choixV2" value ="${choixV2}" />
+<c:set	var ="choixV3" value ="${choixV3}" />
 	
 	
 <c:forEach var="v" items="${listeArticles}">
@@ -194,7 +200,7 @@ ma liste enchere
 		<c:if test="${now1.time gt finEnchere.time}">
 		<c:if test="${meilleurEnchere eq maMeilleurEnchere}">
 		<div class="bloc">
-			<div class="entetebloc">Mes enchere remportées</div>
+			<div class="entetebloc">Mes enchères remportées</div>
 			<li>${t.noArticle.nomArticle}</li>
 			<li>${t.noArticle.prixVente}</li>
 			<li>${t.noArticle.dateFinEncheres}</li>
