@@ -52,38 +52,30 @@ public class ServletNouvelleVente extends HttpServlet {
 		System.out.println("ServletNouvelleVente - doPost");
 		
 		String nomArticle = request.getParameter("nomArticle");
-		//System.out.println("nomArticle :" + nomArticle);
 		
 		String descriptionArticle = request.getParameter("descriptionArticle");
-		//System.out.println("descriptionArticle :" + descriptionArticle);
 		
 	//Permet de récupérer la date de début d'enchère en String et de la convertir en LocalDate
 		String debutEnchere = request.getParameter("debutEnchere");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
 		LocalDate debutEncherelocalDate = LocalDate.parse(debutEnchere,formatter);
-		//System.out.println("Début enchère : " + debutEncherelocalDate);
 		
 		
 	//Permet de récupérer la date de fin d'enchère en String et de la convertir en LocalDate
 		String finEnchere = request.getParameter("finEnchere");
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
-		LocalDate finEncherelocalDate = LocalDate.parse(finEnchere,formatter);
-		//System.out.println("fin enchère : " + finEncherelocalDate);
-		
+		LocalDate finEncherelocalDate = LocalDate.parse(finEnchere,formatter2);
 				
 		int miseAPrixArticle = Integer.parseInt(request.getParameter("miseAPrixArticle"));
-		//System.out.println("miseAPrixArticle :" + miseAPrixArticle);
 		
 		int prixVente = miseAPrixArticle;
-		//System.out.println("prixVente :" + miseAPrixArticle);
 	
 	//Permet de récupérer l'id de l'utilisateur
 		HttpSession session = request.getSession();
 		session.setAttribute("session", 1);//a retirer juste là pour les test
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
-		//System.out.println("id utilisateur : " + session.getAttribute("session"));
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		try {
 			utilisateur = UtilisateurBll.get(idUtilisateur);
@@ -92,10 +84,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 	//Permet de récupérer le noCategorie	
-		int noCategorie2 = Integer.parseInt(request.getParameter("categorieArticle"));
-		//System.out.println("nocategorie liste deroulante :" + noCategorie2);
-		CategorieBo noCat = CategorieBll.get(noCategorie2);
-		//System.out.println("noCat : " + noCat);
+		int noCategorie = Integer.parseInt(request.getParameter("categorieArticle"));
+		CategorieBo CategorieNouvelArticle = CategorieBll.get(noCategorie);
 		
 		
 		boolean retraitEffectue = false;
@@ -103,23 +93,27 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 		
 		//Récupérer et le noRetrait et le noCategorie et l'insérer dans la method insert
-		
-		
-		List<RetraitBo> listeRetraits = RetraitBll.get();
 		String rueRetrait = request.getParameter("rueRetrait");
 		String codePostalRetrait = request.getParameter("codePostalRetrait");
 		String villeRetrait = request.getParameter("villeRetrait");
+
 		
+		RetraitBo retrait = RetraitBll.getRetrait(rueRetrait, codePostalRetrait, villeRetrait); //recuperation de l'adresse de retrait en bdd
 		
-		/*for(RetraitBo retrait : listeRetraits)
+		if(retrait == null) //si cette adresse n'existe pas alors :
 		{
+			try {
+				RetraitBll nouvelleAdresse = new RetraitBll();
+				
+				RetraitBo newRetrait = new RetraitBo();
+				
+				newRetrait.setRue(rueRetrait);
+				newRetrait.setCodePostal(codePostalRetrait);
+				newRetrait.setVille(villeRetrait);
+				
+				nouvelleAdresse.insert(newRetrait); //enregistrement de la nouvelle adresse
+				
 			
-			if((retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
-			{
-				int noRetrait = retrait.getNoRetrait();
-				System.out.println("Retrait numéro " + noRetrait);
-				RetraitBo RetraitParDefaut = RetraitBll.get(noRetrait);
-				System.out.println("RetraitParDefaut " + RetraitParDefaut);
 				
 				//permet d'insérer une nouvelle vente
 				ArticleVenduBll articleVenduBll = new ArticleVenduBll();
@@ -127,77 +121,56 @@ public class ServletNouvelleVente extends HttpServlet {
 				nouvelArticleVendu.setNomArticle(nomArticle);
 				nouvelArticleVendu.setDescription(descriptionArticle);
 				nouvelArticleVendu.setDateDebutEncheres(debutEncherelocalDate);
-				nouvelArticleVendu.setDateFinEncheres(debutEncherelocalDate);
+				nouvelArticleVendu.setDateFinEncheres(finEncherelocalDate);
 				nouvelArticleVendu.setMiseAPrix(miseAPrixArticle);
 				nouvelArticleVendu.setPrixVente(prixVente);
 				nouvelArticleVendu.setRetraitEffectue(retraitEffectue);
 				nouvelArticleVendu.setUtilisateur(utilisateur);
-				nouvelArticleVendu.setCategorie(noCat);
-				nouvelArticleVendu.setRetrait(RetraitParDefaut);
-				System.out.println(nouvelArticleVendu);
+				nouvelArticleVendu.setCategorie(CategorieNouvelArticle);
+				nouvelArticleVendu.setRetrait(newRetrait);
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-					
-				
-			}else {
-				System.out.println("pas bon");
-			}
-			
-		
-	
-			
-		
-		if(!(retrait.getRue().equals(rueRetrait) & retrait.getCodePostal().equals(codePostalRetrait) & retrait.getVille().equals(villeRetrait)))
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+	} 
+		else
 		{
-		//crée un nouveau retrait
-				RetraitBo nouvelleAdresseRetrait = new RetraitBo();
-				nouvelleAdresseRetrait.setRue(rueRetrait);
-				nouvelleAdresseRetrait.setCodePostal(codePostalRetrait);
-				nouvelleAdresseRetrait.setVille(villeRetrait);
-				System.out.println("nouvelleAdresseRetrait : " + nouvelleAdresseRetrait);
+			
+			try {
+				ArticleVenduBo article = new ArticleVenduBo();
+				//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
+
+				//permet d'insérer une nouvelle vente
+				ArticleVenduBll articleVenduBll = new ArticleVenduBll();
+				ArticleVenduBo nouvelArticleVendu = new ArticleVenduBo();
+				nouvelArticleVendu.setNomArticle(nomArticle);
+				nouvelArticleVendu.setDescription(descriptionArticle);
+				nouvelArticleVendu.setDateDebutEncheres(debutEncherelocalDate);
+				nouvelArticleVendu.setDateFinEncheres(finEncherelocalDate);
+				nouvelArticleVendu.setMiseAPrix(miseAPrixArticle);
+				nouvelArticleVendu.setPrixVente(prixVente);
+				nouvelArticleVendu.setRetraitEffectue(retraitEffectue);
+				nouvelArticleVendu.setUtilisateur(utilisateur);
+				nouvelArticleVendu.setCategorie(CategorieNouvelArticle);
+				nouvelArticleVendu.setRetrait(retrait);
+
 				try {
-					RetraitBll.insert(nouvelleAdresseRetrait);
+					articleVenduBll.insertArticle(nouvelArticleVendu);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		}
+			}catch (Exception e) {
+				e.printStackTrace();
+			} 
 			
-				
-		}  
-			*/
-		
-		
-		RetraitBo retraitEssai1000= new RetraitBo();
-		retraitEssai1000.setRue(rueRetrait);
-		retraitEssai1000.setCodePostal(codePostalRetrait);
-		retraitEssai1000.setVille(villeRetrait);
-		try {
-			RetraitBll.getRetrait(retraitEssai1000);
-			System.out.println();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-				
-			
-			
-				
-				
-			
-		
-			
-			
-			
-			
-		
-		
-	
-	
-				
-
-	
 	}
+
+	}
+	
 }//ne pas toucher
