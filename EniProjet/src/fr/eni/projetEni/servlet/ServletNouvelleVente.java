@@ -38,7 +38,7 @@ public class ServletNouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ServletNouvelleVente - doGet");
+
 		List<CategorieBo> listeCategorie = CategorieBll.getallM1();
 		request.setAttribute("categorieListe", listeCategorie);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
@@ -51,7 +51,6 @@ public class ServletNouvelleVente extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ServletNouvelleVente - doPost");
 		
 		String nomArticle = request.getParameter("nomArticle");
 		

@@ -20,3 +20,7 @@ div
 	border: 1px solid black;	
 }
 
+#upload
+{
+	display: none;
+}
