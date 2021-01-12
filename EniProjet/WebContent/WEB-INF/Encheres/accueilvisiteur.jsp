@@ -21,22 +21,22 @@
 	
 <h1> Liste des enchères</h1>
 
-<c:set var = "recherchearticle" value ="le nom de l'article contient" />
+<c:set var = "recherchearticle" value ="${namerecherche}" />
 <form method="post" action="<%=request.getContextPath()%>/ServletAccueil">
 <label for="recherchearticle">Filtres</label>
 <input type="text" name="recherche" 
-placeholder="${recherchearticle}" size= "10"/>
+placeholder="${recherchearticle}" size= "40"/>
 <br/>
 
-
+<c:set var = "test2" value ="${categorieselection}" />
 <br/>
 <label for="categorie">Catégorie : </label>
 <select name="categorie" size="1">
-<option value="" selected="selected">Toutes</option>
-<option value="1">Informatique</option>
-<option value="2">Ameublement</option>
-<option value="3">Vêtement</option>
-<option value="4">Sport et Loisirs</option>
+<c:forEach items="${listeCategorie}" var="categ" varStatus="loop">
+    <option value="${loop.index}">
+        <option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>
+        
+    </c:forEach>
 </select>
 <input type="submit" value="RECHERCHER">
 </form>
@@ -47,13 +47,6 @@ placeholder="${recherchearticle}" size= "10"/>
 <br/>
 <br/>
 
-
-
-
-	
-
-
-	
 	<ul>
 		<c:forEach var="v" items="${listeArticles}">
 		
