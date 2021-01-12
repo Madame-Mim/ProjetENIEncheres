@@ -75,6 +75,12 @@ public class EnchereBll
         EnchereDal.update(enchere);
     }   
     
+    public static void updateAll(EnchereBo enchere) throws Exception
+    {
+    	    	
+        EnchereDal.updateAll(enchere);
+    }   
+    
     public static void delete(int id) throws Exception
     {
         if(id<=0)
