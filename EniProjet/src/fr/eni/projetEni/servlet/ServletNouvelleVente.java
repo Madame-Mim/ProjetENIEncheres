@@ -39,6 +39,8 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletNouvelleVente - doGet");
+		List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+		request.setAttribute("categorieListe", listeCategorie);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
 		rd.forward(request, response);
 		

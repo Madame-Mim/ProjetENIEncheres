@@ -14,7 +14,6 @@
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	
 	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
 		
 		<c:if test="${article.prixVente ==0}" >

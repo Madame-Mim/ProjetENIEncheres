@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.EnchereBll;
@@ -51,7 +52,6 @@ public class ServletVenteTerminee extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 
 		try {

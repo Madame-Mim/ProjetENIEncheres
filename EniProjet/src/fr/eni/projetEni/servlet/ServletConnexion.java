@@ -39,7 +39,7 @@ public class ServletConnexion extends HttpServlet {
 		String pseudo = request.getParameter("pseudo");
 		String password = request.getParameter("password");
 		boolean checkSiEmail = Pattern.matches("\\b[\\w.%+-]+@[a-zA-Z\\d.-]+\\.[A-Za-z]{2,4}\\b", pseudo) ;
-			
+			System.out.println(pseudo+" "+ password);
 		if(checkSiEmail==true)
 		{
 			try 

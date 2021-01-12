@@ -14,7 +14,7 @@
 	<section>
 		<div class=title><h1>Nouvelle vente</h1></div>
 	
-		<form method="post" action="/EniProjet/ServletNouvelleVente">
+		<form method="post" action="/EniProjet/ServletNouvelleVente" enctype="multipart/form-data">
 			
 			
 			<div>
@@ -25,18 +25,20 @@
 				<label>Decsription : </label><input type="textarea" name="descriptionArticle" required>
 			</div>
 			<br>
-			<div>
-				<label>Catégorie </label><select name="categorieArticle" required>
-				<option value=2>Informatique</option>
-				<option value=3>Ameublement</option>
-				<option value=4>Vêtement</option>
-				<option value=5>Sport&Loisirs</option>
-				</select>
-			</div>
+			<div class="col-xs-offset-1 col-xs-4"> Catégorie :</div>
+				<div class="col-xs-6">	
+					<select name="categorie">	
+						<% request.getAttribute("categorieListe"); %>
+						<c:forEach var="v" items="${categorieListe}">
+			   				<option value="${v.noCategorie}">${v.libelle}</option>
+						</c:forEach>
+					</select>
+				</div>
 			<br>
-			<div>
-				<label>Photo de l'article </label><input type="button" value="UPLOADER">
-			</div>
+			<div class="clearfix"></div>
+			<br>
+			
+			<div class="col-xs-offset-1 col-xs-4"> photo de l'article : </div><div class="col-xs-6"><label class="submit" for="upload">uploader</label> <input id="upload" type="file"> </div>
 			<br>
 			<div>
 				<label>Mise à prix : </label><input type="number" name="miseAPrixArticle" min="5" max="1000" step="5" required>

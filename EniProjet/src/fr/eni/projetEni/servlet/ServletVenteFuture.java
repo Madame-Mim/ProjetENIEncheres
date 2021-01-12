@@ -59,6 +59,7 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.setAttribute("session", 2);
 
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
@@ -87,7 +88,8 @@ public class ServletVenteFuture extends HttpServlet {
 			
 			if(retrait == null) //si cette adresse n'existe pas alors :
 			{
-				try {
+				try 
+				{
 					RetraitBll nouvelleadresse = new RetraitBll();
 					
 					RetraitBo newPlace = new RetraitBo();
@@ -114,23 +116,27 @@ public class ServletVenteFuture extends HttpServlet {
 					article.setCategorie(categorieVente);
 					article.setUtilisateur(utilisateur);
 					article.setRetrait(newPlace); //on set la nouvelle adresse enregistrée
-					try {
+					try
+					{
 						articleAModifie.updateArticle(article); //enregistrement de l'article
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
+					} 
+					catch (Exception e)
+					{
 						e.printStackTrace();
 					}
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
+				} 
+				catch (Exception e1) 
+				{
 				e1.printStackTrace();
-			}
+				}
 
-		} 
+			} 
 			else
 			{
 				UtilisateurBo utilisateur;
 				
-				try {
+				try
+				{
 					utilisateur = UtilisateurBll.get(id);
 					ArticleVenduBo article = new ArticleVenduBo();
 					//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
@@ -145,18 +151,24 @@ public class ServletVenteFuture extends HttpServlet {
 						article.setCategorie(categorieVente);
 						article.setUtilisateur(utilisateur);
 						article.setRetrait(retrait);
-						try {
+						
+						try 
+						{
 							articleAModifie.updateArticle(article);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
+						} 
+						catch (Exception e) 
+						{
 							e.printStackTrace();
-				}
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+						}
+				} 
+				catch (Exception e1) 
+				{
 					e1.printStackTrace();
-				}
-				
-		}
+				}			
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+			rd.forward(request, response);
 		}
 		else if(request.getParameter("annulerModif")!=null)
 		{
