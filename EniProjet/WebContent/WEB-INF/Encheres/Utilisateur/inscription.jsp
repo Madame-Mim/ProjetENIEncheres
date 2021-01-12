@@ -22,55 +22,70 @@
                 <fieldset>
                     <legend>Créer mon profil</legend>
                     
-                    <div class="droite">
+                    <div class="container-fluid">
+                    <div class="row">
+                    <div class="col">
+                    
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo" required="required" value="" size="20" maxlength="30"  />
-                    </div><br />
-                    
-                    <div class="gauche">
-                    <label for="nom">Nom :</label>
-                    <input class="text-end" type="text" id="nom" name="nom" required="required" value="" size="20" maxlength="30" />
-                    </div><br />
+                    <br />
                     
                     <label for="prenom">Prénom :</label>
                     <input type="text" id="prenom" name="prenom" required="required"  value="" size="20" maxlength="30" />
-                    <br />
-                    
-                    <label for="email">Email :</label>
-                    <input type="email" id="email" name="email" required="required" value="" size="20" maxlength="60" />
                     <br />
                     
                     <label for="telephone">Numéro de téléphone :</label>
                     <input type="text" id="telephone" name="telephone" required="required" value="" size="20" maxlength="20" />
                     <br />
                     
-                    <label for="rue">Rue :</label>
-                    <input type="text" id="rue" name="rue" required="required" value="" size="20" maxlength="120" />
-                    <br />
-                    
-                    <label for="codePostal">Code postale :</label>
+                     <label for="codePostal">Code postal :</label>
                     <input type="text" id="codePostal" name="codePostal" required="required" value="" size="20" maxlength="20" />
-                    <br />
-                    
-                                        
-                    <label for="ville">Ville :</label>
-                    <input type="text" id="ville" name="ville" required="required" value="" size="20" maxlength="20" />
                     <br />
                     
                     <label for="motdepasse">Mot de passe :</label>
                 	<input type="password" id="motdepasse" name="motdepasse" required="required" value="" size="20" maxlength="20" />
                 	<br />
-
+                	</div>
+                	                   
+                    <div class="col">
+                    <label for="nom">Nom :</label>
+                    <input class="text-end" type="text" id="nom" name="nom" required="required" value="" size="20" maxlength="30" />
+                    <br />
+                    
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required="required" value="" size="20" maxlength="60" />
+                    <br />
+                    
+                    <label for="rue">Rue :</label>
+                    <input type="text" id="rue" name="rue" required="required" value="" size="20" maxlength="120" />
+                    <br />
+                    
+                    <label for="ville">Ville :</label>
+                    <input type="text" id="ville" name="ville" required="required" value="" size="20" maxlength="20" />
+                    <br />
+           
                 	<label for="confirmation">Confirmation du mot de passe :</label>
                 	<input type="password" id="confirmation" name="confirmation" required="required" value="" size="20" maxlength="20" />
                 	<br />
+                	
+                	</div>
+                	</div>
+                	</div>
                     
                 </fieldset>
+                
+                <div class="container">
+                <div class="row">
+                <div class="col">
+                </div>
+                <div class="col">
                 <input class="btn btn-success" type="submit" value="Valider">
-                <!--    <input type="submit" value="Valider"  />  -->
-                <a class="btn btn-success" href="ServletAccueil" role="button">Annuler</a>
-                <!-- <a href="ServletAccueil" class="button">Annuler</a>  -->
-                <br /> 
+                </div>
+                <div class="col">
+                <a class="btn btn-success" href="ServletAccueil" role="button">Annuler</a> 
+                </div>
+                </div>
+                </div>
             </form>
         </div>
 
