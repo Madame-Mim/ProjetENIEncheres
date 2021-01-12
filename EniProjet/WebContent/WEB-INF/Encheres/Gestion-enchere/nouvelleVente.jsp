@@ -22,7 +22,7 @@
 			</div>
 			<br>
 			<div>
-				<label>Decsription : </label><input type="textarea" name="descriptionArticle" required>
+				<label>Description : </label><input type="textarea" name="descriptionArticle" required>
 			</div>
 			<br>
 			<div class="col-xs-offset-1 col-xs-4"> Catégorie :</div>
@@ -38,7 +38,7 @@
 			<div class="clearfix"></div>
 			<br>
 			
-			<div class="col-xs-offset-1 col-xs-4"> photo de l'article : </div><div class="col-xs-6"><label class="submit" for="upload">uploader</label> <input id="upload" type="file"> </div>
+			<div class="col-xs-offset-1 col-xs-4"> Photo de l'article : </div><div class="col-xs-6"><label class="upload" for="upload">uploader</label> <input id="upload" type="file"> </div>
 			<br>
 			<div>
 				<label>Mise à prix : </label><input type="number" name="miseAPrixArticle" min="5" max="1000" step="5" required>
