@@ -33,10 +33,9 @@ placeholder="${recherchearticle}" size= "40"/>
 <label for="categorie">Catégorie : </label>
 <select name="categorie" size="1">
 <c:forEach items="${listeCategorie}" var="categ" varStatus="loop">
-    <option value="${loop.index}">
-        <option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>
-        
-    </c:forEach>
+<option value="${loop.index}">
+<option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>     
+</c:forEach>
 </select>
 <input type="submit" value="RECHERCHER">
 </form>
@@ -47,8 +46,8 @@ placeholder="${recherchearticle}" size= "40"/>
 <br/>
 <br/>
 
-	<ul>
-		<c:forEach var="v" items="${listeArticles}">
+<ul>
+<c:forEach var="v" items="${listeArticles}">
 		
 		
 <jsp:useBean id="now" class="java.util.Date" />

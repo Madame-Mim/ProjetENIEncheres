@@ -29,14 +29,14 @@ placeholder="${recherchearticle}" size= "40"/>
 <br/>
 
 
+<c:set var = "test2" value ="${categorieselection}" />
 <br/>
 <label for="categorie">Catégorie : </label>
 <select name="categorie" size="1">
-<option value="" selected="selected">Toutes</option>
-<option value="1">Informatique</option>
-<option value="2">Ameublement</option>
-<option value="3">Vêtement</option>
-<option value="4">Sport et Loisirs</option>
+<c:forEach items="${listeCategorie}" var="categ" varStatus="loop">
+<option value="${loop.index}">
+<option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>
+</c:forEach>
 </select>
 
 

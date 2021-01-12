@@ -136,6 +136,8 @@ public class ServletAccueil extends HttpServlet {
 		
 		
 		try {
+			listeCategorie= CategorieBll.get();
+			request.setAttribute("listeCategorie", listeCategorie);
 			listeArticles= ArticleVenduBll.getAll();
 			malisteEncheres=EnchereBll.getbyutilisateur(vendeur);
 			request.setAttribute("malisteEncheres", malisteEncheres);
