@@ -22,7 +22,7 @@
 
 
 <c:set var = "recherchearticle" value ="${namerecherche}" />
-<form method="post" action="<%=request.getContextPath()%>/ServletAccueil">
+<form method="post" action="<%=request.getContextPath()%>/Accueil">
 <label for="recherchearticle">Filtres</label>
 <input type="text" name="recherche" 
 placeholder="${recherchearticle}" size= "40"/>
@@ -33,8 +33,8 @@ placeholder="${recherchearticle}" size= "40"/>
 <br/>
 <label for="categorie">Catégorie : </label>
 <select name="categorie" size="1">
-<c:forEach items="${listeCategorie}" var="categ" varStatus="loop">
-<option value="${loop.index}">
+<option value="" selected="selected">Toutes</option>
+<c:forEach items="${listeCategorie}" var="categ">
 <option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>
 </c:forEach>
 </select>

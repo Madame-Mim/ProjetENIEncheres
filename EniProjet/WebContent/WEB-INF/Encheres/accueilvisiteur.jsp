@@ -32,8 +32,8 @@ placeholder="${recherchearticle}" size= "40"/>
 <br/>
 <label for="categorie">Catégorie : </label>
 <select name="categorie" size="1">
-<c:forEach items="${listeCategorie}" var="categ" varStatus="loop">
-<option value="${loop.index}">
+<option value="" selected="selected">Toutes</option>
+<c:forEach items="${listeCategorie}" var="categ" >
 <option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>     
 </c:forEach>
 </select>

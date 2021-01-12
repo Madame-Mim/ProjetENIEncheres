@@ -24,7 +24,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 /**
  * Servlet implementation class ServletAccueil
  */
-@WebServlet("/ServletAccueil")
+@WebServlet("/Accueil")
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
