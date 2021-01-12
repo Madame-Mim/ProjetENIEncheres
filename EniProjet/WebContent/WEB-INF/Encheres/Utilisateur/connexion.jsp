@@ -30,7 +30,7 @@
 			 <input type="checkbox" name="souvenir" id=souvenir>
 				 Se souvenir de moi
 				<br>
-				<a href="#">Mot de passe oublié</a>
+				<a href="/EniProjet/ServletMotDePasseOublie">Mot de passe oublié</a>
 			</div>
 		</form>
 		
