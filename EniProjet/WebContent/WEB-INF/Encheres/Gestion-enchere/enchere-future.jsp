@@ -22,17 +22,24 @@
 		<div class="clearfix"></div>
 		<br>
 		<form action="<%=request.getContextPath()%>/VenteFuture?idarticle=${article.noArticle}" method="post">
-			<div class="col-xs-offset-1 col-xs-4"> Article :</div><div class="col-xs-6"><input name="nom" type="text" value="${article.nomArticle}"></div>
+			<div class="col-xs-offset-1 col-xs-4"> Article :</div><div class="col-xs-6"><input name="nom" type="text" value="${article.nomArticle}"  size=36></div>
 			<br><br>
 			<div class="col-xs-offset-1 col-xs-4"> Description : </div><div class="col-xs-6"> <textarea name="description" cols="35" rows="3">${article.description}</textarea> </div>
 			<br>
 			
 			<div class="col-xs-offset-1 col-xs-4"> Catégorie :</div>
-				<div class="col-xs-6">	
+				<div class="col-xs-6">
+				
 					<select name="categorie">	
 						<% request.getAttribute("categorieListe"); %>
 						<c:forEach var="v" items="${categorieListe}">
-			   				<option value="${v.noCategorie}">${v.libelle}</option>
+							<c:if test="${article.categorie.getNoCategorie()==v.noCategorie}">
+								<c:set var="selected" value="selected"></c:set>
+							</c:if>
+							<c:if test="${article.categorie.getNoCategorie()!=v.noCategorie}">
+								<c:set var="selected" value=""></c:set>
+							</c:if>
+			   				<option value="${v.noCategorie}" ${selected} > ${v.libelle}</option>
 						</c:forEach>
 					</select>
 				</div>

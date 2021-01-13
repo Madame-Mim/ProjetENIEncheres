@@ -21,14 +21,7 @@ public class ArticleVenduDal {
     private static final String GET_ALL="SELECT * FROM ARTICLES_VENDUS";
     private static final String GET_BY_ID="SELECT * FROM ARTICLES_VENDUS WHERE no_article= ?";
     private static final String GET_BY_ID_UTILISATEUR="SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
-    
-    
-    /* get by idUtilisateur: select all from articlesVendu where  no_utilisateur = ? */
-    /* where date_debut  */  
-      /* %request.getparameter("recherche")% */ 
-    
-    
-    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, retrait_effectue=?, no_retrait=? WHERE no_article = ?";
+    private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, retrait_effectue=?, no_categorie=?, no_retrait=? WHERE no_article = ?";
     private static final String UPDATE_ALL="UPDATE ARTICLES_VENDUS SET no_utilisateur=1, no_retrait=1 WHERE no_utilisateur = ?";
     private static final String DELETE="DELETE ARTICLES_VENDUS WHERE no_article = ?";
 	
@@ -238,8 +231,9 @@ public class ArticleVenduDal {
              rqt.setInt(5, articleVendu.getMiseAPrix());
              rqt.setInt(6, articleVendu.getPrixVente());
              rqt.setBoolean(7, articleVendu.isRetraitEffectue());
-             rqt.setInt(8, articleVendu.getRetrait().getNoRetrait());
-       	 	 rqt.setInt(9, articleVendu.getNoArticle());
+             rqt.setInt(8, articleVendu.getCategorie().getNoCategorie());
+             rqt.setInt(9, articleVendu.getRetrait().getNoRetrait());
+       	 	 rqt.setInt(10, articleVendu.getNoArticle());
 
              rqt.executeUpdate();
 
