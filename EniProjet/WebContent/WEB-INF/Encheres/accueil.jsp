@@ -10,26 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript">
-
-    function grisercheckbox(form1){
-    	
-    
-        if(document.getElementById("achat").checked){
- 
-            document.getElementById('ChoixV1').disabled = '';
-            document.getElementById('ChoixV2').disabled = '';
-            document.getElementById('ChoixV3').disabled = '';
- 
-        }
- 
-        else{
- 
-        	 document.getElementById('ChoixA1').disabled = '';
-             document.getElementById('ChoixA2').disabled = '';
-             document.getElementById('ChoixA3').disabled = '';
- 
-        }</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/accueil.css">
 <title>ENI-Enchères</title>
@@ -74,26 +55,26 @@
 	      <br/>	      
 		  <div class="col-xs-12"> 
 				<div class="row col-xs-6">>
-			<input checked type="radio" id="achat" name="choixAV" value="achat" onclick="grisercheckbox(form1)">
+			<input checked type="radio" id="achat" name="choixAV" value="achat" onclick="grisercheckbox();">
 			<label for="achat">Achats</label>
 			<br>				
 			<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
-			<label for="achat">enchères ouverte</label><br>
+			<label for="choixA1">enchères ouverte</label><br>
 			<input type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
-			<label for="achat">mes enchères en cours</label><br>
+			<label for="choixA2">mes enchères en cours</label><br>
 			<input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
-			<label for="achat">mes enchères remportés</label><br>
+			<label for="choixA3">mes enchères remportés</label><br>
 			    </div>
 				<div class="row col-xs-6">>
-			<input type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox(form1)">
+			<input type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox();">
 			<label for="vente">Mes ventes</label>
 			<br>
-			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
-			<label for="achat">mes ventes en cours</label><br>
-			<input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute">
-			<label for="achat">ventes non debutées</label><br>
-			<input type="checkbox" id="choixV3" name="choixV3" value="ventetermine">
-			<label for="achat">ventes terminées</label><br></div>
+			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte" disabled="disabled">
+			<label for="choixV1">mes ventes en cours</label><br>
+			<input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute" disabled="disabled">
+			<label for="choixV2">ventes non debutées</label><br>
+			<input type="checkbox" id="choixV3" name="choixV3" value="ventetermine" disabled="disabled">
+			<label for="choixV3">ventes terminées</label><br></div>
            </div>
 		</div>
 	<div class="col-xs-3 col-xs-offset-1" id="rechercher">
@@ -147,10 +128,10 @@
     		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
 			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Enchère en cours</div>
-			<div class="col-xs-4 col-xs-offset-1">
+			<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div class="col-xs-7">
+			<div class="col-xs-offset-1 col-xs-7">
 						
 					<div class=labelproduit>
 					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
@@ -167,10 +148,10 @@
 			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes en cours</div>
 				<br/>
-				<div class="col-xs-4 col-xs-offset-1">
+				<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-offset-1 col-xs-7">
 						
 					<div class=labelproduit>
 					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
@@ -189,10 +170,10 @@
 			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes non débutées</div>
 			<br/>
-				<div class="col-xs-4 col-xs-offset-1">
+				<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-offset-1 col-xs-7">
 								
 					<div class=labelproduit>
 					<p><a href="<%=request.getContextPath()%>/VenteFuture?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
@@ -208,10 +189,10 @@
 			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes terminées</div>
 			<br/>
-				<div class="col-xs-4 col-xs-offset-1">
+				<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-offset-1 col-xs-7">
 						
 			
 					<div class=labelproduit>
@@ -242,16 +223,15 @@
 	<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
 
 
-
 		<c:if test="${!empty choixA2}">
 		<c:if test="${now1.time lt finEnchere.time && now1.time gt debutEnchere.time}">
 		<div class="col-xs-4" id="cartes">
 		<div class="entetebloc">Enchere en cours</div>
 		<br/>
-			<div class="col-xs-4 col-xs-offset-1">
+			<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div class="col-xs-7">
+			<div class="col-xs-offset-1 col-xs-7">
 						
 			
 			<div class=labelproduit>
@@ -271,10 +251,10 @@
 		<div class="col-xs-4" id="cartes">
 		<div class="entetebloc">Mes enchères remportées</div>
 			<br/>
-			<div class="col-xs-4 col-xs-offset-1">
+			<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-				<div class="col-xs-7">
+				<div class="col-xs-offset-1 col-xs-7">
 						
 			
 			<div class=labelproduit>
@@ -291,11 +271,30 @@
 </section>					
 
 
- 
-    
- 
-
-	
-
 </body>
+<script type="text/javascript">  
+function grisercheckbox(){
+    	
+    
+        if(document.getElementById("achat").checked){
+ 
+            document.getElementById('choixV1').disabled = 'disabled';
+            document.getElementById('choixV2').disabled = 'disabled';
+            document.getElementById('choixV3').disabled = 'disabled';
+            document.getElementById('choixA1').disabled ='';
+            document.getElementById('choixA2').disabled = '';
+            document.getElementById('choixA3').disabled = '';
+        }
+ 
+        else if(document.getElementById("vente").checked){
+ 
+        	 document.getElementById('choixV1').disabled ='' ;
+             document.getElementById('choixV2').disabled ='';
+             document.getElementById('choixV3').disabled ='';   
+             document.getElementById('choixA1').disabled = 'disabled';
+             document.getElementById('choixA2').disabled = 'disabled';
+             document.getElementById('choixA3').disabled = 'disabled';
+ 
+        }}
+        </script>
 </html>
