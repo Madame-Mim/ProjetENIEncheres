@@ -127,12 +127,15 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+			
 
 	} 
 		else
@@ -158,6 +161,8 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
