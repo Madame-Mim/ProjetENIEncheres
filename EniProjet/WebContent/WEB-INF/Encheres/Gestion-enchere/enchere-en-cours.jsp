@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -66,6 +67,10 @@
 			 <c:when test="${enchere.noUtilisateur.getId()==sessionScope.session}" >
 				 <c:set var="enabled" value="disabled" scope="page" />
 				 <c:set var="message" value="Vous êtes déjà le meilleur enchérisseur !" scope="page" />
+			 </c:when>
+			 <c:when test="" >
+				 <c:set var="enabled" value="disabled" scope="page" />
+				 <c:set var="message" value="La vente est terminée !" scope="page" />
 			 </c:when>
 			 <c:otherwise>
 			 	<c:set var="message" value="Vous disposez de ${utilisateur.getCredit()} points pour enchérir" scope="page" />

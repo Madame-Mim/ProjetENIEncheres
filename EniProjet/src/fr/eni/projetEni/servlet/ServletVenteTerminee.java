@@ -69,7 +69,7 @@ public class ServletVenteTerminee extends HttpServlet {
 			ArticleVenduBll articleAModifie = new ArticleVenduBll();
 			ArticleVenduBo articleRetire = ArticleVenduBll.getById(idArticle);
 			articleRetire.setRetraitEffectue(true);
-			System.out.println(articleRetire);
+
 			articleAModifie.updateArticle(articleRetire);
 			} catch (Exception e) {
 				e.printStackTrace();
