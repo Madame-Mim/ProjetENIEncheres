@@ -24,6 +24,10 @@
 			<label for="password">Mot de passe : </label>
 			<input class="texte" type="password" name="password" id="password"  size=30>
 			<br><br>
+			<c:if test="${not empty erreur}">
+				<span class="text-danger erreur"> ${erreur} </span>
+			<br><br>
+			</c:if>
 			<input class="submit" type="submit" value="Connexion">
 			 
 			 <div id="iteration2">

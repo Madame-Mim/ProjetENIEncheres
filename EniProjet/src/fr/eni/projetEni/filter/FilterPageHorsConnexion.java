@@ -23,19 +23,19 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     HttpServletRequest request = (HttpServletRequest) req;
 	HttpServletResponse response = (HttpServletResponse) res;
 	
+	response.setHeader("Cache-Control", "no-cache, no-store"); // HTTP 1.1.
+	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+	response.setDateHeader("Expires", 0); // Proxies.
 
 /* Récupération de la session depuis la requête */
 HttpSession session = request.getSession();
 
 if(session.getAttribute("session")!=null)
 {
-    response.sendRedirect(Accueil);
+    response.sendRedirect(request.getContextPath() + Accueil);
 } 
 	else
-	{
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-		response.setDateHeader("Expires", 0); // Proxies.
+	{		
 		chain.doFilter(req, res);
 	}
 }

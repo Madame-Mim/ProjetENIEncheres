@@ -50,6 +50,7 @@ public class ServletConnexion extends HttpServlet {
 
 				if(utilisateurRecupere==null)
 				{
+					request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 				}
 				else
@@ -60,6 +61,7 @@ public class ServletConnexion extends HttpServlet {
 
 					if(VerifPassword==false) 
 					{
+						request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 					}
 					else
@@ -83,6 +85,7 @@ public class ServletConnexion extends HttpServlet {
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
 				if(utilisateurRecupere==null)
 				{
+					request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 				}
 				else
@@ -92,6 +95,7 @@ public class ServletConnexion extends HttpServlet {
 					int id =utilisateurRecupere.getId();
 					if(VerifPassword==false||pseudo==null)
 					{
+						request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 						jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
 					}
 					else

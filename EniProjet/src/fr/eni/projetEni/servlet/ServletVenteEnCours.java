@@ -36,7 +36,6 @@ public class ServletVenteEnCours extends HttpServlet {
 
 			try {
 			    HttpSession session = request.getSession();
-			    session.setAttribute("session", 2);
 			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 			     
 			    ArticleVenduBo article = ArticleVenduBll.getById(numArticle);

@@ -15,23 +15,23 @@
   </session-config>
   
   <filter>
-    <filter-name>NoCacheFilter</filter-name>
+    <filter-name>PageMembreFilter</filter-name>
     <filter-class>fr.eni.projetEni.filter.FilterNoCache</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>NoCacheFilter</filter-name>
+    <filter-name>PageMembreFilter</filter-name>
     <url-pattern>/Gestion-enchere/*</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>NoCacheFilter</filter-name>
+    <filter-name>PageMembreFilter</filter-name>
     <url-pattern>/Utilisateur/afficherProfil.jsp</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>NoCacheFilter</filter-name>
+    <filter-name>PageMembreFilter</filter-name>
     <url-pattern>/Utilisateur/modifierMonProfil.jsp</url-pattern>
   </filter-mapping>
   <filter-mapping>
-    <filter-name>NoCacheFilter</filter-name>
+    <filter-name>PageMembreFilter</filter-name>
     <url-pattern>/accueil.jsp</url-pattern>
   </filter-mapping>
   
@@ -52,11 +52,11 @@
     <filter-name>FilterPageHorsConnexion</filter-name>
     <url-pattern>/Utilisateur/connexion.jsp</url-pattern>
   </filter-mapping>
-
 <filter-mapping>
     <filter-name>FilterPageHorsConnexion</filter-name>
-    <url-pattern>/Utilisateur/inscription.jsp</url-pattern>
+    <url-pattern>/Utilisateur/accueilvisiteur.jsp</url-pattern>
   </filter-mapping>
+
 
  <servlet>
         <servlet-name>Upload</servlet-name>

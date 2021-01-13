@@ -48,14 +48,30 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Ma proposition </div>
 		 <c:if test="${article.miseAPrix>article.prixVente}" >
-		 <c:set var="proposition" value="${article.miseAPrix}" scope="page" />
+		 	<c:set var="proposition" value="${article.miseAPrix}" scope="page" />
 		 </c:if>
-		 <c:if test="${article.miseAPrix<=article.prixVente}" >
-		 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
+			<c:if test="${article.miseAPrix<=article.prixVente}" >
+			 <c:set var="proposition" value="${article.prixVente+1}" scope="page" />
 		 </c:if>
-		 <c:if test="${utilisateur.getCredit()<article.prixVente || article.utilisateur.getId()==sessionScope.session || enchere.noUtilisateur.getId()==sessionScope.session}" >
-		 <c:set var="enabled" value="disabled" scope="page" />
-		 </c:if>
+		 
+		 <c:choose>
+			 <c:when test="${utilisateur.getCredit()<article.prixVente}" >
+				 <c:set var="enabled" value="disabled" scope="page" />
+				 <c:set var="message" value="Vous n'avez pas assez de crédit pour surenchérir !" scope="page" />
+			 </c:when>
+			 <c:when test="${article.utilisateur.getId()==sessionScope.session}" >
+				 <c:set var="enabled" value="disabled" scope="page" />
+				 <c:set var="message" value="Vous ne pouvez pas enchérir sur votre propre bien !" scope="page" />
+			 </c:when>
+			 <c:when test="${enchere.noUtilisateur.getId()==sessionScope.session}" >
+				 <c:set var="enabled" value="disabled" scope="page" />
+				 <c:set var="message" value="Vous êtes déjà le meilleur enchérisseur !" scope="page" />
+			 </c:when>
+			 <c:otherwise>
+			 	<c:set var="message" value="Vous disposez de ${utilisateur.getCredit()} points pour enchérir" scope="page" />
+			 </c:otherwise>
+		 </c:choose>
+		 
 		<div class="col-xs-6">
 		<form action="<%=request.getContextPath()%>/VenteEnCours?idarticle=${article.getNoArticle()}" method="post">
 			<input  name="enchere" type="number" max="${article.utilisateur.getCredit()}" min="${proposition}" value="${proposition}" size=5 ${enabled}>
@@ -65,7 +81,7 @@
 					<div class="clearfix"></div>
 		
 		<br><br>
-		<span class="col-xs-offset-4 col-xs-6">Vous disposez de ${utilisateur.getCredit()} points pour enchérir </span> 
+		<span class="col-xs-offset-4 col-xs-6">${message} </span> 
 		
 	</section>
 	
