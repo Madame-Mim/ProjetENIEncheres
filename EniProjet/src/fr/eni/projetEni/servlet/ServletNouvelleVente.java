@@ -1,11 +1,8 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -24,8 +21,6 @@ import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
-import fr.eni.projetEni.dal.ArticleVenduDal;
-import fr.eni.projetEni.dal.RetraitDal;
  
 /** 
  * Servlet implementation class ServletNouvelleVente
@@ -85,7 +80,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 	//Permet de récupérer le noCategorie	
-		int noCategorie = Integer.parseInt(request.getParameter("categorieArticle"));
+		int noCategorie = Integer.parseInt(request.getParameter("categorie"));
 		CategorieBo CategorieNouvelArticle = CategorieBll.get(noCategorie);
 		
 		
@@ -132,12 +127,15 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+			
 
 	} 
 		else
@@ -163,6 +161,8 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
+					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

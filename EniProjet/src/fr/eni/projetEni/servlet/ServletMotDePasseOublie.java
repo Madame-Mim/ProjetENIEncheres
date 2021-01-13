@@ -45,6 +45,10 @@ public class ServletMotDePasseOublie extends HttpServlet {
 			{
 				if(utilisateur.getEmail().equals(adresseMail))
 				{
+					int idUtilisateur = utilisateur.getId();
+					System.out.println("idUtilisateur : " + idUtilisateur);
+					request.setAttribute("idUtilisateur", idUtilisateur);
+					
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/lienReinitialiserMDP.jsp");
 					rd.forward(request, response);
 				}
@@ -52,7 +56,6 @@ public class ServletMotDePasseOublie extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		
 	}//fin de doPost

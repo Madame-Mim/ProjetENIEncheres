@@ -12,15 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.eni.projetEni.bll.UtilisateurBll;
-import fr.eni.projetEni.bo.UtilisateurBo;
-
 /**
  * Servlet Filter implementation class FilterNoCache
  */
-@WebFilter("/FilterAdmin")
-public class FilterAdmin implements Filter {
-    public static final String Accueil = "/WEB-INF/Encheres/accueilvisiteur.jsp";
+@WebFilter("/FilterPageHorsConnexion")
+public class FilterPageHorsConnexion implements Filter {
+    public static final String Accueil = "/Accueil";
 @Override
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) req;
@@ -29,29 +26,19 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 
 /* Récupération de la session depuis la requête */
 HttpSession session = request.getSession();
-int id = Integer.parseInt(session.getAttribute("session").toString());
-UtilisateurBo utilisateur;
-		try {
-			utilisateur = UtilisateurBll.get(id);
-		
-		
-			if(session.getAttribute("session")==null || utilisateur.isAdministrateur()==false)
-			{
-			    response.sendRedirect(Accueil);
-			} 
-			else
-			{
-				response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-				response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-				response.setDateHeader("Expires", 0); // Proxies.
-				chain.doFilter(req, res);
-			}
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+
+if(session.getAttribute("session")!=null)
+{
+    response.sendRedirect(Accueil);
+} 
+	else
+	{
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setDateHeader("Expires", 0); // Proxies.
+		chain.doFilter(req, res);
 	}
+}
 
 	/**
 	 * @see Filter#init(FilterConfig)

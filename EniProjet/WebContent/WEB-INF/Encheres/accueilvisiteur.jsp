@@ -19,14 +19,14 @@
 		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
 
-<div class="block">
+<section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
 <header>
 <h2>Liste des enchères</h2>
 </header>
-</div>
+</section>
 <br/>
-<div class="block">
-	<div class="blockform">
+<section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
+	<div class="row col-xs-offset-1 col-xs-6">
 
 		<form method="post" action="<%=request.getContextPath()%>/Accueil">
                     
@@ -48,19 +48,19 @@
 			</select>
 			</div>
 	</div>
-	<div class="blockform" id="rechercher">
+	<div class="col-xs-3 col-xs-offset-2" id="rechercher">
 		<input class="btn btn-success" type="submit" value="RECHERCHER">
 	</div>
 		</form>
-</div>
 
 
+</section>
 <br/>
 <br/>
-<div class="block">
+<section class="col-xs-12 ">
+<br/>
+<br/>
 
-
-<div class="dispocartes">
 	<c:forEach var="v" items="${listeArticles}">
 		
 		
@@ -79,13 +79,11 @@
     	<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
     
     		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
-			<div class="cartes">
-				<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
+			<div class="col-xs-4" id="cartes">
+				<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-				<div id="colonnes">
+				<div class="col-xs-7">
 					<div class=labelproduit>
 					<p><u>${v.nomArticle}</u></p></div>
 					<p>${v.prixVente}</p>
@@ -97,9 +95,9 @@
 		</c:if>
 	</c:forEach>
 </div>
-	
+</section>	
 
 <c:set var = "test1" value =""/>
-</div>
+
 </body>
 </html>

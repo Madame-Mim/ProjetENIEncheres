@@ -238,7 +238,7 @@ import java.time.LocalDate;
 			return "ArticleVenduBo [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description="
 					+ description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres
 					+ ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente /*+ ", etatVente=" + etatVente + "]"*/ 
-					+", retraitEffectue="+ retraitEffectue +"]";
+					+", retraitEffectue="+ retraitEffectue +", retrait=" + retrait +"]";
 		}
 		/* toString */
 		

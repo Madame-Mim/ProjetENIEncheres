@@ -21,7 +21,7 @@
 		<br>
 		<div class="clearfix"></div>
 		<br>
-		<form action="<%=request.getContextPath()%>/VenteFuture?idarticle=${article.noArticle}" method="post" enctype="multipart/form-data">
+		<form action="<%=request.getContextPath()%>/VenteFuture?idarticle=${article.noArticle}" method="post">
 			<div class="col-xs-offset-1 col-xs-4"> Article :</div><div class="col-xs-6"><input name="nom" type="text" value="${article.nomArticle}"></div>
 			<br><br>
 			<div class="col-xs-offset-1 col-xs-4"> Description : </div><div class="col-xs-6"> <textarea name="description" cols="35" rows="3">${article.description}</textarea> </div>
@@ -67,9 +67,9 @@
 			<br>
 			<div class="clearfix"></div>
 			<br>
-			<div class="col-xs-offset-1 col-xs-3"><input class="submitCourt" type="submit" value = "enregistrer" name="enregistrer"></div>
-			<div class="col-xs-4"><input class="submitCourt" type="submit" value = "annuler" name="annulerModif"></div>
-			<div class="col-xs-3"><input class="submitLong" type="submit" value = "annuler la vente" name="annulerVente"></div>
+			<div class="col-xs-offset-1 col-xs-3"><input class="submitCourt" type="submit" value ="enregistrer" name="enregistrer"></div>
+			<div class="col-xs-4"><input class="submitCourt" type="submit" value="annuler" name="annulerModif"></div>
+			<div class="col-xs-3"><input class="submitLong" type="submit" value="annuler la vente" name="annulerVente"></div>
 		</form>
 	</section>
 	

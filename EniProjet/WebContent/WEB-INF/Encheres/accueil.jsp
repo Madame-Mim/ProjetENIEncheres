@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jstl/xml" prefix="x" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -9,6 +10,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+
+    function grisercheckbox(form1){
+    	
+    
+        if(document.getElementById("achat").checked){
+ 
+            document.getElementById('ChoixV1').disabled = '';
+            document.getElementById('ChoixV2').disabled = '';
+            document.getElementById('ChoixV3').disabled = '';
+ 
+        }
+ 
+        else{
+ 
+        	 document.getElementById('ChoixA1').disabled = '';
+             document.getElementById('ChoixA2').disabled = '';
+             document.getElementById('ChoixA3').disabled = '';
+ 
+        }</script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/accueil.css">
 <title>ENI-Enchères</title>
@@ -19,17 +40,17 @@
 		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
 
-<div class="block">
+<section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
 <header>
 <h2>Liste des enchères</h2>	
 </header>
-</div>
+</section>
 <br/>
-<div class="block">
-	<div class="blockform">
+<section class="col-xs-12">
+	<div class=" col-xs-8">
 
-		<form method="post" action="<%=request.getContextPath()%>/Accueil">
-           <div class="elemform">         
+		<form method="post" name="form1" action="<%=request.getContextPath()%>/Accueil">
+           <div class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">         
 			<label for="recherchearticle">Filtres : </label>
 			<br/>
 			<c:set var = "recherchearticle" value ="${namerecherche}" />
@@ -51,10 +72,9 @@
 	      <br/>
 	      <br/>
 	      <br/>	      
-		  <div class="elemform2"> 
-			<div class="choixAV">
-				<div class="col">
-			<input checked type="radio" id="achat" name="choixAV" value="achat">
+		  <div class="col-xs-12"> 
+				<div class="row col-xs-6">>
+			<input checked type="radio" id="achat" name="choixAV" value="achat" onclick="grisercheckbox(form1)">
 			<label for="achat">Achats</label>
 			<br>				
 			<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
@@ -64,8 +84,8 @@
 			<input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
 			<label for="achat">mes enchères remportés</label><br>
 			    </div>
-				<div class="col">
-			<input type="radio" id="vente" name="choixAV" value="vente">
+				<div class="row col-xs-6">>
+			<input type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox(form1)">
 			<label for="vente">Mes ventes</label>
 			<br>
 			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
@@ -76,17 +96,20 @@
 			<label for="achat">ventes terminées</label><br></div>
            </div>
 		</div>
-	</div>
-	<div class="blockform" id="rechercher">
+	<div class="col-xs-3 col-xs-offset-1" id="rechercher">
 		<input class="btn btn-success" type="submit" value="RECHERCHER">
 	</div>
 		</form>
-</div>		
+</section>		
+<section class="col-xs-12 ">
 <br/>
 <br/>
-<div class="block">
 
-<div class="dispocartes">
+<br/>
+<br/>
+</section>
+<section class="col-xs-12 ">
+
 
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
@@ -122,20 +145,18 @@
     	
     		<c:if test="${!empty choixA1}">
     		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
-			<div class="cartes">
-				<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
-				</div>
-			<div id="colonnes">
+			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Enchère en cours</div>
-			
+			<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+				</div>
+			<div class="col-xs-7">
+						
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
-					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
 			</div> 
 			</c:if>
 			</c:if>
@@ -143,19 +164,16 @@
 			<c:if test="${!empty choixV1}">
 			<c:if test="${vendeurtest eq vendeur}">
 			<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
-			<div class="cartes">
+			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes en cours</div>
 				<br/>
-				<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
+				<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div id="colonnes">
-			
-			
+				<div class="col-xs-7">
+						
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -168,17 +186,16 @@
 		<c:if test="${vendeurtest eq vendeur}">
 			<c:if test="${!empty choixV2}">
 			<c:if test="${now.time lt debutEnchere.time}">
-			<div class="cartes">
+			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes non débutées</div>
 			<br/>
-				<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
+				<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div id="colonnes">			
+				<div class="col-xs-7">
+								
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteFuture?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -188,18 +205,17 @@
 			
 			<c:if test="${!empty choixV3}">
 			<c:if test="${now.time gt finEnchere.time}">
-			<div class="cartes">
+			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Ventes terminées</div>
 			<br/>
-				<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
-			</div>
-			<div id="colonnes">
+				<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+				</div>
+				<div class="col-xs-7">
+						
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -229,18 +245,17 @@
 
 		<c:if test="${!empty choixA2}">
 		<c:if test="${now1.time lt finEnchere.time && now1.time gt debutEnchere.time}">
-		<div class="cartes">
+		<div class="col-xs-4" id="cartes">
 		<div class="entetebloc">Enchere en cours</div>
 		<br/>
-			<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
+			<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div id="colonnes">
+			<div class="col-xs-7">
+						
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
+			<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>
@@ -253,18 +268,17 @@
 		<c:if test="${!empty choixA3}">
 		<c:if test="${now1.time gt finEnchere.time}">
 		<c:if test="${meilleurEnchere eq maMeilleurEnchere}">
-		<div class="cartes">
+		<div class="col-xs-4" id="cartes">
 		<div class="entetebloc">Mes enchères remportées</div>
 			<br/>
-			<div id="colonnes">
-					<div class="photo">
-					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
-					</div>
+			<div class="col-xs-4 col-xs-offset-1">
+					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
 				</div>
-			<div id="colonnes">
+				<div class="col-xs-7">
+						
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
+			<p><a href="<%=request.getContextPath()%>/ServletEnchereRemportee?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>	
@@ -274,7 +288,13 @@
 		</c:if>
 </c:if>
 </c:forEach>
-</div>					
+</section>					
+
+
+ 
+    
+ 
+
 	
 
 </body>

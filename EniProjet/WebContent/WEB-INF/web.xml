@@ -44,6 +44,7 @@
     <url-pattern>/Administration/*</url-pattern>
   </filter-mapping>
   
+<<<<<<< HEAD
   
       <servlet>
         <servlet-name>Upload</servlet-name>
@@ -61,3 +62,18 @@
   
   
 </web-app>
+=======
+  <filter>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <filter-class>fr.eni.projetEni.filter.FilterPageHorsConnexion</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/Utilisateur/connexion.jsp</url-pattern>
+  </filter-mapping>
+
+<filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/Utilisateur/inscription.jsp</url-pattern>
+  </filter-mapping></web-app>
+>>>>>>> branch 'master' of https://github.com/Urselka/projetENI.git
