@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
+import fr.eni.projetEni.bo.EnchereBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
@@ -44,7 +45,7 @@ public class ArticleVenduBll {
 	    	return ArticleVenduDal.getByNom(nom);
 	    }
 	   }
-	    public static ArticleVenduBo getByIdUtilisateur(int id)throws Exception {
+	    public static  List<ArticleVenduBo> getByIdUtilisateur(int id)throws Exception {
 	    {
 	    	return ArticleVenduDal.getByIdUtilisateur(id);
 	    }
@@ -59,7 +60,14 @@ public class ArticleVenduBll {
 	    	
 	    	ArticleVenduDal.updateArticle(article);
 	    }
+	   }
+	    
+	    public static void updateAll(ArticleVenduBo article) throws Exception{
+		    {	    		    	
+		    	ArticleVenduDal.updateAll(article);
+		    }		    
 	    }
+	    
 	    public static void deleteArticle(int id)throws Exception {
 	        if(ArticleVenduDal.getById(id)==null)
 	        {

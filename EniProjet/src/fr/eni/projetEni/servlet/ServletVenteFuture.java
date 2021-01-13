@@ -180,9 +180,7 @@ public class ServletVenteFuture extends HttpServlet {
 				ArticleVenduBll articleBll = new ArticleVenduBll();
 				ArticleVenduBo articleADelete;
 				try {
-					System.out.println(idarticle);
 					articleADelete = ArticleVenduBll.getById(idarticle);
-					System.out.println(articleADelete);
 					articleBll.deleteArticle(idarticle);
 					
 					   RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");

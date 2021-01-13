@@ -29,6 +29,7 @@ public class ArticleVenduDal {
     
     
     private static final String UPDATE="UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?, date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, retrait_effectue=? WHERE no_article = ?";
+    private static final String UPDATE_ALL="UPDATE ARTICLES_VENDUS SET no_utilisateur=1, no_retrait=1 WHERE no_utilisateur = ?";
     private static final String DELETE="DELETE ARTICLES_VENDUS WHERE no_article = ?";
 	
     private static Logger logger = MonLogger.getLogger("ArticleVenduDal");
@@ -184,21 +185,22 @@ public class ArticleVenduDal {
     } // fin get by id
     
     
-   public static ArticleVenduBo getByIdUtilisateur(int id) {
+   public static List<ArticleVenduBo> getByIdUtilisateur(int id) {
     	
-        ArticleVenduBo resultat = null;
+	   List<ArticleVenduBo> listes = new ArrayList<>();
 
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
     		
     		PreparedStatement rqt = cnx.prepareStatement(GET_BY_ID_UTILISATEUR);
 
-            rqt.setObject(1, UtilisateurDal.get(id));
+            rqt.setInt(1, id);
 
             ResultSet rs = rqt.executeQuery();
 
             while(rs.next())
             {
-                resultat = new ArticleVenduBo();
+            	ArticleVenduBo resultat = new ArticleVenduBo();
+                resultat.setNoArticle(rs.getInt("no_article"));
                 resultat.setNomArticle(rs.getString("nom_article"));
                 resultat.setDescription(rs.getString("description"));
                 resultat.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
@@ -207,20 +209,21 @@ public class ArticleVenduDal {
                 resultat.setPrixVente(rs.getInt("prix_vente"));
                 resultat.setRetraitEffectue(rs.getBoolean("retrait_effectue"));
 
-                UtilisateurBo vendeur = UtilisateurDal.getPseudo("pseudo");
+                UtilisateurBo vendeur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
                 resultat.setUtilisateur(vendeur);
                 
-                RetraitBo retrait = RetraitDal.get(rs.getInt(id));
+                RetraitBo retrait = RetraitDal.get(rs.getInt("no_retrait"));
                 resultat.setRetrait(retrait);
-                
+                listes.add(resultat);
+
             }
 
         } 
     	catch (Exception ex ) 
     	{
-            logger.severe("Erreur dans la méthode getById(int id) " + id + "erreur : " + ex.getMessage());
+            logger.severe("Erreur dans la méthode getByIdUtilisateur(int id) " + id + "erreur : " + ex.getMessage());
         }
-        return resultat;
+        return listes;
     } // fin get by idUtilisateur
     
     
@@ -244,7 +247,19 @@ public class ArticleVenduDal {
         }
     }/* fin update */
 
+    public static void updateAll(ArticleVenduBo articleVendu) {
+        try ( Connection cnx = ConnectionProvider.getConnection() ) 
+        {
+        	PreparedStatement rqt = cnx.prepareStatement(UPDATE_ALL);
+      	 	 rqt.setInt(1, articleVendu.getUtilisateur().getId());
+   
+             rqt.executeUpdate();
 
+        } catch (Exception ex ) {
+           //logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
+        	ex.printStackTrace();
+        }
+    }/* fin update */
     public static void deleteArticle(int id) {
         try ( Connection cnx = ConnectionProvider.getConnection() ) {
             PreparedStatement rqt = cnx.prepareStatement(DELETE);

@@ -23,6 +23,7 @@ public class EnchereDal {
     private static final String GET_MAX_BY_IDARTICLE="SELECT * FROM Encheres WHERE montant_enchere =(SELECT MAX(montant_enchere) FROM Encheres WHERE no_article=?)";
     private static final String GET_ALL="SELECT * FROM Encheres";
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? WHERE no_enchere=?";
+    private static final String UPDATE_ALL="UPDATE Encheres SET no_article=1, no_utilisateur=1 WHERE no_utilisateur=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
@@ -209,6 +210,21 @@ public class EnchereDal {
         }
     }
        
+    public static void updateAll(EnchereBo enchere)
+    {
+    	 try(Connection cnx = ConnectionProvider.getConnection())
+        {
+            PreparedStatement requete = cnx.prepareStatement(UPDATE_ALL);
+            requete.setInt(1,enchere.getNoUtilisateur().getId());
+
+            requete.executeUpdate();
+        }
+        catch(Exception ex)
+        {
+            logger.severe("Erreur dans la methode updateAll(EnchereBo enchere) avec enchere =" + enchere + " erreur :" + ex.getMessage());
+        }
+    }
+    
     public static void delete(int id)
     {
     	try(Connection cnx = ConnectionProvider.getConnection())

@@ -8,9 +8,10 @@
 		</c:if>
 		<c:if test="${not empty session}">
 			<li><a href="<%=request.getContextPath()%>/ServletDeconnexion">Déconnexion</a></li>
+			<li><a href="<%=request.getContextPath()%>/Administration">Panel administration</a></li>
 			<li><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">Mon profil</a></li>
 			<li><a href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre un article</a></li>
-			<li><a href="<%=request.getContextPath()%>/ServletAccueil">Enchères</a></li>
+			<li><a href="<%=request.getContextPath()%>/Accueil">Enchères</a></li>
 		</c:if>
 		</ul>
 	</nav>

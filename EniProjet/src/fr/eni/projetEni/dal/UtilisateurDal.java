@@ -59,7 +59,7 @@ public class UtilisateurDal {
         while(rs.next())
         {
             UtilisateurBo utilisateur = new UtilisateurBo();
-            utilisateur.setId(rs.getInt("id"));
+            utilisateur.setId(rs.getInt("no_utilisateur"));
             utilisateur.setPseudo(rs.getString("pseudo"));
             utilisateur.setNom(rs.getString("nom"));
             utilisateur.setPrenom(rs.getString("prenom"));
@@ -68,7 +68,7 @@ public class UtilisateurDal {
             utilisateur.setRue(rs.getString("rue"));
             utilisateur.setCodePostal(rs.getString("code_postal"));
             utilisateur.setVille(rs.getString("ville"));
-            utilisateur.setPassword(rs.getString("moy_de_passe"));
+            utilisateur.setPassword(rs.getString("mot_de_passe"));
             utilisateur.setCredit(rs.getInt("credit"));
             utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
             listes.add(utilisateur);
