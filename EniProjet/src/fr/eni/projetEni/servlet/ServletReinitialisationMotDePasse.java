@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetEni.bll.UtilisateurBll;
+import fr.eni.projetEni.bo.UtilisateurBo;
+
 /**
  * Servlet implementation class ServletReinitialisationMotDePasse
  */
@@ -22,6 +25,9 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ServletReinitialisationMotDePasse - doGet");
+		
+		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
+		System.out.println("idUtilisateur sur servletReinitialisatioMDP : " + idUtilisateur);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 		rd.forward(request, response);
@@ -37,19 +43,30 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 		System.out.println("nouveauMotDePasse :" + nouveauMotDePasse);
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 		System.out.println("confirmationMotDePasse :" + confirmationMotDePasse);
+		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
+		System.out.println("idUtilisateur sur servletReinitialisatioMDP : " + idUtilisateur);
 		
-		if(nouveauMotDePasse != confirmationMotDePasse)
+		if(!(nouveauMotDePasse.equals(confirmationMotDePasse)))
 		{
 			System.out.println("Veuillez entrer deux mot de passe identiques");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 			rd.forward(request, response); 
 		}else
 		{
+			UtilisateurBo utilisateurMAJ;
+			try {
+				utilisateurMAJ = UtilisateurBll.get(idUtilisateur); 
+				System.out.println("utilisateurMAJ :" + utilisateurMAJ);
+				utilisateurMAJ.setPassword(nouveauMotDePasse);
+				UtilisateurBll.update(utilisateurMAJ);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			System.out.println("identique ok");
-			RequestDispatcher rd1 = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
-			rd1.forward(request, response); 
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
+			rd.forward(request, response); 
 		}
-		 
 		
 	}
 

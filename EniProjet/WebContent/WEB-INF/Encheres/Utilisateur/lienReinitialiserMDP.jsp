@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/EniProjet/ServletReinitialisationMotDePasse">Lien pour mettre à jour votre mot de passe</a>
+	<p><a href="/EniProjet/ServletReinitialisationMotDePasse?idUtilisateur=${idUtilisateur}">Lien pour mettre à jour votre mot de passe</a></p>
 </body>
 </html>

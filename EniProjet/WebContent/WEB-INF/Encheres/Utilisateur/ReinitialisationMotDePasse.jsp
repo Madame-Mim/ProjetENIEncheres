@@ -13,6 +13,7 @@
 		<br><br>
 		<label>Confirmer nouveau mot de passe : </label><input type="text" name="confirmationMotDePasse" required>
 		<br>
+		<input type="hidden" name="idUtilisateur" value="<%= request.getParameter("idUtilisateur") %>"> 
 		<input type="submit" value="Valider">
 	</form>
 
