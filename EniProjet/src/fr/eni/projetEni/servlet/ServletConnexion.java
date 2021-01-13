@@ -28,10 +28,22 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+				Cookie[] cookies = request.getCookies();
+				 if ( cookies != null ) 
+				 {
+			         for ( Cookie cookie : cookies ) 
+			         {
+			             request.setAttribute(cookie.getName(),cookie.getValue());
+			         }
+				}
+		 
+
 	RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
 	rd.forward(request, response);
-	}
-
+	
+   
+    }
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -111,25 +123,22 @@ public class ServletConnexion extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		//modif à partir de là
+		if(request.getParameter("souvenir")!=null)
+		{
+		int checkbox = Integer.parseInt(request.getParameter("souvenir"));	
+		
+				Cookie[] cookies = request.getCookies();
+				Cookie cookiePseudo = new Cookie("Cpseudo", pseudo);
+				cookiePseudo.setMaxAge(60*60*24*30);
+				response.addCookie(cookiePseudo);
+				
+				Cookie cookiePassword = new Cookie("Cpassword", password);
+				cookiePassword.setMaxAge(60*60*24*30);
+				response.addCookie(cookiePassword);	
+		}
 		RequestDispatcher rd= request.getRequestDispatcher(jspCible);
 		rd.forward(request, response);
-		//modif à partir de là
 		
-		Cookie[] cookies = request.getCookies();
-		Cookie cookiePseudo = new Cookie("pseudo", pseudo);
-		cookiePseudo.setMaxAge(60*60*24*30);
-		response.addCookie(cookiePseudo);
-		
-		Cookie cookiePassword = new Cookie("password", password);
-		cookiePassword.setMaxAge(60*60*24*30);
-		response.addCookie(cookiePassword);
-			
-		int checkbox = Integer.parseInt(request.getParameter("souvenir"));
-		System.out.println("checkbox :" + checkbox);
-		
-		if(checkbox == 1)
-		{
-			
-		}
-	}
+	}//fin du dopost
 }

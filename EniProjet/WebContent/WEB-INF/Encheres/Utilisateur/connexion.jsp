@@ -14,15 +14,26 @@
 
 	<div class="clearfix"></div>
 <br><br>
-
+	<c:if test="${not empty Cpseudo}">
+		<c:set var="cookiepseudo" value="${Cpseudo}"> </c:set>
+		<c:set var="checked" value="checked"> </c:set>		
+	</c:if>
+	<c:if test="${empty Cpseudo}">
+		<c:set var="cookiepseudo" value=""> </c:set>
+	</c:if>
+		<c:if test="${not empty Cpassword}">
+		<c:set var="cookiepassword" value="${Cpassword}"> </c:set>
+	</c:if>
+	<c:if test="${empty Cpassword}">
+		<c:set var="cookiepassword" value=""> </c:set>
+	</c:if>
 	<section class="row col-xs-offset-4 col-xs-4 col-xs-offset-4">
-	
 		<form action="<%=request.getContextPath()%>/connexion" method="post">
 			<label for="identifiant">Identifiant : </label>
-			<input class="texte" type="text" name="pseudo" id="identifiant" size=30/>
+			<input class="texte" type="text" name="pseudo" id="identifiant" size=30 value="${cookiepseudo}"/>
 			<br><br>
 			<label for="password">Mot de passe : </label>
-			<input class="texte" type="password" name="password" id="password"  size=30>
+			<input class="texte" type="password" name="password" id="password"  size=30 value="${cookiepassword}"/>
 			<br><br>
 			<c:if test="${not empty erreur}">
 				<span class="text-danger erreur"> ${erreur} </span>
@@ -31,7 +42,7 @@
 			<input class="submit" type="submit" value="Connexion">
 			 
 			 <div id="iteration2">
-			 <input type="checkbox" name="souvenir" id=souvenir value="1">
+			 <input type="checkbox" name="souvenir" id=souvenir value="1" ${checked} >
 				 Se souvenir de moi
 				<br>
 				<a href="/EniProjet/ServletMotDePasseOublie">Mot de passe oublié</a>
