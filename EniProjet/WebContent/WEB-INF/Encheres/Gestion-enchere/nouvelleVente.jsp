@@ -18,7 +18,7 @@
 	
 		<form method="post" action="/EniProjet/ServletNouvelleVente">
 			
-			
+			//
 			<div>
 				<label>Article : </label><input type="text" name="nomArticle" required>
 			</div>
