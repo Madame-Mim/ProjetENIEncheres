@@ -132,10 +132,10 @@
 			<div class="entetebloc">Enchère en cours</div>
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</p></div>
+					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
-					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
 			</div> 
 			</c:if>
 			</c:if>
@@ -155,10 +155,10 @@
 			
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</p></div>
+					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
-					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
 			</div> 
 			</c:if>
 			</c:if>
@@ -178,10 +178,10 @@
 				</div>
 			<div id="colonnes">			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</p></div>
+					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
-					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
 			</div> 
 			</c:if>
 			</c:if>
@@ -199,10 +199,10 @@
 			<div id="colonnes">
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</p></div>
+					<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
-					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
 			</div> 
 			</c:if>
 			</c:if>
@@ -240,10 +240,10 @@
 			<div id="colonnes">
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</u></p></div>
+			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
-			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</p>
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>
 			</div> 
 		
 		
@@ -264,10 +264,10 @@
 			<div id="colonnes">
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</u></p></div>
+			<p><a href="<%=request.getContextPath()%>/Enchere?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
-			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</p>	
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>	
 		
 		</c:if>
 		</c:if>	
