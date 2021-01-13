@@ -64,7 +64,7 @@ public class ServletConnexion extends HttpServlet {
 					{
 						HttpSession session = request.getSession();
 						session.setAttribute("session", id);
-						jspCible="ServletAccueil";
+						jspCible="/Accueil";
 					}
 				}
 			}
@@ -96,7 +96,7 @@ public class ServletConnexion extends HttpServlet {
 					{
 						HttpSession session = request.getSession();
 						session.setAttribute("session", id);
-						jspCible="ServletAccueil";					
+						jspCible="/Accueil";					
 					}
 				}
 			} 

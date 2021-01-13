@@ -105,7 +105,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		}
 		
 		}
-        this.getServletContext().getRequestDispatcher( "/ServletAccueil" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
 
 		
 	

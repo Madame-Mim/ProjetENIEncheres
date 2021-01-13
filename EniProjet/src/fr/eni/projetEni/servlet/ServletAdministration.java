@@ -1,7 +1,6 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,12 +14,10 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
 import fr.eni.projetEni.bll.EnchereBll;
-import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.EnchereBo;
-import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
@@ -34,7 +31,7 @@ public class ServletAdministration extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session =  request.getSession();
 
 		List<UtilisateurBo> listeUtilisateur;
 		try {
