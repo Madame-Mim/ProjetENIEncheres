@@ -10,16 +10,10 @@ h2 {
 
 img{
 	max-width:100%;
-	height=auto;
-	 align="left";
-	  valign="center";
+	margin-left:-60px;
+    margin-top:-30px;
 	  
 }
-conteneur select {
-    width:80px;
-}
-
-
 
 #rechercher{
 	
@@ -42,10 +36,6 @@ conteneur select {
 	 text-align:center;
 	}
 	
-.photo{
-	float:left;
-	
-}
 
 .labelproduit{
 	font-weight:bold;

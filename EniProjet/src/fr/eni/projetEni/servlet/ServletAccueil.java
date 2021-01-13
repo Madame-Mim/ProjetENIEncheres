@@ -39,6 +39,9 @@ public class ServletAccueil extends HttpServlet {
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		String namerecherche= "le nom de l'article contient";
 		List<CategorieBo> listeCategorie = new ArrayList<>();
+		String choixA1="choixA1";
+		String choixAV="achat";
+		
 		if (session.getAttribute("session") == null ) 
 		{
 			try {
@@ -48,6 +51,8 @@ public class ServletAccueil extends HttpServlet {
 				 request.setAttribute("listeArticles", listeArticles);
 				 request.setAttribute("namerecherche", namerecherche);
 				 request.setAttribute("namerecherche", namerecherche);
+				 request.setAttribute("choixA1", choixA1);
+				 request.setAttribute("choixAV", choixAV);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();}
@@ -71,6 +76,8 @@ public class ServletAccueil extends HttpServlet {
 	        request.setAttribute("listeArticles", listeArticles);
 	        request.setAttribute("vendeur", vendeur);
 	        request.setAttribute("namerecherche", namerecherche);
+	        request.setAttribute("choixA1", choixA1);
+			request.setAttribute("choixAV", choixAV);
             
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -94,6 +101,7 @@ public class ServletAccueil extends HttpServlet {
 		String categorieselection = request.getParameter("categorie");
 		String namerecherche= "le nom de l'article contient";
 		List<CategorieBo> listeCategorie = new ArrayList<>();
+		
 		if (session.getAttribute("session") == null ) 
 		{
 			try {
@@ -120,11 +128,9 @@ public class ServletAccueil extends HttpServlet {
 		else 
 		{
 			int vendeur= Integer.parseInt(session.getAttribute("session").toString());	
-			
-				        
+			       
 		
 			String choixAV = request.getParameter("choixAV");
-			
 			String choixA1 = request.getParameter("choixA1");
 			String choixA2 = request.getParameter("choixA2");
 			String choixA3 = request.getParameter("choixA3");
