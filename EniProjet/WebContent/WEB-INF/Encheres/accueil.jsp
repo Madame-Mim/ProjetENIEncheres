@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jstl/xml" prefix="x" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
@@ -9,6 +10,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+
+    function grisercheckbox(form1){
+    	
+    
+        if(document.getElementById("achat").checked){
+ 
+            document.getElementById('ChoixV1').disabled = '';
+            document.getElementById('ChoixV2').disabled = '';
+            document.getElementById('ChoixV3').disabled = '';
+ 
+        }
+ 
+        else{
+ 
+        	 document.getElementById('ChoixA1').disabled = '';
+             document.getElementById('ChoixA2').disabled = '';
+             document.getElementById('ChoixA3').disabled = '';
+ 
+        }</script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/accueil.css">
 <title>ENI-Enchères</title>
@@ -28,7 +49,7 @@
 <section class="col-xs-12">
 	<div class=" col-xs-8">
 
-		<form method="post" action="<%=request.getContextPath()%>/Accueil">
+		<form method="post" name="form1" action="<%=request.getContextPath()%>/Accueil">
            <div class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">         
 			<label for="recherchearticle">Filtres : </label>
 			<br/>
@@ -53,7 +74,7 @@
 	      <br/>	      
 		  <div class="col-xs-12"> 
 				<div class="row col-xs-6">>
-			<input checked type="radio" id="achat" name="choixAV" value="achat">
+			<input checked type="radio" id="achat" name="choixAV" value="achat" onclick="grisercheckbox(form1)">
 			<label for="achat">Achats</label>
 			<br>				
 			<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
@@ -64,7 +85,7 @@
 			<label for="achat">mes enchères remportés</label><br>
 			    </div>
 				<div class="row col-xs-6">>
-			<input type="radio" id="vente" name="choixAV" value="vente">
+			<input type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox(form1)">
 			<label for="vente">Mes ventes</label>
 			<br>
 			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
@@ -132,7 +153,7 @@
 			<div class="col-xs-7">
 						
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/ServletVenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -152,7 +173,7 @@
 				<div class="col-xs-7">
 						
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/ServletVenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -174,7 +195,7 @@
 				<div class="col-xs-7">
 								
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/ServletVenteFuture?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteFuture?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -194,7 +215,7 @@
 						
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/ServletVenteTerminee?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -234,7 +255,7 @@
 						
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/ServletVenteEnCours?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
+			<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>
@@ -267,7 +288,13 @@
 		</c:if>
 </c:if>
 </c:forEach>
-</div>					
+</section>					
+
+
+ 
+    
+ 
+
 	
 
 </body>

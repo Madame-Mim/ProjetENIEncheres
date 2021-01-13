@@ -1,6 +1,7 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,6 +47,15 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
 		System.out.println("idUtilisateur sur servletReinitialisatioMDP : " + idUtilisateur);
 		
+		
+		List<UtilisateurBo> utilisateurs = null;
+		try {
+			utilisateurs = UtilisateurBll.get();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		
 		if(!(nouveauMotDePasse.equals(confirmationMotDePasse)))
 		{
 			System.out.println("Veuillez entrer deux mot de passe identiques");
@@ -57,8 +67,13 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 			try {
 				utilisateurMAJ = UtilisateurBll.get(idUtilisateur); 
 				System.out.println("utilisateurMAJ :" + utilisateurMAJ);
-				utilisateurMAJ.setPassword(nouveauMotDePasse);
-				UtilisateurBll.update(utilisateurMAJ);
+				
+				for(UtilisateurBo utilisateur : utilisateurs )
+				if(utilisateur.getEmail().equals(utilisateurMAJ.getEmail()) & utilisateur.getId() == idUtilisateur)
+				{
+					utilisateurMAJ.setPassword(nouveauMotDePasse);
+					UtilisateurBll.update(utilisateurMAJ);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
