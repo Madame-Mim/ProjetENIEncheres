@@ -44,26 +44,7 @@
     <url-pattern>/Administration/*</url-pattern>
   </filter-mapping>
   
-<<<<<<< HEAD
-  
-      <servlet>
-        <servlet-name>Upload</servlet-name>
-        <servlet-class>fr.eni.projetEni.servlet.Upload</servlet-class>
-        <multipart-config>
-            <max-file-size>10485760</max-file-size> <!-- 10 Mo -->
-            <max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
-            <file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
-        </multipart-config>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Upload</servlet-name>
-        <url-pattern>/Upload</url-pattern>
-    </servlet-mapping>
-  
-  
-</web-app>
-=======
-  <filter>
+   <filter>
     <filter-name>FilterPageHorsConnexion</filter-name>
     <filter-class>fr.eni.projetEni.filter.FilterPageHorsConnexion</filter-class>
   </filter>
@@ -75,5 +56,20 @@
 <filter-mapping>
     <filter-name>FilterPageHorsConnexion</filter-name>
     <url-pattern>/Utilisateur/inscription.jsp</url-pattern>
-  </filter-mapping></web-app>
->>>>>>> branch 'master' of https://github.com/Urselka/projetENI.git
+  </filter-mapping>
+
+ <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>fr.eni.projetEni.servlet.Upload</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- 10 Mo -->
+            <max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
+            <file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+        </multipart-config>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+  
+</web-app>
