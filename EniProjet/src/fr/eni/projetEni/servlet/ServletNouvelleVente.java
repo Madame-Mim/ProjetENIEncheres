@@ -34,6 +34,23 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		session.setAttribute("session", 1);//a retirer juste là pour les test
+		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
+		UtilisateurBo utilisateur = new UtilisateurBo();
+		try {
+			utilisateur = UtilisateurBll.get(idUtilisateur);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		String rueRetraitUtilisateur = utilisateur.getRue();
+		request.setAttribute("rueRetraitUtilisateur", rueRetraitUtilisateur);
+		String cpRetraitUtilisateur = utilisateur.getCodePostal();
+		request.setAttribute("cpRetraitUtilisateur", cpRetraitUtilisateur);
+		String villeRetraitUtilisateur = utilisateur.getVille();
+		request.setAttribute("villeRetraitUtilisateur", villeRetraitUtilisateur);
+		
 		List<CategorieBo> listeCategorie = CategorieBll.getallM1();
 		request.setAttribute("categorieListe", listeCategorie);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");

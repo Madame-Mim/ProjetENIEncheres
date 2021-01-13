@@ -58,11 +58,11 @@
 				<label>Retrait</label>
 			
 				<div class="detailRetrait">
-				<label>Rue : </label><input type="text" name="rueRetrait">
+				<label>Rue : </label><input type="text" name="rueRetrait" value="<%= request.getAttribute("rueRetraitUtilisateur")%>">
 				<br>
-				<label>Code postal : </label><input type="text" name="codePostalRetrait">
+				<label>Code postal : </label><input type="text" name="codePostalRetrait" value="<%= request.getAttribute("cpRetraitUtilisateur")%>">
 				<br>
-				<label>Ville: </label><input type="text" name="villeRetrait">
+				<label>Ville: </label><input type="text" name="villeRetrait" value="<%= request.getAttribute("villeRetraitUtilisateur")%>">
 				</div>
 			</div>
 			
