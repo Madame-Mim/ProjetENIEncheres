@@ -35,7 +35,7 @@ UtilisateurBo utilisateur;
 			utilisateur = UtilisateurBll.get(id);
 		
 		
-			if(session.getAttribute("session")==null /*|| utilisateur.isAdministrateur()==false*/ )
+			if(session.getAttribute("session")==null || utilisateur.isAdministrateur()==false)
 			{
 			    response.sendRedirect(Accueil);
 			} 

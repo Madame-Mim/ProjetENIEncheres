@@ -54,7 +54,7 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	
+	session.setAttribute("session", 2);
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 		
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
@@ -93,8 +93,8 @@ public class ServletVenteFuture extends HttpServlet {
 					newPlace.setVille(ville);
 					
 					nouvelleadresse.insert(newPlace); //enregistrement de la nouvelle adresse
+					RetraitBo nouvelleAdresse = RetraitBll.getRetrait(newPlace.getRue(), newPlace.getCodePostal(), newPlace.getVille());
 					
-				
 					UtilisateurBo utilisateur;
 			
 					utilisateur = UtilisateurBll.get(id);
@@ -109,7 +109,7 @@ public class ServletVenteFuture extends HttpServlet {
 					article.setPrixVente(0);
 					article.setCategorie(categorieVente);
 					article.setUtilisateur(utilisateur);
-					article.setRetrait(newPlace); //on set la nouvelle adresse enregistrée
+					article.setRetrait(nouvelleAdresse); //on set la nouvelle adresse enregistrée
 					System.out.println(article);
 					try
 					{
