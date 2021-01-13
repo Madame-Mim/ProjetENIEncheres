@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@include file="/WEB-INF/Include/logo.html" %>
 <title>Réinitialisation du mot de passe</title>
 </head>
 <body>
