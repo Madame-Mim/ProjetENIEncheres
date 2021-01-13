@@ -39,10 +39,16 @@ public class UtilisateurBll {
   }
 
     public static List<UtilisateurBo> get()throws Exception {
-    {
-    	return UtilisateurDal.get();
-    }
-   }
+        {
+        	return UtilisateurDal.get();
+        }
+       }
+    
+    public static List<UtilisateurBo> getAllM1()throws Exception {
+        {
+        	return UtilisateurDal.getAllM1();
+        }
+       }
 
     public static UtilisateurBo get(int id)throws Exception {
     {

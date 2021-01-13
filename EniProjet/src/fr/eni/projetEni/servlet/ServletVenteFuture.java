@@ -110,7 +110,6 @@ public class ServletVenteFuture extends HttpServlet {
 					article.setCategorie(categorieVente);
 					article.setUtilisateur(utilisateur);
 					article.setRetrait(nouvelleAdresse); //on set la nouvelle adresse enregistrée
-					System.out.println(article);
 					try
 					{
 						articleAModifie.updateArticle(article); //enregistrement de l'article
@@ -146,7 +145,6 @@ public class ServletVenteFuture extends HttpServlet {
 				{
 					utilisateur = UtilisateurBll.get(id);
 					ArticleVenduBo article = new ArticleVenduBo();
-
 						article.setNoArticle(idArticle);
 						article.setNomArticle(nom);
 						article.setDescription(description);

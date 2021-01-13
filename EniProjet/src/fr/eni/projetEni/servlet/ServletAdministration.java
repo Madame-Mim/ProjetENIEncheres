@@ -35,7 +35,7 @@ public class ServletAdministration extends HttpServlet {
 
 		List<UtilisateurBo> listeUtilisateur;
 		try {
-			listeUtilisateur = UtilisateurBll.get();
+			listeUtilisateur = UtilisateurBll.getAllM1();
 			request.setAttribute("utilisateurListe", listeUtilisateur);
 		} catch (Exception e) {
 			e.printStackTrace();

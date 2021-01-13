@@ -14,7 +14,7 @@ public class CategorieDal {
 	private static final String INSERT = "INSERT INTO CATEGORIES VALUES (?)";
     private static final String GET_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie = ?";
     private static final String GET_ALL = "SELECT * FROM CATEGORIES";
-    private static final String GET_ALL_MINUS1 = "SELECT * FROM CATEGORIES ORDER BY no_categorie OFFSET 1 ROWS";
+    private static final String GET_ALL_MINUS1 = "SELECT * FROM CATEGORIES WHERE no_categorie != 1 ORDER BY no_categorie";
     private static final String UPDATE = "UPDATE CATEGORIES SET libelle = ? WHERE no_categorie = ?";
     private static final String DELETE = "DELETE CATEGORIES WHERE no_categorie = ?";
      

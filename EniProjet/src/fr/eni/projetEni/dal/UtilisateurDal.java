@@ -14,7 +14,7 @@ public class UtilisateurDal {
 
     private static final String INSERT = "INSERT INTO utilisateurs VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String GET_ALL = "SELECT * FROM utilisateurs";
-    private static final String GET_ALL_MINUS_1 = "SELECT * FROM utilisateurs ORDER BY pseudo";
+    private static final String GET_ALL_MINUS_1 = "SELECT * FROM utilisateurs WHERE no_utilisateur != 1 ORDER BY pseudo";
     private static final String GET_BY_ID = "SELECT * FROM utilisateurs WHERE no_utilisateur=?";
     private static final String GET_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
     private static final String GET_BY_COURRIEL = "SELECT * FROM utilisateurs WHERE email=?";
@@ -82,6 +82,39 @@ public class UtilisateurDal {
         return listes;
 }
 
+    public static List<UtilisateurBo>  getAllM1()
+    {
+        List<UtilisateurBo> listes = new ArrayList<>();
+   try(Connection cnx = ConnectionProvider.getConnection())
+    {
+        PreparedStatement requete = cnx.prepareStatement(GET_ALL_MINUS_1);
+        ResultSet rs =  requete.executeQuery();
+
+        while(rs.next())
+        {
+            UtilisateurBo utilisateur = new UtilisateurBo();
+            utilisateur.setId(rs.getInt("no_utilisateur"));
+            utilisateur.setPseudo(rs.getString("pseudo"));
+            utilisateur.setNom(rs.getString("nom"));
+            utilisateur.setPrenom(rs.getString("prenom"));
+            utilisateur.setEmail(rs.getString("email"));
+            utilisateur.setTelephone(rs.getString("telephone"));
+            utilisateur.setRue(rs.getString("rue"));
+            utilisateur.setCodePostal(rs.getString("code_postal"));
+            utilisateur.setVille(rs.getString("ville"));
+            utilisateur.setPassword(rs.getString("mot_de_passe"));
+            utilisateur.setCredit(rs.getInt("credit"));
+            utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
+            listes.add(utilisateur);
+        }
+    }
+        catch (Exception ex)
+    {
+        logger.severe("Erreur dans la méthode get() - erreur : "+ex.getMessage());
+    }
+        return listes;
+}
+    
     public static UtilisateurBo get(int id)
     {
     	UtilisateurBo resultat=null;
