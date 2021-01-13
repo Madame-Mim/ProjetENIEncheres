@@ -20,6 +20,24 @@
 		<%@ include file="/WEB-INF/Include/header.html" %>
 		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
+<c:set var="vente" value="vente" />
+<c:set var = "test1" value ="${filtreNom}"/>
+<c:set var = "test2" value ="${categorieselection}" />
+<c:set var = "recherchearticle" value ="${filtreNom}" />
+<c:set var ="vendeur" value ="${vendeur}" />
+<c:set var ="choixAV" value ="${choixAV}" />
+<c:set	var ="choixA1" value ="${choixA1}" />
+<c:set	var ="choixA2" value ="${choixA2}" />
+<c:set	var ="choixA3" value ="${choixA3}" />
+<c:set	var ="choixV1" value ="${choixV1}" />
+<c:set	var ="choixV2" value ="${choixV2}" />
+<c:set	var ="choixV3" value ="${choixV3}" />
+<c:if test="${empty choixA1 && empty choixA2 && empty choixA3}"> 
+<c:if test="${empty choixV1 && empty choixV2 && empty choixV3}">
+<c:set var ="choixA1" value ="A1" />	
+</c:if>
+</c:if>
+
 
 <section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
 <header>
@@ -27,6 +45,8 @@
 </header>
 </section>
 <br/>
+<br/>
+
 <section class="col-xs-12">
 	<div class=" col-xs-8">
 
@@ -52,28 +72,29 @@
 	      </div>
 	      <br/>
 	      <br/>
-	      <br/>	      
+	      <br/>	
+	  
 		  <div class="col-xs-12"> 
-				<div class="row col-xs-6">>
+				<div class="row col-xs-6">
 			<input checked type="radio" id="achat" name="choixAV" value="achat" onclick="grisercheckbox();">
 			<label for="achat">Achats</label>
 			<br>				
-			<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
+			<input <c:if test="${!empty choixA1}">checked</c:if>  type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"   > 
 			<label for="choixA1">enchères ouverte</label><br>
-			<input type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
+			<input <c:if test="${!empty choixA2}">checked</c:if>  type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
 			<label for="choixA2">mes enchères en cours</label><br>
-			<input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
+			<input <c:if test="${!empty choixA3}">checked</c:if> type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
 			<label for="choixA3">mes enchères remportés</label><br>
 			    </div>
-				<div class="row col-xs-6">>
-			<input type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox();">
+				<div class="row col-xs-6">
+			<input <c:if test="${choixAV eq vente}">checked</c:if> type="radio" id="vente" name="choixAV" value="vente" onclick="grisercheckbox();">
 			<label for="vente">Mes ventes</label>
 			<br>
-			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte" disabled="disabled">
+			<input <c:if test="${!empty choixV1}">checked</c:if> type="checkbox" id="choixV1" name="choixV1" value="venteouverte" disabled="disabled">
 			<label for="choixV1">mes ventes en cours</label><br>
-			<input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute" disabled="disabled">
+			<input <c:if test="${!empty choixV2}">checked</c:if> type="checkbox" id="choixV2" name="choixV2" value="ventenondebute" disabled="disabled">
 			<label for="choixV2">ventes non debutées</label><br>
-			<input type="checkbox" id="choixV3" name="choixV3" value="ventetermine" disabled="disabled">
+			<input <c:if test="${!empty choixV3}">checked</c:if> type="checkbox" id="choixV3" name="choixV3" value="ventetermine" disabled="disabled">
 			<label for="choixV3">ventes terminées</label><br></div>
            </div>
 		</div>
@@ -92,23 +113,7 @@
 <section class="col-xs-12 ">
 
 
-<c:set var = "test1" value ="${filtreNom}"/>
-<c:set var = "test2" value ="${categorieselection}" />
-<c:set var = "recherchearticle" value ="${filtreNom}" />
-<c:set var ="vendeur" value ="${vendeur}" />
-<c:set var ="choixAV" value ="${choixAV}" />
-<c:set	var ="choixA1" value ="${choixA1}" />
-<c:set	var ="choixA2" value ="${choixA2}" />
-<c:set	var ="choixA3" value ="${choixA3}" />
-<c:set	var ="choixV1" value ="${choixV1}" />
-<c:set	var ="choixV2" value ="${choixV2}" />
-<c:set	var ="choixV3" value ="${choixV3}" />
 
-<c:if test="${empty choixA1 && empty choixA2 && empty choixA3}"> 
-<c:if test="${empty choixV1 && empty choixV2 && empty choixV3}">
-<c:set	var ="choixA1" value ="A1" />	
-</c:if>
-</c:if>
 	
 	<c:forEach var="v" items="${listeArticles}">
 				
@@ -284,6 +289,10 @@ function grisercheckbox(){
             document.getElementById('choixA1').disabled ='';
             document.getElementById('choixA2').disabled = '';
             document.getElementById('choixA3').disabled = '';
+            document.getElementById('choixV1').checked = false;
+            document.getElementById('choixV2').checked = false;
+            document.getElementById('choixV3').checked = false;
+            document.getElementById('choixA1').checked = true;
         }
  
         else if(document.getElementById("vente").checked){
@@ -294,6 +303,10 @@ function grisercheckbox(){
              document.getElementById('choixA1').disabled = 'disabled';
              document.getElementById('choixA2').disabled = 'disabled';
              document.getElementById('choixA3').disabled = 'disabled';
+             document.getElementById('choixA1').checked = false;
+             document.getElementById('choixA2').checked = false;
+             document.getElementById('choixA3').checked = false;
+             document.getElementById('choixV1').checked = true;
  
         }}
         </script>
