@@ -8,82 +8,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ENI-Encheres</title>
-
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/accueil.css">
+<title>ENI-Enchères</title>
 </head>
-
 <body>
-
 <header>
 		<%@ include file="/WEB-INF/Include/header.html" %>
+		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
-<h1> Liste des enchères</h1>	
 
-
-<c:set var = "recherchearticle" value ="${namerecherche}" />
-<form method="post" action="<%=request.getContextPath()%>/Accueil">
-<label for="recherchearticle">Filtres</label>
-<input type="text" name="recherche" 
-placeholder="${recherchearticle}" size= "40"/>
-<br/>
-
-
-<c:set var = "test2" value ="${categorieselection}" />
-<br/>
-<label for="categorie">Catégorie : </label>
-<select name="categorie" size="1">
-<option value="" selected="selected">Toutes</option>
-<c:forEach items="${listeCategorie}" var="categ">
-<option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>
-</c:forEach>
-</select>
-
-
-<br/>
-<br/>
-
-
-
-
-<div class="choixAV">
-<input checked type="radio" id="achat" name="choixAV" value="achat">
-<label for="achat">Achats</label><br>
-
-<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
-<label for="achat">enchères ouverte</label><br>
-<input type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
-<label for="achat">mes enchères en cours</label><br>
-<input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
-<label for="achat">mes enchères remportés</label><br>
-
-<input type="radio" id="vente" name="choixAV" value="vente">
-<label for="vente">Mes ventes</label><br>
-
-<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
-<label for="achat">mes ventes en cours</label><br>
-<input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute">
-<label for="achat">ventes non debutées</label><br>
-<input type="checkbox" id="choixV3" name="choixV3" value="ventetermine">
-<label for="achat">ventes terminées</label><br>
-
+<div class="block">
+<header>
+<h2>Liste des enchères</h2>	
+</header>
 </div>
-
-
-
-<input type="submit" value="RECHERCHER">
-</form>
-
 <br/>
-<!--
-<p><%=request.getAttribute("listeArticles") %> </p>
-vendeur
-<p>${vendeur}</p>
-ma liste enchere
-<p><%=request.getAttribute("malisteEncheres") %> </p>
-<br/>-->
-<p>
-	<ul>
+<div class="block">
+	<div class="blockform">
+
+		<form method="post" action="<%=request.getContextPath()%>/Accueil">
+           <div class="elemform">         
+			<label for="recherchearticle">Filtres : </label>
+			<br/>
+			<c:set var = "recherchearticle" value ="${namerecherche}" />
+			<input type="text" name="recherche" 
+			placeholder="${recherchearticle}" size= "30"/>
+			<br/>
+			<br/>
+			<div id=categorie>
+			<c:set var = "test2" value ="${categorieselection}" />
+			<label for="categorie">Catégorie : </label>
+			<select name="categorie" size="1" >
+			<option value="" selected="selected">Toutes</option>
+				<c:forEach items="${listeCategorie}" var="categ" >
+					<option value="${categ.noCategorie}" ${categ.noCategorie == test2 ? 'selected="selected"' : ''} >${categ.libelle}</option>     
+				</c:forEach>
+			</select>
+			</div>
+	      </div>
+	      <br/>
+	      <br/>
+	      <br/>	      
+		  <div class="elemform2"> 
+			<div class="choixAV">
+				<div class="col">
+			<input checked type="radio" id="achat" name="choixAV" value="achat">
+			<label for="achat">Achats</label>
+			<br>				
+			<input checked type="checkbox" id="choixA1" name="choixA1" value="enchereouverte"  > 
+			<label for="achat">enchères ouverte</label><br>
+			<input type="checkbox" id="choixA2" name="choixA2" value="enchereencours"  > 
+			<label for="achat">mes enchères en cours</label><br>
+			<input type="checkbox" id="choixA3" name="choixA3" value="enchereremporte"  >
+			<label for="achat">mes enchères remportés</label><br>
+			    </div>
+				<div class="col">
+			<input type="radio" id="vente" name="choixAV" value="vente">
+			<label for="vente">Mes ventes</label>
+			<br>
+			<input type="checkbox" id="choixV1" name="choixV1" value="venteouverte">
+			<label for="achat">mes ventes en cours</label><br>
+			<input type="checkbox" id="choixV2" name="choixV2" value="ventenondebute">
+			<label for="achat">ventes non debutées</label><br>
+			<input type="checkbox" id="choixV3" name="choixV3" value="ventetermine">
+			<label for="achat">ventes terminées</label><br></div>
+           </div>
+		</div>
+	</div>
+	<div class="blockform" id="rechercher">
+		<input class="btn btn-success" type="submit" value="RECHERCHER">
+	</div>
+		</form>
+</div>		
+<br/>
+<br/>
+<div class="block">
+
+<div class="dispocartes">
 
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
@@ -96,122 +99,183 @@ ma liste enchere
 <c:set	var ="choixV1" value ="${choixV1}" />
 <c:set	var ="choixV2" value ="${choixV2}" />
 <c:set	var ="choixV3" value ="${choixV3}" />
-	
-	
-<c:forEach var="v" items="${listeArticles}">
-		
-		
-<jsp:useBean id="now" class="java.util.Date" />
-<c:set var="currentDate" value="${v.dateFinEncheres}" />
-<fmt:parseDate value="${currentDate}" var="finEnchere" pattern="yyyy-MM-dd" />
-<c:set var="currentDate" value="${v.dateDebutEncheres}" />
-<fmt:parseDate value="${currentDate}" var="debutEnchere" pattern="yyyy-MM-dd" />
-<c:set var = "theString" value ="${v.nomArticle}" />
-<c:set var = "catégorie" value ="${v.categorie.noCategorie}" />
-<c:set var = "vendeurtest" value ="${v.utilisateur.id}" />
 
-<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
+<c:if test="${empty choixA1 && empty choixA2 && empty choixA3}"> 
+<c:if test="${empty choixV1 && empty choixV2 && empty choixV3}">
+<c:set	var ="choixA1" value ="A1" />	
+</c:if>
+</c:if>
+	
+	<c:forEach var="v" items="${listeArticles}">
+				
+			<jsp:useBean id="now" class="java.util.Date" />
+			<c:set var="currentDate" value="${v.dateFinEncheres}" />
+			<fmt:parseDate value="${currentDate}" var="finEnchere" pattern="yyyy-MM-dd" />
+			<c:set var="currentDate" value="${v.dateDebutEncheres}" />
+			<fmt:parseDate value="${currentDate}" var="debutEnchere" pattern="yyyy-MM-dd" />
+			<c:set var = "theString" value ="${v.nomArticle}" />
+			<c:set var = "catégorie" value ="${v.categorie.noCategorie}" />
+			<c:set var = "vendeurtest" value ="${v.utilisateur.id}" />
+
+		<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
     	
     	
-    	<c:if test="${!empty choixA1}">
-    	<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
-			<div class="bloc">
+    		<c:if test="${!empty choixA1}">
+    		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
+			<div class="cartes">
+				<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+				</div>
+			<div id="colonnes">
 			<div class="entetebloc">Enchère en cours</div>
-			<li>${v.nomArticle}</li>
-			<li>${v.prixVente}</li>
-			<li>${v.dateFinEncheres}</li>
-			<li>${v.utilisateur.pseudo}	</li>
+			
+					<div class=labelproduit>
+					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</p></div>
+					<p>${v.prixVente}</p>
+					<p>${v.dateFinEncheres}</p>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
 			</div> 
-		</c:if>
-		</c:if>
+			</c:if>
+			</c:if>
 		
-		<c:if test="${!empty choixV1}">
-		<c:if test="${vendeurtest eq vendeur}">
-		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
-		<div class="bloc">
+			<c:if test="${!empty choixV1}">
+			<c:if test="${vendeurtest eq vendeur}">
+			<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
+			<div class="cartes">
 			<div class="entetebloc">Ventes en cours</div>
-			<li>${v.nomArticle}</li>
-			<li>${v.prixVente}</li>
-			<li>${v.dateFinEncheres}</li>
-			<li>${v.utilisateur.pseudo}	</li>
-		
-		</c:if>
-		</c:if>
-		</c:if>
+				<br/>
+				<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+				</div>
+			<div id="colonnes">
+			
+			
+					<div class=labelproduit>
+					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</p></div>
+					<p>${v.prixVente}</p>
+					<p>${v.dateFinEncheres}</p>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+			</div> 
+			</c:if>
+			</c:if>
+			</c:if>
 			
 		
-	<c:if test="${vendeurtest eq vendeur}">
-		<c:if test="${!empty choixV2}">
-		<c:if test="${now.time lt debutEnchere.time}">
-		<div class="bloc">
-			<div class="entetebloc">Ventes non debutées</div>
-			<li>${v.nomArticle}</li>
-			<li>${v.prixVente}</li>
-			<li>${v.dateFinEncheres}</li>
-			<li>${v.utilisateur.pseudo}	</li>
-		
+		<c:if test="${vendeurtest eq vendeur}">
+			<c:if test="${!empty choixV2}">
+			<c:if test="${now.time lt debutEnchere.time}">
+			<div class="cartes">
+			<div class="entetebloc">Ventes non débutées</div>
+			<br/>
+				<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+				</div>
+			<div id="colonnes">			
+					<div class=labelproduit>
+					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</p></div>
+					<p>${v.prixVente}</p>
+					<p>${v.dateFinEncheres}</p>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+			</div> 
+			</c:if>
+			</c:if>
+			
+			<c:if test="${!empty choixV3}">
+			<c:if test="${now.time gt finEnchere.time}">
+			<div class="cartes">
+			<div class="entetebloc">Ventes terminées</div>
+			<br/>
+				<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+			</div>
+			<div id="colonnes">
+			
+					<div class=labelproduit>
+					<p><a href="<%=request.getContextPath()%>/Enchere?${v.noArticle}">${v.nomArticle}</p></div>
+					<p>${v.prixVente}</p>
+					<p>${v.dateFinEncheres}</p>
+					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</p></div>
+			</div> 
+			</c:if>
+			</c:if>
 		</c:if>
-		</c:if>
-		<c:if test="${!empty choixV3}">
-		<c:if test="${now.time gt finEnchere.time}">
-		<div class="bloc">
-			<div class="entetebloc">Ventes non debutées</div>
-			<li>${v.nomArticle}</li>
-			<li>${v.prixVente}</li>
-			<li>${v.dateFinEncheres}</li>
-			<li>${v.utilisateur.pseudo}	</li>
-		
-		</c:if>
-		</c:if>
-	</c:if>
 </c:if>	
 </c:forEach>
-<c:forEach var="t" items="${malisteEncheres}">
-
-<jsp:useBean id="now1" class="java.util.Date" />
-<c:set var="currentDate" value="${t.noArticle.dateFinEncheres}" />
-<fmt:parseDate value="${currentDate}" var="finEnchere" pattern="yyyy-MM-dd" />
-<c:set var="currentDate" value="${t.noArticle.dateDebutEncheres}" />
-<fmt:parseDate value="${currentDate}" var="debutEnchere" pattern="yyyy-MM-dd" />
-<c:set var = "theString" value ="${t.noArticle.nomArticle}" />
-<c:set var = "catégorie" value ="${t.noArticle.categorie.noCategorie}" />
-<c:set var = "meilleurEnchere" value ="${t.noArticle.prixVente}" />
-<c:set var = "maMeilleurEnchere" value ="${t.montantEnchere}" />
-
-<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
 
 
+	<c:forEach var="t" items="${malisteEncheres}">
 
-		<c:if test="${!empty choixA}">
+		<jsp:useBean id="now1" class="java.util.Date" />
+		<c:set var="currentDate" value="${t.noArticle.dateFinEncheres}" />
+		<fmt:parseDate value="${currentDate}" var="finEnchere" pattern="yyyy-MM-dd" />
+		<c:set var="currentDate" value="${t.noArticle.dateDebutEncheres}" />
+		<fmt:parseDate value="${currentDate}" var="debutEnchere" pattern="yyyy-MM-dd" />
+		<c:set var = "theString" value ="${t.noArticle.nomArticle}" />
+		<c:set var = "catégorie" value ="${t.noArticle.categorie.noCategorie}" />
+		<c:set var = "meilleurEnchere" value ="${t.noArticle.prixVente}" />
+		<c:set var = "maMeilleurEnchere" value ="${t.montantEnchere}" />
+
+	<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
+
+
+
+		<c:if test="${!empty choixA2}">
 		<c:if test="${now1.time lt finEnchere.time && now1.time gt debutEnchere.time}">
-		<div class="bloc">
-			<div class="entetebloc">Enchere en cours</div>
-			<li>${t.noArticle.nomArticle}</li>
-			<li>${t.noArticle.prixVente}</li>
-			<li>${t.noArticle.dateFinEncheres}</li>
-			<li>${t.noArticle.utilisateur.pseudo}	</li>
+		<div class="cartes">
+		<div class="entetebloc">Enchere en cours</div>
+		<br/>
+			<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+				</div>
+			<div id="colonnes">
 			
+			<div class=labelproduit>
+			<p><a href="<%=request.getContextPath()%>/Enchere?${t.noArticle}">${t.noArticle.nomArticle}</u></p></div>
+			<p>${t.noArticle.prixVente}</p>
+			<p>${t.noArticle.dateFinEncheres}</p>
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</p>
+			</div> 
 		
 		
 		</c:if>
 		</c:if>	
 		
-		<c:if test="${!empty choixA}">
+		<c:if test="${!empty choixA3}">
 		<c:if test="${now1.time gt finEnchere.time}">
 		<c:if test="${meilleurEnchere eq maMeilleurEnchere}">
-		<div class="bloc">
-			<div class="entetebloc">Mes enchères remportées</div>
-			<li>${t.noArticle.nomArticle}</li>
-			<li>${t.noArticle.prixVente}</li>
-			<li>${t.noArticle.dateFinEncheres}</li>
-			<li>${t.noArticle.utilisateur.pseudo}	</li>
+		<div class="cartes">
+		<div class="entetebloc">Mes enchères remportées</div>
+			<br/>
+			<div id="colonnes">
+					<div class="photo">
+					<img  alt="dest" src="<%=request.getContextPath()%>/Image/destroyed.jpg" width="130" height=auto align="left" valign="center">
+					</div>
+				</div>
+			<div id="colonnes">
+			
+			<div class=labelproduit>
+			<p><a href="<%=request.getContextPath()%>/Enchere?${t.noArticle}">${t.noArticle.nomArticle}</u></p></div>
+			<p>${t.noArticle.prixVente}</p>
+			<p>${t.noArticle.dateFinEncheres}</p>
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</p>	
 		
 		</c:if>
 		</c:if>	
 		</c:if>
 </c:if>
-</c:forEach>						
-</ul>	
+</c:forEach>
+</div>					
+	
 
 </body>
 </html>

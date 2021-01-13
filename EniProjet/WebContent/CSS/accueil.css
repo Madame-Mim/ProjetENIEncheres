@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/* Général ------------------------------------------------------------------------------------- */
+
+body, p, legend, label, input {
+    font: normal 12pt verdana, helvetica, sans-serif;
+}
+h2 {
+    text-align:center;
+}
+conteneur select {
+    width:80px;
+}
+.block {
+    margin-left:40px;
+    
+}
+
+.blockform {
+    display:inline-block
+    
+}
+.elemform2{
+	display:block;
+    display:grid;
+    grid-template-columns: 1fr 1fr
+}
+
+
+#rechercher{
+	margin-left:100px;
+	justify-content:center;
+	align-items:top;
+}
+.col{
+	display:block;
+	
+}
+
+
+
+.dispocartes {
+  display:grid;
+  justify-content:space-between;
+  grid-template-columns: 1fr 1fr 1fr;
+ 
+    
+}
+.cartes {
+	background-color:lightgrey;
+	margin:5px;
+    border:solid;
+    padding:10px;
+    display:block;
+    display:grid;
+    grid-template-columns: 1fr 1fr
+   }
+
+
+.colonnes{
+	display:block;
+	
+}
+.entetebloc{
+	 text-align:center;
+	}
+.photo{
+justify-content:center;
+align-items:center;	
+}
+.labelproduit{
+	font-weight:bold;
+	color:blue;
+		
+}
+
+#categorie {
+     display:inline-flex;
+}
