@@ -27,7 +27,7 @@
 			<input class="submit" type="submit" value="Connexion">
 			 
 			 <div id="iteration2">
-			 <input type="checkbox" name="souvenir" id=souvenir>
+			 <input type="checkbox" name="souvenir" id=souvenir value="1">
 				 Se souvenir de moi
 				<br>
 				<a href="/EniProjet/ServletMotDePasseOublie">Mot de passe oublié</a>

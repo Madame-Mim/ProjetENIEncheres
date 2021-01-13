@@ -1,11 +1,13 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -107,5 +109,23 @@ public class ServletConnexion extends HttpServlet {
 		}
 		RequestDispatcher rd= request.getRequestDispatcher(jspCible);
 		rd.forward(request, response);
+		//modif à partir de là
+		
+		Cookie[] cookies = request.getCookies();
+		Cookie cookiePseudo = new Cookie("pseudo", pseudo);
+		cookiePseudo.setMaxAge(60*60*24*30);
+		response.addCookie(cookiePseudo);
+		
+		Cookie cookiePassword = new Cookie("password", password);
+		cookiePassword.setMaxAge(60*60*24*30);
+		response.addCookie(cookiePassword);
+			
+		int checkbox = Integer.parseInt(request.getParameter("souvenir"));
+		System.out.println("checkbox :" + checkbox);
+		
+		if(checkbox == 1)
+		{
+			
+		}
 	}
 }
