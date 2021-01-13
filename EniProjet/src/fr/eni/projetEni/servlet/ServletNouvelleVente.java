@@ -80,7 +80,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		}
 		
 	//Permet de récupérer le noCategorie	
-		int noCategorie = Integer.parseInt(request.getParameter("categorieArticle"));
+		int noCategorie = Integer.parseInt(request.getParameter("categorie"));
 		CategorieBo CategorieNouvelArticle = CategorieBll.get(noCategorie);
 		
 		

@@ -16,7 +16,7 @@
 	<section>
 		<div class=title><h1>Nouvelle vente</h1></div>
 	
-		<form method="post" action="/EniProjet/ServletNouvelleVente" enctype="multipart/form-data">
+		<form method="post" action="/EniProjet/ServletNouvelleVente">
 			
 			
 			<div>

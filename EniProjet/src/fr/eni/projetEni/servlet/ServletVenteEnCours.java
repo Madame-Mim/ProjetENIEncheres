@@ -1,7 +1,9 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,40 +31,33 @@ public class ServletVenteEnCours extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*  
-        if (session.getAttribute("session") == null )
-        {
-           
-            response.sendRedirect(request.getContextPath()+"/ServletAccueil");
-        }
-        else
-        {
-        	*/
-		int numArticle = Integer.parseInt(request.getParameter("idarticle"));
+	
+       		int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
 			try {
 			    HttpSession session = request.getSession();
+			    session.setAttribute("session", 2);
 			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
-				ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
+			     
+			    ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
 				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
 				request.setAttribute("utilisateur", utilisateur);
-
-				
+						
 				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 				request.setAttribute("enchere", enchere);
-
-
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-        //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
-        rd.forward(request, response);
-        }
-	//}
+				
+				}
+			    catch (Exception e)
+			    {
+						e.printStackTrace();
+				}
+			        
+		        //le forward envoi l'affichage à la jsp
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
+					rd.forward(request, response);
+			     }
+				
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
