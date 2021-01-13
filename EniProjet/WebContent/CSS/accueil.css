@@ -24,17 +24,17 @@ conteneur select {
     display:grid;
     grid-template-columns: 1fr 1fr
 }
-
+.col{
+	display:block;
+	
+}
 
 #rechercher{
 	margin-left:100px;
 	justify-content:center;
 	align-items:top;
 }
-.col{
-	display:block;
-	
-}
+
 
 
 
