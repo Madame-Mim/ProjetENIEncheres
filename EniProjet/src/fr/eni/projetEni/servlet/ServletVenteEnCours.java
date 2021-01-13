@@ -119,17 +119,25 @@ public class ServletVenteEnCours extends HttpServlet {
 			article.setPrixVente(montant);
 
 			articleAModifie.updateArticle(article);
+			
+			
+			//Rechargement des données pour affichage
+			int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
+			ArticleVenduBo articleACharge = ArticleVenduBll.getById(numArticle);
+			request.setAttribute("article", articleACharge);
+			EnchereBo enchereACharge = EnchereBll.getByIdArticle(article.getNoArticle());
+			request.setAttribute("enchere", enchereACharge);
+	        //le forward envoi l'affichage à la jsp
+	        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
+	        rd.forward(request, response);
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
+
 		
-	
-        //le forward envoi l'affichage à la jsp
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
-        rd.forward(request, response);
 		
-}
+	}
 }

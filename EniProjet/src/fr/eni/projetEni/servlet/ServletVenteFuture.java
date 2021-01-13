@@ -1,10 +1,7 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,12 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEni.bll.ArticleVenduBll;
 import fr.eni.projetEni.bll.CategorieBll;
-import fr.eni.projetEni.bll.EnchereBll;
 import fr.eni.projetEni.bll.RetraitBll;
 import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
-import fr.eni.projetEni.bo.EnchereBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 
@@ -59,14 +54,13 @@ public class ServletVenteFuture extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		session.setAttribute("session", 2);
-
+	
 		int id = Integer.parseInt(session.getAttribute("session").toString());
+		
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
-
 		
 		if(request.getParameter("enregistrer")!=null)
-		{
+		{ 
 			ArticleVenduBll articleAModifie = new ArticleVenduBll();
 			
 			int idArticle = Integer.parseInt(request.getParameter("idarticle"));
@@ -116,9 +110,11 @@ public class ServletVenteFuture extends HttpServlet {
 					article.setCategorie(categorieVente);
 					article.setUtilisateur(utilisateur);
 					article.setRetrait(newPlace); //on set la nouvelle adresse enregistrée
+					System.out.println(article);
 					try
 					{
 						articleAModifie.updateArticle(article); //enregistrement de l'article
+						
 					} 
 					catch (Exception e)
 					{
@@ -129,9 +125,20 @@ public class ServletVenteFuture extends HttpServlet {
 				{
 				e1.printStackTrace();
 				}
+				ArticleVenduBo article;
+				try {
+					article = ArticleVenduBll.getById(idarticle);
+					request.setAttribute("article", article);
 
+					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+					request.setAttribute("categorieListe", listeCategorie);				
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+				rd.forward(request, response);
 			} 
-			else
+			else 	//Si cette adresse de retrait existe déjà:
 			{
 				UtilisateurBo utilisateur;
 				
@@ -139,7 +146,6 @@ public class ServletVenteFuture extends HttpServlet {
 				{
 					utilisateur = UtilisateurBll.get(id);
 					ArticleVenduBo article = new ArticleVenduBo();
-					//Enregistrer d'abord le retrait si besoin	RetraitBo retrait = RetraitBll.get(no_retrait);
 
 						article.setNoArticle(idArticle);
 						article.setNomArticle(nom);
@@ -164,14 +170,39 @@ public class ServletVenteFuture extends HttpServlet {
 				catch (Exception e1) 
 				{
 					e1.printStackTrace();
-				}			
+				}
+				
+				ArticleVenduBo article;
+				try 
+				{
+					article = ArticleVenduBll.getById(idarticle);
+					request.setAttribute("article", article);
+
+					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+					request.setAttribute("categorieListe", listeCategorie);				
+				} 
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+					rd.forward(request, response);
 			}
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
-			rd.forward(request, response);
 		}
 		else if(request.getParameter("annulerModif")!=null)
-		{
+		{				
+			try 
+			{
+				ArticleVenduBo article = ArticleVenduBll.getById(idarticle);
+				request.setAttribute("article", article);
+	
+				List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+				request.setAttribute("categorieListe", listeCategorie);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 			rd.forward(request, response);
 		}
@@ -183,16 +214,14 @@ public class ServletVenteFuture extends HttpServlet {
 					articleADelete = ArticleVenduBll.getById(idarticle);
 					articleBll.deleteArticle(idarticle);
 					
-					   RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					   RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 					   rd.forward(request, response);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
 		}
 		
-		 //le forward envoi l'affichage à la jsp
 
-		}
+	}
 }
