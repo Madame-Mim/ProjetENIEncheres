@@ -45,7 +45,7 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 		
 		//session.invalidate();
 		
-        this.getServletContext().getRequestDispatcher( "/ServletAccueil" ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
 	} 
 
 
