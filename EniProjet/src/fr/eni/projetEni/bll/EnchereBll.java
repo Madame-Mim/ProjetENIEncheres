@@ -72,7 +72,7 @@ public class EnchereBll
         {
             throw new Exception("Vendeur incorrect");
         }
-        return EnchereDal.getbyutilisateur(no_Utilisateur);
+        return EnchereDal.getmaxbyutilisateur(no_Utilisateur);
 
     }
     public static void update(EnchereBo enchere) throws Exception
