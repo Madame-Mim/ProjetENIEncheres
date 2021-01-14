@@ -62,15 +62,23 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				{
 					utilisateurCree.insert(utilisateur);
 					utilisateur = UtilisateurBll.getPseudo(pseudo);
-					HttpSession session = request.getSession();
-					int id = utilisateur.getId();
+					
 
-					session.setAttribute("session", id);
 				} 
 				catch (Exception e) 
 				{
 					e.printStackTrace();
 				}
+				HttpSession session = request.getSession();
+				
+				int id = utilisateur.getId();
+				session.setAttribute("session", id);
+
+				System.out.println(id);
+				System.out.println(session.getAttribute("session"));
+				if (id !=0)
+				{
+
 					this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
 				}
 		else 
@@ -79,6 +87,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 			request.setAttribute("erreur", message);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );		
 		}	
+		}
 	}		
 }
 
