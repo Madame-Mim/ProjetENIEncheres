@@ -1,3 +1,7 @@
+/**
+ * @author edavi2020
+ */
+
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
@@ -19,18 +23,18 @@ import fr.eni.projetEni.bo.UtilisateurBo;
  */
 @WebServlet("/ServletInscriptionUtilisateur")
 public class ServletInscriptionUtilisateur extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 1L;
 	private UtilisateurBll utilisateurCree = new UtilisateurBll();
        
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//récupération des infos des champs
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -43,8 +47,10 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		String confirmation = request.getParameter("confirmation");
 		System.out.println(motdepasse+ ", " +confirmation);
 
+		//instanciation d'un nouvel utilisateur
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		
+		//attribution des valeurs
 		utilisateur.setPseudo(pseudo);
 		utilisateur.setNom(nom);
 		utilisateur.setPrenom(prenom);
@@ -55,38 +61,42 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		utilisateur.setVille(ville);
 		utilisateur.setPassword(motdepasse);
 
-		
+		//teste le mot de passe
 		if (motdepasse.equals(confirmation)) 
 		{
-				try 
-				{
-					utilisateurCree.insert(utilisateur);
-					utilisateur = UtilisateurBll.getPseudo(pseudo);
-					
+			//insertion de l'utilisateur dans la BDD
+			try 
+			{
+				utilisateurCree.insert(utilisateur);
+				utilisateur = UtilisateurBll.getPseudo(pseudo);
 
 				} 
 				catch (Exception e) 
 				{
 					e.printStackTrace();
 				}
-				HttpSession session = request.getSession();
-				
-				int id = utilisateur.getId();
-				session.setAttribute("session", id);
+			
+			//instanciation d'une nouvelle session
+			HttpSession session = request.getSession();
+			
+			//récupération de l'ID de l'utilisateur
+			int id = utilisateur.getId();
+			
+			//attribution de l'ID dans la session
+			session.setAttribute("session", id);
 
-				System.out.println(id);
-				System.out.println(session.getAttribute("session"));
-				if (id !=0)
-				{
-
+			//teste si l'utilisateur existe déjà
+			if (id !=0)
+			{
 					this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
-				}
-		else 
-		{	
-			String message ="Echec de l'inscription. Réessayez.";
-			request.setAttribute("erreur", message);
-			this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );		
-		}	
+					
+			} else {	
+				
+				//envoi d'un message d'erreur
+				String message ="Echec de l'inscription. Réessayez.";
+				request.setAttribute("erreur", message);
+				this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );		
+			}	
 		}
 	}		
 }
