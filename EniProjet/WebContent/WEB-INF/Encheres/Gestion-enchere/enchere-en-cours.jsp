@@ -68,12 +68,6 @@
 				 <c:set var="enabled" value="disabled" scope="page" />
 				 <c:set var="message" value="Vous êtes déjà le meilleur enchérisseur !" scope="page" />
 			 </c:when>
-			 <!-- 
-			 <c:when test="" >
-				 <c:set var="enabled" value="disabled" scope="page" />
-				 <c:set var="message" value="La vente est terminée !" scope="page" />
-			 </c:when>
-			  -->
 			 <c:otherwise>
 			 	<c:set var="message" value="Vous disposez de ${utilisateur.getCredit()} points pour enchérir" scope="page" />
 			 </c:otherwise>
