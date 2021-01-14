@@ -37,19 +37,19 @@
 				                    <br />
 				                    
 				                    <label for="telephone">Numéro de téléphone :<span class="requis"></span></label>
-				                    <input type="text" id="telephone" name="telephone" value="${utilisateur.telephone}" size="20" maxlength="20" />
+				                    <input type="text" id="telephone" name="telephone" value="<c:out value="${utilisateur.telephone}"/>" size="20" maxlength="20" />
 				                    <br />
 				                    
 				                    <label for="codePostal">Code postal :<span class="requis"></span></label>
-				                    <input type="text" id="codePostal" name="codePostal" value="${utilisateur.codePostal}" size="20" maxlength="20" />
+				                    <input type="text" id="codePostal" name="codePostal" value="<c:out value="${utilisateur.codePostal}"/>" size="20" maxlength="20" />
 				                    <br />
 				                    
 				                    <label for="motdepasseactuel">Mot de passe actuel :<span class="requis"></span></label>
-				                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="${utilisateur.password}" size="20" maxlength="20" />
+				                	<input type="password" id="motdepasseactuel" name="motdepasseactuel" value="<c:out value="${utilisateur.password}"/>" size="20" maxlength="20" />
 				                	<br />
 				                    
 				                    <label for="motdepasse">Nouveau mot de passe :<span class="requis"></span></label>
-				                	<input type="password" id="motdepasse" name="motdepasse" value="${utilisateur.password}" size="20" maxlength="20" />
+				                	<input type="password" id="motdepasse" name="motdepasse" value="<c:out value="${utilisateur.password}"/>" size="20" maxlength="20" />
 				                	<br />
 		                		</div>
 		                	
@@ -67,16 +67,16 @@
 				                    <br />
 				                                                            
 				                    <label for="rue">Rue :<span class="requis"></span></label>
-				                    <input type="text" id="rue" name="rue" value="${utilisateur.rue}" size="20" maxlength="120" />
+				                    <input type="text" id="rue" name="rue" value="<c:out value="${utilisateur.rue}"/>" size="20" maxlength="120" />
 				                    <br />
 				                                                            
 				                    <label for="ville">Ville :<span class="requis"></span></label>
-				                    <input type="text" id="ville" name="ville" value="${utilisateur.ville}" size="20" maxlength="20" />
+				                    <input type="text" id="ville" name="ville" value="<c:out value="${utilisateur.ville}"/>" size="20" maxlength="20" />
 				                    <br />
 				                    <br />
 				          
 				                	<label for="confirmation">Confirmation du mot de passe <span class="requis"></span></label>
-				                	<input type="password" id="confirmation" name="confirmation" value="${utilisateur.password}" size="20" maxlength="20" />
+				                	<input type="password" id="confirmation" name="confirmation" value="<c:out value="${utilisateur.password}"/>" size="20" maxlength="20" />
 				                	<br />
 			                	
 			                	</div>

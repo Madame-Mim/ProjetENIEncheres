@@ -28,19 +28,19 @@
 			                    </div>
 			                    <div class="col-4">
 				                    <label for="pseudo">Pseudo :</label>
-				                    <input type="text" id="pseudo" name="pseudo" required="required" value="${utilisateur.pseudo}" size="20" maxlength="30"  />
+				                    <input type="text" id="pseudo" name="pseudo" required="required" value="<c:out value="${utilisateur.pseudo}"/>" size="20" maxlength="30"  />
 				                    <br />
 				                    
 				                    <label for="prenom">Prénom :</label>
-				                    <input type="text" id="prenom" name="prenom" required="required"  value="${utilisateur.prenom}" size="20" maxlength="30" />
+				                    <input type="text" id="prenom" name="prenom" required="required"  value="<c:out value="${utilisateur.prenom}"/>" size="20" maxlength="30" />
 				                    <br />
 				                    
 				                    <label for="telephone">Numéro de téléphone :</label>
-				                    <input type="text" id="telephone" name="telephone" required="required" value="${utilisateur.telephone}" size="20" maxlength="20" />
+				                    <input type="text" id="telephone" name="telephone" required="required" value="<c:out value="${utilisateur.telephone}"/>" size="20" maxlength="20" />
 				                    <br />
 				                    
 				                     <label for="codePostal">Code postal :</label>
-				                    <input type="text" id="codePostal" name="codePostal" required="required" value="${utilisateur.codePostal}" size="20" maxlength="20" />
+				                    <input type="text" id="codePostal" name="codePostal" required="required" value="<c:out value="${utilisateur.codePostal}"/>" size="20" maxlength="20" />
 				                    <br />
 				                    
 				                    <label for="motdepasse">Mot de passe :</label>
@@ -50,19 +50,19 @@
 			                	                   
 			                    <div class="col-4">
 				                    <label for="nom">Nom :</label>
-				                    <input class="text-end" type="text" id="nom" name="nom" required="required" value="${utilisateur.nom}" size="20" maxlength="30" />
+				                    <input class="text-end" type="text" id="nom" name="nom" required="required" value="<c:out value="${utilisateur.nom}"/>" size="20" maxlength="30" />
 				                    <br />
 				                    
 				                    <label for="email">Email :</label>
-				                    <input type="email" id="email" name="email" required="required" value="${utilisateur.email}" size="20" maxlength="60" />
+				                    <input type="email" id="email" name="email" required="required" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
 				                    <br />
 				                    
 				                    <label for="rue">Rue :</label>
-				                    <input type="text" id="rue" name="rue" required="required" value="${utilisateur.rue}" size="20" maxlength="120" />
+				                    <input type="text" id="rue" name="rue" required="required" value="<c:out value="${utilisateur.rue}"/>" size="20" maxlength="120" />
 				                    <br />
 				                    
 				                    <label for="ville">Ville :</label>
-				                    <input type="text" id="ville" name="ville" required="required" value="${utilisateur.ville}" size="20" maxlength="20" />
+				                    <input type="text" id="ville" name="ville" required="required" value="<c:out value="${utilisateur.ville}"/>" size="20" maxlength="20" />
 				                    <br />
 				           
 				                	<label for="confirmation">Confirmation du mot de passe :</label>
