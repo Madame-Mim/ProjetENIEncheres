@@ -25,10 +25,7 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ServletReinitialisationMotDePasse - doGet");
-		
 		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
-		System.out.println("idUtilisateur sur servletReinitialisatioMDP : " + idUtilisateur);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 		rd.forward(request, response);
@@ -38,14 +35,10 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ServletReinitialisationMotDePasse - doPost");
 		
 		String nouveauMotDePasse = request.getParameter("nouveauMotDePasse");
-		System.out.println("nouveauMotDePasse :" + nouveauMotDePasse);
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
-		System.out.println("confirmationMotDePasse :" + confirmationMotDePasse);
 		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
-		System.out.println("idUtilisateur sur servletReinitialisatioMDP : " + idUtilisateur);
 		
 		
 		List<UtilisateurBo> utilisateurs = null;
@@ -58,7 +51,6 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 		
 		if(!(nouveauMotDePasse.equals(confirmationMotDePasse)))
 		{
-			System.out.println("Veuillez entrer deux mot de passe identiques");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 			rd.forward(request, response); 
 		}else
@@ -66,7 +58,6 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 			UtilisateurBo utilisateurMAJ;
 			try {
 				utilisateurMAJ = UtilisateurBll.get(idUtilisateur); 
-				System.out.println("utilisateurMAJ :" + utilisateurMAJ);
 				
 				for(UtilisateurBo utilisateur : utilisateurs )
 				if(utilisateur.getEmail().equals(utilisateurMAJ.getEmail()) & utilisateur.getId() == idUtilisateur)
@@ -78,7 +69,6 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			System.out.println("identique ok");
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
 			rd.forward(request, response); 
 		}
