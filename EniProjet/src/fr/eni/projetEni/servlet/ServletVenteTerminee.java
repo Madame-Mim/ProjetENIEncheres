@@ -1,6 +1,7 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,23 +30,54 @@ public class ServletVenteTerminee extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			int id = Integer.parseInt(request.getParameter("idarticle"));
+		try 
+		{
+			HttpSession session = request.getSession();
 
-			ArticleVenduBo article = ArticleVenduBll.getById(id);
-			request.setAttribute("article", article);
-			
-			EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
-			request.setAttribute("enchere", enchere);
-
-		} catch (Exception e) {
+			if(request.getParameter("idarticle")==null || request.getParameter("idarticle")=="" || Integer.parseInt(request.getParameter("idarticle"))==0)// si idarticle n'existe pas ou est paramétré à 0
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+			    rd.forward(request, response);
+			}
+			else
+			{
+				int id = Integer.parseInt(request.getParameter("idarticle"));
+				
+				ArticleVenduBo article = ArticleVenduBll.getById(id); //récupération de l'article passé en paramètre d'url
+				request.setAttribute("article", article);
+				
+				if(article==null ||article.getUtilisateur().getId() != Integer.parseInt(session.getAttribute("session").toString()))//Si l'utilisateur n'est pas le vendeur ou si l'article n'existe pas
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+				    rd.forward(request, response);
+				}
+				else
+				{
+					EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
+					request.setAttribute("enchere", enchere);	
+					
+					Timestamp timestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
+					long finEnchereMillis = timestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+				
+					if(finEnchereMillis > System.currentTimeMillis()) //si d'avantages de millisecondes se seront écoulées à la date de fin d'enchère qu'aujourd'hui, la date n'est pas passée
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+					    rd.forward(request, response);
+					}
+					else
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
+						rd.forward(request, response);
+					}
+				}
+			}
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-		}
-        
-    //le forward envoi l'affichage à la jsp
-    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
-    rd.forward(request, response);
-    }
+		}							
+}
 //
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +86,8 @@ public class ServletVenteTerminee extends HttpServlet {
 		HttpSession session = request.getSession();
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 
-		try {
+		try
+		{
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
 			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id);
 			int montant = Integer.parseInt(request.getParameter("credit"));
@@ -71,11 +104,14 @@ public class ServletVenteTerminee extends HttpServlet {
 			articleRetire.setRetraitEffectue(true);
 
 			articleAModifie.updateArticle(articleRetire);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
 		
-		try {
+		try 
+		{
 			int id2 = Integer.parseInt(request.getParameter("idarticle"));
 			ArticleVenduBo article;
 
@@ -84,13 +120,12 @@ public class ServletVenteTerminee extends HttpServlet {
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("article", article);
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
 		}
 		
-		
-		 //le forward envoi l'affichage à la jsp
 	    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-terminee.jsp");
 	    rd.forward(request, response);
 		}

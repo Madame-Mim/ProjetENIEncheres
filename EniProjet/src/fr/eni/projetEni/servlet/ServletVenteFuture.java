@@ -1,6 +1,7 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,29 +33,61 @@ public class ServletVenteFuture extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			int id = Integer.parseInt(request.getParameter("idarticle"));
+		try 
+		{
+			HttpSession session = request.getSession();
 
-			ArticleVenduBo article = ArticleVenduBll.getById(id);
-			request.setAttribute("article", article);
+			if(request.getParameter("idarticle")==null || request.getParameter("idarticle")=="" || Integer.parseInt(request.getParameter("idarticle"))==0)// si idarticle n'existe pas ou est paramétré à 0
+			{
+				RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+			    rd.forward(request, response);
+			}
+			else	
+			{
+				int id = Integer.parseInt(request.getParameter("idarticle"));
 
-			List<CategorieBo> listeCategorie = CategorieBll.get();
-			request.setAttribute("categorieListe", listeCategorie);
-		} catch (Exception e) {
-			e.printStackTrace();
+				ArticleVenduBo article = ArticleVenduBll.getById(id);
+				request.setAttribute("article", article);
+				
+				if(article==null || article.getUtilisateur().getId() != Integer.parseInt(session.getAttribute("session").toString()))//Si l'utilisateur n'est pas le vendeur ou si l'article n'existe pas
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+				    rd.forward(request, response);
+				}
+				else
+				{
+					List<CategorieBo> listeCategorie = CategorieBll.get();
+					request.setAttribute("categorieListe", listeCategorie);
+					
+					Timestamp timestamp = Timestamp.valueOf(article.getDateDebutEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
+					long debutEnchereMillis = timestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+					
+					if(debutEnchereMillis < System.currentTimeMillis()) //si l'enchère à déjà commencé
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+					    rd.forward(request, response);
+					}
+					else
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+						rd.forward(request, response);
+					}
+				}
+			}
 		}
-        
-    //le forward envoi l'affichage à la jsp
-    RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
-    rd.forward(request, response);
-    }
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		} 
+	}
 //
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-	session.setAttribute("session", 2);
+		
 		int id = Integer.parseInt(session.getAttribute("session").toString());
 		
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
