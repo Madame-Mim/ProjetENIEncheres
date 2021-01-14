@@ -47,7 +47,7 @@
 </section>
 <br/>
 <br/>
-<p><%=request.getAttribute("malisteEncheresmax") %> </p>
+
 <section class="col-xs-12">
 	<div class=" col-xs-8">
 
@@ -211,7 +211,8 @@
 		</c:if>
 </c:if>	
 </c:forEach>
-
+</section>
+<section class="col-xs-12 ">
 
 	<c:forEach var="t" items="${malisteEncheresmax}">
 
@@ -267,7 +268,7 @@
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 	
-		
+		</div>
 		</c:if>
 		</c:if>	
 		</c:if>
