@@ -13,23 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 /**
+ * @author edavi2020
  * Servlet implementation class Upload
  */
 //@WebServlet("/Upload")
 public class Upload extends HttpServlet {
 	 private static final long serialVersionUID = 1L;
-
-	    public static final int TAILLE_TAMPON = 10240;
-	    public static final String CHEMIN_FICHIERS = "C:\\Users\\edavi2020\\git\\projetENI\\EniProjet\\WebContent\\Image\\"; 
-	    //public static final String CHEMIN_FICHIERS = "C:\\apache-tomcat-8.5.60\\webapps\\uploaded\\"; 
+	 public static final int TAILLE_TAMPON = 10240;
+	 public static final String CHEMIN_FICHIERS = "C:\\Users\\edavi2020\\git\\projetENI\\EniProjet\\WebContent\\Image\\"; 
+	 //Si vers serveur :
+	 //public static final String CHEMIN_FICHIERS = "C:\\apache-tomcat-8.5.60\\webapps\\uploaded\\";    
 	  
-
-	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/Encheres/upload.jsp").forward(request, response);
 	    }
 
-	    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-	        // On récupère le champ description comme d'habitude
+	 public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		 
+	        // On récupère le champ description 
 	        String description = request.getParameter("description");
 	        request.setAttribute("description", description );
 
@@ -47,11 +49,12 @@ public class Upload extends HttpServlet {
 	                    .substring(nomFichier.lastIndexOf('\\') + 1);
 	 
 
-	            // On écrit définitivement le fichier sur le disque
+	            // On écrit définitivement le fichier dans le dossier
 	            ecrireFichier(part, nomFichier, CHEMIN_FICHIERS);
 
 	            request.setAttribute(nomChamp, nomFichier);
 	            
+	            //On attribue le fichier à la requête
 	            request.setAttribute("nomFichier", nomFichier);
 	            
 	        }
@@ -59,6 +62,7 @@ public class Upload extends HttpServlet {
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/Encheres/upload.jsp").forward(request, response);
 	    }
 
+	 	//méthode pour écrire le fichier dans le dossier
 	    private void ecrireFichier( Part part, String nomFichier, String chemin ) throws IOException {
 	        BufferedInputStream entree = null;
 	        BufferedOutputStream sortie = null;
@@ -83,6 +87,7 @@ public class Upload extends HttpServlet {
 	        }
 	    }
 	    
+	    //méthode pour vérifier qu'on reçoit un fichier
 	    private static String getNomFichier( Part part ) {
 	        for ( String contentDisposition : part.getHeader( "content-disposition" ).split( ";" ) ) {
 	            if ( contentDisposition.trim().startsWith( "filename" ) ) {
