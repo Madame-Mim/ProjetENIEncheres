@@ -51,7 +51,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		String villeRetraitUtilisateur = utilisateur.getVille();
 		request.setAttribute("villeRetraitUtilisateur", villeRetraitUtilisateur);
 		
-		List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+		List<CategorieBo> listeCategorie = CategorieBll.get();
 		request.setAttribute("categorieListe", listeCategorie);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/nouvelleVente.jsp");
 		rd.forward(request, response);
@@ -144,7 +144,7 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
-					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -178,7 +178,7 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
-					RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+					RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();

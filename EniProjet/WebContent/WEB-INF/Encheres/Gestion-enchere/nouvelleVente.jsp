@@ -69,7 +69,7 @@
 			<br>
 			<div>
 				<input type="submit" value="Enregister">
-				<a href="/EniProjet/ServletAccueil">Annuler</a>
+				<a href="/EniProjet/Accueil">Annuler</a>
 			</div>
 		</form>
 	</section>	
