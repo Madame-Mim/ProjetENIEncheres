@@ -22,10 +22,9 @@
         
         <c:out value="${ description }"></c:out></br>
         
-       <!--   -->
           <img src="http://localhost:8080/<%=request.getContextPath()%>/Image/<c:out value="${ nomFichier }"></c:out>"/>
           
-       <!--    <img src="http://localhost:8080/uploaded/<c:out value="${ nomFichier }"></c:out>"/>   -->
+       <!--Si fichier uploadé sur serveur :   <img src="http://localhost:8080/uploaded/<c:out value="${ nomFichier }"></c:out>"/>   -->
         
     </form>
     
