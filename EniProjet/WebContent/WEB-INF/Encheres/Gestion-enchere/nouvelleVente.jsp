@@ -6,25 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/nouvelleVente.css">
 <title>Nouvelle vente</title>
 </head>
-<body>
+<body class="container-fluid col-xs-12">
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	<section>
-		<div class=title><h1>Nouvelle vente</h1></div>
+	<section class="col-xs-offset-3 col-xs-6">
+		<div class="col-xs-12"><h1>Nouvelle vente</h1></div>
 	
 		<form method="post" action="/EniProjet/ServletNouvelleVente">
 			
-			<div>
-				<label>Article : </label><input type="text" name="nomArticle" required>
+			<div class="col-xs-offset-1 col-xs-4"">
+				<label>Article : </label></div>
+			<div class="col-xs-6">
+				<input type="text" name="nomArticle" size="37" required>
+			</div>
+			<div class="clearfix"></div>
+			<br>
+			<div class="col-xs-offset-1 col-xs-4"">
+				<label>Description : </label>
+			</div>
+			<div class="col-xs-6">
+			<textarea name="descriptionArticle" required cols="35" rows="5"></textarea>
 			</div>
 			<br>
-			<div>
-				<label>Description : </label><input type="textarea" name="descriptionArticle" required>
-			</div>
 			<br>
 			<div class="col-xs-offset-1 col-xs-4"> Catégorie :</div>
 				<div class="col-xs-6">	
@@ -39,39 +47,73 @@
 			<div class="clearfix"></div>
 			<br>
 			
-			<div class="col-xs-offset-1 col-xs-4"> Photo de l'article : </div><div class="col-xs-6"><label class="upload" for="upload">uploader</label> <input id="upload" type="file"> </div>
+			<div class="col-xs-offset-1 col-xs-4"> Photo de l'article : </div>
+			<div class="col-xs-6"><label class="upload" for="upload">uploader</label> <input id="upload" type="file"> </div>
+			<div class="clearfix"></div>
 			<br>
-			<div>
-				<label>Mise à prix : </label><input type="number" name="miseAPrixArticle" min="5" max="1000" step="5" required>
+			<div class="col-xs-offset-1 col-xs-4">
+				<label>Mise à prix : </label>
 			</div>
-			<br>
-			<div>
-				<label>Début de l'enchère : </label><input type="date" name="debutEnchere" required>
+			<div class="col-xs-6">	
+				<input type="number" name="miseAPrixArticle" min="5" max="1000" step="5" required>
 			</div>
+			<div class="clearfix"></div>
 			<br>
-			<div>
-				<label>Fin de l'enchère : </label><input type="date" name="finEnchere" required>
+			<div class="col-xs-offset-1 col-xs-4">
+				<label>Début de l'enchère : </label>
 			</div>
+			<div class="col-xs-6">	
+				<input type="date" name="debutEnchere" required>
+			</div>
+			<div class="clearfix"></div>
 			<br>
+			<div class="col-xs-offset-1 col-xs-4">
+				<label>Fin de l'enchère : </label>
+			</div>
+			<div class="col-xs-6">	
+				<input type="date" name="finEnchere" required>
+			</div>
+			<div class="clearfix"></div>
+			<br><br>
 				
-			<div class="retrait">
-				<label>Retrait</label>
-			
-				<div class="detailRetrait">
-				<label>Rue : </label><input type="text" name="rueRetrait" value="<%= request.getAttribute("rueRetraitUtilisateur")%>">
-				<br>
-				<label>Code postal : </label><input type="text" name="codePostalRetrait" value="<%= request.getAttribute("cpRetraitUtilisateur")%>">
-				<br>
-				<label>Ville: </label><input type="text" name="villeRetrait" value="<%= request.getAttribute("villeRetraitUtilisateur")%>">
-				</div>
+			<div class="col-xs-offset-1 col-xs-10">
+				<fieldset>
+				<legend>Retrait</legend>
+								
+					<span class="col-xs-offset-1 col-xs-4">
+						<label>Rue : </label>
+					</span>
+					<span class="col-xs-6">
+						<input type="text" name="rueRetrait" value="<%= request.getAttribute("rueRetraitUtilisateur")%>">
+					</span>
+					<div class="clearfix"></div>
+					<br>
+					<span class="col-xs-offset-1 col-xs-4">
+						<label>Code postal : </label>
+					</span>
+					<span class="col-xs-6">
+						<input type="text" name="codePostalRetrait" value="<%= request.getAttribute("cpRetraitUtilisateur")%>">
+					</span>
+					<div class="clearfix"></div>
+					<br>
+					<span class="col-xs-offset-1 col-xs-4">
+						<label>Ville: </label>
+					</span>
+					<span class="col-xs-6">
+						<input type="text" name="villeRetrait" value="<%= request.getAttribute("villeRetraitUtilisateur")%>">
+					</span>
+				</fieldset>
 			</div>
-			
-			<br>
-			<div>
+			<div class="clearfix"></div>
+			<br><br>
+			<div class="col-xs-offset-1 col-xs-4">
 				<input type="submit" value="Enregister">
 				<a href="/EniProjet/Accueil">Annuler</a>
 			</div>
+			
 		</form>
 	</section>	
+	<div class="clearfix"></div>
+			<br><br><br><br>
 </body>
 </html>

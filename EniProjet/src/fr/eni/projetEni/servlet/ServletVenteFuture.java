@@ -38,7 +38,7 @@ public class ServletVenteFuture extends HttpServlet {
 			ArticleVenduBo article = ArticleVenduBll.getById(id);
 			request.setAttribute("article", article);
 
-			List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+			List<CategorieBo> listeCategorie = CategorieBll.get();
 			request.setAttribute("categorieListe", listeCategorie);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,7 +196,7 @@ public class ServletVenteFuture extends HttpServlet {
 				ArticleVenduBo article = ArticleVenduBll.getById(idarticle);
 				request.setAttribute("article", article);
 	
-				List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+				List<CategorieBo> listeCategorie = CategorieBll.get();
 				request.setAttribute("categorieListe", listeCategorie);
 			} catch (Exception e) {
 				e.printStackTrace();
