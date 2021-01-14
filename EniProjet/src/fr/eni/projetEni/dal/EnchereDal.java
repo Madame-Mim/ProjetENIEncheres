@@ -26,7 +26,7 @@ public class EnchereDal {
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? WHERE no_enchere=?";
     private static final String UPDATE_ALL="UPDATE Encheres SET no_article=1, no_utilisateur=1 WHERE no_utilisateur=?";
     private static final String DELETE="DELETE Encheres WHERE no_enchere=?";
-    private static final String GET_MAX_BY_UTILISATEUR="SELECT * FROM Encheres WHERE no_utilisateur=?";
+    private static final String GET_MAX_BY_UTILISATEUR="SELECT * GROUP BY no_article FROM Encheres WHERE no_utilisateur=?";
     private static Logger logger = MonLogger.getLogger("EnchereDAL");
     
     
@@ -165,46 +165,35 @@ public class EnchereDal {
     
     public static List<EnchereBo> getmaxbyutilisateur(int no_Utilisateur)
     {
-        List<EnchereBo> listes = new ArrayList<>();
-       
+    	List<EnchereBo> listes = new ArrayList<>();
+        
         try(Connection cnx = ConnectionProvider.getConnection())
         {
-            PreparedStatement requete = cnx.prepareStatement(GET_MAX_BY_UTILISATEUR);
+            PreparedStatement requete = cnx.prepareStatement(GET_BY_UTILISATEUR);
             requete.setInt(1,no_Utilisateur);
-            PreparedStatement requete2 = cnx.prepareStatement(GET_MAX_BY_IDARTICLE);
-           
-            ResultSet rs1 = requete.executeQuery();
+            ResultSet rs = requete.executeQuery();
 
-            while(rs1.next())
-            	{
-            	ArticleVenduBo article1 = ArticleVenduDal.getById(rs1.getInt("no_article"));
-            	int art = article1.getNoArticle();
-            	requete2.setInt(1,art);
-            	ResultSet rs = requete2.executeQuery();
-            		while(rs.next())
-            			{
-            				EnchereBo enchere= new EnchereBo();
-            				enchere.setNoEnchere(rs.getInt("no_enchere"));
-            				enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
-            				enchere.setMontantEnchere(rs.getInt("montant_enchere"));
-            				UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
-            				enchere.setNoUtilisateur(utilisateur);
-            				ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
-            				enchere.setNoArticle(article);
-            				listes.add(enchere);}
-                              
-                
+            while(rs.next())
+            {
+            	EnchereBo enchere= new EnchereBo();
+            	enchere.setNoEnchere(rs.getInt("no_enchere"));
+            	enchere.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
+            	enchere.setMontantEnchere(rs.getInt("montant_enchere"));
+            	UtilisateurBo utilisateur = UtilisateurDal.get(rs.getInt("no_utilisateur"));
+                enchere.setNoUtilisateur(utilisateur);
+                ArticleVenduBo article = ArticleVenduDal.getById(rs.getInt("no_article"));
+                enchere.setNoArticle(article);
+                listes.add(enchere);
             	
             }
         }
 
         catch (Exception ex)
         {
-            logger.severe("Erreur dans la methode getmaxbyutilisateur - erreur :" + ex.getMessage());
+            logger.severe("Erreur dans la methode getbyutilisateur - erreur :" + ex.getMessage());
         }
         return listes;
     }
-
     
     public static List<EnchereBo> get()
     {
