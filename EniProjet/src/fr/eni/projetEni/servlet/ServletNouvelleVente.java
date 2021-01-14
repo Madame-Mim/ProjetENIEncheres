@@ -86,7 +86,6 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 	//Permet de récupérer l'id de l'utilisateur
 		HttpSession session = request.getSession();
-		session.setAttribute("session", 1);//a retirer juste là pour les test
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		try {
