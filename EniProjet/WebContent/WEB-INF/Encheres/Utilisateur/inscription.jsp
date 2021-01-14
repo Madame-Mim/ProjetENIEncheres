@@ -86,6 +86,7 @@
                 </div>
                 </div>
                 </div>
+                <c:out value="${ message }"></c:out>
             </form>
         </div>
 
