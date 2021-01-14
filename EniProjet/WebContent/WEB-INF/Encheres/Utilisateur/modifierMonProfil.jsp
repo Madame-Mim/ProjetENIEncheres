@@ -25,7 +25,9 @@
                     
                     <div class="container-fluid">
                     <div class="row">
-                    <div class="col">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
                     
                     <label for="pseudo">Pseudo : <span class="requis"></span></label>
                     <input type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" size="30" maxlength="30"  />
@@ -55,7 +57,7 @@
                     
                     
                     
-                    
+                    <div class="col-4">
                     
                     <div class="col"> 
                     <label for="nom">Nom : <span class="requis"></span></label>
@@ -80,6 +82,8 @@
                 	<br />
                 	
                 	</div>
+                	<div class="col-2">
+                	</div>
                 	</div>
                 	</div>
                     
@@ -90,9 +94,11 @@
                 <div class="col">
                 </div>
                 <div class="col">
+                </br></br>
                 <input class="btn btn-success" type="submit" value="Enregistrer">
                 </div>
                 <div class="col">
+                </br></br>
                 <a class="btn btn-success" href="ServletSupprimerMonProfil" role="button">Annuler</a> 
                 
                 </div>

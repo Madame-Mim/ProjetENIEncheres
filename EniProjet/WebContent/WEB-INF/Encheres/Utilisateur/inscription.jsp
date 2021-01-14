@@ -24,7 +24,9 @@
                     
                     <div class="container-fluid">
                     <div class="row">
-                    <div class="col">
+                    <div class="col-2">
+                    </div>
+                    <div class="col-4">
                     
                     <label for="pseudo">Pseudo :</label>
                     <input type="text" id="pseudo" name="pseudo" required="required" value="${utilisateur.pseudo}" size="20" maxlength="30"  />
@@ -47,7 +49,7 @@
                 	<br />
                 	</div>
                 	                   
-                    <div class="col">
+                    <div class="col-4">
                     <label for="nom">Nom :</label>
                     <input class="text-end" type="text" id="nom" name="nom" required="required" value="${utilisateur.nom}" size="20" maxlength="30" />
                     <br />
@@ -69,6 +71,8 @@
                 	<br />
                 	
                 	</div>
+                	<div class="col-2">
+                	</div>
                 	</div>
                 	</div>
                     
@@ -78,10 +82,14 @@
                 <div class="row">
                 <div class="col">
                 </div>
+                
+                
                 <div class="col">
+                </br></br>
                 <input class="btn btn-success" type="submit" value="Valider">
                 </div>
                 <div class="col">
+                </br></br>
                 <a class="btn btn-success" href="ServletAccueil" role="button">Annuler</a> 
                 </div>
                 </div>
