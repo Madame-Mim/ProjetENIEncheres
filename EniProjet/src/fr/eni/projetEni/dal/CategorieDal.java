@@ -21,8 +21,7 @@ public class CategorieDal {
     
     public static void insert(CategorieBo libelle)
     {
-    	try {
-			Connection cnx = ConnectionProvider.getConnection();
+    	try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(INSERT);
 			
 			requete.setString(1, libelle.getLibelle());
@@ -58,9 +57,7 @@ public class CategorieDal {
     public static List<CategorieBo>  get()
     {
     	List<CategorieBo>libelles = new ArrayList<CategorieBo>();
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(GET_ALL);
 			ResultSet rs = requete.executeQuery();
 			
@@ -82,9 +79,7 @@ public class CategorieDal {
     public static List<CategorieBo>  getAllM1()
     {
     	List<CategorieBo>libelles = new ArrayList<CategorieBo>();
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(GET_ALL_MINUS1);
 			ResultSet rs = requete.executeQuery();
 			
@@ -105,10 +100,8 @@ public class CategorieDal {
     
     public static void update(CategorieBo libelle)
     {
-    	Connection cnx;
-        try
+        try( Connection cnx = ConnectionProvider.getConnection() )
         {
-        	cnx = ConnectionProvider.getConnection();
             PreparedStatement requete = cnx.prepareStatement(UPDATE);
             requete.setInt(1, libelle.getNoCategorie());
             requete.setString(2,libelle.getLibelle());
@@ -122,10 +115,8 @@ public class CategorieDal {
 
     public static void delete(int no_categorie)
     {
-    	Connection cnx;
-        try
+        try( Connection cnx = ConnectionProvider.getConnection() )
         {
-        	cnx = ConnectionProvider.getConnection();
             PreparedStatement requete = cnx.prepareStatement(DELETE);
             requete.setInt(1,no_categorie);
             requete.executeUpdate();

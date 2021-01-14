@@ -22,8 +22,7 @@ public class RetraitDal {
     
     public static void insert(RetraitBo AdresseRetrait)
     {
-    	try {
-			Connection cnx = ConnectionProvider.getConnection();
+    	try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(INSERT);
 			
 			requete.setString(1, AdresseRetrait.getRue());
@@ -39,9 +38,7 @@ public class RetraitDal {
     public static RetraitBo get(int noRetrait)
     {
     	RetraitBo resultat = null;
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(GET_BY_ID);
 			requete.setInt(1, noRetrait);
 	    	ResultSet rs = requete.executeQuery();
@@ -63,9 +60,7 @@ public class RetraitDal {
     public static RetraitBo getRetrait(String rue, String codePostal, String ville)
     {
     	RetraitBo resultat = null;
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(GET_RETRAIT);
 			requete.setString(1, rue);
 			requete.setString(2, codePostal);
@@ -90,9 +85,7 @@ public class RetraitDal {
     public static List<RetraitBo>  get()
     {
     	List<RetraitBo>listeRetraits = new ArrayList<RetraitBo>();
-    	Connection cnx;
-		try {
-			cnx = ConnectionProvider.getConnection();
+		try ( Connection cnx = ConnectionProvider.getConnection() ){
 			PreparedStatement requete = cnx.prepareStatement(GET_ALL);
 			ResultSet rs = requete.executeQuery();
 			
@@ -116,10 +109,8 @@ public class RetraitDal {
     
     public static void update(RetraitBo AdresseRetrait)
     {
-    	Connection cnx;
-        try
+        try( Connection cnx = ConnectionProvider.getConnection() )
         {
-        	cnx = ConnectionProvider.getConnection();
             PreparedStatement requete = cnx.prepareStatement(UPDATE);
             requete.setInt(1, AdresseRetrait.getNoRetrait());
             requete.setString(2,AdresseRetrait.getRue());
