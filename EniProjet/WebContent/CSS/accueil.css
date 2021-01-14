@@ -32,10 +32,18 @@ img{
        
    }
 
+.rouge{
+	text-align:center;
+	text-decoration: #ff8000;
+	}
+.vert{
+	 text-align:center;
+	 text-shadow:green;
+     text-decoration: #008000;
+	}
 .entetebloc{
 	 text-align:center;
-	}
-	
+	}	
 
 .labelproduit{
 	font-weight:bold;

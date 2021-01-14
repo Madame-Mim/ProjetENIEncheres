@@ -21,6 +21,8 @@
 		<%@ include file="/WEB-INF/Include/header.html" %>
 		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
+
+
 <c:set var="vente" value="vente" />
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
@@ -245,6 +247,8 @@
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 
+			<c:if test="${meilleurEnchere == maMeilleurEnchere }">C'est la meilleure enchère pour l'instant</c:if>
+			<div class="rouge"><c:if test="${meilleurEnchere != maMeilleurEnchere }">Il y a une meilleure enchère </c:if></div>
 			</div> 
 		
 		
@@ -264,7 +268,7 @@
 						
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/ServletEnchereRemportee?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
+			<p><a href="<%=request.getContextPath()%>/ServletEnchereRemportee?idarticle=${t.noArticle.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 	
