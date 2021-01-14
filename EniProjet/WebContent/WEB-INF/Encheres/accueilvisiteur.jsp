@@ -76,7 +76,7 @@
 			<c:set var = "recherchearticle" value ="${filtreNom}" />
 
 		
-    	<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
+    	<c:if test="${(empty test1 || fn:containsIgnoreCase(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
     
     		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
 			<div class="col-xs-4" id="cartes">
