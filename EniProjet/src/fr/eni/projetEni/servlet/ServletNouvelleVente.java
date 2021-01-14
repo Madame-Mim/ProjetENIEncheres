@@ -35,7 +35,6 @@ public class ServletNouvelleVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		session.setAttribute("session", 1);//a retirer juste là pour les test
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		try {
