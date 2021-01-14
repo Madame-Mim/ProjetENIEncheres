@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/accueil.css">
 <title>ENI-Enchères</title>
 </head>
-<body>
+<body class="container-fluid col-xs-12">
 <header>
 		<%@ include file="/WEB-INF/Include/header.html" %>
 		<%@include file="/WEB-INF/Include/logo.html" %>

@@ -35,12 +35,12 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Vendeur :	</div><div class="col-xs-6">${article.utilisateur.getPseudo()}</div>
 		<br>
-		<div>Tel :</div><div class="col-xs-6">${article.utilisateur.getTelephone}</div>
+		<div>Tel :</div><div class="col-xs-6">${article.utilisateur.getTelephone()}</div>
 		
 			<div class="clearfix"></div>
 		
 		<br><br><br>
-		<div class="back"><a href="/EniProjet/ServletAccueil">Retour Accueil</a> </div>
+		<div class="back"><a href="/EniProjet/Accueil">Retour Accueil</a> </div>
 	</section>
 	
 </body>
