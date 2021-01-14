@@ -9,6 +9,7 @@ public class EnchereBll
 {
    
 
+	
     public static void insert(EnchereBo enchere) throws Exception
     {
         if(enchere.getDateEnchere()==null||enchere.getMontantEnchere()==0)

@@ -16,6 +16,7 @@ import java.sql.ResultSet;
 public class EnchereDal {
 
 	
+	
 	private static final String INSERT="INSERT INTO Encheres VALUES (?,?,?,?)";
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
     private static final String GET_BY_UTILISATEUR="SELECT * FROM Encheres WHERE no_utilisateur=?";
