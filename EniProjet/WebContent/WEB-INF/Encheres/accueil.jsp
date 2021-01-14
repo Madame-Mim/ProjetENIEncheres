@@ -24,7 +24,6 @@
 <c:set var="vente" value="vente" />
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
-<c:set var = "recherchearticle" value ="${filtreNom}" />
 <c:set var ="vendeur" value ="${vendeur}" />
 <c:set var ="choixAV" value ="${choixAV}" />
 <c:set	var ="choixA1" value ="${choixA1}" />
@@ -126,7 +125,7 @@
 			<c:set var = "catégorie" value ="${v.categorie.noCategorie}" />
 			<c:set var = "vendeurtest" value ="${v.utilisateur.id}" />
 
-		<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
+		<c:if test="${(empty test1 || fn:containsIgnoreCase(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
     	
     	
     		<c:if test="${!empty choixA1}">
@@ -226,7 +225,7 @@
 		<c:set var = "meilleurEnchere" value ="${t.noArticle.prixVente}" />
 		<c:set var = "maMeilleurEnchere" value ="${t.montantEnchere}" />
 
-	<c:if test="${(empty test1 || fn:contains(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
+	<c:if test="${(empty test1 || fn:containsIgnoreCase(theString,filtreNom))&&(empty test2 || (catégorie eq test2))}">	
 
 
 		<c:if test="${!empty choixA2}">

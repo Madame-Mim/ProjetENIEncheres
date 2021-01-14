@@ -52,7 +52,6 @@ public class ServletAccueil extends HttpServlet {
 				request.setAttribute("listeCategorie", listeCategorie);
 				 request.setAttribute("listeArticles", listeArticles);
 				 request.setAttribute("namerecherche", namerecherche);
-				 request.setAttribute("namerecherche", namerecherche);
 				 request.setAttribute("choixA1", choixA1);
 				 request.setAttribute("choixAV", choixAV);
 			} catch (Exception e) {
@@ -102,8 +101,12 @@ public class ServletAccueil extends HttpServlet {
 		HttpSession session = request.getSession();
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		String filtreNom = request.getParameter("recherche");
+		String namerecherche=filtreNom;
+		if(filtreNom == null | filtreNom == "")
+		{namerecherche= "le nom de l'article contient";}
+		
 		String categorieselection = request.getParameter("categorie");
-		String namerecherche= "le nom de l'article contient";
+		
 		List<CategorieBo> listeCategorie = new ArrayList<>();
 		
 		if (session.getAttribute("session") == null ) 
@@ -115,8 +118,6 @@ public class ServletAccueil extends HttpServlet {
 				 request.setAttribute("listeArticles", listeArticles);
 				 request.setAttribute("filtreNom", filtreNom);  
 			     request.setAttribute("categorieselection", categorieselection);
-			     if (filtreNom != null ) 
-					{namerecherche=filtreNom;}
 			     request.setAttribute("namerecherche", namerecherche);
 			     
 	            
@@ -158,6 +159,7 @@ public class ServletAccueil extends HttpServlet {
 	        request.setAttribute("categorieselection", categorieselection);
 	        request.setAttribute("vendeur", vendeur);
 	        request.setAttribute("choixAV", choixAV);
+	        request.setAttribute("namerecherche", namerecherche);
 	        
 	        request.setAttribute("choixA1", choixA1);
 	        request.setAttribute("choixA2", choixA2);
@@ -165,7 +167,7 @@ public class ServletAccueil extends HttpServlet {
 	        request.setAttribute("choixV1", choixV1);
 	        request.setAttribute("choixV2", choixV2);
 	        request.setAttribute("choixV3", choixV3);
-	        request.setAttribute("namerecherche", namerecherche);
+	        
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
