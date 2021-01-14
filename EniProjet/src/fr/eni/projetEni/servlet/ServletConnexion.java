@@ -125,9 +125,7 @@ public class ServletConnexion extends HttpServlet {
 		}
 		//modif à partir de là
 		if(request.getParameter("souvenir")!=null)
-		{
-		int checkbox = Integer.parseInt(request.getParameter("souvenir"));	
-		
+		{	
 				Cookie[] cookies = request.getCookies();
 				Cookie cookiePseudo = new Cookie("Cpseudo", pseudo);
 				cookiePseudo.setMaxAge(60*60*24*30);
