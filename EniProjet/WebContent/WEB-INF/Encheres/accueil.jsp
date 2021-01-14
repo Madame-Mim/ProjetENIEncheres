@@ -46,7 +46,7 @@
 </section>
 <br/>
 <br/>
-
+<p><%=request.getAttribute("malisteEncheresmax") %> </p>
 <section class="col-xs-12">
 	<div class=" col-xs-8">
 
@@ -111,7 +111,6 @@
 <br/>
 </section>
 <section class="col-xs-12 ">
-
 
 
 	
@@ -213,7 +212,7 @@
 </c:forEach>
 
 
-	<c:forEach var="t" items="${malisteEncheres}">
+	<c:forEach var="t" items="${malisteEncheresmax}">
 
 		<jsp:useBean id="now1" class="java.util.Date" />
 		<c:set var="currentDate" value="${t.noArticle.dateFinEncheres}" />
@@ -243,7 +242,7 @@
 			<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
-			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 
 			</div> 
 		
 		
@@ -266,7 +265,7 @@
 			<p><a href="<%=request.getContextPath()%>/ServletEnchereRemportee?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
-			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p>	
+			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 	
 		
 		</c:if>
 		</c:if>	
