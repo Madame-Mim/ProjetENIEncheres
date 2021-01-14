@@ -65,6 +65,16 @@ public class EnchereBll
         return EnchereDal.getbyutilisateur(no_Utilisateur);
 
     }
+    
+    public static List<EnchereBo> getmaxbyutilisateur(int no_Utilisateur) throws Exception
+    {
+    	if(no_Utilisateur<=0)
+        {
+            throw new Exception("Vendeur incorrect");
+        }
+        return EnchereDal.getbyutilisateur(no_Utilisateur);
+
+    }
     public static void update(EnchereBo enchere) throws Exception
     {
     	if(enchere.getDateEnchere()==null||enchere.getMontantEnchere()==0)

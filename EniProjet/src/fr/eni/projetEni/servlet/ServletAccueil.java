@@ -67,12 +67,14 @@ public class ServletAccueil extends HttpServlet {
 			int vendeur= Integer.parseInt(session.getAttribute("session").toString());
 			System.out.println(vendeur);
 		List<EnchereBo> malisteEncheres = new ArrayList<>();
-		
+		List<EnchereBo> malisteEncheresmax = new ArrayList<>();
 		
 		try {
 			listeArticles= ArticleVenduBll.getAll();		
 			malisteEncheres=EnchereBll.getbyutilisateur(vendeur);
+			malisteEncheresmax=EnchereBll.getmaxbyutilisateur(vendeur);
 			request.setAttribute("malisteEncheres", malisteEncheres);
+			request.setAttribute("malisteEncheresmax", malisteEncheresmax);
 	        request.setAttribute("listeArticles", listeArticles);
 	        request.setAttribute("vendeur", vendeur);
 	        request.setAttribute("namerecherche", namerecherche);
@@ -139,14 +141,16 @@ public class ServletAccueil extends HttpServlet {
 			String choixV3 = request.getParameter("choixV3");
 			
 		List<EnchereBo> malisteEncheres = new ArrayList<>();
-		
+		List<EnchereBo> malisteEncheresmax = new ArrayList<>();
 		
 		try {
 			listeCategorie= CategorieBll.get();
 			request.setAttribute("listeCategorie", listeCategorie);
 			listeArticles= ArticleVenduBll.getAll();
 			malisteEncheres=EnchereBll.getbyutilisateur(vendeur);
+			malisteEncheresmax=EnchereBll.getmaxbyutilisateur(vendeur);
 			request.setAttribute("malisteEncheres", malisteEncheres);
+			request.setAttribute("malisteEncheresmax", malisteEncheresmax);
 	        request.setAttribute("listeArticles", listeArticles);
 	        request.setAttribute("filtreNom", filtreNom);  
 	        request.setAttribute("categorieselection", categorieselection);
