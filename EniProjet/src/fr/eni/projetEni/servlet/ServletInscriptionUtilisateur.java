@@ -33,7 +33,6 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -44,7 +43,8 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String motdepasse = request.getParameter("motdepasse");
 		String confirmation = request.getParameter("confirmation");
-		
+		System.out.println(motdepasse+ ", " +confirmation);
+
 		UtilisateurBo utilisateur = new UtilisateurBo();
 		
 		utilisateur.setPseudo(pseudo);
@@ -58,56 +58,33 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 		utilisateur.setPassword(motdepasse);
 
 		
-		if (motdepasse.equals(confirmation)) {
-				try {
+		if (motdepasse.equals(confirmation)) 
+		{
+				try 
+				{
 					utilisateurCree.insert(utilisateur);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				//}
-				
-				
-				/*
-				   //avec un cookie :
-				
-				
-				Cookie cookieConnecte = new Cookie( "connecté(e)","statut");  
-				
-				response.addCookie(cookieConnecte);}
-				
-				//avec le contexte :
-				
-				ServletContext application = this.getServletContext();
-				application.setAttribute("connecté(e)", "statut");
-				
-				//avec une session :  */ 
-					
-					//recupere l'ID
-				
-				try {
 					utilisateur = UtilisateurBll.getPseudo(pseudo);
 					HttpSession session = request.getSession();
 					int id = utilisateur.getId();
 
 					session.setAttribute("session", id);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} 
+				catch (Exception e) 
+				{
+					e.printStackTrace();
 				}
-
-				
-			/*HttpSession session = request.getSession();
-				
-				String statut = "connecté(e)";
-				
-				request.getSession().setAttribute("session", statut);*/
-
-		}
-		
-		}
-        this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
+					this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
+				}
+		else 
+		{	
+			String message ="ah non alors ! ona dit le même mot ded passe, hein !";
+			request.setAttribute("erreur", message);
+			this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );		
+		}	
+	}		
+}
 
 		
 	
-	}
-}
+	
+
