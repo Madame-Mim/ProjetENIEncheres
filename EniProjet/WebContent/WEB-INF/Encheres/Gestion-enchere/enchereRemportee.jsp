@@ -40,7 +40,9 @@
 			<div class="clearfix"></div>
 		
 		<br><br><br>
-		<div class="back"><a href="/EniProjet/Accueil">Retour Accueil</a> </div>
+		<form action="<%=request.getContextPath()%>/Accueil">
+			<input type="submit" value="Retour Accueil">
+		</form>
 	</section>
 	
 </body>

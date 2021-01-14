@@ -3,6 +3,7 @@ package fr.eni.projetEni.servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -34,6 +35,10 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		GregorianCalendar aujourdhui = new GregorianCalendar();//modifier le format pour être normal
+		System.out.println("aujourdhui :" + aujourdhui);
+		
+		
 		HttpSession session = request.getSession();
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
 		UtilisateurBo utilisateur = new UtilisateurBo();
@@ -104,9 +109,9 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 		
 		//Récupérer et le noRetrait et le noCategorie et l'insérer dans la method insert
-		String rueRetrait = request.getParameter("rueRetrait");
-		String codePostalRetrait = request.getParameter("codePostalRetrait");
-		String villeRetrait = request.getParameter("villeRetrait");
+		String rueRetrait = request.getParameter("rueRetrait").toLowerCase();
+		String codePostalRetrait = request.getParameter("codePostalRetrait").toLowerCase();
+		String villeRetrait = request.getParameter("villeRetrait").toLowerCase();
 
 		
 		RetraitBo retrait = RetraitBll.getRetrait(rueRetrait, codePostalRetrait, villeRetrait); //recuperation de l'adresse de retrait en bdd

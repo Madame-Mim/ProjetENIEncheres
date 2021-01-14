@@ -34,7 +34,7 @@ public class ServletMotDePasseOublie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			String adresseMail = request.getParameter("adresseMail");
+			String adresseMail = request.getParameter("adresseMail").toLowerCase();//voir s'il ne faudrait pas enregister les utilisateurs avec un toLowerCase
 		try {
 			List<UtilisateurBo> listeUtilisateurs = UtilisateurBll.get();
 			

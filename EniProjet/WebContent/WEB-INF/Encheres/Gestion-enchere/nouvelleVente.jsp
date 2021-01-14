@@ -104,14 +104,19 @@
 					</span>
 				</fieldset>
 			</div>
+		
 			<div class="clearfix"></div>
 			<br><br>
 			<div class="col-xs-offset-1 col-xs-4">
 				<input type="submit" value="Enregister">
-				<a href="/EniProjet/Accueil">Annuler</a>
 			</div>
-			
 		</form>
+		<form action="<%=request.getContextPath()%>/Accueil">
+			<input class="col-xs col-xs-2" type="submit" value="Annuler">
+		</form>
+			
+			
+		
 	</section>	
 	<div class="clearfix"></div>
 			<br><br><br><br>
