@@ -29,7 +29,7 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 		rd.forward(request, response);
-	}
+	} 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
