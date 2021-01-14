@@ -83,7 +83,7 @@ public class ServletInscriptionUtilisateur extends HttpServlet {
 				}
 		else 
 		{	
-			String message ="ah non alors ! ona dit le même mot ded passe, hein !";
+			String message ="Echec de l'inscription. Réessayez.";
 			request.setAttribute("erreur", message);
 			this.getServletContext().getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/inscription.jsp" ).forward( request, response );		
 		}	
