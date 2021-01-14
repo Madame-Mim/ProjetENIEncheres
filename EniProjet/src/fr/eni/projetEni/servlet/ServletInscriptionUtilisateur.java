@@ -1,7 +1,3 @@
-/**
- * @author edavi2020
- */
-
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
@@ -19,6 +15,7 @@ import fr.eni.projetEni.bll.UtilisateurBll;
 import fr.eni.projetEni.bo.UtilisateurBo;
 
 /**
+ * @author edavi2020
  * Servlet implementation class ServletInscriptionUtilisateur
  */
 @WebServlet("/ServletInscriptionUtilisateur")
