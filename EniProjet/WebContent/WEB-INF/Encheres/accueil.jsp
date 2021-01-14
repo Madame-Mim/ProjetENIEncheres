@@ -40,7 +40,8 @@
 
 <section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
 <header>
-<h2>Liste des enchères</h2>	
+<h2>Liste des enchères</h2>
+	
 </header>
 </section>
 <br/>
