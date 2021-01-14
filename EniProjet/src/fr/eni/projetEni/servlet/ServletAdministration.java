@@ -42,7 +42,7 @@ public class ServletAdministration extends HttpServlet {
 		}
 		
 		
-		List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+		List<CategorieBo> listeCategorie = CategorieBll.get();
 		request.setAttribute("categorieListe", listeCategorie);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Administration/admin.jsp");
