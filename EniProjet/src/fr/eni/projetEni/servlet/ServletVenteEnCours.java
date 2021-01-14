@@ -1,9 +1,8 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,31 +30,63 @@ public class ServletVenteEnCours extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		if(request.getParameter("idarticle")==null || request.getParameter("idarticle")=="" || Integer.parseInt(request.getParameter("idarticle"))==0)// si idarticle n'existe pas ou est paramétré à 0
+		{
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+		    rd.forward(request, response);
+		}
+		else
+		{
        		int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
-			try {
+       		try
+			{
 			    HttpSession session = request.getSession();
 			     int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
 			     
 			    ArticleVenduBo article = ArticleVenduBll.getById(numArticle);
 				request.setAttribute("article", article);
-				UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
-				request.setAttribute("utilisateur", utilisateur);
-						
-				EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
-				request.setAttribute("enchere", enchere);
+				if(article==null) //si l'id article n'existe pas
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+				    rd.forward(request, response);
+				}			
+				else
+				{
+					
 				
+					Timestamp debutEnchereTimestamp = Timestamp.valueOf(article.getDateDebutEncheres().atStartOfDay()); //Passage de la date de debut d'enchere de l'article au format timestamp
+					long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+					Timestamp finEnchereTimestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
+					long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+				
+				
+					if(finEnchereMillis < System.currentTimeMillis() || System.currentTimeMillis() < debutEnchereMillis) //si la date actuelle n'est pas comprise entre les dates de l'enchère
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
+					    rd.forward(request, response);
+					}			
+					else 
+					{
+						UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+						request.setAttribute("utilisateur", utilisateur);
+								
+						EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
+						request.setAttribute("enchere", enchere);
+						
+						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
+						rd.forward(request, response);
+					}
 				}
-			    catch (Exception e)
-			    {
+			}
+		
+			catch (Exception e)
+			{
 						e.printStackTrace();
-				}
-			        
-		        //le forward envoi l'affichage à la jsp
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
-					rd.forward(request, response);
-			     }
+			}
+		}
+}
 				
 
 	/**
