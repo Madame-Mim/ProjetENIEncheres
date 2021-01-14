@@ -38,10 +38,10 @@
 </c:if>
 </c:if>
 
-
 <section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
 <header>
-<h2>Liste des enchères</h2>	
+<h2>Liste des enchères</h2>
+	
 </header>
 </section>
 <br/>
@@ -200,7 +200,7 @@
 						
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -231,7 +231,8 @@
 		<c:if test="${!empty choixA2}">
 		<c:if test="${now1.time lt finEnchere.time && now1.time gt debutEnchere.time}">
 		<div class="col-xs-4" id="cartes">
-		<div class="entetebloc">Enchere en cours</div>
+		<div class="entetebloc">Mes encheres en cours</div>
+		
 		<br/>
 			<div class="col-xs-4 ">
 					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
@@ -240,7 +241,7 @@
 						
 			
 			<div class=labelproduit>
-			<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${t.noArticle}">${t.noArticle.nomArticle}</a></p></div>
+			<p><a href="<%=request.getContextPath()%>/VenteEnCours?idarticle=${t.noArticle.noArticle}">${t.noArticle.nomArticle}</a></p></div>
 			<p>${t.noArticle.prixVente}</p>
 			<p>${t.noArticle.dateFinEncheres}</p>
 			<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${t.noArticle.utilisateur.pseudo}">${t.noArticle.utilisateur.pseudo}</a></p></div> 
