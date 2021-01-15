@@ -60,7 +60,7 @@ public class ServletConnexion extends HttpServlet {
 				
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getCourriel(pseudo);
 
-				if(utilisateurRecupere==null)
+				if(utilisateurRecupere==null ||utilisateurRecupere.getId()==1)
 				{
 					request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
@@ -95,7 +95,7 @@ public class ServletConnexion extends HttpServlet {
 			try 
 			{
 				UtilisateurBo utilisateurRecupere = UtilisateurBll.getPseudo(pseudo);
-				if(utilisateurRecupere==null)
+				if(utilisateurRecupere==null ||utilisateurRecupere.getId()==1)
 				{
 					request.setAttribute("erreur", "L'identifiant et le mot de passe ne correspondent pas");
 					jspCible="/WEB-INF/Encheres/Utilisateur/connexion.jsp";
