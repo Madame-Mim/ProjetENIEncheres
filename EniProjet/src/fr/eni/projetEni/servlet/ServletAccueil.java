@@ -44,6 +44,17 @@ public class ServletAccueil extends HttpServlet {
 		String choixA1="choixA1";
 		String choixAV="achat";
 		
+		try
+        {
+            int id=Integer.parseInt(session.getAttribute("session").toString());
+            UtilisateurBo utilisateur = UtilisateurBll.get(id);
+            request.setAttribute("utilisateur", utilisateur);
+        } catch (NumberFormatException e1) {
+            e1.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
 		if (session.getAttribute("session") == null ) 
 		{
 			try {
@@ -108,6 +119,16 @@ public class ServletAccueil extends HttpServlet {
 		String categorieselection = request.getParameter("categorie");
 		
 		List<CategorieBo> listeCategorie = new ArrayList<>();
+		try
+        {
+            int id=Integer.parseInt(session.getAttribute("session").toString());
+            UtilisateurBo utilisateur = UtilisateurBll.get(id);
+            request.setAttribute("utilisateur", utilisateur);
+        } catch (NumberFormatException e1) {
+            e1.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 		
 		if (session.getAttribute("session") == null ) 
 		{
