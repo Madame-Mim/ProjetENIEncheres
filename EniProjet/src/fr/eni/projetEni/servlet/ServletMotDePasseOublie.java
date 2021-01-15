@@ -34,13 +34,13 @@ public class ServletMotDePasseOublie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			String adresseMail = request.getParameter("adresseMail").toLowerCase();//voir s'il ne faudrait pas enregister les utilisateurs avec un toLowerCase
+			String adresseMail = request.getParameter("adresseMail");
 		try {
 			List<UtilisateurBo> listeUtilisateurs = UtilisateurBll.get();
 			
 			for(UtilisateurBo utilisateur : listeUtilisateurs)
 			{
-				if(utilisateur.getEmail().equals(adresseMail))
+				if(utilisateur.getEmail().toLowerCase().equals(adresseMail.toLowerCase()))
 				{
 					int idUtilisateur = utilisateur.getId();
 					request.setAttribute("idUtilisateur", idUtilisateur);
