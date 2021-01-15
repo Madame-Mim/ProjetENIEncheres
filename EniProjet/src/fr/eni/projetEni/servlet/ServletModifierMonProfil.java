@@ -47,7 +47,6 @@ public class ServletModifierMonProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//int credit = Integer.parseInt(session.getAttribute("credit").toString());
 		
 		//instanciation d'une nouvelle session pour récupérer l'ID de l'utilisateur
 		HttpSession session = request.getSession();
@@ -75,6 +74,8 @@ public class ServletModifierMonProfil extends HttpServlet {
 		String ville = request.getParameter("ville");
 		String motdepasse = request.getParameter("motdepasse");
 		String confirmation = request.getParameter("confirmation");
+		
+		int credit = Integer.parseInt(session.getAttribute("credit").toString());
 		boolean admin = false;
 		
 		//instanciation d'un nouvel utilisateur
@@ -90,7 +91,7 @@ public class ServletModifierMonProfil extends HttpServlet {
 		utilisateur.setCodePostal(codePostal);
 		utilisateur.setVille(ville);
 		utilisateur.setPassword(motdepasse);
-		//utilisateur.setCredit(credit);
+		utilisateur.setCredit(credit);
 		utilisateur.setAdministrateur(admin);
 		utilisateur.setId(id);
 
