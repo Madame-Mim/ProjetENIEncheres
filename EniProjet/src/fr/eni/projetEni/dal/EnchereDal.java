@@ -21,7 +21,7 @@ public class EnchereDal {
     private static final String GET_BY_ID="SELECT * FROM Encheres WHERE no_enchere=?";
     private static final String GET_BY_UTILISATEUR="SELECT * FROM Encheres WHERE no_utilisateur=?";
     private static final String GET_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=?";
-    private static final String GET_MAX_BY_IDARTICLE="SELECT * FROM Encheres WHERE montant_enchere =(SELECT MAX(montant_enchere) FROM Encheres WHERE no_article=?)";
+    private static final String GET_MAX_BY_IDARTICLE="SELECT * FROM Encheres WHERE no_article=? AND montant_enchere =(SELECT MAX(montant_enchere) FROM Encheres WHERE no_article=?)";
     private static final String GET_ALL="SELECT * FROM Encheres";
     private static final String UPDATE="UPDATE Encheres SET date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? WHERE no_enchere=?";
     private static final String UPDATE_ALL="UPDATE Encheres SET no_article=1, no_utilisateur=1 WHERE no_utilisateur=?";
@@ -104,13 +104,14 @@ public class EnchereDal {
         return resultat;
 	}
     
-    public static EnchereBo getMaxByIdArticle(int noArticle)
+    public static EnchereBo getMaxByIdArticle(int noArticle, int noArticle2)
     {
     	EnchereBo resultat=null;
         try(Connection cnx = ConnectionProvider.getConnection())
         {
             PreparedStatement requete = cnx.prepareStatement(GET_MAX_BY_IDARTICLE);
             requete.setInt(1,noArticle);
+            requete.setInt(2,noArticle2);
             ResultSet rs =  requete.executeQuery();
 
             while(rs.next()) {

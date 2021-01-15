@@ -41,13 +41,13 @@ public class EnchereBll
 
     }
     
-    public static EnchereBo getMaxByIdArticle(int noArticle) throws Exception
+    public static EnchereBo getMaxByIdArticle(int noArticle, int noArticle2) throws Exception
     {
-        if(noArticle<=0)
+        if(noArticle<=0 || noArticle2<=0)
         {
             throw new Exception("Id incorrect");
         }
-        return EnchereDal.getMaxByIdArticle(noArticle);
+        return EnchereDal.getMaxByIdArticle(noArticle, noArticle2);
 
     }
     

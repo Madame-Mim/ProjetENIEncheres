@@ -92,7 +92,7 @@ public class ServletVenteFuture extends HttpServlet {
 		
 		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
 		
-		if(request.getParameter("enregistrer")!=null)
+		if(request.getParameter("enregistrer")!=null) //Si l'enregistrement de l'update est demandé
 		{ 
 			ArticleVenduBll articleAModifie = new ArticleVenduBll();
 			
@@ -113,96 +113,14 @@ public class ServletVenteFuture extends HttpServlet {
 			CategorieBo categorieVente = CategorieBll.get(categorie);
 			RetraitBo retrait = RetraitBll.getRetrait(rue, codePostal, ville); //recuperation de l'adresse de retrait en bdd
 			
-			if(retrait == null) //si cette adresse n'existe pas alors :
-			{
-				try 
-				{
-					RetraitBll nouvelleadresse = new RetraitBll();
-					
-					RetraitBo newPlace = new RetraitBo();
-					
-					newPlace.setRue(rue);
-					newPlace.setCodePostal(codePostal);
-					newPlace.setVille(ville);
-					
-					nouvelleadresse.insert(newPlace); //enregistrement de la nouvelle adresse
-					RetraitBo nouvelleAdresse = RetraitBll.getRetrait(newPlace.getRue(), newPlace.getCodePostal(), newPlace.getVille());
-					
-					UtilisateurBo utilisateur;
+			Timestamp debutEnchereTimestamp = Timestamp.valueOf(debutEnchere.atStartOfDay()); //Passage de la date de debut d'enchere de l'article au format timestamp
+			long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+			Timestamp finEnchereTimestamp = Timestamp.valueOf(finEnchere.atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
+			long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+			long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
 			
-					utilisateur = UtilisateurBll.get(id);
-					ArticleVenduBo article = new ArticleVenduBo();
-				
-					article.setNoArticle(idArticle);
-					article.setNomArticle(nom);
-					article.setDescription(description);
-					article.setDateDebutEncheres(debutEnchere);
-					article.setDateFinEncheres(finEnchere);
-					article.setMiseAPrix(prixBase);
-					article.setPrixVente(0);
-					article.setCategorie(categorieVente);
-					article.setUtilisateur(utilisateur);
-					article.setRetrait(nouvelleAdresse); //on set la nouvelle adresse enregistrée
-					try
-					{
-						articleAModifie.updateArticle(article); //enregistrement de l'article
-						
-					} 
-					catch (Exception e)
-					{
-						e.printStackTrace();
-					}
-				} 
-				catch (Exception e1) 
-				{
-				e1.printStackTrace();
-				}
-				ArticleVenduBo article;
-				try {
-					article = ArticleVenduBll.getById(idarticle);
-					request.setAttribute("article", article);
-
-					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
-					request.setAttribute("categorieListe", listeCategorie);				
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
-				rd.forward(request, response);
-			} 
-			else 	//Si cette adresse de retrait existe déjà:
+			if(debutEnchereMillis<now||finEnchereMillis<now)
 			{
-				UtilisateurBo utilisateur;
-				
-				try
-				{
-					utilisateur = UtilisateurBll.get(id);
-					ArticleVenduBo article = new ArticleVenduBo();
-						article.setNoArticle(idArticle);
-						article.setNomArticle(nom);
-						article.setDescription(description);
-						article.setDateDebutEncheres(debutEnchere);
-						article.setDateFinEncheres(finEnchere);
-						article.setMiseAPrix(prixBase);
-						article.setPrixVente(0);
-						article.setCategorie(categorieVente);
-						article.setUtilisateur(utilisateur);
-						article.setRetrait(retrait);
-						
-						try 
-						{
-							articleAModifie.updateArticle(article);
-						} 
-						catch (Exception e) 
-						{
-							e.printStackTrace();
-						}
-				} 
-				catch (Exception e1) 
-				{
-					e1.printStackTrace();
-				}
-				
 				ArticleVenduBo article;
 				try 
 				{
@@ -216,43 +134,147 @@ public class ServletVenteFuture extends HttpServlet {
 				{
 					e.printStackTrace();
 				}
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+				rd.forward(request, response);
+			}
+			else if(retrait == null) //si cette adresse n'existe pas alors :
+				{
+					try 
+					{
+						RetraitBll nouvelleadresse = new RetraitBll();
+						
+						RetraitBo newPlace = new RetraitBo();
+						
+						newPlace.setRue(rue);
+						newPlace.setCodePostal(codePostal);
+						newPlace.setVille(ville);
+						
+						nouvelleadresse.insert(newPlace); //enregistrement de la nouvelle adresse
+						RetraitBo nouvelleAdresse = RetraitBll.getRetrait(newPlace.getRue(), newPlace.getCodePostal(), newPlace.getVille());
+						
+						UtilisateurBo utilisateur;
 				
+						utilisateur = UtilisateurBll.get(id);
+						ArticleVenduBo article = new ArticleVenduBo();
+					
+						article.setNoArticle(idArticle);
+						article.setNomArticle(nom);
+						article.setDescription(description);
+						article.setDateDebutEncheres(debutEnchere);
+						article.setDateFinEncheres(finEnchere);
+						article.setMiseAPrix(prixBase);
+						article.setPrixVente(0);
+						article.setCategorie(categorieVente);
+						article.setUtilisateur(utilisateur);
+						article.setRetrait(nouvelleAdresse); //on set la nouvelle adresse enregistrée
+						try
+						{
+							articleAModifie.updateArticle(article); //enregistrement de l'article
+							
+						} 
+						catch (Exception e)
+						{
+							e.printStackTrace();
+						}
+					} 
+					catch (Exception e1) 
+					{
+					e1.printStackTrace();
+					}
+					ArticleVenduBo article;
+					try {
+						article = ArticleVenduBll.getById(idarticle);
+						request.setAttribute("article", article);
+	
+						List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+						request.setAttribute("categorieListe", listeCategorie);				
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 					rd.forward(request, response);
-			}
-			
-		}
-		else if(request.getParameter("annulerModif")!=null)
-		{				
-			try 
-			{
-				ArticleVenduBo article = ArticleVenduBll.getById(idarticle);
-				request.setAttribute("article", article);
-	
-				List<CategorieBo> listeCategorie = CategorieBll.get();
-				request.setAttribute("categorieListe", listeCategorie);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
-			rd.forward(request, response);
-		}
-		else if(request.getParameter("annulerVente")!=null)
-		{
-				ArticleVenduBll articleBll = new ArticleVenduBll();
-				ArticleVenduBo articleADelete;
-				try {
-					articleADelete = ArticleVenduBll.getById(idarticle);
-					articleBll.deleteArticle(idarticle);
+				} 
+				else 	//Si cette adresse de retrait existe déjà:
+				{
+					UtilisateurBo utilisateur;
 					
-					   RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
-					   rd.forward(request, response);
+					try
+					{
+						utilisateur = UtilisateurBll.get(id);
+						ArticleVenduBo article = new ArticleVenduBo();
+							article.setNoArticle(idArticle);
+							article.setNomArticle(nom);
+							article.setDescription(description);
+							article.setDateDebutEncheres(debutEnchere);
+							article.setDateFinEncheres(finEnchere);
+							article.setMiseAPrix(prixBase);
+							article.setPrixVente(0);
+							article.setCategorie(categorieVente);
+							article.setUtilisateur(utilisateur);
+							article.setRetrait(retrait);
+							
+							try 
+							{
+								articleAModifie.updateArticle(article);
+							} 
+							catch (Exception e) 
+							{
+								e.printStackTrace();
+							}
+					} 
+					catch (Exception e1) 
+					{
+						e1.printStackTrace();
+					}
+					
+					ArticleVenduBo article;
+					try 
+					{
+						article = ArticleVenduBll.getById(idarticle);
+						request.setAttribute("article", article);
+	
+						List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+						request.setAttribute("categorieListe", listeCategorie);				
+					} 
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+					
+						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+						rd.forward(request, response);
+				}
+				
+			}
+			else if(request.getParameter("annulerModif")!=null) //Si l'annulation de la modification est demandée
+			{				
+				try 
+				{
+					ArticleVenduBo article = ArticleVenduBll.getById(idarticle);
+					request.setAttribute("article", article);
+		
+					List<CategorieBo> listeCategorie = CategorieBll.get();
+					request.setAttribute("categorieListe", listeCategorie);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-		}
-		
-
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+				rd.forward(request, response);
+			}
+			else if(request.getParameter("annulerVente")!=null) //Si l'annulation de la vente est demandée
+			{
+					ArticleVenduBll articleBll = new ArticleVenduBll();
+					ArticleVenduBo articleADelete;
+					try {
+						articleADelete = ArticleVenduBll.getById(idarticle);
+						articleBll.deleteArticle(idarticle);
+						
+						   RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+						   rd.forward(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+			}		
 	}
 }

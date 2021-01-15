@@ -112,7 +112,7 @@ public class ServletVenteEnCours extends HttpServlet {
 			EnchereBo enchere = new EnchereBo();
 			
 			//Remboursement points de la meilleur enchere actuelle
-			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article);
+			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article, no_article);
 	
 			UtilisateurBo utilisateurARembourse = enchere.getNoUtilisateur();
 			if(utilisateurARembourse != null)
