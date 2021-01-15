@@ -12,7 +12,6 @@
 <body>
 
 <header>
-<%@ include file="/WEB-INF/Include/header.html" %>	
 </header>
 
 	<h1>Mon profil</h1>
@@ -29,11 +28,11 @@
 			                    <div class="col-4">
 			                    
 				                    <label for="pseudo">Pseudo : <span class="requis"></span></label>
-				                    <input type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" size="30" maxlength="30"  />
+				                    <input type="text" id="pseudo" name="pseudo" value="<c:out value="${utilisateur.pseudo}"/>" size="20" maxlength="30"  />
 				                    <br />
 				                    
 				                    <label for="prenom">Prénom : <span class="requis"></span></label>
-				                    <input type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.prenom}"/>" size="30" maxlength="30" />
+				                    <input type="text" id="prenom" name="prenom" value="<c:out value="${utilisateur.prenom}"/>" size="20" maxlength="30" />
 				                    <br />
 				                    
 				                    <label for="telephone">Numéro de téléphone :<span class="requis"></span></label>
@@ -59,7 +58,7 @@
 			                    <div class="col-4">
 			                    
 				                    <label for="nom">Nom : <span class="requis"></span></label>
-				                    <input type="text" id="nom" name="nom" value="<c:out value="${utilisateur.nom}"/>" size="30" maxlength="30" />
+				                    <input type="text" id="nom" name="nom" value="<c:out value="${utilisateur.nom}"/>" size="20" maxlength="30" />
 				                    <br />                    
 				                                        
 				                    <label for="email">Email :</label>
@@ -84,6 +83,12 @@
 			                	</div>
 		                	</div>
                 	</div>
+                	
+                	
+                	<div>
+                		Crédit         <c:out value="${ utilisateur.credit }"></c:out>
+                	</div>
+                	
                     
                 </fieldset> 
                 
@@ -97,7 +102,7 @@
 		                </div>
 		                <div class="col">
 		                </br></br>
-		                <a class="btn btn-success" href="ServletSupprimerMonProfil" role="button">Annuler</a> 
+		                <a class="btn btn-success" href="ServletSupprimerMonProfil" role="button">Supprimer mon compte</a> 
 		                </div>
 	                </div>
                 </div>

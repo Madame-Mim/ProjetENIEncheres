@@ -1,5 +1,7 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/header.css">
+	
 
 	<nav>
 		<ul>
@@ -8,7 +10,9 @@
 		</c:if>
 		<c:if test="${not empty session}">
 			<li><a href="<%=request.getContextPath()%>/ServletDeconnexion">Déconnexion</a></li>
+		<c:if test="${utilisateur.isAdministrateur()==true}">
 			<li><a href="<%=request.getContextPath()%>/Administration">Panel administration</a></li>
+		</c:if>
 			<li><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2">Mon profil</a></li>
 			<li><a href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre un article</a></li>
 			<li><a href="<%=request.getContextPath()%>/Accueil">Enchères</a></li>

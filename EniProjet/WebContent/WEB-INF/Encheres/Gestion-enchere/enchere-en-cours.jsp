@@ -18,7 +18,6 @@
 	
 	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
 		<h2>Détail vente</h2>
-		
 		<h3>${article.nomArticle}</h3>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Description : </div><div class=" col-xs-6">${article.description}</div>

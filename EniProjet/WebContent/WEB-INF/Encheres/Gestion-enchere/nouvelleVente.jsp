@@ -19,14 +19,14 @@
 	
 		<form method="post" action="/EniProjet/ServletNouvelleVente">
 			
-			<div class="col-xs-offset-1 col-xs-4"">
+			<div class="col-xs-offset-1 col-xs-4">
 				<label>Article : </label></div>
 			<div class="col-xs-6">
 				<input type="text" name="nomArticle" size="37" required>
 			</div>
 			<div class="clearfix"></div>
 			<br>
-			<div class="col-xs-offset-1 col-xs-4"">
+			<div class="col-xs-offset-1 col-xs-4">
 				<label>Description : </label>
 			</div>
 			<div class="col-xs-6">
@@ -108,11 +108,13 @@
 			<div class="clearfix"></div>
 			<br><br>
 			<div class="col-xs-offset-1 col-xs-4">
-				<input type="submit" value="Enregister">
+				<input class="btn btn-success" type="submit" value="Enregister">
 			</div>
 		</form>
 		<form action="<%=request.getContextPath()%>/Accueil">
-			<input class="col-xs col-xs-2" type="submit" value="Annuler">
+		<div>
+			<input class="btn btn-success" type="submit" value="Annuler">
+		</div>
 		</form>
 			
 			
