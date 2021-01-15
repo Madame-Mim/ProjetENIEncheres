@@ -23,7 +23,6 @@
 		 <h2>${enchere.noUtilisateur.getPseudo()} a remporté l'enchère !</h2>
 		 </c:if>
 		 <br>
-
 		<h3>${article.nomArticle}</h3>
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Description : </div><div class=" col-xs-6">${article.description}</div>
