@@ -1,8 +1,12 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -35,10 +39,6 @@ public class ServletNouvelleVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		GregorianCalendar aujourdhui = new GregorianCalendar();//modifier le format pour être normal
-		System.out.println("aujourdhui :" + aujourdhui);
-		
-		
 		HttpSession session = request.getSession();
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
 		UtilisateurBo utilisateur = new UtilisateurBo();
@@ -89,6 +89,7 @@ public class ServletNouvelleVente extends HttpServlet {
 		
 		int prixVente = miseAPrixArticle;
 	
+		
 	//Permet de récupérer l'id de l'utilisateur
 		HttpSession session = request.getSession();
 		int idUtilisateur = Integer.parseInt(session.getAttribute("session").toString());
