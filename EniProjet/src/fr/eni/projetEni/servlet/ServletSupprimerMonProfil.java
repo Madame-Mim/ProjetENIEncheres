@@ -23,7 +23,6 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//
 		HttpSession session = request.getSession();
 		session.getAttribute("session");
 		int id= Integer.parseInt(session.getAttribute("session").toString());
@@ -44,7 +43,7 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 		
 		session.invalidate();
 		
-        this.getServletContext().getRequestDispatcher( "/Accueil" ).forward( request, response );
+		response.sendRedirect( "/WEB-INF/Encheres/accueilvisiteur.jsp" );
 	} 
 
 
