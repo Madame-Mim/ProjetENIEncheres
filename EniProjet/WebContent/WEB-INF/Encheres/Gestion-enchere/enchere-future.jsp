@@ -54,11 +54,17 @@
 			<br><br>
 			<fmt:parseDate  value="${article.dateDebutEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
 			<fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd" var="debutDateEnchere" />
-			<div class="col-xs-offset-1 col-xs-4">Début de l'enchère : </div><div class="col-xs-6"><input name="dateDebut" type="date" value="${debutDateEnchere}"/></div>
+			<div class="col-xs-offset-1 col-xs-4">Début de l'enchère : </div><div class="col-xs-7"><input name="dateDebut"min="${date}" type="date" value="${debutDateEnchere}"/>
+			<c:if test="${not empty erreur}">
+				<span class="text-danger erreur"> ${erreur} </span>
+			</c:if></div>
 			<br><br>
 			<fmt:parseDate  value="${article.dateFinEncheres}"  type="date" pattern="yyyy-MM-dd" var="parsedDate" />
 			<fmt:formatDate value="${parsedDate}" type="date" pattern="yyyy-MM-dd" var="finDateEnchere" />	
-			<div class="col-xs-offset-1 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><input name="dateFin" type="date" value="${finDateEnchere}"/></div>
+			<div class="col-xs-offset-1 col-xs-4">Fin de l'enchère : </div><div class="col-xs-6"><input name="dateFin" type="date" min="${date}" value="${finDateEnchere}"/>
+			<c:if test="${not empty erreur2}">
+				<span class="text-danger erreur"> ${erreur2} </span>
+			</c:if></div>
 			<br><br><br>
 			
 			<div class="col-xs-offset-1 col-xs-10">

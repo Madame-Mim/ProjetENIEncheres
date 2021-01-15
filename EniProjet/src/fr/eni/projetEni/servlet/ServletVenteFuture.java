@@ -1,6 +1,7 @@
 package fr.eni.projetEni.servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
@@ -61,9 +62,9 @@ public class ServletVenteFuture extends HttpServlet {
 					
 					Timestamp timestamp = Timestamp.valueOf(article.getDateDebutEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
 					long debutEnchereMillis = timestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
-					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
-					
-					if(debutEnchereMillis < System.currentTimeMillis()) //si l'enchère à déjà commencé
+					long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+					Date date =new Date(now);
+					if(debutEnchereMillis <= now) //si l'enchère à déjà commencé
 					{
 						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
 					    rd.forward(request, response);
@@ -114,12 +115,12 @@ public class ServletVenteFuture extends HttpServlet {
 			RetraitBo retrait = RetraitBll.getRetrait(rue, codePostal, ville); //recuperation de l'adresse de retrait en bdd
 			
 			Timestamp debutEnchereTimestamp = Timestamp.valueOf(debutEnchere.atStartOfDay()); //Passage de la date de debut d'enchere de l'article au format timestamp
-			long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+			long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date			
 			Timestamp finEnchereTimestamp = Timestamp.valueOf(finEnchere.atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
-			long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
+			long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date		
 			long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
-			
-			if(debutEnchereMillis<now||finEnchereMillis<now)
+
+			if(debutEnchereMillis < now||finEnchereMillis < now || debutEnchereMillis >= finEnchereMillis) // si les dates d'encheres ont lieu avant la date actuelle ou si le debut à lieu avant la fin
 			{
 				ArticleVenduBo article;
 				try 
@@ -128,7 +129,10 @@ public class ServletVenteFuture extends HttpServlet {
 					request.setAttribute("article", article);
 
 					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
-					request.setAttribute("categorieListe", listeCategorie);				
+					request.setAttribute("categorieListe", listeCategorie);	
+					
+					request.setAttribute("erreur", "la date de début d'enchère ne peut pas avoir lieu avant demain, ni après la fin de l'enchère ");
+					request.setAttribute("erreur2", "la date de fin d'enchère ne peut avoir lieu qu'après la date de début d'enchère ");
 				} 
 				catch (Exception e)
 				{
