@@ -129,10 +129,10 @@ public class ServletVenteFuture extends HttpServlet {
 					article = ArticleVenduBll.getById(idarticle);
 					request.setAttribute("article", article);
 
-					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+					List<CategorieBo> listeCategorie = CategorieBll.get();
 					request.setAttribute("categorieListe", listeCategorie);	
 					
-					//messages d'erreurs à afficher sur la jsp afin d'aider l'utilisateur
+					/* messages d'erreurs à afficher sur la jsp afin d'aider l'utilisateur */
 					request.setAttribute("erreur", "la date doit au moins être à demain"); 
 					request.setAttribute("erreur2", "la date doit être après celle de début d'enchère");
 				} 
@@ -193,7 +193,7 @@ public class ServletVenteFuture extends HttpServlet {
 						article = ArticleVenduBll.getById(idarticle);
 						request.setAttribute("article", article);
 	
-						List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+						List<CategorieBo> listeCategorie = CategorieBll.get();
 						request.setAttribute("categorieListe", listeCategorie);				
 					} 
 					catch (Exception e) 
@@ -244,7 +244,7 @@ public class ServletVenteFuture extends HttpServlet {
 						article = ArticleVenduBll.getById(idarticle);
 						request.setAttribute("article", article);
 	
-						List<CategorieBo> listeCategorie = CategorieBll.getallM1();
+						List<CategorieBo> listeCategorie = CategorieBll.get();
 						request.setAttribute("categorieListe", listeCategorie);				
 					} 
 					catch (Exception e)

@@ -59,10 +59,10 @@ public class ServletVenteEnCours extends HttpServlet {
 					long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
 					Timestamp finEnchereTimestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
 					long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
-					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+					long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
 				
 				
-					if(finEnchereMillis < System.currentTimeMillis() || System.currentTimeMillis() < debutEnchereMillis) //si la date actuelle n'est pas comprise entre les dates de l'enchère
+					if(finEnchereMillis < now || now < debutEnchereMillis) //si la date actuelle n'est pas comprise entre les dates de l'enchère
 					{
 						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
 					    rd.forward(request, response);
@@ -95,58 +95,58 @@ public class ServletVenteEnCours extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try 
 		{
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(); //récupération de la session
 
-			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString());
+			int no_utilisateur = Integer.parseInt(session.getAttribute("session").toString()); //récupération de l'id passé en attribut de session (au format int de l'objet passé en String)
 
-			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
+			UtilisateurBll utilisateurAmodifie = new UtilisateurBll(); //instanciation de l'utilisateurBll
 			
-			int no_article=Integer.parseInt(request.getParameter("idarticle"));
+			int no_article=Integer.parseInt(request.getParameter("idarticle")); //récupération de l'id de l'article passé en paramère d'url sous le nom "idarticle"
 			
-			ArticleVenduBll articleAModifie = new ArticleVenduBll();
-			ArticleVenduBo article = ArticleVenduBll.getById(no_article);
+			ArticleVenduBll articleAModifie = new ArticleVenduBll(); //instanciation de l'article utilisateurBll
+			ArticleVenduBo article = ArticleVenduBll.getById(no_article); //récupération de l'article par son id
 			
-			LocalDate date = LocalDate.now();	
-			int montant= Integer.parseInt(request.getParameter("enchere"));
+			LocalDate date = LocalDate.now();	// récupération de la date du jour
+			int montant= Integer.parseInt(request.getParameter("enchere")); //récupération du montant de l'enchère effectuée
 
-			EnchereBo enchere = new EnchereBo();
+			EnchereBo enchere = new EnchereBo(); //instanciation d'une nouvelle enchère.
 			
-			//Remboursement points de la meilleur enchere actuelle
-			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article, no_article);
+			/*Remboursement points de la meilleur enchere actuelle */
+			EnchereBo meilleurEnchere = EnchereBll.getMaxByIdArticle(no_article, no_article); //récupération de la meilleur enchère de l'article voulu
 	
-			UtilisateurBo utilisateurARembourse = enchere.getNoUtilisateur();
-			if(utilisateurARembourse != null)
+			UtilisateurBo utilisateurARembourse = meilleurEnchere.getNoUtilisateur(); // récupération du meilleur enchérisseur passé
+			if(utilisateurARembourse != null) //s'il existe alors :
 			{
-			int creditActuell = utilisateurARembourse.getCredit();
-			int nouveauCreditt = creditActuell+meilleurEnchere.getMontantEnchere();
-			utilisateurARembourse.setCredit(nouveauCreditt);
+			int creditActuell = utilisateurARembourse.getCredit(); //recuperation de son credit actuel
+			int nouveauCreditt = creditActuell+meilleurEnchere.getMontantEnchere(); // Calcul du nouveau crédit
+			utilisateurARembourse.setCredit(nouveauCreditt); //instanciation du nouveau crédit
 			
-			utilisateurAmodifie.update(utilisateurARembourse);
+			utilisateurAmodifie.update(utilisateurARembourse); //update du crédit de l'ancien meilleur enchérisseur
 			}
 			
-			//Retrait des points du nouvel enchérisseur
-			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur);
+			/* Retrait des points du nouvel enchérisseur */
+			UtilisateurBo utilisateur = UtilisateurBll.get(no_utilisateur); //récupération de l'utilisateur qui vient de faire l'enchère
 
-			int creditActuel = utilisateur.getCredit();
-			int nouveauCredit = creditActuel-montant;
-			utilisateur.setCredit(nouveauCredit);
-			utilisateurAmodifie.update(utilisateur);
+			int creditActuel = utilisateur.getCredit();  //recuperation de son credit actuel
+			int nouveauCredit = creditActuel-montant; // Calcul du nouveau crédit
+			utilisateur.setCredit(nouveauCredit); //instanciation du nouveau crédit
+			utilisateurAmodifie.update(utilisateur); //update du crédit du nouvel enchérisseur
 
-		//	insertion de la nouvelle enchère
-			enchere.setDateEnchere(date);
-			enchere.setMontantEnchere(montant);
-			enchere.setNoArticle(article);
-			enchere.setNoUtilisateur(utilisateur);
-			EnchereBll.insert(enchere);
+			/* insertion de la nouvelle enchère */
+			enchere.setDateEnchere(date); //instanciation de la date d'enchère
+			enchere.setMontantEnchere(montant); //instanciation du montant enchéri
+			enchere.setNoArticle(article); //instanciation de l'article concerné
+			enchere.setNoUtilisateur(utilisateur); //instanciation de l'utilisateur qui a fait l'enchère
+			EnchereBll.insert(enchere); //Insertion en bdd
 
 			// Modification du prix de vente dans la table article
 			
-			article.setPrixVente(montant);
+			article.setPrixVente(montant); // instanciation du prix de vente actuel
 
-			articleAModifie.updateArticle(article);
+			articleAModifie.updateArticle(article); // update du prix de l'article
 			
 			
-			//Rechargement des données pour affichage
+			/* Rechargement des données pour affichage */
 			int numArticle = Integer.parseInt(request.getParameter("idarticle"));
 
 			ArticleVenduBo articleACharge = ArticleVenduBll.getById(numArticle);

@@ -1,16 +1,9 @@
 package fr.eni.projetEni.bll;
 //
-import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.projetEni.bo.ArticleVenduBo;
-import fr.eni.projetEni.bo.CategorieBo;
-import fr.eni.projetEni.bo.EnchereBo;
-import fr.eni.projetEni.bo.RetraitBo;
-import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.ArticleVenduDal;
-import fr.eni.projetEni.dal.UtilisateurDal;
-
 
 public class ArticleVenduBll {
 	

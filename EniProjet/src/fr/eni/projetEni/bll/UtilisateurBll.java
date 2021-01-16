@@ -2,7 +2,6 @@ package fr.eni.projetEni.bll;
 
 import java.util.List;
 
-import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
 import fr.eni.projetEni.dal.UtilisateurDal;
 

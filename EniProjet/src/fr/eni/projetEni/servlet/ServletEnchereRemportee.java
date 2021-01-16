@@ -31,7 +31,7 @@ public class ServletEnchereRemportee extends HttpServlet {
 		System.out.println("ServletEnchereRemportee - doGet");
 		
 		try {
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(); //récupération de la session
 
 			if(request.getParameter("idarticle")==null || request.getParameter("idarticle")=="" || Integer.parseInt(request.getParameter("idarticle"))==0)// si idarticle n'existe pas ou est paramétré à 0
 			{

@@ -29,11 +29,6 @@ public class CategorieBll {
 		 return CategorieDal.get();
 	 }
 	 
-	 public static List<CategorieBo>  getallM1()
-	 {
-		 return CategorieDal.getAllM1();
-	 }
-	 
 	 public static void update(CategorieBo libelle)
 	 {
 		 CategorieDal.update(libelle);

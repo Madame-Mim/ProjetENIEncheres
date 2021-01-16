@@ -30,21 +30,21 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); //récupération de la session
 		session.getAttribute("session");
-		int id= Integer.parseInt(session.getAttribute("session").toString());
+		int id= Integer.parseInt(session.getAttribute("session").toString()); // récupération de l'id de l'utilisateur connecté (passage au format int de l'objet passé en String)
 	
 		EnchereBll enchereAmodifié= new EnchereBll();
 		UtilisateurBo utilisateurAmodifie;
 		try
 		{
-			utilisateurAmodifie = UtilisateurBll.get(id);
-			List<EnchereBo> listeEnchere = EnchereBll.getbyutilisateur(id);
-			for (int i = 0; i < listeEnchere.size(); i++) 
+			utilisateurAmodifie = UtilisateurBll.get(id); //récupération de l'utilisateur connecté
+			List<EnchereBo> listeEnchere = EnchereBll.getbyutilisateur(id); //récupération de toutes les enchères faites par l'utilisateur
+			for (int i = 0; i < listeEnchere.size(); i++) // pour chacune d'entre elles
 			{
-				EnchereBo enchere = new EnchereBo();
-				enchere.setNoUtilisateur(utilisateurAmodifie);
-				enchereAmodifié.updateAll(enchere);
+				EnchereBo enchere = new EnchereBo(); //instanciation d'une nouvelle enchère
+				enchere.setNoUtilisateur(utilisateurAmodifie); //instanciation de l'utilisateur ayant fait l'enchère a modifié
+				enchereAmodifié.updateAll(enchere); //appel à la fonction updateAll (qui met toutes les enchères sur l'utilisateur 1 : "Pseudo supprimé")
 			}
 		
 		}
@@ -52,7 +52,7 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 		{
 			e1.printStackTrace();
 		}
-		//maj des articles vers "utilisateur supprimé"
+		/* update des articles vers "pseudo supprimé" */
 
 		ArticleVenduBll articleAmodifié= new ArticleVenduBll();
 		UtilisateurBo utilisateurArticleAmodifie;
@@ -76,14 +76,15 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 			e1.printStackTrace();
 		}
 
-					
+		/* updSuppression de l'utilisateur connecté */
+			
 		UtilisateurBll utilisateurASupprimer = new UtilisateurBll();
 		try 
 		{
 			UtilisateurBo utilisateur = UtilisateurBll.get(id);
 			utilisateurASupprimer.delete(id);
 			
-			session.invalidate();
+			session.invalidate(); //destruction de la session
 			
 			response.sendRedirect( "http://localhost:8080/EniProjet/Accueil" );
 		} 

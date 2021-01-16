@@ -20,7 +20,7 @@ import javax.servlet.http.Part;
 public class Upload extends HttpServlet {
 	 private static final long serialVersionUID = 1L;
 	 public static final int TAILLE_TAMPON = 10240;
-	 public static final String CHEMIN_FICHIERS = "C:\\Users\\edavi2020\\git\\projetENI\\EniProjet\\WebContent\\Image\\"; 
+	 public static final String CHEMIN_FICHIERS = "C:\\Users\\nicol.DESKTOP-CD7QT37\\git\\projetENI\\EniProjet\\WebContent\\Image\\"; 
 	 //Si vers serveur :
 	 //public static final String CHEMIN_FICHIERS = "C:\\apache-tomcat-8.5.60\\webapps\\uploaded\\";    
 	  
@@ -39,15 +39,11 @@ public class Upload extends HttpServlet {
 	        Part part = request.getPart("fichier");
 	            
 	        // On vérifie qu'on a bien reçu un fichier
-	        String nomFichier = getNomFichier(part);
+	        String nomFichier = "1.jpg";
 
 	        // Si on a bien un fichier
 	        if (nomFichier != null && !nomFichier.isEmpty()) {
 	            String nomChamp = part.getName();
-	            // Corrige un bug du fonctionnement d'Internet Explorer
-	             nomFichier = nomFichier.substring(nomFichier.lastIndexOf('/') + 1)
-	                    .substring(nomFichier.lastIndexOf('\\') + 1);
-	 
 
 	            // On écrit définitivement le fichier dans le dossier
 	            ecrireFichier(part, nomFichier, CHEMIN_FICHIERS);

@@ -48,7 +48,7 @@ public class ArticleVenduDal {
             
 		} catch (Exception ex) {
 			ex.printStackTrace();
-            //logger.severe("Erreur dans la méthode insertArticle(ArticleVenduBo articleVendu) avec article ="+ articleVendu +"- erreur : "+ex.getMessage());
+            logger.severe("Erreur dans la méthode insertArticle(ArticleVenduBo articleVendu) avec article ="+ articleVendu +"- erreur : "+ex.getMessage());
 		}
     } /* fin insert */
     
@@ -251,7 +251,7 @@ public class ArticleVenduDal {
              rqt.executeUpdate();
 
         } catch (Exception ex ) {
-           //logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
+           logger.severe("erreur dans la méthode updateArticle(ArticleVenduBo articleVendu) " + articleVendu + "erreur : " + ex.getMessage());
         	ex.printStackTrace();
         }
     }/* fin update */

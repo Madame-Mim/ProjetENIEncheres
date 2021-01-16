@@ -56,11 +56,11 @@ public class ServletVenteTerminee extends HttpServlet {
 					EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 					request.setAttribute("enchere", enchere);	
 					
-					Timestamp timestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
+					Timestamp timestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); // Passage de la date de fin d'enchere de l'article au format timestamp
 					long finEnchereMillis = timestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
-					System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
+					long now = System.currentTimeMillis(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
 				
-					if(finEnchereMillis > System.currentTimeMillis()) //si d'avantages de millisecondes se seront écoulées à la date de fin d'enchère qu'aujourd'hui, la date n'est pas passée
+					if(finEnchereMillis > now) //si d'avantages de millisecondes se seront écoulées à la date de fin d'enchère qu'aujourd'hui, la date n'est pas passée
 					{
 						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
 					    rd.forward(request, response);
