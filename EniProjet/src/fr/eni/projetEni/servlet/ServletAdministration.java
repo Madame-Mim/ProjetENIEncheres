@@ -34,10 +34,13 @@ public class ServletAdministration extends HttpServlet {
 		HttpSession session =  request.getSession();
 
 		List<UtilisateurBo> listeUtilisateur;
-		try {
-			listeUtilisateur = UtilisateurBll.getAllM1();
+		try 
+		{
+			listeUtilisateur = UtilisateurBll.getAllM1(); //récupération de tous les utilisateurs sauf l'id 1 (Pré attribué à "Pseudo supprimé" en bdd)
 			request.setAttribute("utilisateurListe", listeUtilisateur);
-		} catch (Exception e) {
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 		
@@ -64,7 +67,7 @@ public class ServletAdministration extends HttpServlet {
 		{
 			if(supprimerUser!=null)
 			{
-				//maj des encheres vers "utilisateur supprimé"
+				/* maj des encheres vers "Pseudo supprimé" */
 				
 				EnchereBll enchereAmodifié= new EnchereBll();
 				UtilisateurBo utilisateurAmodifie;
@@ -84,7 +87,7 @@ public class ServletAdministration extends HttpServlet {
 				{
 					e1.printStackTrace();
 				}
-				//maj des articles vers "utilisateur supprimé"
+				//maj des articles vers "Pseudo supprimé"
 
 				ArticleVenduBll articleAmodifié= new ArticleVenduBll();
 				UtilisateurBo utilisateurArticleAmodifie;
@@ -94,7 +97,6 @@ public class ServletAdministration extends HttpServlet {
 					utilisateurArticleAmodifie = UtilisateurBll.get(idUtilisateur);
 
 					List<ArticleVenduBo> listeArticle = (List<ArticleVenduBo>) ArticleVenduBll.getByIdUtilisateur(idUtilisateur);
-					System.out.println(listeArticle);
 
 					for (int i = 0; i < listeArticle.size(); i++) 
 					{
@@ -109,7 +111,7 @@ public class ServletAdministration extends HttpServlet {
 					e1.printStackTrace();
 				}
 
-							
+				/*Suppression de l'utilisateur*/			
 				UtilisateurBll utilisateurASupprimer = new UtilisateurBll();
 				try 
 				{
