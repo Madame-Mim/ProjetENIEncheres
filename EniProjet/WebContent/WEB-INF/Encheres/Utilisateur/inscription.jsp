@@ -87,7 +87,7 @@
 		                </div>
 		                <div class="col">
 			                </br></br>
-			                <a class="btn btn-success" href="ServletAccueil" role="button">Annuler</a> 
+			                <a class="btn btn-success" href="Accueil" role="button">Annuler</a> 
 		                </div>
                		</div>
                 </div>

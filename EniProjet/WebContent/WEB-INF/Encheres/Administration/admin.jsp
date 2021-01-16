@@ -11,47 +11,47 @@
 <title>Panel administration</title>
 </head>
 <body class="container-fluide col-xs-12">
-<%@include file="/WEB-INF/Include/header.html" %>
-
-<section class="col-xs-offset-2 col-xs-4">
-	<h3> Utilisateur :</h3>
-	<br>
-	<div class="clearfix"></div>
-	<br>
-	<form action="<%=request.getContextPath()%>/Administration" method="post">
-		<select name="utilisateur">	
-				<% request.getAttribute("utilisateurListe"); %>
-				<c:forEach var="v" items="${utilisateurListe}">
-			   		<option value="${v.id}">(${v.pseudo})   ${v.nom} ${v.prenom}</option>
-				</c:forEach>
-		</select>
-		<br><br>
-			<input name="desactiver" type="submit" value="désactiver le compte">
-			<input name="supprimerUtilisateur" type="submit" value="supprimer le compte">
-	</form>
-</section>
-<section class="col-xs-4">
-	<h3> Catégorie :</h3>
-	<br>
-	<div class="clearfix"></div>
-	<br>
-		<form>
+	<header>
+		<%@include file="/WEB-INF/Include/header.html" %>
+	</header>
+<div class="clearfix"></div>
+<br><br>
+	<section class="row col-xs-offset-2 col-xs-4">
+		<form action="<%=request.getContextPath()%>/Administration" method="post">
+			<fieldset>
+				<legend> Gestion des utilisateurs</legend>
+					<select name="utilisateur">	
+							<% request.getAttribute("utilisateurListe"); %>
+							<c:forEach var="v" items="${utilisateurListe}">
+						   		<option value="${v.id}">(${v.pseudo})   ${v.nom} ${v.prenom}</option>
+							</c:forEach>
+					</select>
 			
-			<div>	
-				<% request.getAttribute("categorieListe"); %>
-					<c:forEach var="v" items="${categorieListe}">
+					<input class="btn btn-success" name="desactiver" type="submit" value="désactiver le compte" disabled>
+					<input class="btn btn-success" name="supprimerUtilisateur" type="submit" value="supprimer le compte">
+			</fieldset>
+		</form>	
+	</section>
+	<section class="col-xs-offset-1 col-xs-4">
+			<form>
+				<fieldset>
+			<legend>Gestion des catégories</legend>
+				<div>	
+					<% request.getAttribute("categorieListe"); %>
+						<c:forEach var="v" items="${categorieListe}">
+							<form action="<%=request.getContextPath()%>/Categories" method="post">
+				   				<input name="idcategorie" value="${v.noCategorie}" type="hidden">
+				   				<input type="text" value="${v.libelle}" placeholder="${v.libelle}"> <input class="btn btn-success" name="Modifier" type="submit" value="modifier" disabled>	
+				   				<input class="btn btn-success" name="supprimerCategorie" type="submit" value="supprimer" disabled>				   				
+				   			</form><br><br>
+						</c:forEach>
+						<br><br>
 						<form action="<%=request.getContextPath()%>/Categories" method="post">
-			   				<input name="idcategorie" value="${v.noCategorie}" type="hidden">
-			   				<input type="text" value="${v.libelle}"placeholder="${v.libelle}"><input name="Modifier" type="submit" value="modifier">	
-			   				<input name="supprimerCategorie" type="submit" value="supprimer">				   				
-			   			</form><br><br>
-					</c:forEach>
-					<br><br>
-					<form action="<%=request.getContextPath()%>/Categories" method="post">
-			   				<input type="text" placeholder="Libellé de la catégorie"> <input name="Ajouter" type="submit" value="ajouter une catégorie">			   				
-			   			</form>
-			</div>
-		</form>
-</section>
+				   				<input type="text" placeholder="Libellé de la catégorie"> <input class="btn btn-success" name="Ajouter" type="submit" value="ajouter une catégorie" disabled>	
+				   	</fieldset>		   				
+				   		</form>
+				</div>
+			</form>
+	</section>
 </body>
 </html>

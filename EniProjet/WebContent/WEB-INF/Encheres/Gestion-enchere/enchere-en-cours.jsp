@@ -75,7 +75,7 @@
 		<div class="col-xs-6">
 		<form action="<%=request.getContextPath()%>/VenteEnCours?idarticle=${article.getNoArticle()}" method="post">
 			<input  name="enchere" type="number" max="${article.utilisateur.getCredit()}" min="${proposition}" value="${proposition}" size=5 ${enabled}>
-			<input  class="submitEncherir" type="submit" value="Enchérir" ${enabled}>
+			<input  class="submitEncherir btn btn-success" type="submit" value="Enchérir" ${enabled}>
 		</form>
 		</div>
 					<div class="clearfix"></div>

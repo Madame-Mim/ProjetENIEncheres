@@ -16,7 +16,7 @@
 	<br>
 	<form method="post" action="/EniProjet/ServletMotDePasseOublie">
 		<div class="col-xs-offset-3 col-xs-4">
-			<label>Adresse Mail : </label><input type="text" name="adresseMail" required>
+			<label>Adresse Mail : </label><input type="text" name="adresseMail" size=20 required>
 		<div class="clearfix"></div>
 			<br>
 			<input class="btn btn-success" type="submit" value="Valider">

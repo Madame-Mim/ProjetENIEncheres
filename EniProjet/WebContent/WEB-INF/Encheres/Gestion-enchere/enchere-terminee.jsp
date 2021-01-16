@@ -52,7 +52,7 @@
 		<br><br><br>
 		<c:if test="${article.retraitEffectue== false && article.prixVente>0}">
 		<form class="col-xs-offset-2 col-xs-4" action="<%=request.getContextPath()%>/VenteTerminee?idarticle=${article.noArticle}" method="post">
-			<input class="submitCourt" type="submit" value="Retrait effectué">
+			<input class="submitCourt btn btn-success" type="submit" value="Retrait effectué">
 			<input name="credit" type="hidden" value="${article.prixVente}">
 		</form>
 		</c:if>

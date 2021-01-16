@@ -80,9 +80,9 @@
 			<br>
 			<div class="clearfix"></div>
 			<br>
-			<div class="col-xs-offset-1 col-xs-3"><input class="submitCourt" type="submit" value ="enregistrer" name="enregistrer"></div>
-			<div class="col-xs-4"><input class="submitCourt" type="submit" value="annuler" name="annulerModif"></div>
-			<div class="col-xs-3"><input class="submitLong" type="submit" value="annuler la vente" name="annulerVente"></div>
+			<div class="col-xs-offset-1 col-xs-3"><input class="submitCourt btn btn-success" type="submit" value ="enregistrer" name="enregistrer"></div>
+			<div class="col-xs-4"><input class="submitCourt btn btn-success" type="submit" value="annuler" name="annulerModif"></div>
+			<div class="col-xs-3"><input class="submitLong btn btn-success" type="submit" value="annuler la vente" name="annulerVente"></div>
 		</form>
 	</section>
 	

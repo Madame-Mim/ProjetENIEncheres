@@ -89,21 +89,21 @@ public class ServletVenteTerminee extends HttpServlet {
 		try
 		{
 			UtilisateurBll utilisateurAmodifie = new UtilisateurBll();
-			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id);
-			int montant = Integer.parseInt(request.getParameter("credit"));
-			int creditActuel = utilisateurACrediter.getCredit();
-			int nouveauCredit = creditActuel+montant;
-			utilisateurACrediter.setCredit(nouveauCredit);
+			UtilisateurBo utilisateurACrediter = UtilisateurBll.get(id); // récupération de l'utilisateur connecté
+			int montant = Integer.parseInt(request.getParameter("credit")); // récupération du montant du prix de vente obtenu de l'enchère
+			int creditActuel = utilisateurACrediter.getCredit(); // récupération du nombre de crédit possédé par l'utilisateur
+			int nouveauCredit = creditActuel+montant; // Calcul du crédit devant être en possession du vendeur
+			utilisateurACrediter.setCredit(nouveauCredit); //instanciation de la donnée à modifier
 			
-			utilisateurAmodifie.update(utilisateurACrediter);
+			utilisateurAmodifie.update(utilisateurACrediter); //mise à jour de la donnée
 			
-			int idArticle = Integer.parseInt(request.getParameter("idarticle"));
+			int idArticle = Integer.parseInt(request.getParameter("idarticle")); //récupération de l'id article
 
-			ArticleVenduBll articleAModifie = new ArticleVenduBll();
-			ArticleVenduBo articleRetire = ArticleVenduBll.getById(idArticle);
-			articleRetire.setRetraitEffectue(true);
+			ArticleVenduBll articleAModifie = new ArticleVenduBll(); 
+			ArticleVenduBo articleRetire = ArticleVenduBll.getById(idArticle);  //récupération de l'article
+			articleRetire.setRetraitEffectue(true); //instanciation de la donnée à modifier
 
-			articleAModifie.updateArticle(articleRetire);
+			articleAModifie.updateArticle(articleRetire); //enregistrement du retrait dans la table
 		} 
 		catch (Exception e) 
 		{
@@ -112,6 +112,7 @@ public class ServletVenteTerminee extends HttpServlet {
 		
 		try 
 		{
+			//Récupération des données nécessaires à l'affichage de la page (comme dans le do get)
 			int id2 = Integer.parseInt(request.getParameter("idarticle"));
 			ArticleVenduBo article;
 

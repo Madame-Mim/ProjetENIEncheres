@@ -30,21 +30,23 @@
 	<section class="row col-xs-offset-4 col-xs-4 col-xs-offset-4">
 		<form action="<%=request.getContextPath()%>/connexion" method="post">
 			<label for="identifiant">Identifiant : </label>
-			<input class="texte" type="text" name="pseudo" id="identifiant" size=30 value="${cookiepseudo}"/>
+			<input class="texte" type="text" name="pseudo" id="identifiant" size=30 value="${cookiepseudo}" required/>
 			<br><br>
 			<label for="password">Mot de passe : </label>
-			<input class="texte" type="password" name="password" id="password"  size=30 value="${cookiepassword}"/>
+			<input class="texte" type="password" name="password" id="password"  size=30 value="${cookiepassword}" required/>
 			<br><br>
 			<c:if test="${not empty erreur}">
 				<span class="text-danger erreur"> ${erreur} </span>
 			<br><br>
 			</c:if>
-			<input class="submit" type="submit" value="Connexion">
+			<div class="clearfix"></div>
+<br><br>
+			<input class="submit btn btn-success" type="submit" value="Connexion">
 			 
 			 <div id="iteration2">
 			 <input type="checkbox" name="souvenir" id=souvenir value="1" ${checked} >
 				 Se souvenir de moi
-				<br>
+				<br><br>
 				<a href="/EniProjet/ServletMotDePasseOublie">Mot de passe oublié</a>
 			</div>
 		</form>
@@ -52,7 +54,7 @@
 	<div class="clearfix"></div>
 <br><br>
 			<form action="<%=request.getContextPath()%>/ServletInscriptionUtilisateur">
-				<input class="submit" type="submit" value="Créer un compte">
+				<input class="submit btn btn-success" type="submit" value="Créer un compte">
 			</form>
 			
 	</section>

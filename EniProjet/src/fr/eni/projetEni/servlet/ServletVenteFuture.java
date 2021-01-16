@@ -45,19 +45,19 @@ public class ServletVenteFuture extends HttpServlet {
 			}
 			else	
 			{
-				int id = Integer.parseInt(request.getParameter("idarticle"));
+				int id = Integer.parseInt(request.getParameter("idarticle")); //recupere l'id de l'article
 
-				ArticleVenduBo article = ArticleVenduBll.getById(id);
-				request.setAttribute("article", article);
+				ArticleVenduBo article = ArticleVenduBll.getById(id); // recupère les infos de l'article
+				request.setAttribute("article", article); //met l'article en attribut pour l'affichage en jsp
 				
-				if(article==null || article.getUtilisateur().getId() != Integer.parseInt(session.getAttribute("session").toString()))//Si l'utilisateur n'est pas le vendeur ou si l'article n'existe pas
+				if(article==null || article.getUtilisateur().getId() != Integer.parseInt(session.getAttribute("session").toString()))//Si l'article n'existe pas ou si l'utilisateur n'est pas le vendeur 
 				{
 					RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
 				    rd.forward(request, response);
 				}
 				else
 				{
-					List<CategorieBo> listeCategorie = CategorieBll.get();
+					List<CategorieBo> listeCategorie = CategorieBll.get(); // recupère les valeurs en BDD de la table catégorie
 					request.setAttribute("categorieListe", listeCategorie);
 					
 					Timestamp timestamp = Timestamp.valueOf(article.getDateDebutEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
@@ -69,9 +69,9 @@ public class ServletVenteFuture extends HttpServlet {
 						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
 					    rd.forward(request, response);
 					}
-					else
+					else //j'ai passé tous les barrages
 					{
-						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp"); // j'affiche la page voulue
 						rd.forward(request, response);
 					}
 				}
@@ -89,9 +89,9 @@ public class ServletVenteFuture extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		int id = Integer.parseInt(session.getAttribute("session").toString());
+		int id = Integer.parseInt(session.getAttribute("session").toString()); // récupération de l'id de l'utilisateur connecté
 		
-		int idarticle = Integer.parseInt(request.getParameter("idarticle"));
+		int idarticle = Integer.parseInt(request.getParameter("idarticle")); // récupération de l'id de l'article
 		
 		if(request.getParameter("enregistrer")!=null) //Si l'enregistrement de l'update est demandé
 		{ 
@@ -121,18 +121,20 @@ public class ServletVenteFuture extends HttpServlet {
 			long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
 
 			if(debutEnchereMillis < now||finEnchereMillis < now || debutEnchereMillis >= finEnchereMillis) // si les dates d'encheres ont lieu avant la date actuelle ou si le debut à lieu avant la fin
-			{
+			{ 
+				//récupération des valeurs nécessaires à l'affichage jsp (comme pour le do get, sinon les valeurs ne sont pas connues)
 				ArticleVenduBo article;
 				try 
-				{
+				{	
 					article = ArticleVenduBll.getById(idarticle);
 					request.setAttribute("article", article);
 
 					List<CategorieBo> listeCategorie = CategorieBll.getallM1();
 					request.setAttribute("categorieListe", listeCategorie);	
 					
-					request.setAttribute("erreur", "la date de début d'enchère ne peut pas avoir lieu avant demain, ni après la fin de l'enchère ");
-					request.setAttribute("erreur2", "la date de fin d'enchère ne peut avoir lieu qu'après la date de début d'enchère ");
+					//messages d'erreurs à afficher sur la jsp afin d'aider l'utilisateur
+					request.setAttribute("erreur", "la date doit au moins être à demain"); 
+					request.setAttribute("erreur2", "la date doit être après celle de début d'enchère");
 				} 
 				catch (Exception e)
 				{
@@ -141,7 +143,7 @@ public class ServletVenteFuture extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 				rd.forward(request, response);
 			}
-			else if(retrait == null) //si cette adresse n'existe pas alors :
+			else if(retrait == null) //si l'adresse de retrait n'existe pas alors je l'insère :
 				{
 					try 
 					{
@@ -154,13 +156,13 @@ public class ServletVenteFuture extends HttpServlet {
 						newPlace.setVille(ville);
 						
 						nouvelleadresse.insert(newPlace); //enregistrement de la nouvelle adresse
-						RetraitBo nouvelleAdresse = RetraitBll.getRetrait(newPlace.getRue(), newPlace.getCodePostal(), newPlace.getVille());
+						RetraitBo nouvelleAdresseRetrait = RetraitBll.getRetrait(newPlace.getRue(), newPlace.getCodePostal(), newPlace.getVille()); //récupération de l'adresse enregistrée
 						
-						UtilisateurBo utilisateur;
-				
-						utilisateur = UtilisateurBll.get(id);
+						UtilisateurBo utilisateur = UtilisateurBll.get(id); //je récupère le vendeur
+									
+						//J'instancie l'article avec les valeurs à y insérer
 						ArticleVenduBo article = new ArticleVenduBo();
-					
+												 
 						article.setNoArticle(idArticle);
 						article.setNomArticle(nom);
 						article.setDescription(description);
@@ -170,7 +172,7 @@ public class ServletVenteFuture extends HttpServlet {
 						article.setPrixVente(0);
 						article.setCategorie(categorieVente);
 						article.setUtilisateur(utilisateur);
-						article.setRetrait(nouvelleAdresse); //on set la nouvelle adresse enregistrée
+						article.setRetrait(nouvelleAdresseRetrait); //on set la nouvelle adresse enregistrée
 						try
 						{
 							articleAModifie.updateArticle(article); //enregistrement de l'article
@@ -183,28 +185,33 @@ public class ServletVenteFuture extends HttpServlet {
 					} 
 					catch (Exception e1) 
 					{
-					e1.printStackTrace();
+						e1.printStackTrace();
 					}
 					ArticleVenduBo article;
-					try {
+					try 
+					{
 						article = ArticleVenduBll.getById(idarticle);
 						request.setAttribute("article", article);
 	
 						List<CategorieBo> listeCategorie = CategorieBll.getallM1();
 						request.setAttribute("categorieListe", listeCategorie);				
-					} catch (Exception e) {
+					} 
+					catch (Exception e) 
+					{
 						e.printStackTrace();
 					}
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");//l'article est enregistré, j'affiche la page modifiée
 					rd.forward(request, response);
 				} 
-				else 	//Si cette adresse de retrait existe déjà:
+				else 	//Si cette adresse de retrait existe déjà: 
 				{
 					UtilisateurBo utilisateur;
 					
 					try
 					{
 						utilisateur = UtilisateurBll.get(id);
+						
+						
 						ArticleVenduBo article = new ArticleVenduBo();
 							article.setNoArticle(idArticle);
 							article.setNomArticle(nom);
@@ -219,7 +226,7 @@ public class ServletVenteFuture extends HttpServlet {
 							
 							try 
 							{
-								articleAModifie.updateArticle(article);
+								articleAModifie.updateArticle(article); //je modifie l'article sans insérer de nouvelles adresses de retrait
 							} 
 							catch (Exception e) 
 							{
@@ -262,7 +269,7 @@ public class ServletVenteFuture extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");// je renvoie sur la page sans n'en rien faire
 				rd.forward(request, response);
 			}
 			else if(request.getParameter("annulerVente")!=null) //Si l'annulation de la vente est demandée
@@ -270,8 +277,8 @@ public class ServletVenteFuture extends HttpServlet {
 					ArticleVenduBll articleBll = new ArticleVenduBll();
 					ArticleVenduBo articleADelete;
 					try {
-						articleADelete = ArticleVenduBll.getById(idarticle);
-						articleBll.deleteArticle(idarticle);
+						articleADelete = ArticleVenduBll.getById(idarticle); //je récupère l'article
+						articleBll.deleteArticle(idarticle);// et je le supprime
 						
 						   RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 						   rd.forward(request, response);
