@@ -73,10 +73,12 @@ public class ServletVenteEnCours extends HttpServlet {
 						EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 						request.setAttribute("enchere", enchere);
 
-						File photo = new File("Image/"+numArticle+".jpg");
-						File noPhoto = new File("Image/NoImage.png");
-						
-						if(photo.isFile())
+						File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+numArticle+".jpg");
+						String photo = "Image/"+numArticle+".jpg";
+						File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+						String noPhoto = "Image/NoImage.png";
+
+						if(photoArticle.isFile())
 						{
 							request.setAttribute("image", photo);
 						}
@@ -163,10 +165,12 @@ public class ServletVenteEnCours extends HttpServlet {
 			EnchereBo enchereACharge = EnchereBll.getByIdArticle(article.getNoArticle());
 			request.setAttribute("enchere", enchereACharge);
 			
-			File photo = new File("Image/"+numArticle+".jpg");
-			File noPhoto = new File("Image/NoImage.png");
-			
-			if(photo.isFile())
+			File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+numArticle+".jpg");
+			String photo = "Image/"+numArticle+".jpg";
+			File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+			String noPhoto = "Image/NoImage.png";
+
+			if(photoArticle.isFile())
 			{
 				request.setAttribute("image", photo);
 			}

@@ -72,10 +72,12 @@ public class ServletVenteFuture extends HttpServlet {
 					}
 					else //j'ai passé tous les barrages
 					{
-						File photo = new File("Image/"+id+".jpg");
-						File noPhoto = new File("Image/NoImage.png"); 
+						File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+						String photo = "Image/"+id+".jpg";
+						File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+						String noPhoto = "Image/NoImage.png";
 
-						if(photo.isFile())
+						if(photoArticle.isFile())
 						{
 							request.setAttribute("image", photo);
 						}
@@ -83,7 +85,8 @@ public class ServletVenteFuture extends HttpServlet {
 						{
 							request.setAttribute("image", noPhoto);
 						}
-						System.out.println(photo.isFile());
+						System.out.println(photoArticle.isFile());
+						System.out.println(noPhotoArticle.isFile());
 						System.out.println(request.getAttribute("image"));
 						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp"); // j'affiche la page voulue
 						rd.forward(request, response);
@@ -155,10 +158,12 @@ public class ServletVenteFuture extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-				File photo = new File("Image/"+idarticle+".jpg");
-				File noPhoto = new File("Image/NoImage.png"); 
+				File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+				String photo = "Image/"+id+".jpg";
+				File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+				String noPhoto = "Image/NoImage.png";
 
-				if(photo.isFile())
+				if(photoArticle.isFile())
 				{
 					request.setAttribute("image", photo);
 				}
@@ -278,11 +283,13 @@ public class ServletVenteFuture extends HttpServlet {
 					{
 						e.printStackTrace();
 					}
-						File photo = new File("Image/"+idarticle+".jpg");
-						File noPhoto = new File("Image/NoImage.png"); 
-	
-						if(photo.isFile())
-						{
+					File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+					String photo = "Image/"+id+".jpg";
+					File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+					String noPhoto = "Image/NoImage.png";
+
+					if(photoArticle.isFile())
+					{
 							request.setAttribute("image", photo);
 						}
 						else
@@ -305,10 +312,12 @@ public class ServletVenteFuture extends HttpServlet {
 					List<CategorieBo> listeCategorie = CategorieBll.get();
 					request.setAttribute("categorieListe", listeCategorie);
 					
-					File photo = new File("Image/"+idarticle+".jpg");
-					File noPhoto = new File("Image/NoImage.png"); 
+					File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+					String photo = "Image/"+id+".jpg";
+					File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+					String noPhoto = "Image/NoImage.png";
 
-					if(photo.isFile())
+					if(photoArticle.isFile())
 					{
 						request.setAttribute("image", photo);
 					}

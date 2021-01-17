@@ -68,10 +68,12 @@ public class ServletVenteTerminee extends HttpServlet {
 					}
 					else
 					{
-						File photo = new File("Image/"+id+".jpg");
-						File noPhoto = new File("Image/NoImage.png"); 
+						File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+						String photo = "Image/"+id+".jpg";
+						File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+						String noPhoto = "Image/NoImage.png";
 
-						if(photo.isFile())
+						if(photoArticle.isFile())
 						{
 							request.setAttribute("image", photo);
 						}
@@ -138,10 +140,12 @@ public class ServletVenteTerminee extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-		File photo = new File("Image/"+id+".jpg");
-		File noPhoto = new File("Image/NoImage.png"); 
+		File photoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//"+id+".jpg");
+		String photo = "Image/"+id+".jpg";
+		File noPhotoArticle = new File("C://Users//nicol.DESKTOP-CD7QT37//git//projetENI//EniProjet//WebContent//Image//NoImage.png"); 
+		String noPhoto = "Image/NoImage.png";
 
-		if(photo.isFile())
+		if(photoArticle.isFile())
 		{
 			request.setAttribute("image", photo);
 		}
