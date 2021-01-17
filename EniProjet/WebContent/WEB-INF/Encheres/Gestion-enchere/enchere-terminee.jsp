@@ -14,7 +14,10 @@
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
+		<div class="col-xs-1 containerImage">
+			<img class="photo" src="<%= request.getAttribute("image")%>"/>
+		</div>
+	<section class="row col-xs-offset-1 col-xs-6 col-xs-offset-3">
 		
 		<c:if test="${article.prixVente ==0}" >
 		<h2> Cette vente s'est achevée sans enchère.</h2>

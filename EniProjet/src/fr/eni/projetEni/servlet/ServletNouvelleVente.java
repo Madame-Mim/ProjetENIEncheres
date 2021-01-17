@@ -26,6 +26,7 @@ import fr.eni.projetEni.bo.ArticleVenduBo;
 import fr.eni.projetEni.bo.CategorieBo;
 import fr.eni.projetEni.bo.RetraitBo;
 import fr.eni.projetEni.bo.UtilisateurBo;
+import fr.eni.projetEni.dal.ArticleVenduDal;
  
 /** 
  * Servlet implementation class ServletNouvelleVente
@@ -182,7 +183,17 @@ public class ServletNouvelleVente extends HttpServlet {
 
 				try {
 					articleVenduBll.insertArticle(nouvelArticleVendu);
-					RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+					request.setAttribute("id", nouvelArticleVendu.getNoArticle());
+					 int idarticle = Integer.parseInt(request.getAttribute("id").toString()); //recupere l'id de l'article
+						System.out.println(idarticle);
+						try {
+							ArticleVenduBo articlePourUpload = ArticleVenduBll.getById(idarticle);
+							request.setAttribute("article", articlePourUpload);
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/upload.jsp");
 					rd.forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();

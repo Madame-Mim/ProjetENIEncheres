@@ -1,5 +1,6 @@
 package fr.eni.projetEni.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -52,16 +53,13 @@ public class ServletVenteEnCours extends HttpServlet {
 				    rd.forward(request, response);
 				}			
 				else
-				{
-					
-				
+				{				
 					Timestamp debutEnchereTimestamp = Timestamp.valueOf(article.getDateDebutEncheres().atStartOfDay()); //Passage de la date de debut d'enchere de l'article au format timestamp
 					long debutEnchereMillis = debutEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
 					Timestamp finEnchereTimestamp = Timestamp.valueOf(article.getDateFinEncheres().atStartOfDay()); //Passage de la date de fin d'enchere de l'article au format timestamp
 					long finEnchereMillis = finEnchereTimestamp.getTime(); // obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et cette date
 					long now = System.currentTimeMillis(); //obtention du nombre de millisecondes écoulées entre le 1er janvier 1970 et maintenant
-				
-				
+						
 					if(finEnchereMillis < now || now < debutEnchereMillis) //si la date actuelle n'est pas comprise entre les dates de l'enchère
 					{
 						RequestDispatcher rd = request.getRequestDispatcher("/Accueil"); // je renvoie vers l'accueil
@@ -74,7 +72,18 @@ public class ServletVenteEnCours extends HttpServlet {
 								
 						EnchereBo enchere = EnchereBll.getByIdArticle(article.getNoArticle());
 						request.setAttribute("enchere", enchere);
+
+						File photo = new File("Image/"+numArticle+".jpg");
+						File noPhoto = new File("Image/NoImage.png");
 						
+						if(photo.isFile())
+						{
+							request.setAttribute("image", photo);
+						}
+						else
+						{
+							request.setAttribute("image", noPhoto);
+						}
 						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
 						rd.forward(request, response);
 					}
@@ -153,6 +162,18 @@ public class ServletVenteEnCours extends HttpServlet {
 			request.setAttribute("article", articleACharge);
 			EnchereBo enchereACharge = EnchereBll.getByIdArticle(article.getNoArticle());
 			request.setAttribute("enchere", enchereACharge);
+			
+			File photo = new File("Image/"+numArticle+".jpg");
+			File noPhoto = new File("Image/NoImage.png");
+			
+			if(photo.isFile())
+			{
+				request.setAttribute("image", photo);
+			}
+			else
+			{
+				request.setAttribute("image", noPhoto);
+			}
 	        //le forward envoi l'affichage à la jsp
 	        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-en-cours.jsp");
 	        rd.forward(request, response);

@@ -10,17 +10,21 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/CSS/venteterminee.css">
 <title>Vente future</title>
 </head>
+
+<body>
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-<body>
-
 	
-	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
+		<div class="col-xs-1 containerImage">
+			<img class="photo" src="<%= request.getAttribute("image")%>"/>
+		</div>
+	<section class="row col-xs-offset-1 col-xs-6 col-xs-offset-3">
 		<h3>Nouvelle vente</h3>
 		<br>
 		<div class="clearfix"></div>
 		<br>
+	
 		<form action="<%=request.getContextPath()%>/VenteFuture?idarticle=${article.noArticle}" method="post">
 			<div class="col-xs-offset-1 col-xs-4"> Article :</div><div class="col-xs-6"><input name="nom" type="text" value="${article.nomArticle}"  size=36></div>
 			<br><br>
@@ -47,7 +51,6 @@
 			<div class="clearfix"></div>
 			<br>
 			
-			<div class="col-xs-offset-1 col-xs-4"> photo de l'article : </div><div class="col-xs-6"><label class="submit" for="upload">uploader</label> <input id="upload" type="file"> </div>
 			<div class="clearfix"></div>
 			<br>
 			<div class="col-xs-offset-1 col-xs-4">Mise à prix : </div> <div class="col-xs-6"><input name="prix" type="number" value="${article.miseAPrix}" min=1 size=3></div>

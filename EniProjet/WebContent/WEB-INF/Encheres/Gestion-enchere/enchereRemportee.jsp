@@ -14,8 +14,10 @@
 	<header>
 		<%@ include file="/WEB-INF/Include/logo.html" %>	
 	</header>
-	
-	<section class="row col-xs-offset-3 col-xs-6 col-xs-offset-3">
+		<div class="col-xs-1 containerImage">
+			<img class="photo" src="<%= request.getAttribute("image")%>"/>
+		</div>
+	<section class="row col-xs-offset-1 col-xs-6 col-xs-offset-3">
 		
 		 <div class="title"><h3>Vous avez remporté la vente</h3></div>
 		 <br>
@@ -35,13 +37,13 @@
 		<br>
 		<div class="col-xs-offset-2 col-xs-4">Vendeur :	</div><div class="col-xs-6">${article.utilisateur.getPseudo()}</div>
 		<br>
-		<div>Tel :</div><div class="col-xs-6">${article.utilisateur.getTelephone()}</div>
+		<div class="col-xs-offset-2 col-xs-4">Tel :</div><div class="col-xs-6">${article.utilisateur.getTelephone()}</div>
 		
 			<div class="clearfix"></div>
 		
 		<br><br><br>
 		<form action="<%=request.getContextPath()%>/Accueil">
-			<input type="submit" value="Retour Accueil">
+			<div class="col-xs-offset-2 col-xs-4"> <input  class="btn btn-success" type="submit" value="Retour Accueil"></div>
 		</form>
 	</section>
 	

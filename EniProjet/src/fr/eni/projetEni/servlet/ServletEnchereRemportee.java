@@ -1,5 +1,6 @@
 package fr.eni.projetEni.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 
@@ -74,6 +75,17 @@ public class ServletEnchereRemportee extends HttpServlet {
 						}
 						else
 						{
+							File photo = new File("Image/"+id+".jpg");
+							File noPhoto = new File("Image/NoImage.png"); 
+
+							if(photo.isFile())
+							{
+								request.setAttribute("image", photo);
+							}
+							else
+							{
+								request.setAttribute("image", noPhoto);
+							}
 							RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchereRemportee.jsp");
 							rd.forward(request, response);
 						}

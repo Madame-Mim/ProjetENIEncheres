@@ -10,6 +10,21 @@ div
 	font-size: 1.5em;
 }
 
+.containerImage
+{
+	width: 400px;
+    height: 550px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+  }
+  
+.photo
+{
+	height: 100%;
+  	width: 100%;
+  	object-fit: contain;
+}  
+
 .submit
 {
 	width:130px;

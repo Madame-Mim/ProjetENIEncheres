@@ -5,18 +5,23 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import fr.eni.projetEni.bll.ArticleVenduBll;
+import fr.eni.projetEni.bll.CategorieBll;
+import fr.eni.projetEni.bo.ArticleVenduBo;
+import fr.eni.projetEni.bo.CategorieBo;
+
 /**
  * @author edavi2020
  * Servlet implementation class Upload
  */
-//@WebServlet("/Upload")
 public class Upload extends HttpServlet {
 	 private static final long serialVersionUID = 1L;
 	 public static final int TAILLE_TAMPON = 10240;
@@ -30,16 +35,14 @@ public class Upload extends HttpServlet {
 	    }
 
 	 public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		 
-	        // On récupère le champ description 
-	        String description = request.getParameter("description");
-	        request.setAttribute("description", description );
-
+		
+		 	//on récupère l'id de l'article
+		 int id= Integer.parseInt(request.getParameter("id"));
 	        // On récupère le champ du fichier
 	        Part part = request.getPart("fichier");
 	            
 	        // On vérifie qu'on a bien reçu un fichier
-	        String nomFichier = "1.jpg";
+	        String nomFichier = id+".jpg";
 
 	        // Si on a bien un fichier
 	        if (nomFichier != null && !nomFichier.isEmpty()) {
@@ -54,10 +57,29 @@ public class Upload extends HttpServlet {
 	            request.setAttribute("nomFichier", nomFichier);
 	            
 	        }
-	        
-	        this.getServletContext().getRequestDispatcher("/WEB-INF/Encheres/upload.jsp").forward(request, response);
-	    }
+	        try {
+				ArticleVenduBo article = ArticleVenduBll.getById(id); // recupère les infos de l'article
+				request.setAttribute("article", article); //met l'article en attribut pour l'affichage en jsp
+				List<CategorieBo> listeCategorie = CategorieBll.get(); // recupère les valeurs en BDD de la table catégorie
+				request.setAttribute("categorieListe", listeCategorie);
+				File photo = new File("Image/"+id+".jpg");
+				File noPhoto = new File("Image/NoImage.png"); 
 
+				if(photo.isFile())
+				{
+					request.setAttribute("image", photo);
+				}
+				else
+				{
+					request.setAttribute("image", noPhoto);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+	        this.getServletContext().getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp?idarticle="+id).forward(request, response);
+	   
+	 }
 	 	//méthode pour écrire le fichier dans le dossier
 	    private void ecrireFichier( Part part, String nomFichier, String chemin ) throws IOException {
 	        BufferedInputStream entree = null;

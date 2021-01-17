@@ -3,6 +3,8 @@ package fr.eni.projetEni.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,9 +30,9 @@ public class ArticleVenduDal {
     private static Logger logger = MonLogger.getLogger("ArticleVenduDal");
 
     
-    public static void insertArticle(ArticleVenduBo articleVendu) {
+    public static void insertArticle(ArticleVenduBo articleVendu) throws SQLException {
     	try ( Connection cnx = ConnectionProvider.getConnection() ) {
-            PreparedStatement rqt = cnx.prepareStatement(INSERT);
+            PreparedStatement rqt = cnx.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
             rqt.setString(1, articleVendu.getNomArticle());
             rqt.setString(2, articleVendu.getDescription());
@@ -44,12 +46,24 @@ public class ArticleVenduDal {
             rqt.setInt(10, articleVendu.getRetrait().getNoRetrait());
 
 
-            rqt.executeUpdate();
-            
+            int nombreLignesAffectees = rqt.executeUpdate();
+            if(nombreLignesAffectees==0) 
+            { 
+                throw new SQLException("Creating user failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = rqt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                	articleVendu.setNoArticle(generatedKeys.getInt(1));
+                }
+                else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
 		} catch (Exception ex) {
 			ex.printStackTrace();
             logger.severe("Erreur dans la méthode insertArticle(ArticleVenduBo articleVendu) avec article ="+ articleVendu +"- erreur : "+ex.getMessage());
 		}
+    	}
     } /* fin insert */
     
     

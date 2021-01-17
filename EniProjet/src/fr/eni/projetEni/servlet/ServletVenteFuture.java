@@ -1,5 +1,6 @@
 package fr.eni.projetEni.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -71,6 +72,19 @@ public class ServletVenteFuture extends HttpServlet {
 					}
 					else //j'ai passé tous les barrages
 					{
+						File photo = new File("Image/"+id+".jpg");
+						File noPhoto = new File("Image/NoImage.png"); 
+
+						if(photo.isFile())
+						{
+							request.setAttribute("image", photo);
+						}
+						else
+						{
+							request.setAttribute("image", noPhoto);
+						}
+						System.out.println(photo.isFile());
+						System.out.println(request.getAttribute("image"));
 						RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp"); // j'affiche la page voulue
 						rd.forward(request, response);
 					}
@@ -140,6 +154,19 @@ public class ServletVenteFuture extends HttpServlet {
 				{
 					e.printStackTrace();
 				}
+				
+				File photo = new File("Image/"+idarticle+".jpg");
+				File noPhoto = new File("Image/NoImage.png"); 
+
+				if(photo.isFile())
+				{
+					request.setAttribute("image", photo);
+				}
+				else
+				{
+					request.setAttribute("image", noPhoto);
+				}
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 				rd.forward(request, response);
 			}
@@ -251,6 +278,17 @@ public class ServletVenteFuture extends HttpServlet {
 					{
 						e.printStackTrace();
 					}
+						File photo = new File("Image/"+idarticle+".jpg");
+						File noPhoto = new File("Image/NoImage.png"); 
+	
+						if(photo.isFile())
+						{
+							request.setAttribute("image", photo);
+						}
+						else
+						{
+							request.setAttribute("image", noPhoto);
+						}	
 					
 						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Gestion-enchere/enchere-future.jsp");
 						rd.forward(request, response);
@@ -266,6 +304,18 @@ public class ServletVenteFuture extends HttpServlet {
 		
 					List<CategorieBo> listeCategorie = CategorieBll.get();
 					request.setAttribute("categorieListe", listeCategorie);
+					
+					File photo = new File("Image/"+idarticle+".jpg");
+					File noPhoto = new File("Image/NoImage.png"); 
+
+					if(photo.isFile())
+					{
+						request.setAttribute("image", photo);
+					}
+					else
+					{
+						request.setAttribute("image", noPhoto);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -279,6 +329,7 @@ public class ServletVenteFuture extends HttpServlet {
 					try {
 						articleADelete = ArticleVenduBll.getById(idarticle); //je récupère l'article
 						articleBll.deleteArticle(idarticle);// et je le supprime
+						
 						
 						   RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 						   rd.forward(request, response);
