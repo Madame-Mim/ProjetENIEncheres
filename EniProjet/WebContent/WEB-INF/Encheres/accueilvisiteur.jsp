@@ -81,14 +81,14 @@
     		<c:if test="${now.time lt finEnchere.time && now.time gt debutEnchere.time}">
 			<div class="col-xs-4" id="cartes">
 				<div class="col-xs-4 col-xs-offset-1">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%=request.getContextPath()%>/Image/NoImage.png" alt="${v.nomArticle}" class="photo">
 				</div>
 				<div class="col-xs-7">
 					<div class=labelproduit>
 					<p><u>${v.nomArticle}</u></p></div>
-					<p>${v.prixVente}</p>
-					<p>${v.dateFinEncheres}</p>
-					<p>${v.utilisateur.pseudo}</p></div>
+					<p>Prix : ${v.prixVente} points</p>
+					<p>Fin : ${v.dateFinEncheres}</p>
+					<p>Vendeur : ${v.utilisateur.pseudo}</p></div>
 				</div> 
 			
 			</c:if>
