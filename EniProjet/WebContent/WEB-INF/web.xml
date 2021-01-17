@@ -16,7 +16,7 @@
   
   <filter>
     <filter-name>PageMembreFilter</filter-name>
-    <filter-class>fr.eni.projetEni.filter.FilterNoCache</filter-class>
+    <filter-class>fr.eni.projetEni.filter.FilterPageMembre</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>PageMembreFilter</filter-name>
@@ -33,6 +33,10 @@
   <filter-mapping>
     <filter-name>PageMembreFilter</filter-name>
     <url-pattern>/accueil.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>PageMembreFilter</filter-name>
+    <url-pattern>/upload.jsp</url-pattern>
   </filter-mapping>
   
   <filter>
@@ -52,13 +56,29 @@
     <filter-name>FilterPageHorsConnexion</filter-name>
     <url-pattern>/Utilisateur/connexion.jsp</url-pattern>
   </filter-mapping>
-<filter-mapping>
+  <filter-mapping>
     <filter-name>FilterPageHorsConnexion</filter-name>
-    <url-pattern>/Utilisateur/accueilvisiteur.jsp</url-pattern>
+    <url-pattern>/Utilisateur/inscription.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/Utilisateur/lienReinitialiserMDP.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/Utilisateur/MotDePasseOublie.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/Utilisateur/ReinitialisationMotDePasse.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>FilterPageHorsConnexion</filter-name>
+    <url-pattern>/accueilvisiteur.jsp</url-pattern>
   </filter-mapping>
 
 
- <servlet>
+ 	<servlet>
         <servlet-name>Upload</servlet-name>
         <servlet-class>fr.eni.projetEni.servlet.Upload</servlet-class>
         <multipart-config>
@@ -66,7 +86,7 @@
             <max-request-size>52428800</max-request-size> <!-- 5 x 10 Mo -->
             <file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
         </multipart-config>
-</servlet>
+	</servlet>
     <servlet-mapping>
         <servlet-name>Upload</servlet-name>
         <url-pattern>/Upload</url-pattern>

@@ -21,6 +21,7 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 @WebFilter("/FilterAdmin")
 public class FilterAdmin implements Filter {
     public static final String Accueil = "/Accueil";
+    
 @Override
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) req;
@@ -29,6 +30,7 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
 	response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 	response.setDateHeader("Expires", 0); // Proxies.
+	
 /* Récupération de la session depuis la requête */
 HttpSession session = request.getSession();
 int id = Integer.parseInt(session.getAttribute("session").toString());
@@ -37,9 +39,9 @@ UtilisateurBo utilisateur;
 			utilisateur = UtilisateurBll.get(id);
 		
 		
-			if(session.getAttribute("session")==null || utilisateur.isAdministrateur()==false)
+			if(session.getAttribute("session")==null || utilisateur.isAdministrateur()==false) // si l'utilisateur n'est pas connecté ou bien s'il n'est pas administrateur
 			{
-			    response.sendRedirect(request.getContextPath() + Accueil);
+			    response.sendRedirect(request.getContextPath() + Accueil); //retour à l'accueil
 			} 
 			else
 			{

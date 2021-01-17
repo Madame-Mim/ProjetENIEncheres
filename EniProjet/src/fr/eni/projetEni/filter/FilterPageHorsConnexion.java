@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/FilterPageHorsConnexion")
 public class FilterPageHorsConnexion implements Filter {
     public static final String Accueil = "/Accueil";
+    
 @Override
 public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
     HttpServletRequest request = (HttpServletRequest) req;
@@ -30,9 +31,9 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
 /* Récupération de la session depuis la requête */
 HttpSession session = request.getSession();
 
-if(session.getAttribute("session")!=null)
+if(session.getAttribute("session")!=null) //si l'utilisateur est connecté
 {
-    response.sendRedirect(request.getContextPath() + Accueil);
+    response.sendRedirect(request.getContextPath() + Accueil); //retour à l'accueil
 } 
 	else
 	{		

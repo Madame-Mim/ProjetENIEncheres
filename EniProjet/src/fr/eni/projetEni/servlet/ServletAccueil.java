@@ -36,7 +36,6 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("do get");
 		
 		HttpSession session = request.getSession();
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
@@ -65,12 +64,11 @@ public class ServletAccueil extends HttpServlet {
 				listeArticles= ArticleVenduBll.getAll();
 				listeCategorie= CategorieBll.get();
 				request.setAttribute("listeCategorie", listeCategorie);
-				 request.setAttribute("listeArticles", listeArticles);
-				 request.setAttribute("namerecherche", namerecherche);
-				 request.setAttribute("choixA1", choixA1);
-				 request.setAttribute("choixAV", choixAV);
+				request.setAttribute("listeArticles", listeArticles);
+				request.setAttribute("namerecherche", namerecherche);
+			 	request.setAttribute("choixA1", choixA1);
+			 	request.setAttribute("choixAV", choixAV);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();}
 				
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueilvisiteur.jsp");
@@ -81,9 +79,9 @@ public class ServletAccueil extends HttpServlet {
 		else 
 		{
 			int vendeur= Integer.parseInt(session.getAttribute("session").toString());
-			System.out.println(vendeur);
-		List<EnchereBo> malisteEncheres = new ArrayList<>();
-		List<EnchereBo> malisteEncheresmax = new ArrayList<>();
+
+			List<EnchereBo> malisteEncheres = new ArrayList<>();
+			List<EnchereBo> malisteEncheresmax = new ArrayList<>();
 		
 		try {
 			listeArticles= ArticleVenduBll.getAll();		
@@ -98,7 +96,6 @@ public class ServletAccueil extends HttpServlet {
 			request.setAttribute("choixAV", choixAV);
             
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -112,7 +109,6 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("do post");
 		HttpSession session = request.getSession();
 		List<ArticleVenduBo> listeArticles = new ArrayList<>();
 		String filtreNom = request.getParameter("recherche");
@@ -150,7 +146,6 @@ public class ServletAccueil extends HttpServlet {
 			     
 	            
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace(); }
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/accueilvisiteur.jsp");
@@ -197,7 +192,6 @@ public class ServletAccueil extends HttpServlet {
 	        request.setAttribute("choixV3", choixV3);
 	        
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

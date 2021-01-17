@@ -21,8 +21,7 @@
 		<%@ include file="/WEB-INF/Include/header.html" %>
 		<%@include file="/WEB-INF/Include/logo.html" %>
 </header>
-
-
+	
 <c:set var="vente" value="vente" />
 <c:set var = "test1" value ="${filtreNom}"/>
 <c:set var = "test2" value ="${categorieselection}" />
@@ -41,10 +40,9 @@
 </c:if>
 
 <section class="row col-xs-offset-1 col-xs-10 col-xs-offset-1">
-<header>
+
 <h2>Liste des enchères</h2>
-	
-</header>
+
 </section>
 <br/>
 <br/>
@@ -100,9 +98,9 @@
 			<label for="choixV3">ventes terminées</label><br></div>
            </div>
 		</div>
-	<div class="col-xs-3 col-xs-offset-1" id="rechercher">
-		<input class="btn btn-success" type="submit" value="RECHERCHER">
-	</div>
+			<div class="col-xs-3 col-xs-offset-1" id="rechercher">
+				<input class="btn btn-success" type="submit" value="RECHERCHER">
+			</div>	
 		</form>
 </section>		
 <section class="col-xs-12 ">
@@ -202,7 +200,7 @@
 						
 			
 					<div class=labelproduit>
-					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle.noArticle}">${v.nomArticle}</a></p></div>
+					<p><a href="<%=request.getContextPath()%>/VenteTerminee?idarticle=${v.noArticle}">${v.nomArticle}</a></p></div>
 					<p>${v.prixVente}</p>
 					<p>${v.dateFinEncheres}</p>
 					<p><a href="<%=request.getContextPath()%>/ServletAfficherProfil?pseudo2=${v.utilisateur.pseudo}">${v.utilisateur.pseudo}</a></p></div>
@@ -291,7 +289,7 @@ function grisercheckbox(){
             document.getElementById('choixV1').disabled = 'disabled';
             document.getElementById('choixV2').disabled = 'disabled';
             document.getElementById('choixV3').disabled = 'disabled';
-            document.getElementById('choixA1').disabled ='';
+            document.getElementById('choixA1').disabled = '';
             document.getElementById('choixA2').disabled = '';
             document.getElementById('choixA3').disabled = '';
             document.getElementById('choixV1').checked = false;
@@ -304,7 +302,7 @@ function grisercheckbox(){
  
         	 document.getElementById('choixV1').disabled ='' ;
              document.getElementById('choixV2').disabled ='';
-             document.getElementById('choixV3').disabled ='';   
+             document.getElementById('choixV3').disabled ='';
              document.getElementById('choixA1').disabled = 'disabled';
              document.getElementById('choixA2').disabled = 'disabled';
              document.getElementById('choixA3').disabled = 'disabled';
