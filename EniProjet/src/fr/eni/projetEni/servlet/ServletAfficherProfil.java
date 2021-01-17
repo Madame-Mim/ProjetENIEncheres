@@ -20,42 +20,31 @@ import fr.eni.projetEni.bo.UtilisateurBo;
 public class ServletAfficherProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletAfficherProfil() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
+   	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-	if(request.getParameter("pseudo2").trim().equals(""))
-		{HttpSession session = request.getSession();
-		session.getAttribute("session");		
-		int id1= Integer.parseInt(session.getAttribute("session").toString());
+	if(request.getParameter("pseudo2").trim().equals("")) //si le paramètre en url n'a pas de valeur associé
+		{
+		HttpSession session = request.getSession(); // récupèration de la session
+		int id1= Integer.parseInt(session.getAttribute("session").toString()); //recupération de l'attribut de session "session"
 		try {
-			UtilisateurBo utilisateur = UtilisateurBll.get(id1);
-			request.setAttribute("utilisateur", utilisateur);
+			UtilisateurBo utilisateur = UtilisateurBll.get(id1); //récupération de l'utilisateur correspondant à l'id passé en session
+			request.setAttribute("utilisateur", utilisateur); //instanciation de l'utilisateur pour affichage jsp
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 		}
-	else
+	else //si le parmaetre pseudo a une valeur
 
 	{
 		try {
-			UtilisateurBo utilisateur = UtilisateurBll.get(UtilisateurBll.getPseudo(request.getParameter("pseudo2")).getId());
-			request.setAttribute("utilisateur", utilisateur);
+			UtilisateurBo utilisateur = UtilisateurBll.get(UtilisateurBll.getPseudo(request.getParameter("pseudo2")).getId()); // récupération de l'id correspondant à ce pseudo
+			request.setAttribute("utilisateur", utilisateur); //instanciation de l'utilisateur pour affichage jsp
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}}
 		RequestDispatcher rd = request.getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/afficherProfil.jsp");
@@ -72,10 +61,6 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
-
 		
 		HttpSession session = request.getSession();
 		session.getAttribute("session");
@@ -87,7 +72,6 @@ public class ServletAfficherProfil extends HttpServlet {
 			UtilisateurBo utilisateur = UtilisateurBll.get(id);
 			request.setAttribute("utilisateur", utilisateur);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher( "/WEB-INF/Encheres/Utilisateur/afficherProfil.jsp");

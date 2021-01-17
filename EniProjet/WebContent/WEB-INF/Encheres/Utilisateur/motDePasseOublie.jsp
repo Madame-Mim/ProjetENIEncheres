@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +18,16 @@
 	<br>
 	<form method="post" action="/EniProjet/ServletMotDePasseOublie">
 		<div class="col-xs-offset-3 col-xs-4">
-			<label>Adresse Mail : </label><input type="text" name="adresseMail" size=20 required>
+			<label>Adresse Mail : </label> <input type="text" name="adresseMail" size=20 required>
+			
+		<c:if test="${not empty erreur}">
+				<br>
+				<span class="text-danger erreur"> ${erreur} </span>
+		</c:if>
+		
 		<div class="clearfix"></div>
-			<br>
+		<br>
+			
 			<input class="btn btn-success" type="submit" value="Valider">
 		</div>
 	</form>

@@ -25,7 +25,7 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
+		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur")); //récupération de l'id passé en url
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
 		rd.forward(request, response);
@@ -49,27 +49,32 @@ public class ServletReinitialisationMotDePasse extends HttpServlet {
 		}
 		
 		
-		if(!(nouveauMotDePasse.equals(confirmationMotDePasse)))
+		if(!(nouveauMotDePasse.equals(confirmationMotDePasse))) //si les mots de passe sont différents
 		{
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp");
+			request.setAttribute("erreur", "Les mots de passe ne correspondent pas"); //instanciation du message d'erreur pour affichage en jsp
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp"); //retour sur la page
 			rd.forward(request, response); 
-		}else
+		}
+		else //si les mots de passe correspondent
 		{
 			UtilisateurBo utilisateurMAJ;
 			try {
-				utilisateurMAJ = UtilisateurBll.get(idUtilisateur); 
+				utilisateurMAJ = UtilisateurBll.get(idUtilisateur); //récupération de l'utilisateur
 				
-				for(UtilisateurBo utilisateur : utilisateurs )
-				if(utilisateur.getEmail().equals(utilisateurMAJ.getEmail()) & utilisateur.getId() == idUtilisateur)
+				for(UtilisateurBo utilisateur : utilisateurs ) //pour chacun
+				if(utilisateur.getEmail().equals(utilisateurMAJ.getEmail()) & utilisateur.getId() == idUtilisateur) //si l'id et l'email correspondent à l'utilisateur
 				{
-					utilisateurMAJ.setPassword(nouveauMotDePasse);
-					UtilisateurBll.update(utilisateurMAJ);
+					utilisateurMAJ.setPassword(nouveauMotDePasse); //instanciation du mot de passe
+					UtilisateurBll.update(utilisateurMAJ); //update de l'utilisateur
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp"); //retour sur la page de connexion
+					rd.forward(request, response); 
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/connexion.jsp");
+			// Sinon
+			request.setAttribute("erreur", "Cet utilisateur n'existe pas, merci de recliquer sur le lien et de ne pas jouer avec l'url"); //message d'erreur
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Encheres/Utilisateur/ReinitialisationMotDePasse.jsp"); //retour au formulaire
 			rd.forward(request, response); 
 		}
 		

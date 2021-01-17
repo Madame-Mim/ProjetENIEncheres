@@ -34,6 +34,8 @@ public class ServletSupprimerMonProfil extends HttpServlet {
 		session.getAttribute("session");
 		int id= Integer.parseInt(session.getAttribute("session").toString()); // récupération de l'id de l'utilisateur connecté (passage au format int de l'objet passé en String)
 	
+		/* update des enchères vers "pseudo supprimé" */
+
 		EnchereBll enchereAmodifié= new EnchereBll();
 		UtilisateurBo utilisateurAmodifie;
 		try
