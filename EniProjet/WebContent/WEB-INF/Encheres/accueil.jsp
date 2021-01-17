@@ -133,7 +133,7 @@
 			<div class="col-xs-4" id="cartes">
 			<div class="entetebloc">Enchère en cours</div>
 			<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%> alt="${v.nomArticle}" class="photo">
 				</div>
 			<div class="col-xs-offset-1 col-xs-7">
 						
@@ -153,7 +153,7 @@
 			<div class="entetebloc">Ventes en cours</div>
 				<br/>
 				<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%>" alt="${v.nomArticle}" class="photo">
 				</div>
 				<div class="col-xs-offset-1 col-xs-7">
 						
@@ -175,7 +175,7 @@
 			<div class="entetebloc">Ventes non débutées</div>
 			<br/>
 				<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%>" alt="${v.nomArticle}" class="photo">
 				</div>
 				<div class="col-xs-offset-1 col-xs-7">
 								
@@ -194,7 +194,7 @@
 			<div class="entetebloc">Ventes terminées</div>
 			<br/>
 				<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%>" alt="${v.nomArticle}" class="photo">
 				</div>
 				<div class="col-xs-offset-1 col-xs-7">
 						
@@ -235,7 +235,7 @@
 		
 		<br/>
 			<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%>" alt="${v.nomArticle}" class="photo">
 				</div>
 			<div class="col-xs-offset-1 col-xs-7">
 						
@@ -260,7 +260,7 @@
 		<div class="entetebloc">Mes enchères remportées</div>
 			<br/>
 			<div class="col-xs-4 ">
-					<img  src="<%=request.getContextPath()%>/Image/destroyed.jpg" alt="${v.nomArticle}" class="photo">
+					<img  src="<%= request.getAttribute("image")%>" alt="${v.nomArticle}" class="photo">
 				</div>
 				<div class="col-xs-offset-1 col-xs-7">
 						
